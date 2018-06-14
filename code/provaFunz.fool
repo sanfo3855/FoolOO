@@ -1,0 +1,7 @@
+let
+    int funzA(int a){
+        a=a+1;
+    };
+in
+    b=funzA(1);
+;

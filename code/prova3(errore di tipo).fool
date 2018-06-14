@@ -1,0 +1,14 @@
+let
+    int a = 5*4;
+    bool b=true;
+in
+    a=
+        if(a>=2) then {
+            b=false||!true;
+            print(b);
+        } else {
+            b=2;
+            print(b);
+        }
+    ;
+;
