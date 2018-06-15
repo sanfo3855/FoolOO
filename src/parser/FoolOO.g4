@@ -10,23 +10,38 @@ grammar FoolOO;
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
+start   : (block)+
+        ; //TODO: Scegliere se aggiungere SEMIC
 
-prog   : exp SEMIC                 #singleExp
-       | let exp SEMIC             #letInExp
-       ;
+block   : prog     #progDeclaration
+        | class    #classDeclaration
+        ;
 
-let     : LET (dec SEMIC)+ IN ;
+prog    : exp                 #singleExp
+        | let exp            #letInExp
+        ;
 
-vardec  : type ID ;
+class   : CLASS ID (extends)? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR fun CRPAR
+        ;
 
-varasm     : vardec ASM exp ;
+extends : EXTENDS ID
+        ;
 
-fun    : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (let)? exp CRPAR ;
+let     : LET (dec)+ IN
+        ;
 
-dec   : varasm           #varAssignment
-      | fun              #funDeclaration
-      ;
+vardec  : type ID
+        ;
 
+varasm  : vardec ASM exp SEMIC
+        ;
+
+fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog CRPAR
+        ;
+
+dec     : varasm           #varAssignment
+        | fun              #funDeclaration
+        ;
 
 type    : INT
         | BOOL
@@ -42,28 +57,37 @@ term    : left=factor ((TIMES | DIV) right=term)?
 factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) (NOT)? right=value)?
         ;
 
-stm     : ID ASM exp SEMIC    #stmAsignment
+stm     : ID ASM exp            #stmExpAsignment
+        | ID ASM value SEMIC    #stmValAsignment
         | IF cond=exp THEN CLPAR thenBranch=stms CRPAR ELSE CLPAR elseBranch=stms CRPAR       #stmIf
         | PRINT exp SEMIC   #stmPrint
+        | funexp            #funExp
+        | ID DOT funexp     #callMethod
         ;
 
-stms    :  ( stm ) +
+funexp  : ID ( LPAR (exp (COMMA exp)* )? RPAR )? SEMIC
+        ;
+
+stms    : (stm)+
         ;
 
 value   : INTEGER                           #intVal
-        | ( TRUE | FALSE )                   #boolVal
+        | ( TRUE | FALSE )                  #boolVal
         | RETURN exp                        #returnFun
-        | LPAR exp RPAR                      #baseExp
+        | LPAR exp RPAR                     #baseExp
         | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR       #ifExp
         | stms             #stmsExp
         | ID                                             #varExp
-        | ID ( LPAR (exp (COMMA exp)* )? RPAR )?         #funExp
+        | NULL                                           #nullVal
+        | NEW ID LPAR (ID(COMMA ID)+)? RPAR              #newClass
+
         ;
 
 
 /*------------------------------------------------------------------
  * LEXER RULES
  *------------------------------------------------------------------*/
+DOT     : '.';
 SEMIC   : ';' ;
 COLON   : ':' ;
 COMMA   : ',' ;
@@ -96,6 +120,10 @@ INT     : 'int' ;
 BOOL    : 'bool' ;
 VOID    : 'void' ;
 RETURN  : 'return' ;
+CLASS   : 'class';
+EXTENDS : 'extends';
+NEW     : 'new';
+NULL    : 'null';
 
 
 
