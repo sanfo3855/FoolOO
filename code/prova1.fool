@@ -1,9 +1,9 @@
 class A (int a, int b){
     bool funzione(int ctr) {
         if(ctr==1) then {
-            print(1)
+            print(1);
         } else {
-            print(2)
+            print(2);
         }
     }
 
@@ -13,8 +13,18 @@ class A (int a, int b){
 }
 
 let
-    A a = new A;
-    int param = 2
+    int a = 5*4;
+    bool b=true;
 in
-    a.funzione(param)
+    a=
+        if(a>=2) then {
+            b=false||!true;
+            a=print(b);
+        } else {
+            b=2;
+            print(b);
+        }
+    ;
 ;
+
+

@@ -11,20 +11,20 @@ grammar FoolOO;
  * PARSER RULES
  *------------------------------------------------------------------*/
 start   : (block)+
-        ; //TODO: Scegliere se aggiungere SEMIC
-
-block   : prog     #progDeclaration
-        | class    #classDeclaration
         ;
 
-prog    : exp                 #singleExp
-        | let exp            #letInExp
+block   : prog      #progDeclaration
+        | decclass     #classDeclaration
         ;
 
-class   : CLASS ID (extends)? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR fun CRPAR
+prog    : exp       #singleExp
+        | let exp   #letInExp
         ;
 
-extends : EXTENDS ID
+decclass   : CLASS ID (eextends)? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun)+ CRPAR
+        ;
+
+eextends : EXTENDS ID
         ;
 
 let     : LET (dec)+ IN
@@ -57,30 +57,27 @@ term    : left=factor ((TIMES | DIV) right=term)?
 factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) (NOT)? right=value)?
         ;
 
-stm     : ID ASM exp            #stmExpAsignment
-        | ID ASM value SEMIC    #stmValAsignment
+stm     : ID ASM exp SEMIC                                     #stmExpAsignment
+        | ID ASM stms                                            #stmAsignment
+        | ID ASM value SEMIC                                    #stmValAsignment
         | IF cond=exp THEN CLPAR thenBranch=stms CRPAR ELSE CLPAR elseBranch=stms CRPAR       #stmIf
-        | PRINT exp SEMIC   #stmPrint
-        | funexp            #funExp
-        | ID DOT funexp     #callMethod
-        ;
-
-funexp  : ID ( LPAR (exp (COMMA exp)* )? RPAR )? SEMIC
+        | PRINT exp SEMIC                                       #stmPrint
+        | ID ( LPAR (exp (COMMA exp)* )? RPAR )? SEMIC          #funExp
+        | ID DOT ID ( LPAR (exp (COMMA exp)* )? RPAR ) SEMIC    #callMethod
         ;
 
 stms    : (stm)+
         ;
 
-value   : INTEGER                           #intVal
-        | ( TRUE | FALSE )                  #boolVal
-        | RETURN exp                        #returnFun
-        | LPAR exp RPAR                     #baseExp
+value   : INTEGER                               #intVal
+        | ( TRUE | FALSE )                      #boolVal
+        | RETURN exp                            #returnFun
+        | LPAR exp RPAR                         #baseExp
         | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR       #ifExp
-        | stms             #stmsExp
-        | ID                                             #varExp
-        | NULL                                           #nullVal
-        | NEW ID LPAR (ID(COMMA ID)+)? RPAR              #newClass
-
+        | stms                                  #stmsExp
+        | ID                                    #varExp
+        | NULL                                  #nullVal
+        | NEW ID LPAR (ID(COMMA ID)+)? RPAR     #newClass
         ;
 
 
@@ -114,8 +111,6 @@ ELSE    : 'else' ;
 PRINT   : 'print' ;
 LET     : 'let' ;
 IN      : 'in' ;
-//VAR     : 'var' ;
-//FUN     : 'fun' ;
 INT     : 'int' ;
 BOOL    : 'bool' ;
 VOID    : 'void' ;
@@ -124,10 +119,6 @@ CLASS   : 'class';
 EXTENDS : 'extends';
 NEW     : 'new';
 NULL    : 'null';
-
-
-
-
 
 //Numbers
 fragment DIGIT : '0'..'9';
@@ -141,9 +132,6 @@ ID              : CHAR (CHAR | DIGIT)* ;
 WS              : (' '|'\t'|'\n'|'\r') -> skip;
 LINECOMENTS    : '//' (~('\n'|'\r'))* -> skip;
 BLOCKCOMENTS    : '/*'( ~('/'|'*')|'/'~'*'|'*'~'/'|BLOCKCOMENTS)* '*/' -> skip;
-
-
-
 
  //VERY SIMPLISTIC ERROR CHECK FOR THE LEXING PROCESS, THE OUTPUT GOES DIRECTLY TO THE TERMINAL
  //THIS IS WRONG!!!!
