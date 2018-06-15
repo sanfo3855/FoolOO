@@ -7,10 +7,12 @@ import java.util.ArrayList;
 
 public class LetInExpNode implements Node {
 
+    private ArrayList<Node> listDec;
     private Node exp;
 
-    public LetInExpNode (Node e) {
-        exp=e;
+    public LetInExpNode (ArrayList<Node> listDec, Node exp) {
+        this.listDec=listDec;
+        this.exp=exp;
     }
 
     public String toPrint(String s) {
