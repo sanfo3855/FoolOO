@@ -7,10 +7,13 @@ import java.util.ArrayList;
 
 public class BoolValNode implements Node {
 
+    //TODO da togliere
     private Node exp;
 
-    public BoolValNode (Node e) {
-        exp=e;
+    private boolean val;
+
+    public BoolValNode (boolean val) {
+        this.val=val;
     }
 
     public String toPrint(String s) {
