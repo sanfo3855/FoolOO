@@ -5,12 +5,15 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class BaseExpNode  implements Node {
+public class IdValNode implements Node {
 
+    //TODO da togliere
     private Node exp;
 
-    public BaseExpNode (Node e) {
-        exp=e;
+    private String id;
+
+    public IdValNode(String id) {
+        this.id=id;
     }
 
     public String toPrint(String s) {
