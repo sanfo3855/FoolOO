@@ -17,6 +17,11 @@ public class VarNode implements Node {
         this.value=value;
     }
 
+    public VarNode (String id, Node type){
+        this.id = id;
+        this.type = type;
+    }
+
 
     public String toPrint(String s) {
 
