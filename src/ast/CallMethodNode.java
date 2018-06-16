@@ -3,6 +3,7 @@ package ast;
 import util.Environment;
 import util.SemanticError;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -20,8 +21,13 @@ public class CallMethodNode implements Node {
     }
 
     public String toPrint(String s) {
-
-        return "Start\n" + exp.toPrint("  ") ;
+        String returnString = s + "CallMethodNode\n";
+        for(Map.Entry<String,ArrayList<Node>> entry : this.listField.entrySet()){
+            for( Node ntp : entry.getValue()){
+                returnString += s + ntp.toPrint(s + "   ") + "\n";
+            }
+        }
+        return returnString;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

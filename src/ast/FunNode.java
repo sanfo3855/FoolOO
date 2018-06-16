@@ -10,17 +10,23 @@ public class FunNode  implements Node {
     private String id;
     private Node type;
     private ArrayList<Node> listVar;
+    private Node progNode;
 
 
-    public FunNode (String id, Node type, ArrayList<Node> listVar) {
+    public FunNode (String id, Node type, ArrayList<Node> listVar, Node progNode) {
         this.id=id;
         this.type=type;
         this.listVar=listVar;
+        this.progNode=progNode;
     }
 
     public String toPrint(String s) {
-
-        return "Start\n" + type.toPrint("  ") ;
+        String returnString = s + "FunNode" + "\n";
+        for(Node ntp : this.listVar){
+            returnString += s + ntp.toPrint(s + "   ") + "\n";
+        }
+        returnString += s + this.progNode.toPrint(s + "   ");
+        return returnString;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

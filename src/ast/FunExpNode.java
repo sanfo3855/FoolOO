@@ -19,8 +19,11 @@ public class FunExpNode implements Node {
     }
 
     public String toPrint(String s) {
-
-        return "Start\n" + exp.toPrint("  ") ;
+        String returnString = s + "FunExpNode" + "\n";
+        for(Node ntp : listParam){
+            returnString += s + ntp.toPrint(s + "   ") + "\n";
+        }
+        return returnString;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

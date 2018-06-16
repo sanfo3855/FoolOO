@@ -25,7 +25,8 @@ public class VarNode implements Node {
 
     public String toPrint(String s) {
 
-        return "Start\n" + value.toPrint("  ") ;
+        return s + this.type.toPrint(s + "   ") + "\n" +
+                s + this.value.toPrint(s + "  ") + "\n" ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

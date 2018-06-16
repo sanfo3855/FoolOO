@@ -16,8 +16,12 @@ public class LetInExpNode implements Node {
     }
 
     public String toPrint(String s) {
-
-        return "Start\n" + exp.toPrint("  ") ;
+        String returnString = s + "FunNode" + "\n";
+        for(Node ntp : listDec){
+            returnString += s + ntp.toPrint(s + "   ") + "\n";
+        }
+        returnString += s + this.exp.toPrint(s + "   ") + "\n";
+        return returnString;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

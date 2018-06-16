@@ -25,8 +25,11 @@ public class DecclassNode implements Node {
     }
 
     public String toPrint(String s) {
-
-        return "Start\n" + exp.toPrint("  ") ;
+        String returnString = s + "DecclassNode\n";
+        for(Node ntp : listVar){
+            returnString += s + ntp.toPrint(s + "   ") + "\n";
+        }
+        return returnString;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

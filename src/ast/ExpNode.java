@@ -8,17 +8,16 @@ import java.util.ArrayList;
 public class ExpNode implements Node {
 
     private Node left;
-    private Node rigth;
+    private Node right;
 
-    public ExpNode (Node left,Node rigth) {
+    public ExpNode (Node left,Node right) {
         this.left=left;
-        this.rigth=rigth;
+        this.right=right;
     }
 
     public String toPrint(String s) {
-
-        return "Left\n" + left.toPrint("  ") +
-                "Rigth\n" + rigth.toPrint("  ");
+        return s + "LeftExpNode\n" + left.toPrint(s +"  ") + "\n" +
+                s + "RightExpNode\n" + right.toPrint(s + "  ") + "\n";
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
