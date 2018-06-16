@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 public class FoolOOMain {
     public static void main(String[] args) throws Exception {
 
-        String fileName = "code/provaLetInExp.fool";
+        String fileName = "code/provaFunz.fool";
 
         FileInputStream is = new FileInputStream(fileName);
         ANTLRInputStream input = new ANTLRInputStream(is);
@@ -26,6 +26,8 @@ public class FoolOOMain {
             FoolOOVisitorImpl visitor = new FoolOOVisitorImpl();
 
             Node ast = visitor.visit(parser.start()); //generazione AST
+
+            System.out.print(ast);
         }
     }
 }

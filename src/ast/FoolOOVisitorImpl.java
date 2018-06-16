@@ -43,7 +43,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
             listVar.add( visit(dec) );
         }
 
-        if(ctx.eextends().getText()==null){
+        if(ctx.eextends()==null){
            decNode= new DecclassNode(ctx.ID().getText(), listVar);
         }else{
             decNode= new DecclassNode(ctx.ID().getText(), listVar, ctx.eextends().getText());
