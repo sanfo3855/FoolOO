@@ -17,12 +17,12 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(FoolOOParser.StartContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code progDeclaration}
+	 * Visit a parse tree produced by the {@code mainDeclaration}
 	 * labeled alternative in {@link FoolOOParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProgDeclaration(FoolOOParser.ProgDeclarationContext ctx);
+	T visitMainDeclaration(FoolOOParser.MainDeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code classDeclaration}
 	 * labeled alternative in {@link FoolOOParser#block}.

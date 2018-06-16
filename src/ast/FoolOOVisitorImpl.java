@@ -7,8 +7,24 @@ import parser.FoolOOParser.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
+
+
+    @Override
+    public Node visitMainDeclaration(MainDeclarationContext ctx) {
+        ArrayList<Node> listVar = new ArrayList<Node>();
+        Node typeNode = visit(ctx.type());
+
+        return new FunNode(ctx.MAIN().getText(), typeNode, listVar);
+    }
+
+    @Override
+    public Node visitSingleExp(SingleExpContext ctx) {
+        return visit(ctx.exp());
+    }
 
     @Override
     public Node visitLetInExp(LetInExpContext ctx) {
@@ -80,6 +96,35 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         return new FunNode(ctx.ID().getText(), typeNode, listVar);
     }
 
+    @Override
+    public Node visitType(TypeContext ctx) {
+        String type=ctx.getText();
+        Node typeNode=null;
+        if(type.equals("int")){
+            typeNode= new IntTypeNode();
+        }else{
+            if(type.equals("bool")){
+                typeNode= new BoolTypeNode();
+            }else{
+                if(type.equals("void")){
+                    typeNode= new VoidTypeNode();
+                }else{
+                    Pattern pattern = Pattern.compile("[a-zA-Z]+[a-zA-Z0-9]");
+                    Matcher matcher = pattern.matcher(type);
+
+                    System.out.print(type+"....\n");
+                    if (matcher.matches()){
+
+                        System.out.print(true);
+                        typeNode= new IdTypeNode();
+                    }
+                }
+            }
+        }
+
+        //this will never happen thanks to the parser
+        return typeNode;
+    }
 
     @Override
     public Node visitExp(ExpContext ctx) {

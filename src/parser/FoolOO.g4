@@ -13,7 +13,7 @@ grammar FoolOO;
 start   : (block)+
         ;
 
-block   : prog      #progDeclaration
+block   : type MAIN LPAR RPAR CLPAR prog CRPAR       #mainDeclaration
         | decclass     #classDeclaration
         ;
 
@@ -46,6 +46,7 @@ dec     : varasm           #varAssignment
 type    : INT
         | BOOL
         | VOID
+        | ID
         ;
 
 exp     : (MINUS)? left=term ((PLUS | MINUS) right=exp)?
@@ -119,6 +120,7 @@ CLASS   : 'class';
 EXTENDS : 'extends';
 NEW     : 'new';
 NULL    : 'null';
+MAIN    : 'main';
 
 //Numbers
 fragment DIGIT : '0'..'9';

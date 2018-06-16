@@ -1,0 +1,12 @@
+class classe1(int s){
+    int funz(int a){
+        s=a;
+    }
+}
+
+int main(){
+    let
+        aAa8 x=null;
+    in
+        x=0;
+}
