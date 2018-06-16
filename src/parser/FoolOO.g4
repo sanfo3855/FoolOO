@@ -60,7 +60,7 @@ factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) (NOT)? right=value)?
 stm     : ID ASM exp SEMIC                                     #stmExpAsignment
         | ID ASM stms                                            #stmAsignment
         | ID ASM value SEMIC                                    #stmValAsignment
-        | IF cond=exp THEN CLPAR thenBranch=stms CRPAR ELSE CLPAR elseBranch=stms CRPAR       #stmIf
+        | IF cond=exp THEN CLPAR thenBranch=stms CRPAR (ELSE CLPAR elseBranch=stms CRPAR)?       #stmIf
         | PRINT exp SEMIC                                       #stmPrint
         | ID ( LPAR (exp (COMMA exp)* )? RPAR )? SEMIC          #funExp
         | ID DOT ID ( LPAR (exp (COMMA exp)* )? RPAR ) SEMIC    #callMethod
@@ -73,7 +73,7 @@ value   : INTEGER                               #intVal
         | ( TRUE | FALSE )                      #boolVal
         | RETURN exp                            #returnFun
         | LPAR exp RPAR                         #baseExp
-        | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR       #ifExp
+        | IF cond=exp THEN CLPAR thenBranch=exp CRPAR (ELSE CLPAR elseBranch=exp CRPAR)?       #ifExp
         | stms                                  #stmsExp
         | ID                                    #varExp
         | NULL                                  #nullVal
