@@ -16,8 +16,8 @@ public class ExpNode implements Node {
     }
 
     public String toPrint(String s) {
-        return s + "LeftExpNode\n" + left.toPrint(s +"  ") + "\n" +
-                s + "RightExpNode\n" + right.toPrint(s + "  ") + "\n";
+        return s + "LeftExpNode\n" + left.toPrint(s +"  ") + "\n";
+                //+s + "RightExpNode\n" + right.toPrint(s + "  ") + "\n"
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

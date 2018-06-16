@@ -17,7 +17,7 @@ public class IntNode implements Node {
 
     public String toPrint(String s) {
 
-        return "Start\n" + exp.toPrint("  ") ;
+        return "Start\n" + val.toString() ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

@@ -27,7 +27,7 @@ public class FoolOOMain {
 
             Node ast = visitor.visit(parser.start()); //generazione AST
 
-            System.out.print(ast);
+            System.out.print(ast.toPrint(""));
         }
     }
 }

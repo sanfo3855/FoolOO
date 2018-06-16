@@ -18,7 +18,7 @@ public class NullNode implements Node {
 
     public String toPrint(String s) {
 
-        return "Start\n" + exp.toPrint("  ") ;
+        return "Null\n " ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

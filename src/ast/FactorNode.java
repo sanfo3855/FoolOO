@@ -16,8 +16,8 @@ public class FactorNode implements Node {
     }
 
     public String toPrint(String s) {
-        return s + "LeftFactorNode\n" + left.toPrint(s + "  ") + "\n" +
-                s + "RightFactorNode\n" + right.toPrint(s + "  ") + "\n";
+        return s + "LeftFactorNode\n" + left.toPrint(s + "  ") + "\n" ;
+               // s + "RightFactorNode\n" + right.toPrint(s + "  ") + "\n";
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
