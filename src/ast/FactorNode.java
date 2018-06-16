@@ -10,10 +10,9 @@ public class FactorNode implements Node {
     private Node left;
     private Node right;
 
-    public FactorNode (Node l, Node r)
-    {
-        left=l;
-        right=r;
+    public FactorNode (Node left, Node right){
+        this.left=left;
+        this.right=right;
     }
 
     public String toPrint(String s) {

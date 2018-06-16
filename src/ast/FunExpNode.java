@@ -7,12 +7,14 @@ import java.util.ArrayList;
 
 public class FunExpNode implements Node {
 
+    private String id;
     private ArrayList<Node> listParam;
 
     //TODO non serve
     private Node exp;
 
-    public FunExpNode (ArrayList<Node> listParam) {
+    public FunExpNode (String id, ArrayList<Node> listParam) {
+        this.id =id;
         this.listParam = listParam;
     }
 

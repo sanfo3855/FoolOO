@@ -1,33 +1,14 @@
 package ast;
 
+import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.FoolOOBaseVisitor;
 import parser.FoolOOParser.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
-
-//    @Override
-//    public Node visitStart(StartContext ctx) {
-//        return visitChildren(ctx.);
-//    }
-
-
-//    @Override
-//    public Node visitProgDeclaration(ProgDeclarationContext ctx) {
-//        return visitChildren(ctx);
-//    }
-//
-//
-//    @Override
-//    public Node visitClassDeclaration(ClassDeclarationContext ctx) {
-//        return visitChildren(ctx);
-//    }
-
-//    @Override
-//    public Node visitSingleExp(SingleExpContext ctx) {
-//        return visitChildren(ctx);
-//    }
 
     @Override
     public Node visitLetInExp(LetInExpContext ctx) {
@@ -55,22 +36,20 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitDecclass(DecclassContext ctx) {
-        return visitChildren(ctx);
-    }
+        Node decNode;
+        ArrayList<Node> listVar = new ArrayList<Node>();
 
-    @Override
-    public Node visitEextends(EextendsContext ctx) {
-        return visitChildren(ctx);
-    }
+        for(VardecContext dec : ctx.vardec()){
+            listVar.add( visit(dec) );
+        }
 
-    @Override
-    public Node visitLet(LetContext ctx) {
-        return visitChildren(ctx);
-    }
+        if(ctx.eextends().getText()==null){
+           decNode= new DecclassNode(ctx.ID().getText(), listVar);
+        }else{
+            decNode= new DecclassNode(ctx.ID().getText(), listVar, ctx.eextends().getText());
+        }
 
-    @Override
-    public Node visitVardec(VardecContext ctx) {
-        return visitChildren(ctx);
+        return decNode;
     }
 
     @Override
@@ -90,121 +69,105 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitFun(FunContext ctx) {
-        return visitChildren(ctx);
-    }
-//
-//    @Override
-//    public Node visitVarAssignment(VarAssignmentContext ctx) {
-//        return visitChildren(ctx);
-//    }
-//
-//    @Override
-//    public Node visitFunDeclaration(FunDeclarationContext ctx) {
-//        return visitChildren(ctx);
-//    }
+        ArrayList<Node> listVar = new ArrayList<Node>();
 
-//    @Override
-//    public Node visitType(TypeContext ctx) {
-//        return visitChildren(ctx);
-//    }
+        Node typeNode = visit(ctx.type());
+
+        for(VardecContext dec : ctx.vardec()){
+            listVar.add( visit(dec) );
+        }
+
+        return new FunNode(ctx.ID().getText(), typeNode, listVar);
+    }
+
 
     @Override
     public Node visitExp(ExpContext ctx) {
-        return visitChildren(ctx);
+        Node node;
+
+        if (ctx.right==null) {
+            node= visit(ctx.left);
+        }else{
+            node=new ExpNode(visit(ctx.left), visit(ctx.right));
+        }
+        return node;
     }
 
     @Override
     public Node visitTerm(TermContext ctx) {
-        return visitChildren(ctx);
+        Node node;
+
+        if (ctx.right==null) {
+            node= visit(ctx.left);
+        }else{
+            node=new TermNode(visit(ctx.left), visit(ctx.right));
+        }
+        return node;
     }
 
     @Override
     public Node visitFactor(FactorContext ctx) {
-        return visitChildren(ctx);
+        Node node;
+
+        if (ctx.right==null) {
+            node= visit(ctx.left);
+        }else{
+            node=new FactorNode(visit(ctx.left), visit(ctx.right));
+        }
+        return node;
     }
 
-    @Override
-    public Node visitStmExpAsignment(StmExpAsignmentContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Node visitStmAsignment(StmAsignmentContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Node visitStmValAsignment(StmValAsignmentContext ctx) {
-        return visitChildren(ctx);
-    }
 
     @Override
     public Node visitStmIf(StmIfContext ctx) {
-        return visitChildren(ctx);
+        Node ifNode;
+
+        if (ctx.elseBranch==null) {
+            ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch));
+        }else{
+            ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch), visit(ctx.elseBranch));
+        }
+        return ifNode;
     }
 
-    @Override
-    public Node visitStmPrint(StmPrintContext ctx) {
-        return visitChildren(ctx);
-    }
 
     @Override
     public Node visitFunExp(FunExpContext ctx) {
-        return visitChildren(ctx);
+        ArrayList<Node> listVar = new ArrayList<Node>();
+
+        for(ExpContext dec : ctx.exp()){
+            listVar.add( visit(dec) );
+        }
+        return new FunExpNode(ctx.ID().getText(), listVar);
     }
 
     @Override
     public Node visitCallMethod(CallMethodContext ctx) {
-        return visitChildren(ctx);
-    }
 
-//    @Override
-//    public Node visitStms(StmsContext ctx) {
-//        return visitChildren(ctx);
-//    }
+        Map<String, ArrayList<Node>> listField= new HashMap<String, ArrayList<Node>>();
+        ArrayList<Node> listVar;
 
-    @Override
-    public Node visitIntVal(IntValContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Node visitBoolVal(BoolValContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Node visitReturnFun(ReturnFunContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Node visitBaseExp(BaseExpContext ctx) {
-        return visitChildren(ctx);
+        for(TerminalNode id : ctx.ID()){
+            if(!(id.equals(ctx.ID(0)))){
+                listVar = new ArrayList<Node>();
+                for(ExpContext dec : ctx.exp()){
+                    listVar.add( visit(dec) );
+                }
+                listField.put(id.getText(),listVar);
+            }
+        }
+        return new CallMethodNode(ctx.ID(0).getText(), listField);
     }
 
     @Override
     public Node visitIfExp(IfExpContext ctx) {
-        return visitChildren(ctx);
-    }
+        Node ifNode;
 
-    @Override
-    public Node visitStmsExp(StmsExpContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Node visitVarExp(VarExpContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Node visitNullVal(NullValContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Node visitNewClass(NewClassContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.elseBranch==null) {
+            ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch));
+        }else{
+            ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch), visit(ctx.elseBranch));
+        }
+        return ifNode;
     }
 }

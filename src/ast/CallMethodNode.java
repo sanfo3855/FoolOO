@@ -4,15 +4,18 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class CallMethodNode implements Node {
 
-    private ArrayList<Node> listField;
+    private String id;
+    private Map<String, ArrayList<Node>> listField;
 
     //TODO non serve
     private Node exp;
 
-    public CallMethodNode (ArrayList<Node> listField) {
+    public CallMethodNode (String id, Map<String, ArrayList<Node>> listField) {
+        this.id =id;
         this.listField=listField;
     }
 

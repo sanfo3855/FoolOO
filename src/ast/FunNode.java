@@ -9,10 +9,13 @@ public class FunNode  implements Node {
 
     private String id;
     private Node type;
+    private ArrayList<Node> listVar;
 
-    public FunNode (String i, Node t) {
-        id=i;
-        type=t;
+
+    public FunNode (String id, Node type, ArrayList<Node> listVar) {
+        this.id=id;
+        this.type=type;
+        this.listVar=listVar;
     }
 
     public String toPrint(String s) {
