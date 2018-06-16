@@ -7,10 +7,13 @@ import java.util.ArrayList;
 
 public class CallMethodNode implements Node {
 
+    private ArrayList<Node> listField;
+
+    //TODO non serve
     private Node exp;
 
-    public CallMethodNode (Node e) {
-        exp=e;
+    public CallMethodNode (ArrayList<Node> listField) {
+        this.listField=listField;
     }
 
     public String toPrint(String s) {
