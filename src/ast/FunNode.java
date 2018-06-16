@@ -7,28 +7,30 @@ import java.util.ArrayList;
 
 public class FunNode  implements Node {
 
-    private Node exp;
+    private String id;
+    private Node type;
 
-    public FunNode (Node e) {
-        exp=e;
+    public FunNode (String i, Node t) {
+        id=i;
+        type=t;
     }
 
     public String toPrint(String s) {
 
-        return "Start\n" + exp.toPrint("  ") ;
+        return "Start\n" + type.toPrint("  ") ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        return exp.checkSemantics(env);
+        return type.checkSemantics(env);
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return type.typeCheck();
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return type.codeGeneration()+"halt\n";
     }
 
 }

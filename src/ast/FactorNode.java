@@ -7,28 +7,31 @@ import java.util.ArrayList;
 
 public class FactorNode implements Node {
 
-    private Node exp;
+    private Node left;
+    private Node right;
 
-    public FactorNode (Node e) {
-        exp=e;
+    public FactorNode (Node l, Node r)
+    {
+        left=l;
+        right=r;
     }
 
     public String toPrint(String s) {
 
-        return "Start\n" + exp.toPrint("  ") ;
+        return "Start\n" + left.toPrint("  ") ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        return exp.checkSemantics(env);
+        return left.checkSemantics(env);
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return left.typeCheck();
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return left.codeGeneration()+"halt\n";
     }
 
 }
