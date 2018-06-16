@@ -5,12 +5,15 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class StmPrintNode implements Node {
+public class NullNode implements Node {
 
+    //TODO da togliere
     private Node exp;
 
-    public StmPrintNode (Node e) {
-        exp=e;
+    private Object val;
+
+    public NullNode() {
+        this.val = null;
     }
 
     public String toPrint(String s) {
