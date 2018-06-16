@@ -63,7 +63,7 @@ stm     : ID ASM exp SEMIC                                     #stmExpAsignment
         | ID ASM value SEMIC                                    #stmValAsignment
         | IF cond=exp THEN CLPAR thenBranch=stms CRPAR (ELSE CLPAR elseBranch=stms CRPAR)?       #stmIf
         | PRINT exp SEMIC                                       #stmPrint
-        | ID ( LPAR (exp (COMMA exp)* )? RPAR )? SEMIC          #funExp
+        | ID LPAR (exp (COMMA exp)* )? RPAR SEMIC          #funExp
         | ID (DOT ID ( LPAR (exp (COMMA exp)* )? RPAR ))+ SEMIC    #callMethod
         ;
 

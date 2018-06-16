@@ -1,12 +1,15 @@
-class classe1(int s){
+class classe1(int s,
+        aAa8 x){
     int funz(int a){
         s=a;
     }
 }
 
-int main(){
+void main(){
     let
+        int x=0;
         aAa8 x=null;
+        int x=0;
     in
         x=0;
 }

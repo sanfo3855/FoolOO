@@ -5,14 +5,14 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class BoolValNode implements Node {
+public class BoolNode implements Node {
 
     //TODO da togliere
     private Node exp;
 
     private boolean val;
 
-    public BoolValNode (boolean val) {
+    public BoolNode(boolean val) {
         this.val=val;
     }
 

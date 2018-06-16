@@ -17,8 +17,9 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     public Node visitMainDeclaration(MainDeclarationContext ctx) {
         ArrayList<Node> listVar = new ArrayList<Node>();
         Node typeNode = visit(ctx.type());
+        Node progNode= visit(ctx.prog());
 
-        return new FunNode(ctx.MAIN().getText(), typeNode, listVar);
+        return new FunNode(ctx.MAIN().getText(), typeNode, listVar, progNode);
     }
 
     @Override
@@ -93,7 +94,9 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
             listVar.add( visit(dec) );
         }
 
-        return new FunNode(ctx.ID().getText(), typeNode, listVar);
+        Node progNode= visit(ctx.prog());
+
+        return new FunNode(ctx.ID().getText(), typeNode, listVar, progNode);
     }
 
     @Override
@@ -111,11 +114,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
                 }else{
                     Pattern pattern = Pattern.compile("[a-zA-Z]+[a-zA-Z0-9]");
                     Matcher matcher = pattern.matcher(type);
-
-                    System.out.print(type+"....\n");
                     if (matcher.matches()){
-
-                        System.out.print(true);
                         typeNode= new IdTypeNode();
                     }
                 }
@@ -162,7 +161,6 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         return node;
     }
 
-
     @Override
     public Node visitStmIf(StmIfContext ctx) {
         Node ifNode;
@@ -175,6 +173,10 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         return ifNode;
     }
 
+    @Override
+    public Node visitStmPrint(StmPrintContext ctx) {
+        return new PrintNode(visit(ctx.exp()));
+    }
 
     @Override
     public Node visitFunExp(FunExpContext ctx) {
@@ -204,6 +206,33 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         return new CallMethodNode(ctx.ID(0).getText(), listField);
     }
 
+//    @Override
+//    public Node visitStms(StmsContext ctx) {
+//
+//
+//        return visit(ctx.stm());
+//    }
+
+    @Override
+    public Node visitIntVal(IntValContext ctx) {
+        return new IntNode(Integer.parseInt(ctx.INTEGER().getText()));
+    }
+
+    @Override
+    public Node visitBoolVal(BoolValContext ctx) {
+        return new BoolNode(Boolean.parseBoolean(ctx.getText()));
+    }
+
+    @Override
+    public Node visitReturnFun(ReturnFunContext ctx) {
+        return visit (ctx.exp());
+    }
+
+    @Override
+    public Node visitBaseExp(BaseExpContext ctx) {
+        return visit (ctx.exp());
+    }
+
     @Override
     public Node visitIfExp(IfExpContext ctx) {
         Node ifNode;
@@ -214,5 +243,30 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
             ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch), visit(ctx.elseBranch));
         }
         return ifNode;
+    }
+
+    @Override
+    public Node visitStmsExp(StmsExpContext ctx) {
+        return visit(ctx.stms());
+    }
+
+    @Override
+    public Node visitVarExp(VarExpContext ctx) {
+        return new IdNode(ctx.ID().getText());
+    }
+
+    @Override
+    public Node visitNullVal(NullValContext ctx) {
+        return new NullNode();
+    }
+
+    @Override
+    public Node visitNewClass(NewClassContext ctx) {
+        ArrayList<String> listPar = new ArrayList<String>();
+
+        for(TerminalNode id : ctx.ID()){
+            listPar.add( id.getText() );
+        }
+        return new NewClassNode(ctx.ID(0).getText(), listPar);
     }
 }

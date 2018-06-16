@@ -5,13 +5,13 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class IntValNode implements Node {
+public class IntNode implements Node {
 
     private Node exp;
 
     private Integer val;
 
-    public IntValNode (Integer val) {
+    public IntNode(Integer val) {
         this.val=val;
     }
 

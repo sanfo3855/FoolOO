@@ -5,14 +5,14 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class IdValNode implements Node {
+public class IdNode implements Node {
 
     //TODO da togliere
     private Node exp;
 
     private String id;
 
-    public IdValNode(String id) {
+    public IdNode(String id) {
         this.id=id;
     }
 
