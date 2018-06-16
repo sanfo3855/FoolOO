@@ -1,4 +1,4 @@
-// Generated from /home/andrea/IdeaProjects/compilatori/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
+// Generated from /home/matteo/Developments/git/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
 package parser;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

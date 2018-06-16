@@ -7,28 +7,31 @@ import java.util.ArrayList;
 
 public class ExpNode implements Node {
 
-    private Node exp;
+    private Node left;
+    private Node rigth;
 
-    public ExpNode (Node e) {
-        exp=e;
+    public ExpNode (Node left,Node rigth) {
+        this.left=left;
+        this.rigth=rigth;
     }
 
     public String toPrint(String s) {
 
-        return "Start\n" + exp.toPrint("  ") ;
+        return "Left\n" + left.toPrint("  ") +
+                "Rigth\n" + rigth.toPrint("  ");
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        return exp.checkSemantics(env);
+        return left.checkSemantics(env);
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return left.typeCheck();
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return left.codeGeneration()+"halt\n";
     }
 
 }
