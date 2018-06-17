@@ -162,6 +162,20 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     }
 
     @Override
+    public Node visitStmExpAsignment(StmExpAsignmentContext ctx) {
+        return new AsmNode(ctx.ID().getText(), visit(ctx.exp()));
+    }
+    @Override
+    public Node visitStmAsignment(StmAsignmentContext ctx) {
+        return new AsmNode(ctx.ID().getText(), visit(ctx.stms()));
+    }
+    @Override
+    public Node visitStmValAsignment(StmValAsignmentContext ctx) {
+        return new AsmNode(ctx.ID().getText(), visit(ctx.value()));
+    }
+
+
+    @Override
     public Node visitStmIf(StmIfContext ctx) {
         Node ifNode;
 

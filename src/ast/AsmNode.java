@@ -5,35 +5,32 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class IdNode implements Node {
-
-    //TODO da togliere
-    private Node exp;
+public class AsmNode implements Node {
 
     private String id;
-    private STentry entry;
-    private int nestinglevel;
+    private Node value;
 
-    public IdNode(String id) {
+    public AsmNode(String id, Node value) {
         this.id=id;
+        this.value=value;
     }
 
     public String toPrint(String s) {
 
-        return "Start\n" + exp.toPrint("  ") ;
+        return "Start\n" + id ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        return exp.checkSemantics(env);
+        return value.checkSemantics(env);
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return value.typeCheck();
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return value.codeGeneration()+"halt\n";
     }
 
 }
