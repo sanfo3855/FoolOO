@@ -18,8 +18,9 @@ public class DecclassNode implements Node {
 
     public DecclassNode (String id, ArrayList<Node> listVar, ArrayList<Node> listFun, String idExt) {
         this.id = id;
-        this.idExt= idExt;
         this.listVar = listVar;
+        this.listFun= listFun;
+        this.idExt= idExt;
     }
     public DecclassNode (String id, ArrayList<Node> listVar, ArrayList<Node> listFun) {
         new DecclassNode(id,listVar,listFun,"object");

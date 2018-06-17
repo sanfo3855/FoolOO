@@ -51,12 +51,6 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDecclass(FoolOOParser.DecclassContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FoolOOParser#eextends}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEextends(FoolOOParser.EextendsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#let}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

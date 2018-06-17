@@ -7,25 +7,22 @@ import java.util.ArrayList;
 
 public class VarNode implements Node {
 
-    private String id;
-    private Node type;
+    private Node varDec;
     private Node value;
 
-    public VarNode (String id, Node type, Node value) {
-        this.id=id;
-        this.type=type;
+    public VarNode (Node varDec, Node value) {
+        this.varDec=varDec;
         this.value=value;
     }
 
-    public VarNode (String id, Node type){
-        this.id = id;
-        this.type = type;
+    public VarNode (Node varDec){
+        new VarNode(varDec, null);
     }
 
 
     public String toPrint(String s) {
 
-        return s + this.type.toPrint(s + "   ") + "\n" +
+        return s + this.varDec.toPrint(s + "   ") + "\n" +
                 s + this.value.toPrint(s + "  ") + "\n" ;
     }
 

@@ -1,5 +1,6 @@
 package ast;
 
+import jdk.nashorn.internal.ir.Block;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.FoolOOBaseVisitor;
 import parser.FoolOOParser.*;
@@ -12,6 +13,15 @@ import java.util.regex.Pattern;
 
 public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
+    @Override
+    public Node visitStart(StartContext ctx) {
+        ArrayList<Node> listBlock = new ArrayList<Node>();
+        for(BlockContext block : ctx.block()){
+            listBlock.add( visit(block) );
+        }
+
+        return new FoolNode(listBlock);
+    }
 
     @Override
     public Node visitMainDeclaration(MainDeclarationContext ctx) {
@@ -23,7 +33,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     }
 
     @Override public Node visitClassDeclaration(ClassDeclarationContext ctx) {
-        return visitChildren(ctx.decclass());
+        return visit(ctx.decclass());
     }
 
     @Override
@@ -61,22 +71,26 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         ArrayList<Node> listVar = new ArrayList<Node>();
         ArrayList<Node> listFun=new ArrayList<Node>();
 
-        for(VardecContext dec : ctx.vardec()){
-            listVar.add( visit(dec) );
+        for(VardecContext vardec : ctx.vardec()){
+            listVar.add( visit(vardec) );
         }
-
         for(FunContext fun : ctx.fun()){
             listFun.add( visit(fun) );
         }
 
 
-        if(ctx.eextends()==null){
+        if(ctx.IDEXTENDS()==null){
            decNode= new DecclassNode(ctx.ID().getText(), listVar, listFun);
         }else{
-            decNode= new DecclassNode(ctx.ID().getText(), listVar, listFun, ctx.eextends().ID().getText());
+            decNode= new DecclassNode(ctx.ID().getText(), listVar, listFun, ctx.IDEXTENDS().getText());
         }
 
         return decNode;
+    }
+
+    @Override
+    public Node visitVardec(VardecContext ctx) {
+        return new VarDecNode(ctx.ID().getText(), visit(ctx.type()));
     }
 
     @Override
@@ -85,13 +99,13 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         VarNode result;
 
         //visit the type
-        Node typeNode = visit(ctx.vardec().type());
+        Node varDecNode = visit(ctx.vardec());
 
         //visit the exp
         Node expNode = visit(ctx.exp());
 
         //build the varNode
-        return new VarNode(ctx.vardec().ID().getText(), typeNode, expNode);
+        return new VarNode(varDecNode, expNode);
     }
 
     @Override
@@ -100,13 +114,13 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         VarNode result;
 
         //visit the type
-        Node typeNode = visit(ctx.vardec().type());
+        Node varDecNode = visit(ctx.vardec());
 
         //visit the exp
-        Node expNode = visit(ctx.stms());
+        Node stmsNode = visit(ctx.stms());
 
         //build the varNode
-        return new VarNode(ctx.vardec().ID().getText(), typeNode, expNode);
+        return new VarNode(varDecNode, stmsNode);
     }
 
     @Override
