@@ -11,7 +11,7 @@ public class BoolTypeNode implements Node {
   }
 
   public String toPrint(String s) {
-	return s+"IntType\n";
+	return s+"BoolType\n";
   }
 
   public Node typeCheck() {

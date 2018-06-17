@@ -22,6 +22,10 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         return new FunNode(ctx.MAIN().getText(), typeNode, listVar, progNode);
     }
 
+    @Override public Node visitClassDeclaration(ClassDeclarationContext ctx) {
+        return visitChildren(ctx.decclass());
+    }
+
     @Override
     public Node visitSingleExp(SingleExpContext ctx) {
         return visit(ctx.exp());
@@ -55,22 +59,28 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     public Node visitDecclass(DecclassContext ctx) {
         Node decNode;
         ArrayList<Node> listVar = new ArrayList<Node>();
+        ArrayList<Node> listFun=new ArrayList<Node>();
 
         for(VardecContext dec : ctx.vardec()){
             listVar.add( visit(dec) );
         }
 
+        for(FunContext fun : ctx.fun()){
+            listFun.add( visit(fun) );
+        }
+
+
         if(ctx.eextends()==null){
-           decNode= new DecclassNode(ctx.ID().getText(), listVar);
+           decNode= new DecclassNode(ctx.ID().getText(), listVar, listFun);
         }else{
-            decNode= new DecclassNode(ctx.ID().getText(), listVar, ctx.eextends().getText());
+            decNode= new DecclassNode(ctx.ID().getText(), listVar, listFun, ctx.eextends().ID().getText());
         }
 
         return decNode;
     }
 
     @Override
-    public Node visitVarasm(VarasmContext ctx) {
+    public Node visitExpDecAsignment(ExpDecAsignmentContext ctx) {
         //declare the result node
         VarNode result;
 
@@ -79,6 +89,21 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
         //visit the exp
         Node expNode = visit(ctx.exp());
+
+        //build the varNode
+        return new VarNode(ctx.vardec().ID().getText(), typeNode, expNode);
+    }
+
+    @Override
+    public Node visitStmDecAsignment(StmDecAsignmentContext ctx) {
+        //declare the result node
+        VarNode result;
+
+        //visit the type
+        Node typeNode = visit(ctx.vardec().type());
+
+        //visit the exp
+        Node expNode = visit(ctx.stms());
 
         //build the varNode
         return new VarNode(ctx.vardec().ID().getText(), typeNode, expNode);
@@ -97,6 +122,16 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         Node progNode= visit(ctx.prog());
 
         return new FunNode(ctx.ID().getText(), typeNode, listVar, progNode);
+    }
+
+    @Override
+    public Node visitVarAssignment(VarAssignmentContext ctx) {
+        return visit(ctx.varasm());
+    }
+
+    @Override
+    public Node visitFunDeclaration(FunDeclarationContext ctx) {
+        return visit(ctx.fun());
     }
 
     @Override
@@ -161,10 +196,10 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         return node;
     }
 
-    @Override
-    public Node visitStmExpAsignment(StmExpAsignmentContext ctx) {
-        return new AsmNode(ctx.ID().getText(), visit(ctx.exp()));
-    }
+//    @Override
+//    public Node visitStmExpAsignment(StmExpAsignmentContext ctx) {
+//        return new AsmNode(ctx.ID().getText(), visit(ctx.exp()));
+//    }
     @Override
     public Node visitStmAsignment(StmAsignmentContext ctx) {
         return new AsmNode(ctx.ID().getText(), visit(ctx.stms()));

@@ -10,18 +10,19 @@ public class DecclassNode implements Node {
     private String id;
     private String idExt;
     private ArrayList<Node> listVar;
+    private ArrayList<Node> listFun;
 
     //TODO non serve
     private Node exp;
 
 
-    public DecclassNode (String id, ArrayList<Node> listVar, String idExt) {
+    public DecclassNode (String id, ArrayList<Node> listVar, ArrayList<Node> listFun, String idExt) {
         this.id = id;
         this.idExt= idExt;
         this.listVar = listVar;
     }
-    public DecclassNode (String id, ArrayList<Node> listVar) {
-        new DecclassNode(id,listVar,"object");
+    public DecclassNode (String id, ArrayList<Node> listVar, ArrayList<Node> listFun) {
+        new DecclassNode(id,listVar,listFun,"object");
     }
 
     public String toPrint(String s) {

@@ -1,15 +1,19 @@
-class classe1(int s,
-        aAa8 x){
+class classe1(int s, aAa8 x){
     int funz(int a){
-        s=a;
+    let
+        int s=a;
+        in
+        s=0;
     }
 }
 
 void main(){
     let
-        int x=0;
+        bool x=1;
+        int x=s();
         aAa8 x=null;
-        int x=0;
+        int x=x.d();
     in
-        x=0;
+        a.s().s();
+        x=x=0;
 }

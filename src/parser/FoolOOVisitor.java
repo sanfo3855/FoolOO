@@ -69,11 +69,19 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVardec(FoolOOParser.VardecContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FoolOOParser#varasm}.
+	 * Visit a parse tree produced by the {@code expDecAsignment}
+	 * labeled alternative in {@link FoolOOParser#varasm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVarasm(FoolOOParser.VarasmContext ctx);
+	T visitExpDecAsignment(FoolOOParser.ExpDecAsignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code stmDecAsignment}
+	 * labeled alternative in {@link FoolOOParser#varasm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmDecAsignment(FoolOOParser.StmDecAsignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#fun}.
 	 * @param ctx the parse tree
@@ -119,27 +127,6 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFactor(FoolOOParser.FactorContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code stmExpAsignment}
-	 * labeled alternative in {@link FoolOOParser#stm}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmExpAsignment(FoolOOParser.StmExpAsignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code stmAsignment}
-	 * labeled alternative in {@link FoolOOParser#stm}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmAsignment(FoolOOParser.StmAsignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code stmValAsignment}
-	 * labeled alternative in {@link FoolOOParser#stm}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmValAsignment(FoolOOParser.StmValAsignmentContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code stmIf}
 	 * labeled alternative in {@link FoolOOParser#stm}.
 	 * @param ctx the parse tree
@@ -167,6 +154,20 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCallMethod(FoolOOParser.CallMethodContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code stmAsignment}
+	 * labeled alternative in {@link FoolOOParser#stm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmAsignment(FoolOOParser.StmAsignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code stmValAsignment}
+	 * labeled alternative in {@link FoolOOParser#stm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmValAsignment(FoolOOParser.StmValAsignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#stms}.
 	 * @param ctx the parse tree

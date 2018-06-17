@@ -33,7 +33,8 @@ let     : LET (dec)+ IN
 vardec  : type ID
         ;
 
-varasm  : vardec ASM exp SEMIC
+varasm  : vardec ASM exp SEMIC      #expDecAsignment
+        |  vardec ASM stms          #stmDecAsignment
         ;
 
 fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog CRPAR
@@ -58,13 +59,13 @@ term    : left=factor ((TIMES | DIV) right=term)?
 factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) (NOT)? right=value)?
         ;
 
-stm     : ID ASM exp SEMIC                                     #stmExpAsignment
-        | ID ASM stms                                            #stmAsignment
-        | ID ASM value SEMIC                                    #stmValAsignment
-        | IF cond=exp THEN CLPAR thenBranch=stms CRPAR (ELSE CLPAR elseBranch=stms CRPAR)?       #stmIf
+stm     : IF cond=exp THEN CLPAR thenBranch=stms CRPAR (ELSE CLPAR elseBranch=stms CRPAR)?       #stmIf
         | PRINT exp SEMIC                                       #stmPrint
         | ID LPAR (exp (COMMA exp)* )? RPAR SEMIC          #funExp
         | ID (DOT ID ( LPAR (exp (COMMA exp)* )? RPAR ))+ SEMIC    #callMethod
+        //|ID ASM exp SEMIC                                     #stmExpAsignment
+        | ID ASM stms                                            #stmAsignment
+        | ID ASM value SEMIC                                    #stmValAsignment
         ;
 
 stms    : (stm)+
