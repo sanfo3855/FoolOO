@@ -17,9 +17,7 @@ public class VarDecNode implements Node {
 
 
     public String toPrint(String s) {
-
-        return s + this.id + "\n" +
-                s + this.type.toPrint(s + "  ") + "\n" ;
+        return "VarDecNode" + "\n" + s + id + "\n" + s + type.toPrint(s + "  ") + "\n" ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

@@ -28,9 +28,14 @@ public class DecclassNode implements Node {
 
     public String toPrint(String s) {
         String returnString = s + "DecclassNode\n";
-        for(Node ntp : listVar){
-            returnString += s + ntp.toPrint(s + "   ") + "\n";
-        }
+
+        //TODO
+//        for(Node ntp : this.listVar){
+//            returnString += s + ntp.toPrint(s + "   ") + "\n";
+//        }
+//        for(Node varDec :  listVar){
+//            returnString += s + varDec.toPrint("   ") + "\n";
+//        }
         return returnString;
     }
 

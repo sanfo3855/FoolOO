@@ -16,7 +16,7 @@ public class LetInExpNode implements Node {
     }
 
     public String toPrint(String s) {
-        String returnString = s + "FunNode" + "\n";
+        String returnString = s + "LetInExpNode" + "\n";
         for(Node ntp : listDec){
             returnString += s + ntp.toPrint(s + "   ") + "\n";
         }

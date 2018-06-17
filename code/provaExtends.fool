@@ -1,4 +1,4 @@
-class classe1 (int s, int x){
+class classe1 extends isd (int s, int x){
     int funz(int a){
     let
         int s=a;

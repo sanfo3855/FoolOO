@@ -11,7 +11,7 @@ public class IdTypeNode implements Node {
   }
   
   public String toPrint(String s) {
-	return s+"IntType\n";  
+	return s+"IdType\n";
   }
 
   public Node typeCheck() {

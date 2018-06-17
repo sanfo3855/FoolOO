@@ -11,7 +11,7 @@ public class VoidTypeNode implements Node {
   }
   
   public String toPrint(String s) {
-	return s+"IntType\n";  
+	return s+"VoidType\n";
   }
 
   public Node typeCheck() {

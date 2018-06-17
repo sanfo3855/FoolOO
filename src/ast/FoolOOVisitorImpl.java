@@ -43,26 +43,13 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitLetInExp(LetInExpContext ctx) {
-        //resulting node of the right type
-        LetInExpNode res;
-
-        //list of declarations in @res
         ArrayList<Node> listDec = new ArrayList<Node>();
-
-        //visit all nodes corresponding to declarations inside the let context and store them in @declarations
-        //notice that the ctx.let().dec() method returns a list, this is because of the use of * or + in the grammar
-        //antlr detects this is a group and therefore returns a list
         for(DecContext dec : ctx.let().dec()){
             listDec.add( visit(dec) );
         }
-
-        //visit exp context
         Node exp = visit( ctx.exp() );
 
-        //build @res accordingly with the result of the visits to its content
-        res = new LetInExpNode(listDec,  exp);
-
-        return res;
+        return new LetInExpNode(listDec,  exp);
     }
 
     @Override
@@ -71,8 +58,13 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         ArrayList<Node> listVar = new ArrayList<Node>();
         ArrayList<Node> listFun=new ArrayList<Node>();
 
-        for(VardecContext vardec : ctx.vardec()){
-            listVar.add( visit(vardec) );
+
+        if(ctx.vardec()==null) {
+            listVar=null;
+        }else{
+            for (VardecContext vardec : ctx.vardec()) {
+                listVar.add(visit(vardec));
+            }
         }
         for(FunContext fun : ctx.fun()){
             listFun.add( visit(fun) );
@@ -260,8 +252,8 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         for(TerminalNode id : ctx.ID()){
             if(!(id.equals(ctx.ID(0)))){
                 listVar = new ArrayList<Node>();
-                for(ExpContext dec : ctx.exp()){
-                    listVar.add( visit(dec) );
+                for(ExpContext exp : ctx.exp()){
+                    listVar.add( visit(exp) );
                 }
                 listField.put(id.getText(),listVar);
             }
