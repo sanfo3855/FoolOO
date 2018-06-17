@@ -23,19 +23,20 @@ public class DecclassNode implements Node {
         this.idExt= idExt;
     }
     public DecclassNode (String id, ArrayList<Node> listVar, ArrayList<Node> listFun) {
-        new DecclassNode(id,listVar,listFun,"object");
+        this.id = id;
+        this.listVar = listVar;
+        this.listFun= listFun;
     }
 
     public String toPrint(String s) {
         String returnString = s + "DecclassNode\n";
 
-        //TODO
-//        for(Node ntp : this.listVar){
-//            returnString += s + ntp.toPrint(s + "   ") + "\n";
-//        }
-//        for(Node varDec :  listVar){
-//            returnString += s + varDec.toPrint("   ") + "\n";
-//        }
+        for(Node varDec :  listVar){
+            returnString += s + varDec.toPrint("   ") + "\n";
+        }
+        for(Node fun : listFun){
+            returnString += s + fun.toPrint(s + "   ") + "\n";
+        }
         return returnString;
     }
 

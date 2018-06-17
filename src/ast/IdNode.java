@@ -20,7 +20,7 @@ public class IdNode implements Node {
 
     public String toPrint(String s) {
 
-        return "Start\n" + exp.toPrint("  ") ;
+        return "Start\n";
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

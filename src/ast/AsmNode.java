@@ -17,7 +17,7 @@ public class AsmNode implements Node {
 
     public String toPrint(String s) {
 
-        return "Start\n" + id ;
+        return "AsmNode\n" + id ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
