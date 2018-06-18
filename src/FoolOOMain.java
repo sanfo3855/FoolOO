@@ -32,10 +32,10 @@ public class FoolOOMain {
 
             Node ast = visitor.visit(parser.start()); //generazione AST
 
-//            System.out.print(ast.toPrint(""));
+            System.out.print(ast.toPrint(""));
 
-            Environment env = new Environment();
-            ArrayList<SemanticError> err = ast.checkSemantics(env);
+//            Environment env = new Environment();
+//            ArrayList<SemanticError> err = ast.checkSemantics(env);
 //
 //            if(err.size()>0){
 //                System.out.println("You had: " +err.size()+" errors:");

@@ -33,8 +33,9 @@ public class CallMethodNode implements Node {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         int envNL=env.getNestingLevel();
         STentry entryTableTemp=null;
+
         while (envNL>=0 && entryTableTemp==null){
-            entryTableTemp=env.getHashMapNL(envNL).get(id);
+            entryTableTemp=env.getHashMapNL(envNL).get("class|"+id);
         }
         if (entryTableTemp==null){
             semanticErrors.add(new SemanticError("Id "+id+" not declared"));

@@ -1,5 +1,5 @@
 class classe1 (int s, int x){
-    int funz(int a){
+    int funz(int x, bool x){
     let
         int s=a;
         in
@@ -20,6 +20,7 @@ void main(){
         bool x=1;
         int x=s();
         aAa8 x=null;
+        aAa8 x=new aAa8();
         int x=d.d(q).d(ee, ee).y();
     in
     a=0;

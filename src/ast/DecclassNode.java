@@ -47,8 +47,8 @@ public class DecclassNode implements Node {
 
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
         STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
-
-        if ( hashMap.put(id,entryTable) != null ){
+//todo id classe
+        if ( hashMap.put("class|"+id,entryTable) != null ){
             semanticErrors.add(new SemanticError("Class id "+id+" already declared"));
         }else{
             if( hashMap.get(idExt) != null ){

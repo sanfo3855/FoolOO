@@ -290,11 +290,11 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitNewClass(NewClassContext ctx) {
-        ArrayList<String> listPar = new ArrayList<String>();
-        for(TerminalNode id : ctx.ID()){
-            listPar.add( id.getText() );
+        ArrayList<Node> listPar = new ArrayList<Node>();
+        for(ExpContext expContext : ctx.exp()){
+            listPar.add( visit(expContext) );
         }
 
-        return new NewClassNode(ctx.ID(0).getText(), listPar);
+        return new NewClassNode(ctx.ID().getText(), listPar);
     }
 }

@@ -78,7 +78,7 @@ value   : INTEGER                               #intVal
         | stms                                  #stmsExp
         | ID                                    #varExp
         | NULL                                  #nullVal
-        | NEW ID LPAR (ID(COMMA ID)+)? RPAR     #newClass
+        | NEW ID LPAR (exp (COMMA exp)* )? RPAR #newClass
         ;
 
 
