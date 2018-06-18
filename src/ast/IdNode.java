@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 public class IdNode implements Node {
 
-    //TODO da togliere
-    private Node exp;
-
     private String id;
     private STentry entry;
     private int nestinglevel;
@@ -33,11 +30,11 @@ public class IdNode implements Node {
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return null;
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return "";
     }
 
 }

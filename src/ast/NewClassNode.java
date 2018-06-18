@@ -9,9 +9,6 @@ public class NewClassNode implements Node{
     private String id;
     private ArrayList<String> listPar;
 
-    //TODO non serve
-    private Node exp;
-
     public NewClassNode (String id, ArrayList<String> listPar) {
         this.id = id;
         this.listPar = listPar;
@@ -37,11 +34,11 @@ public class NewClassNode implements Node{
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return null;
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return "";
     }
 
 }

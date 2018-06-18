@@ -12,9 +12,6 @@ public class FunExpNode implements Node {
     private STentry entry;
     private int nestinglevel;
 
-    //TODO non serve
-    private Node exp;
-
     public FunExpNode (String id, ArrayList<Node> listParam) {
         this.id =id;
         this.listParam = listParam;
@@ -39,11 +36,11 @@ public class FunExpNode implements Node {
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return null;
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return "";
     }
 
 }

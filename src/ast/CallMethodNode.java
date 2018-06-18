@@ -14,8 +14,6 @@ public class CallMethodNode implements Node {
     private STentry entry;
     private int nestinglevel;
 
-    //TODO non serve
-    private Node exp;
 
     public CallMethodNode (String id, Map<String, ArrayList<Node>> listField) {
         this.id =id;
@@ -43,11 +41,11 @@ public class CallMethodNode implements Node {
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return null;
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return "";
     }
 
 }

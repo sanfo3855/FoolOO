@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 public class NullNode implements Node {
 
-    //TODO da togliere
-    private Node exp;
-
     private Object val;
 
     public NullNode() {
@@ -27,11 +24,11 @@ public class NullNode implements Node {
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return null;
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return "";
     }
 
 }

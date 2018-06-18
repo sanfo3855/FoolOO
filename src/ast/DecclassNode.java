@@ -12,9 +12,6 @@ public class DecclassNode implements Node {
     private ArrayList<Node> listVar;
     private ArrayList<Node> listFun;
 
-    //TODO non serve
-    private Node exp;
-
 
     public DecclassNode (String id, ArrayList<Node> listVar, ArrayList<Node> listFun, String idExt) {
         this.id = id;
@@ -55,11 +52,11 @@ public class DecclassNode implements Node {
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return null;
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return "";
     }
 
 }
