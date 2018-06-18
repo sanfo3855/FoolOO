@@ -23,9 +23,14 @@ public class AsmNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
-
-        //todo
-
+        int j=env.getNestingLevel();
+        STentry tmpEntry=null;
+        while (j>=0 && tmpEntry==null){
+            tmpEntry = env.getHashMapNL(j--).get(id);
+        }
+        if(tmpEntry==null){
+            semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
+        }
         semanticErrors.addAll(value.checkSemantics(env));
 
         return semanticErrors;
