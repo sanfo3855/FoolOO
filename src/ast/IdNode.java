@@ -22,9 +22,17 @@ public class IdNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
-
-        //todo
-
+        int j=env.getNestingLevel();
+        STentry tmp=null;
+        while (j>=0 && tmp==null){
+            tmp = env.getHashMapNL(j--).get(id);
+        }
+        if(tmp==null){
+            semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
+        } else {
+            entry = tmp;
+            nestinglevel = env.getNestingLevel();
+        }
 
         return semanticErrors;
     }

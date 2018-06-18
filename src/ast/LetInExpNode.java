@@ -27,8 +27,10 @@ public class LetInExpNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
-
-        //todo
+        for(Node ntc : listDec){
+            semanticErrors.addAll(ntc.checkSemantics(env));
+        }
+        semanticErrors.addAll(exp.checkSemantics(env));
 
 
         return semanticErrors;
