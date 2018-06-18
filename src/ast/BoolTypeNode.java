@@ -5,7 +5,7 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class BoolTypeNode implements Node {
+public class BoolTypeNode implements TypeNode {
 
     public BoolTypeNode() {
     }
@@ -24,5 +24,9 @@ public class BoolTypeNode implements Node {
 
     public String codeGeneration() {
         return "";
+    }
+
+    public String getType(){
+        return "bool";
     }
 }  

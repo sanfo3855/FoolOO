@@ -5,7 +5,7 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class VoidTypeNode implements Node {
+public class VoidTypeNode implements TypeNode {
 
   public VoidTypeNode() {
   }
@@ -22,9 +22,13 @@ public class VoidTypeNode implements Node {
 		return "";
   }
   
-  @Override
-	public ArrayList<SemanticError> checkSemantics(Environment env) {
-	  return new ArrayList<SemanticError>();
-	}
-  
+    @Override
+    public ArrayList<SemanticError> checkSemantics(Environment env) {
+        return new ArrayList<SemanticError>();
+    }
+
+    public String getType(){
+        return "void";
+    }
+
 }  

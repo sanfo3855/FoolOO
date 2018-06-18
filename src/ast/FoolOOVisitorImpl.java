@@ -135,7 +135,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
                     Pattern pattern = Pattern.compile("[a-zA-Z]+[a-zA-Z0-9]");
                     Matcher matcher = pattern.matcher(type);
                     if (matcher.matches()){
-                        typeNode= new IdTypeNode();
+                        typeNode= new IdTypeNode(type);
                     }
                 }
             }

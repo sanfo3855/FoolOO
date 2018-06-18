@@ -5,32 +5,38 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class IdTypeNode implements Node {
+public class IdTypeNode implements TypeNode {
 
-  public IdTypeNode() {
-  }
-  
-  public String toPrint(String s) {
-	return s+"IdType\n";
-  }
+    String id;
 
-  public Node typeCheck() {
-    return null;
-  }
+    public IdTypeNode(String id) {
+        this.id=id;
+    }
 
-  public String codeGeneration() {
-		return "";
-  }
-  
-  @Override
-	public ArrayList<SemanticError> checkSemantics(Environment env) {
-      ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+    public String toPrint(String s) {
+        return s+"IdType\n";
+    }
+
+    public Node typeCheck() {
+        return null;
+    }
+
+    public String codeGeneration() {
+        return "";
+    }
+
+    @Override
+    public ArrayList<SemanticError> checkSemantics(Environment env) {
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
 
-      //todo
+        //todo
 
 
-      return semanticErrors;
-	}
-  
+        return semanticErrors;
+    }
+
+    public String getType(){
+        return id;
+    }
 }  

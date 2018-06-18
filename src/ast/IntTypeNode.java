@@ -5,26 +5,30 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class IntTypeNode implements Node {
+public class IntTypeNode implements TypeNode {
   
-  public IntTypeNode() {
-  }
-  
-  public String toPrint(String s) {
-	return s+"IntType\n";  
-  }
+    public IntTypeNode() {
+    }
 
-  public Node typeCheck() {
-    return null;
-  }
+    public String toPrint(String s) {
+        return s+"IntType\n";
+    }
 
-  public String codeGeneration() {
-		return "";
-  }
+    public Node typeCheck() {
+        return null;
+    }
+
+    public String codeGeneration() {
+        return "";
+    }
   
-  @Override
+    @Override
 	public ArrayList<SemanticError> checkSemantics(Environment env) {
-	  return new ArrayList<SemanticError>();
+        return new ArrayList<SemanticError>();
 	}
-  
+
+    public String getType(){
+        return "int";
+    }
+
 }  
