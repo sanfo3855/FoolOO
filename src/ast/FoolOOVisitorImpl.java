@@ -57,7 +57,6 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         ArrayList<Node> listVar = new ArrayList<Node>();
         ArrayList<Node> listFun=new ArrayList<Node>();
 
-
         if(ctx.vardec()==null) {
             listVar=null;
         }else{
@@ -68,8 +67,6 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         for(FunContext fun : ctx.fun()){
             listFun.add( visit(fun) );
         }
-
-
         if(ctx.ID(1)==null){
            decNode= new DecclassNode(ctx.ID(0).getText(), listVar, listFun);
         }else{
@@ -86,44 +83,27 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitExpDecAsignment(ExpDecAsignmentContext ctx) {
-        //declare the result node
-        VarNode result;
-
-        //visit the type
         Node varDecNode = visit(ctx.vardec());
-
-        //visit the exp
         Node expNode = visit(ctx.exp());
 
-        //build the varNode
         return new VarNode(varDecNode, expNode);
     }
 
     @Override
     public Node visitStmDecAsignment(StmDecAsignmentContext ctx) {
-        //declare the result node
-        VarNode result;
-
-        //visit the type
         Node varDecNode = visit(ctx.vardec());
-
-        //visit the exp
         Node stmsNode = visit(ctx.stms());
 
-        //build the varNode
         return new VarNode(varDecNode, stmsNode);
     }
 
     @Override
     public Node visitFun(FunContext ctx) {
         ArrayList<Node> listVar = new ArrayList<Node>();
-
         Node typeNode = visit(ctx.type());
-
         for(VardecContext dec : ctx.vardec()){
             listVar.add( visit(dec) );
         }
-
         Node progNode= visit(ctx.prog());
 
         return new FunNode(ctx.ID().getText(), typeNode, listVar, progNode);
@@ -161,43 +141,42 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
             }
         }
 
-        //this will never happen thanks to the parser
         return typeNode;
     }
 
     @Override
     public Node visitExp(ExpContext ctx) {
         Node node;
-
         if (ctx.right==null) {
             node= visit(ctx.left);
         }else{
             node=new ExpNode(visit(ctx.left), visit(ctx.right));
         }
+
         return node;
     }
 
     @Override
     public Node visitTerm(TermContext ctx) {
         Node node;
-
         if (ctx.right==null) {
             node= visit(ctx.left);
         }else{
             node=new TermNode(visit(ctx.left), visit(ctx.right));
         }
+
         return node;
     }
 
     @Override
     public Node visitFactor(FactorContext ctx) {
         Node node;
-
         if (ctx.right==null) {
             node= visit(ctx.left);
         }else{
             node=new FactorNode(visit(ctx.left), visit(ctx.right));
         }
+
         return node;
     }
 
@@ -218,12 +197,12 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitStmIf(StmIfContext ctx) {
         Node ifNode;
-
         if (ctx.elseBranch==null) {
             ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch));
         }else{
             ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch), visit(ctx.elseBranch));
         }
+
         return ifNode;
     }
 
@@ -235,19 +214,17 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitFunExp(FunExpContext ctx) {
         ArrayList<Node> listVar = new ArrayList<Node>();
-
         for(ExpContext dec : ctx.exp()){
             listVar.add( visit(dec) );
         }
+
         return new FunExpNode(ctx.ID().getText(), listVar);
     }
 
     @Override
     public Node visitCallMethod(CallMethodContext ctx) {
-
         Map<String, ArrayList<Node>> listField= new HashMap<String, ArrayList<Node>>();
         ArrayList<Node> listVar;
-
         for(TerminalNode id : ctx.ID()){
             if(!(id.equals(ctx.ID(0)))){
                 listVar = new ArrayList<Node>();
@@ -257,15 +234,9 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
                 listField.put(id.getText(),listVar);
             }
         }
+
         return new CallMethodNode(ctx.ID(0).getText(), listField);
     }
-
-//    @Override
-//    public Node visitStms(StmsContext ctx) {
-//
-//
-//        return visit(ctx.stm());
-//    }
 
     @Override
     public Node visitIntVal(IntValContext ctx) {
@@ -279,23 +250,23 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitReturnFun(ReturnFunContext ctx) {
-        return visit (ctx.exp());
+        return visit(ctx.exp());
     }
 
     @Override
     public Node visitBaseExp(BaseExpContext ctx) {
-        return visit (ctx.exp());
+        return visit(ctx.exp());
     }
 
     @Override
     public Node visitIfExp(IfExpContext ctx) {
         Node ifNode;
-
         if (ctx.elseBranch==null) {
             ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch));
         }else{
             ifNode=new IfNode(visit(ctx.cond),  visit(ctx.thenBranch), visit(ctx.elseBranch));
         }
+
         return ifNode;
     }
 
@@ -317,10 +288,10 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitNewClass(NewClassContext ctx) {
         ArrayList<String> listPar = new ArrayList<String>();
-
         for(TerminalNode id : ctx.ID()){
             listPar.add( id.getText() );
         }
+
         return new NewClassNode(ctx.ID(0).getText(), listPar);
     }
 }
