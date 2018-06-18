@@ -19,8 +19,7 @@ public class IdNode implements Node {
     }
 
     public String toPrint(String s) {
-
-        return "Start\n";
+        return s+"Id:" + id + " at nestlev " + nestinglevel +"\n" + entry.toPrint(s+"  ");
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

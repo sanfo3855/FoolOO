@@ -6,10 +6,6 @@ import util.SemanticError;
 import java.util.ArrayList;
 
 public class BoolNode implements Node {
-
-    //TODO da togliere
-    private Node exp;
-
     private boolean val;
 
     public BoolNode(boolean val) {
@@ -17,21 +13,22 @@ public class BoolNode implements Node {
     }
 
     public String toPrint(String s) {
-
-        return "Start\n" + exp.toPrint("  ") ;
+       if (val)
+           return s+"Bool:true\n";
+                else return s+"Bool:false\n";
     }
 
+    @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-
-        return exp.checkSemantics(env);
+        return new ArrayList<SemanticError>();
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return new BoolTypeNode();
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return "";
     }
 
 }

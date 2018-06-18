@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class IntNode implements Node {
 
-    private Node exp;
-
     private Integer val;
 
     public IntNode(Integer val) {
@@ -16,21 +14,19 @@ public class IntNode implements Node {
     }
 
     public String toPrint(String s) {
-
-        return "Start\n" + val.toString() ;
+        return s+"Int:" + Integer.toString(val) +"\n";
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-
-        return exp.checkSemantics(env);
+        return new ArrayList<SemanticError>();
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        return new IntTypeNode();
     }
 
     public String codeGeneration() {
-        return exp.codeGeneration()+"halt\n";
+        return"push "+val+"\n";
     }
 
 }
