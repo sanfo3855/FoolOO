@@ -16,6 +16,14 @@ public class VarDecNode implements Node {
     }
 
 
+    public String getId(){
+        return id;
+    }
+
+    public Node getType(){
+        return type;
+    }
+
     public String toPrint(String s) {
         return "VarDecNode" + "\n" + s + id + "\n" + s + type.toPrint(s + "  ") + "\n" ;
     }

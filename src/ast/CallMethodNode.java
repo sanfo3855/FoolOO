@@ -10,32 +10,41 @@ import java.util.Map;
 public class CallMethodNode implements Node {
 
     private String id;
-    private Map<String, ArrayList<Node>> listField;
+    private ArrayList<Node> listSubFun;
     private STentry entry;
     private int nestinglevel;
 
 
-    public CallMethodNode (String id, Map<String, ArrayList<Node>> listField) {
+    public CallMethodNode (String id, ArrayList<Node> listSubFun) {
         this.id =id;
-        this.listField=listField;
+        this.listSubFun=listSubFun;
     }
 
     public String toPrint(String s) {
         String returnString = s + "CallMethodNode\n";
-        for(Map.Entry<String,ArrayList<Node>> entry : this.listField.entrySet()){
-            for( Node ntp : entry.getValue()){
-                returnString += s + ntp.toPrint(s + "   ") + "\n";
-            }
+        for( Node ntp : listSubFun){
+            returnString += s + ntp.toPrint(s + "   ") + "\n";
         }
+
         return returnString;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
-
-
-        //todo
-
+        int envNL=env.getNestingLevel();
+        STentry entryTableTemp=null;
+        while (envNL>=0 && entryTableTemp==null){
+            entryTableTemp=env.getHashMapNL(envNL).get(id);
+        }
+        if (entryTableTemp==null){
+            semanticErrors.add(new SemanticError("Id "+id+" not declared"));
+        }else{
+            this.entry = entryTableTemp;
+            this.nestinglevel = env.getNestingLevel();
+            for(Node fun : listSubFun){
+                semanticErrors.addAll(fun.checkSemantics(env));
+            }
+        }
 
         return semanticErrors;
     }

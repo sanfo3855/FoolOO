@@ -4,6 +4,7 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DecclassNode implements Node {
 
@@ -44,10 +45,37 @@ public class DecclassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
+        HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
+        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
 
-        //todo
+        if ( hashMap.put(id,entryTable) != null ){
+            semanticErrors.add(new SemanticError("Class id "+id+" already declared"));
+        }else{
+            if( hashMap.get(idExt) != null ){
+                semanticErrors.add(new SemanticError("Class idExtends "+idExt+" already declared"));
+            }else{
 
+                HashMap<String,STentry> hashMapVar = new HashMap<String,STentry> ();
+                env.addHashMapNL(hashMapVar);
+                ArrayList<Node> varTypes = new ArrayList<Node>();
+                int paroffset=1;
 
+                for(Node varNode : listVar){
+                    VarDecNode arguments = (VarDecNode) varNode;
+                    varTypes.add(arguments.getType());
+                    if ( hashMapVar.put(arguments.getId(),new STentry(env.getNestingLevel(),arguments.getType(),paroffset++)) != null  ){
+                        semanticErrors.add(new SemanticError("Parameter id "+arguments.getId()+" already declared"));
+                    }
+                }
+                if(listFun.size() > 0){
+                    env.setOffset(-2);
+                    for(Node fun : listFun){
+                        semanticErrors.addAll(fun.checkSemantics(env));
+                    }
+                }
+                env.removeHashMapNL();
+            }
+        }
         return semanticErrors;
     }
 
