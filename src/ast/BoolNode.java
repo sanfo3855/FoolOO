@@ -18,7 +18,6 @@ public class BoolNode implements Node {
                 else return s+"Bool:false\n";
     }
 
-    @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         return new ArrayList<SemanticError>();
     }

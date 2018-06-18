@@ -22,14 +22,9 @@ public class FoolNode implements Node {
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-
         ArrayList<SemanticError> err= new ArrayList<SemanticError>();
-        ArrayList<SemanticError> listErrNode;
         for(Node nodo : listNodi){
-            listErrNode= nodo.checkSemantics(env);
-            for(SemanticError errNode : listErrNode){
-                err.add(errNode);
-            }
+            err.addAll(nodo.checkSemantics(env));
         }
         return err;
     }
@@ -44,8 +39,6 @@ public class FoolNode implements Node {
     }
 
     public String codeGeneration() {
-
-
         String code= "";
         for(Node nodo : listNodi){
             code += nodo.codeGeneration()+"halt\n";

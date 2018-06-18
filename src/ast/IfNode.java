@@ -33,8 +33,14 @@ public class IfNode implements Node {
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+        semanticErrors.addAll(cond.checkSemantics(env));
+        semanticErrors.addAll(thenBranch.checkSemantics(env));
+        if(elseBranch!=null){
+            semanticErrors.addAll(elseBranch.checkSemantics(env));
+        }
 
-        return cond.checkSemantics(env);
+        return semanticErrors;
     }
 
     public Node typeCheck() {

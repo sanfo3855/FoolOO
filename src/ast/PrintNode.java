@@ -19,7 +19,6 @@ public class PrintNode implements Node{
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-
         return exp.checkSemantics(env);
     }
 

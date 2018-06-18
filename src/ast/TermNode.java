@@ -21,8 +21,11 @@ public class TermNode implements Node {
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+        semanticErrors.addAll(left.checkSemantics(env));
+        semanticErrors.addAll(right.checkSemantics(env));
 
-        return left.checkSemantics(env);
+        return semanticErrors;
     }
 
     public Node typeCheck() {

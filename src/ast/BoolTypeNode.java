@@ -7,24 +7,22 @@ import java.util.ArrayList;
 
 public class BoolTypeNode implements Node {
 
-  public BoolTypeNode() {
-  }
+    public BoolTypeNode() {
+    }
 
-  public String toPrint(String s) {
-	return s+"BoolType\n";
-  }
+    public String toPrint(String s) {
+        return s+"BoolType\n";
+    }
 
-  public Node typeCheck() {
-    return null;
-  }
+    public ArrayList<SemanticError> checkSemantics(Environment env) {
+        return new ArrayList<SemanticError>();
+    }
 
-  public String codeGeneration() {
-		return "";
-  }
-  
-  @Override
-	public ArrayList<SemanticError> checkSemantics(Environment env) {
-	  return new ArrayList<SemanticError>();
-	}
-  
+    public Node typeCheck() {
+        return null;
+    }
+
+    public String codeGeneration() {
+        return "";
+    }
 }  
