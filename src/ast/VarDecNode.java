@@ -21,7 +21,14 @@ public class VarDecNode implements Node {
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        return new ArrayList<SemanticError>();
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
+
+        //todo
+
+        semanticErrors.addAll(type.checkSemantics(env));
+
+        return semanticErrors;
     }
 
     public Node typeCheck() {

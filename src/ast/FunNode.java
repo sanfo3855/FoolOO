@@ -31,7 +31,13 @@ public class FunNode  implements Node {
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        return type.checkSemantics(env);
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
+
+        //todo
+
+
+        return semanticErrors;
     }
 
     public Node typeCheck() {

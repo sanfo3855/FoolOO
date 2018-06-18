@@ -27,8 +27,11 @@ public class VarNode implements Node {
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+        semanticErrors.addAll(varDec.checkSemantics(env));
+        semanticErrors.addAll(value.checkSemantics(env));
 
-        return value.checkSemantics(env);
+        return semanticErrors;
     }
 
     public Node typeCheck() {

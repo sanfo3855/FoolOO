@@ -27,8 +27,13 @@ public class FunExpNode implements Node {
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
-        return exp.checkSemantics(env);
+
+        //todo
+
+
+        return semanticErrors;
     }
 
     public Node typeCheck() {

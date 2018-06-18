@@ -21,8 +21,14 @@ public class AsmNode implements Node {
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
-        return value.checkSemantics(env);
+
+        //todo
+
+        semanticErrors.addAll(value.checkSemantics(env));
+
+        return semanticErrors;
     }
 
     public Node typeCheck() {
