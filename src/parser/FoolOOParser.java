@@ -21,8 +21,8 @@ public class FoolOOParser extends Parser {
 		DIV=10, AND=11, OR=12, GTEQ=13, LTEQ=14, NOT=15, TRUE=16, FALSE=17, LPAR=18, 
 		RPAR=19, CLPAR=20, CRPAR=21, QLPAR=22, QRPAR=23, IF=24, THEN=25, ELSE=26, 
 		PRINT=27, LET=28, IN=29, INT=30, BOOL=31, VOID=32, RETURN=33, CLASS=34, 
-		EXTENDS=35, NEW=36, NULL=37, MAIN=38, INTEGER=39, ID=40, IDEXTENDS=41, 
-		WS=42, LINECOMENTS=43, BLOCKCOMENTS=44, ERR=45;
+		EXTENDS=35, NEW=36, NULL=37, MAIN=38, INTEGER=39, ID=40, WS=41, LINECOMENTS=42, 
+		BLOCKCOMENTS=43, ERR=44;
 	public static final int
 		RULE_start = 0, RULE_block = 1, RULE_prog = 2, RULE_decclass = 3, RULE_let = 4, 
 		RULE_vardec = 5, RULE_varasm = 6, RULE_fun = 7, RULE_dec = 8, RULE_type = 9, 
@@ -45,7 +45,7 @@ public class FoolOOParser extends Parser {
 		"TIMES", "DIV", "AND", "OR", "GTEQ", "LTEQ", "NOT", "TRUE", "FALSE", "LPAR", 
 		"RPAR", "CLPAR", "CRPAR", "QLPAR", "QRPAR", "IF", "THEN", "ELSE", "PRINT", 
 		"LET", "IN", "INT", "BOOL", "VOID", "RETURN", "CLASS", "EXTENDS", "NEW", 
-		"NULL", "MAIN", "INTEGER", "ID", "IDEXTENDS", "WS", "LINECOMENTS", "BLOCKCOMENTS", 
+		"NULL", "MAIN", "INTEGER", "ID", "WS", "LINECOMENTS", "BLOCKCOMENTS", 
 		"ERR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -334,13 +334,15 @@ public class FoolOOParser extends Parser {
 
 	public static class DecclassContext extends ParserRuleContext {
 		public TerminalNode CLASS() { return getToken(FoolOOParser.CLASS, 0); }
-		public TerminalNode ID() { return getToken(FoolOOParser.ID, 0); }
+		public List<TerminalNode> ID() { return getTokens(FoolOOParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(FoolOOParser.ID, i);
+		}
 		public TerminalNode LPAR() { return getToken(FoolOOParser.LPAR, 0); }
 		public TerminalNode RPAR() { return getToken(FoolOOParser.RPAR, 0); }
 		public TerminalNode CLPAR() { return getToken(FoolOOParser.CLPAR, 0); }
 		public TerminalNode CRPAR() { return getToken(FoolOOParser.CRPAR, 0); }
 		public TerminalNode EXTENDS() { return getToken(FoolOOParser.EXTENDS, 0); }
-		public TerminalNode IDEXTENDS() { return getToken(FoolOOParser.IDEXTENDS, 0); }
 		public List<VardecContext> vardec() {
 			return getRuleContexts(VardecContext.class);
 		}
@@ -387,7 +389,7 @@ public class FoolOOParser extends Parser {
 				setState(56);
 				match(EXTENDS);
 				setState(57);
-				match(IDEXTENDS);
+				match(ID);
 				}
 			}
 
@@ -1766,7 +1768,7 @@ public class FoolOOParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3/\u0102\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3.\u0102\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\6\2$\n"+
 		"\2\r\2\16\2%\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\61\n\3\3\4\3\4\3"+
@@ -1795,7 +1797,7 @@ public class FoolOOParser extends Parser {
 		"\25\2\2+,\7\26\2\2,-\5\6\4\2-.\7\27\2\2.\61\3\2\2\2/\61\5\b\5\2\60\'\3"+
 		"\2\2\2\60/\3\2\2\2\61\5\3\2\2\2\62\67\5\26\f\2\63\64\5\n\6\2\64\65\5\26"+
 		"\f\2\65\67\3\2\2\2\66\62\3\2\2\2\66\63\3\2\2\2\67\7\3\2\2\289\7$\2\29"+
-		"<\7*\2\2:;\7%\2\2;=\7+\2\2<:\3\2\2\2<=\3\2\2\2=>\3\2\2\2>G\7\24\2\2?D"+
+		"<\7*\2\2:;\7%\2\2;=\7*\2\2<:\3\2\2\2<=\3\2\2\2=>\3\2\2\2>G\7\24\2\2?D"+
 		"\5\f\7\2@A\7\6\2\2AC\5\f\7\2B@\3\2\2\2CF\3\2\2\2DB\3\2\2\2DE\3\2\2\2E"+
 		"H\3\2\2\2FD\3\2\2\2G?\3\2\2\2GH\3\2\2\2HI\3\2\2\2IJ\7\25\2\2JL\7\26\2"+
 		"\2KM\5\20\t\2LK\3\2\2\2MN\3\2\2\2NL\3\2\2\2NO\3\2\2\2OP\3\2\2\2PQ\7\27"+

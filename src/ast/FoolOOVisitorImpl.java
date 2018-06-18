@@ -1,6 +1,5 @@
 package ast;
 
-import jdk.nashorn.internal.ir.Block;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.FoolOOBaseVisitor;
 import parser.FoolOOParser.*;
@@ -71,10 +70,10 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         }
 
 
-        if(ctx.IDEXTENDS()==null){
-           decNode= new DecclassNode(ctx.ID().getText(), listVar, listFun);
+        if(ctx.ID(1)==null){
+           decNode= new DecclassNode(ctx.ID(0).getText(), listVar, listFun);
         }else{
-            decNode= new DecclassNode(ctx.ID().getText(), listVar, listFun, ctx.IDEXTENDS().getText());
+            decNode= new DecclassNode(ctx.ID(0).getText(), listVar, listFun, ctx.ID(1).getText());
         }
 
         return decNode;

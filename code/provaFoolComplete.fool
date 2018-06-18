@@ -6,6 +6,14 @@ class classe1 (int s, int x){
         s=0;
     }
 }
+class classe1 extends aaa (int s, int x){
+    int funz(int a){
+    let
+        int a=111;
+        in
+        s=0;
+    }
+}
 
 void main(){
     let
