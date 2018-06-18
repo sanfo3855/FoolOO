@@ -135,12 +135,12 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStmPrint(FoolOOParser.StmPrintContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code funExp}
+	 * Visit a parse tree produced by the {@code callFunExp}
 	 * labeled alternative in {@link FoolOOParser#stm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunExp(FoolOOParser.FunExpContext ctx);
+	T visitCallFunExp(FoolOOParser.CallFunExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code callMethod}
 	 * labeled alternative in {@link FoolOOParser#stm}.
@@ -162,6 +162,12 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStmValAsignment(FoolOOParser.StmValAsignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FoolOOParser#funExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunExp(FoolOOParser.FunExpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#stms}.
 	 * @param ctx the parse tree

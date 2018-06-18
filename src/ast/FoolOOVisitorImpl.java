@@ -208,30 +208,37 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     }
 
     @Override
+    public Node visitCallFunExp(CallFunExpContext ctx) {
+        return visit(ctx.funExp());
+    }
+
+
+    @Override
+    public Node visitCallMethod(CallMethodContext ctx) {
+        ArrayList<Node> listSubFun= new ArrayList<Node>();
+        for(FunExpContext funExpContext : ctx.funExp()){
+                listSubFun.add(visit(funExpContext));
+        }
+        return new CallMethodNode(ctx.ID().getText(), listSubFun);
+    }
+
+    @Override
     public Node visitFunExp(FunExpContext ctx) {
         ArrayList<Node> listVar = new ArrayList<Node>();
-        for(ExpContext dec : ctx.exp()){
-            listVar.add( visit(dec) );
+        for(ExpContext expContext : ctx.exp()){
+            listVar.add( visit(expContext) );
         }
 
         return new FunExpNode(ctx.ID().getText(), listVar);
     }
 
     @Override
-    public Node visitCallMethod(CallMethodContext ctx) {
-        ArrayList<Node> listSubFun= new ArrayList<Node>();
-        ArrayList<Node> listVar;
-        for(TerminalNode id : ctx.ID()){
-            if(!(id.equals(ctx.ID(0)))){
-                listVar = new ArrayList<Node>();
-                for(ExpContext exp : ctx.exp()){
-                    listVar.add( visit(exp) );
-                }
-                listSubFun.add(new FunExpNode(id.getText(),listVar));
-            }
+    public Node visitStms(StmsContext ctx) {
+        ArrayList<Node> listStms = new ArrayList<Node>();
+        for(StmContext stmContext : ctx.stm()){
+            listStms.add( visit(stmContext) );
         }
-
-        return new CallMethodNode(ctx.ID(0).getText(), listSubFun);
+        return new StmsNode(listStms);
     }
 
     @Override
