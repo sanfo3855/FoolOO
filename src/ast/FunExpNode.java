@@ -4,6 +4,8 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FunExpNode implements Node {
 
@@ -27,10 +29,30 @@ public class FunExpNode implements Node {
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+        //da controllare
+        //Cerco una funzione con listParam.length() parametri
+        int j=env.getNestingLevel();
+        STentry tmpEntry = null;
+        HashMap<String,STentry> tmpHm=null;
+        while (j>=0 && tmpEntry==null){
+            tmpHm = env.getHashMapNL(j--);
+            for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
+                String key[] = chkEntry.getKey().split("|");
+                String id = key[1];
+                String paramType = key[3];
+                if(id.equals(id) && paramType.length()==listParam.size()){
+                    tmpEntry=chkEntry.getValue();
+                }
+            }
+        }
+        if(tmpEntry==null){
+            semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
+        }
 
-
-        //todo
-
+        //checkSemantics per listParam
+        for(Node ntc : listParam){
+            semanticErrors.addAll(ntc.checkSemantics(env));
+        }
 
         return semanticErrors;
     }

@@ -27,13 +27,7 @@ public class IdTypeNode implements TypeNode {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
-
-
-        //todo
-
-
-        return semanticErrors;
+        return new ArrayList<SemanticError>();
     }
 
     public String getType(){
