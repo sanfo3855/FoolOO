@@ -21,7 +21,7 @@ prog    : exp       #singleExp
         | let exp   #letInExp
         ;
 
-decclass   : CLASS ID ( EXTENDS IDEXTENDS )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun)+ CRPAR
+decclass   : CLASS ID ( EXTENDS ID )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun)+ CRPAR
         ;
 
 let     : LET (dec)+ IN
@@ -129,8 +129,6 @@ INTEGER       : DIGIT+;
 //IDs
 fragment CHAR  : 'a'..'z' |'A'..'Z' ;
 ID              : CHAR (CHAR | DIGIT)* ;
-
-IDEXTENDS       : ID;
 
 //ESCAPED SEQUENCES
 WS              : (' '|'\t'|'\n'|'\r') -> skip;

@@ -26,10 +26,14 @@ public class DecclassNode implements Node {
         this.id = id;
         this.listVar = listVar;
         this.listFun= listFun;
+        this.idExt= null;
     }
 
     public String toPrint(String s) {
         String returnString = s + "DecclassNode\n";
+        if(idExt!=null){
+            returnString += s + "Extends "+idExt+ "\n";
+        }
 
         for(Node varDec :  listVar){
             returnString += s + varDec.toPrint("   ") + "\n";
