@@ -22,7 +22,7 @@ public class FunTypeNode implements Node{
     }
 
     public Node getReturn () { //
-        return ret;
+        return this.ret;
     }
 
     public ArrayList<Node> getListVar () { //
@@ -31,6 +31,7 @@ public class FunTypeNode implements Node{
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        //TODO
         return new ArrayList<SemanticError>();
     }
 

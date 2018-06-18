@@ -51,15 +51,18 @@ public class FunNode  implements Node {
             HashMap<String, STentry> hmNew = new HashMap<String, STentry>();
             env.addHashMapNL(hmNew);
             int paroffset=1;
+
             for(Node node : listVar){
                 VarDecNode arg = (VarDecNode) node;
                 parList.add(arg.getType());
-                if ( hmNew.put(arg.getId(),new STentry(env.getNestingLevel(),arg.getType(),paroffset++)) != null  )
+                if ( hmNew.put(arg.getId(),new STentry(env.getNestingLevel(),arg.getType(),paroffset++)) != null )
                     semanticErrors.add(new SemanticError("Parameter id "+arg.getId()+" already declared"));
             }
             //add type to current entry
             entry.addType(new FunTypeNode(parList, type));
             semanticErrors.addAll(progNode.checkSemantics(env));
+            //close scope
+            env.removeHashMapNL();
         }
         return semanticErrors;
     }
