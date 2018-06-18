@@ -22,6 +22,6 @@ void main(){
         aAa8 x=null;
         int x=x.d();
     in
-        a.s().s();
+        a.s(a,c).s().s(a);
         x=x=0;
 }

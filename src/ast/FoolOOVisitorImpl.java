@@ -179,7 +179,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
         return node;
     }
-    
+
     @Override
     public Node visitStmAsignment(StmAsignmentContext ctx) {
         return new AsmNode(ctx.ID().getText(), visit(ctx.stms()));
@@ -219,7 +219,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitCallMethod(CallMethodContext ctx) {
-        Map<String, ArrayList<Node>> listField= new HashMap<String, ArrayList<Node>>();
+        ArrayList<Node> listSubFun= new ArrayList<Node>();
         ArrayList<Node> listVar;
         for(TerminalNode id : ctx.ID()){
             if(!(id.equals(ctx.ID(0)))){
@@ -227,11 +227,11 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
                 for(ExpContext exp : ctx.exp()){
                     listVar.add( visit(exp) );
                 }
-                listField.put(id.getText(),listVar);
+                listSubFun.add(new FunExpNode(id.getText(),listVar));
             }
         }
 
-        return new CallMethodNode(ctx.ID(0).getText(), listField);
+        return new CallMethodNode(ctx.ID(0).getText(), listSubFun);
     }
 
     @Override
