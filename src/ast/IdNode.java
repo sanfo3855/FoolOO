@@ -23,14 +23,14 @@ public class IdNode implements Node {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
         int j=env.getNestingLevel();
-        STentry tmp=null;
-        while (j>=0 && tmp==null){
-            tmp = env.getHashMapNL(j--).get(id);
+        STentry tmpEntry=null;
+        while (j>=0 && tmpEntry==null){
+            tmpEntry = env.getHashMapNL(j--).get(id);
         }
-        if(tmp==null){
+        if(tmpEntry==null){
             semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
         } else {
-            entry = tmp;
+            entry = tmpEntry;
             nestinglevel = env.getNestingLevel();
         }
 

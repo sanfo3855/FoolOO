@@ -4,6 +4,7 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VarDecNode implements Node {
 
@@ -31,9 +32,12 @@ public class VarDecNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
+        HashMap<String,STentry> hm = env.getHashMapNL(env.getNestingLevel());
+        STentry entry = new STentry(env.getNestingLevel(),type,env.getOffsetDec());
 
-        //todo
-
+        if( hm.put(id,entry) != null ){
+            semanticErrors.add(new SemanticError("Multiple declaration of " + id + " at " + env.getNestingLevel()));
+        }
         semanticErrors.addAll(type.checkSemantics(env));
 
         return semanticErrors;
