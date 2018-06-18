@@ -9,6 +9,8 @@ public class FunExpNode implements Node {
 
     private String id;
     private ArrayList<Node> listParam;
+    private STentry entry;
+    private int nestinglevel;
 
     //TODO non serve
     private Node exp;

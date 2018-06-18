@@ -11,6 +11,8 @@ public class CallMethodNode implements Node {
 
     private String id;
     private Map<String, ArrayList<Node>> listField;
+    private STentry entry;
+    private int nestinglevel;
 
     //TODO non serve
     private Node exp;
