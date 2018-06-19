@@ -4,6 +4,8 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NewClassNode implements Node{
     private String id;
@@ -28,7 +30,6 @@ public class NewClassNode implements Node{
 
         int envNL=env.getNestingLevel();
         STentry entryTableTemp=null;
-
         while (envNL>=0 && entryTableTemp==null){
             entryTableTemp=env.getHashMapNL(envNL).get("class|"+id);
         }
@@ -36,14 +37,27 @@ public class NewClassNode implements Node{
             semanticErrors.add(new SemanticError("Class "+id+" not declared"));
         }else{
             if(!(listPar.isEmpty())){
+                envNL=env.getNestingLevel();
+                entryTableTemp=null;
+                HashMap<String,STentry> tmpHm=null;
+                while (envNL>=0 && entryTableTemp==null){
+                    tmpHm = env.getHashMapNL(envNL--);
+                    for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
+                        String key[] = chkEntry.getKey().split("|");
+                        String idFun = key[0];
+                        String idType = key[1];
+                        if(idFun.equals(id) && idType.equals("void") && (key.length-2)==listPar.size()){
+                            entryTableTemp=chkEntry.getValue();
+                        }
+                    }
 
-
-                //todo controllare id esistenza funzione id id(parametri----)
-
-
-//            for(Node varNode : listPar){
-//                semanticErrors.addAll(varNode.checkSemantics(env));
-//            }
+                }
+                if(entryTableTemp==null){
+                    semanticErrors.add(new SemanticError("Funzione costruttore della classe " + id + " is not declared"));
+                }
+                for(Node parNode : listPar){
+                    semanticErrors.addAll(parNode.checkSemantics(env));
+                }
             }
         }
         return semanticErrors;
