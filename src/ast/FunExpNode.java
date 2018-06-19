@@ -38,7 +38,7 @@ public class FunExpNode implements Node {
             tmpHm = env.getHashMapNL(j--);
             for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
                 String keysharp[] = chkEntry.getKey().split("#");
-                if(keysharp[0]=="fun") {
+                if(keysharp[0].equals("fun")) {
                     String key[] = keysharp[1].split("%");
                     if (((key.length - 2) == listParam.size()) && (key[0].equals(id))) {
                         tmpEntry = chkEntry.getValue();
@@ -47,7 +47,7 @@ public class FunExpNode implements Node {
             }
         }
         if(tmpEntry==null){
-            semanticErrors.add(new SemanticError("Fun id " + id + " is not declared"));
+            semanticErrors.add(new SemanticError("Funz id " + id + " is not declared"));
         }
 
         //checkSemantics per listParam

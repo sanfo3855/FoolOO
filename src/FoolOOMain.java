@@ -32,8 +32,6 @@ public class FoolOOMain {
 
             Node ast = visitor.visit(parser.start()); //generazione AST
 
-//            System.out.print(ast.toPrint(""));
-
             Environment env = new Environment();
             ArrayList<SemanticError> err = ast.checkSemantics(env);
 
