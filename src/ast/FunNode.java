@@ -47,39 +47,31 @@ public class FunNode  implements Node {
         HashMap<String,STentry> hm = env.getHashMapNL(env.getNestingLevel());
         STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
 
-        //create key todo
-        String idKey = "fun#"+ id +"%";
-        idKey += ((TypeNode) type).getType();
         ArrayList<Node> parList = new ArrayList<Node>();
-        for (Node node : listVar) {
-            TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
-            idKey += "%" + typeVar.getType();
-        }
 
-        if ( hm.get(idKey) == null) {
-            semanticErrors.add(new SemanticError("Fun " + id + " already declared !"));
-        } else {
+        //create key
+//        String idKey = "fun#"+ id +"%";
+//        idKey += ((TypeNode) type).getType();
+//        for (Node node : listVar) {
+//            TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
+//            idKey += "%" + typeVar.getType();
+//        }
+//
+//        if ( hm.get(idKey) == null) {
+//            semanticErrors.add(new SemanticError("Fun " + id + " already declared !"));
+//        } else {
+            env.addHashMapNL( new HashMap<String, STentry>());
+
             for (Node node: listVar) {
+                parList.add(((VarDecNode) node).getType());
                 semanticErrors.addAll(node.checkSemantics(env));
-            }
-
-            //Create new HashMap
-            HashMap<String, STentry> hmNew = new HashMap<String, STentry>();
-            env.addHashMapNL(hmNew);
-            int paroffset=1;
-
-            for(Node node : listVar){
-                VarDecNode arg = (VarDecNode) node;
-                parList.add(arg.getType());
-                if ( hmNew.put(arg.getId(),new STentry(env.getNestingLevel(),arg.getType(),paroffset++)) != null )
-                    semanticErrors.add(new SemanticError("Parameter id "+arg.getId()+" already declared"));
             }
             //add type to current entry
             entry.addType(new FunTypeNode(parList, type));
             semanticErrors.addAll(progNode.checkSemantics(env));
             //close scope
             env.removeHashMapNL();
-        }
+//        }
         return semanticErrors;
     }
 

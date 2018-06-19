@@ -91,7 +91,7 @@ public class DecclassNode implements Node {
                                 idKey += "%" + typeVar.getType();
                             }
                             if ( hashMapClass.put(idKey,entry) != null) {
-                                semanticErrors.add(new SemanticError("FunClass " + idKey + "already declared !"));
+                                semanticErrors.add(new SemanticError("FunClass " + idKey + " already declared !"));
                             }
                         }
                     }

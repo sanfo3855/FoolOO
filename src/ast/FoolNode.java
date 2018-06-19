@@ -32,7 +32,7 @@ public class FoolNode implements Node {
             if(nodo instanceof DecclassNode ){
                 idPutHM=((DecclassNode)nodo).getId();
                 if ( hashMap.put("class%"+idPutHM,entryTable) != null ){
-                    semanticErrors.add(new SemanticError("Class "+idPutHM+" is not declared"));
+                    semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
                 }
             }
             if(nodo instanceof FunNode ){
@@ -46,7 +46,7 @@ public class FoolNode implements Node {
                     idPutHM += "%" + typeVar.getType();
                 }
                 if ( hashMap.put(idPutHM,entryTable) != null ){
-                    semanticErrors.add(new SemanticError("Fun "+idPutHM+" is not declared"));
+                    semanticErrors.add(new SemanticError("Fun "+idPutHM+" already declared"));
                 }
             }
         }

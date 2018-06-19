@@ -42,7 +42,7 @@ public class LetInExpNode implements Node {
                     idPutHM += "%" + typeVar.getType();
                 }
                 if ( hashMap.put(idPutHM,entryTable) != null ){
-                    semanticErrors.add(new SemanticError("Fun "+idPutHM+" is not declared"));
+                    semanticErrors.add(new SemanticError("Fun "+idPutHM+" already declared"));
                 }
             }
         }
