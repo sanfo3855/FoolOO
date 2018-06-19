@@ -36,7 +36,7 @@ public class FunNode  implements Node {
         STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
 
         //create key
-        String idKey = id +"|";
+        String idKey = "fun#"+ id +"|";
         idKey += ((TypeNode) type).getType();
         ArrayList<Node> parList = new ArrayList<Node>();
         for (Node node : listVar) {
