@@ -1,0 +1,40 @@
+class classe1 (int s, int x){
+    void classe1(){
+        s=0;
+    }
+
+    int funz(int a, bool z){
+    let
+        int s=a;
+    in
+        s=0;
+    }
+}
+
+class pippo extends classe1 (int x, int s){
+    void pippo(int a, int c){
+    let
+        int b=111;
+    in
+        s=0;
+    }
+}
+
+void main(){
+    let
+        int s(int g, bool f){
+            g=0;
+            f=1;
+        }
+        bool x=1;
+        classe1 c1 = new classe1();
+        int a=1;
+        pippo d=new pippo(a,4);
+        int q=d.funz(1,2);
+    in
+        a=0;
+        //d.pippo(a,4);
+        //q.q(a,c).r().s(a);
+}
+
+//todo fun costruttore
