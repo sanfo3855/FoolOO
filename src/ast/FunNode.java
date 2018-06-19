@@ -36,12 +36,12 @@ public class FunNode  implements Node {
         STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
 
         //create key
-        String idKey = "fun#"+ id +"|";
+        String idKey = "fun#"+ id +"%";
         idKey += ((TypeNode) type).getType();
         ArrayList<Node> parList = new ArrayList<Node>();
         for (Node node : listVar) {
             TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
-            idKey += "|" + typeVar.getType();
+            idKey += "%" + typeVar.getType();
         }
 
         if ( hm.put(idKey,entry) != null) {

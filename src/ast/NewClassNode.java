@@ -31,7 +31,7 @@ public class NewClassNode implements Node{
         int envNL=env.getNestingLevel();
         STentry entryTableTemp=null;
         while (envNL>=0 && entryTableTemp==null){
-            entryTableTemp=env.getHashMapNL(envNL--).get("class|"+id);
+            entryTableTemp=env.getHashMapNL(envNL--).get("class%"+id);
         }
         if (entryTableTemp==null){
             semanticErrors.add(new SemanticError("New Class "+id+" not declared"));
@@ -46,8 +46,8 @@ public class NewClassNode implements Node{
                     for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
 
                         String keysharp[] = chkEntry.getKey().split("#");
-                        if(keysharp[0]=="fun") {
-                            String key[] = keysharp[1].split("|");
+                        if(keysharp[0].equals("fun")) {
+                            String key[] = keysharp[1].split("%");
                             keylength=key.length;
                             if(key[0].equals(id) && key[1].equals("void") && (keylength-4)==listPar.size() && key[keylength-2].equals("class") && key[keylength-1].equals(id) ){
                                 entryTableTemp=chkEntry.getValue();

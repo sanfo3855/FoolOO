@@ -39,7 +39,7 @@ public class FunExpNode implements Node {
             for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
                 String keysharp[] = chkEntry.getKey().split("#");
                 if(keysharp[0]=="fun") {
-                    String key[] = keysharp[1].split("|");
+                    String key[] = keysharp[1].split("%");
                     if (((key.length - 2) == listParam.size()) && (key[0].equals(id))) {
                         tmpEntry = chkEntry.getValue();
                     }

@@ -6,8 +6,8 @@ class classe1 (int s, int x){
         s=0;
     }
 }
-class pippo extends CIAO (int x){
-    void pippo(int a){
+class pippo extends classe1 (int x){
+    void pippo(int a, int c){
     let
         int a=111;
         in
@@ -20,7 +20,7 @@ void main(){
         bool x=1;
         int a=s();
         aAa8 o=null;
-        pippo d=new pippo(a);
+        pippo d=new pippo(a,o);
         int q=w.t(q).d(ee, ee).y();
     in
     a=0;
