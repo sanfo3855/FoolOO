@@ -8,21 +8,21 @@ import java.util.ArrayList;
 public class FunTypeNode implements Node{
 
     private ArrayList<Node> listVar;
-    private Node ret;
+    private Node returnType;
 
-    public FunTypeNode(ArrayList<Node> listVar, Node ret){
+    public FunTypeNode(ArrayList<Node> listVar, Node returnType){
         this.listVar = listVar;
-        this.ret= ret;
+        this.returnType= returnType;
     }
     public String toPrint(String s) { //
         String varlst="";
         for (Node var:listVar)
             varlst+=var.toPrint(s+"  ");
-        return s+"ArrowType\n" + varlst + ret.toPrint(s+"  ->") ;
+        return s+"ArrowType\n" + varlst + returnType.toPrint(s+"  ->") ;
     }
 
     public Node getReturn () { //
-        return this.ret;
+        return returnType;
     }
 
     public ArrayList<Node> getListVar () { //

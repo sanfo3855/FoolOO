@@ -27,9 +27,20 @@ public class IdTypeNode implements TypeNode {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        //TODO
-        return new ArrayList<SemanticError>();
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
+        int j = env.getNestingLevel();
+        STentry tmpEntry = null;
+        while (j >= 0 && tmpEntry == null) {
+            tmpEntry = env.getHashMapNL(j--).get(id);
+        }
+        if (tmpEntry == null) {
+            semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
+        }
+
+        return semanticErrors;
     }
+
 
     public String getType(){
         return id;
