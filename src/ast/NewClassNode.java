@@ -31,7 +31,7 @@ public class NewClassNode implements Node{
         int envNL=env.getNestingLevel();
         STentry entryTableTemp=null;
         while (envNL>=0 && entryTableTemp==null){
-            entryTableTemp=env.getHashMapNL(envNL).get("class|"+id);
+            entryTableTemp=env.getHashMapNL(envNL--).get("class|"+id);
         }
         if (entryTableTemp==null){
             semanticErrors.add(new SemanticError("Class "+id+" not declared"));

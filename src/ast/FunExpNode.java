@@ -38,7 +38,7 @@ public class FunExpNode implements Node {
             tmpHm = env.getHashMapNL(j--);
             for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
                 String key[] = chkEntry.getKey().split("|");
-                if( (key[1].equals(id)) && ((key.length-2)==listParam.size()) ){
+                if( (key[0].equals(id)) && ((key.length-2)==listParam.size()) ){
                     tmpEntry=chkEntry.getValue();
                 }
             }

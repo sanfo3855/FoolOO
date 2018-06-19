@@ -36,7 +36,7 @@ public class Environment {
 	}
 
 	public void addHashMapNL(HashMap<String,STentry> hm){
-		this.symTable.add(this.nestingLevel++,hm);
+		this.symTable.add(++this.nestingLevel,hm);
 	}
 
 	public void removeHashMapNL(){

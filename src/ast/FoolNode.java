@@ -4,6 +4,7 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FoolNode implements Node {
 
@@ -23,6 +24,7 @@ public class FoolNode implements Node {
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> err= new ArrayList<SemanticError>();
+        env.addHashMapNL(new HashMap<String,STentry>());
         for(Node nodo : listNodi){
             err.addAll(nodo.checkSemantics(env));
         }
