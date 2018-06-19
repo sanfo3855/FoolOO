@@ -34,23 +34,26 @@ public class NewClassNode implements Node{
             entryTableTemp=env.getHashMapNL(envNL--).get("class|"+id);
         }
         if (entryTableTemp==null){
-            semanticErrors.add(new SemanticError("Class "+id+" not declared"));
+            semanticErrors.add(new SemanticError("New Class "+id+" not declared"));
         }else{
             if(!(listPar.isEmpty())){
                 envNL=env.getNestingLevel();
                 entryTableTemp=null;
                 HashMap<String,STentry> tmpHm=null;
+                int keylength;
                 while (envNL>=0 && entryTableTemp==null){
                     tmpHm = env.getHashMapNL(envNL--);
                     for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
-                        String key[] = chkEntry.getKey().split("|");
-                        String idFun = key[0];
-                        String idType = key[1];
-                        if(idFun.equals(id) && idType.equals("void") && (key.length-2)==listPar.size()){
-                            entryTableTemp=chkEntry.getValue();
+
+                        String keysharp[] = chkEntry.getKey().split("#");
+                        if(keysharp[0]=="fun") {
+                            String key[] = keysharp[1].split("|");
+                            keylength=key.length;
+                            if(key[0].equals(id) && key[1].equals("void") && (keylength-4)==listPar.size() && key[keylength-2].equals("class") && key[keylength-1].equals(id) ){
+                                entryTableTemp=chkEntry.getValue();
+                            }
                         }
                     }
-
                 }
                 if(entryTableTemp==null){
                     semanticErrors.add(new SemanticError("Funzione costruttore della classe " + id + " is not declared"));

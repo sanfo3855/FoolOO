@@ -32,10 +32,10 @@ public class IdTypeNode implements TypeNode {
         int j = env.getNestingLevel();
         STentry tmpEntry = null;
         while (j >= 0 && tmpEntry == null) {
-            tmpEntry = env.getHashMapNL(j--).get(id);
+            tmpEntry = env.getHashMapNL(j--).get("class|"+id);
         }
         if (tmpEntry == null) {
-            semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
+            semanticErrors.add(new SemanticError("Class Id " + id + " is not declared"));
         }
 
         return semanticErrors;

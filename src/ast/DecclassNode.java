@@ -48,12 +48,14 @@ public class DecclassNode implements Node {
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
         STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
 
+
         if ( hashMap.put("class|"+id,entryTable) != null ){
-            semanticErrors.add(new SemanticError("Class id "+id+" already declared"));
+            semanticErrors.add(new SemanticError("Class "+id+" is not declared"));
         }else{
-            if( hashMap.get(idExt) != null ){
+            if( hashMap.get("class|"+idExt) == null ){
                 semanticErrors.add(new SemanticError("Class idExtends "+idExt+" already declared"));
             }else{
+                
 
                 HashMap<String,STentry> hashMapVar = new HashMap<String,STentry> ();
                 env.addHashMapNL(hashMapVar);
@@ -71,6 +73,15 @@ public class DecclassNode implements Node {
                     env.setOffset(-2);
                     for(Node fun : listFun){
                         semanticErrors.addAll(fun.checkSemantics(env));
+                    }
+                }
+                for (String keyfun: hashMapVar.keySet()) {
+                    if (keyfun.split("#")[0].equals("fun")){
+                        if ( hashMap.put(keyfun+"|class|"+id,entryTable) != null ){
+                            semanticErrors.add(new SemanticError(keyfun+" already defined in class "+id+ ""));
+                        }else{
+
+                        }
                     }
                 }
                 env.removeHashMapNL();

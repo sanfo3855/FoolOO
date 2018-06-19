@@ -38,14 +38,16 @@ public class FunExpNode implements Node {
             tmpHm = env.getHashMapNL(j--);
             for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
                 String keysharp[] = chkEntry.getKey().split("#");
-                String key[]  = keysharp[1].split("|");
-                if( (keysharp[0].equals("fun")) && ((key.length-2)==listParam.size())&&(key[0].equals(id))){
-                    tmpEntry=chkEntry.getValue();
+                if(keysharp[0]=="fun") {
+                    String key[] = keysharp[1].split("|");
+                    if (((key.length - 2) == listParam.size()) && (key[0].equals(id))) {
+                        tmpEntry = chkEntry.getValue();
+                    }
                 }
             }
         }
         if(tmpEntry==null){
-            semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
+            semanticErrors.add(new SemanticError("Fun id " + id + " is not declared"));
         }
 
         //checkSemantics per listParam

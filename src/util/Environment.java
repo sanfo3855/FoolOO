@@ -12,11 +12,11 @@ public class Environment {
 	private int offset = 0;
 
 	public ArrayList<HashMap<String,STentry>> getSymTable() {
-		return this.symTable;
+		return symTable;
 	}
 
 	public HashMap<String,STentry> getHashMapNL(int i) {
-		return this.symTable.get(i);
+		return symTable.get(i);
 	}
 
 	public int getNestingLevel() {
@@ -24,11 +24,11 @@ public class Environment {
 	}
 
 	public int getOffset() {
-		return this.offset;
+		return offset;
 	}
 
 	public int getOffsetDec() {
-		return this.offset--;
+		return offset--;
 	}
 
 	public void setSymTable(ArrayList<HashMap<String,STentry>> symTable) {
@@ -36,11 +36,11 @@ public class Environment {
 	}
 
 	public void addHashMapNL(HashMap<String,STentry> hm){
-		this.symTable.add(++this.nestingLevel,hm);
+		symTable.add(++nestingLevel,hm);
 	}
 
 	public void removeHashMapNL(){
-		this.symTable.remove(nestingLevel--);
+		symTable.remove(nestingLevel--);
 	}
 
 

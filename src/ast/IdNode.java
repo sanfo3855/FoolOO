@@ -28,7 +28,7 @@ public class IdNode implements Node {
             tmpEntry = env.getHashMapNL(j--).get(id);
         }
         if(tmpEntry==null){
-            semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
+            semanticErrors.add(new SemanticError("Class Id " + id + " is not declared"));
         } else {
             entry = tmpEntry;
             nestinglevel = env.getNestingLevel();
