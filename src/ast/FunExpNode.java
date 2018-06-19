@@ -49,7 +49,8 @@ public class FunExpNode implements Node {
                     if ((keylength-2 == listParam.size()) && (key[0].equals(id))) {
                         tmpEntry = chkEntry.getValue();
                     }else{
-                        if (key[0].equals(id)  && (keylength-4)==listParam.size() && key[keylength-2].equals("class") && key[keylength-1].equals(typeClassMethod)) {
+                        //todo &&  key[1].equals(tipo)
+                        if (key[0].equals(id) && (keylength-4)==listParam.size() && key[keylength-2].equals("class") && key[keylength-1].equals(typeClassMethod)) {
                             tmpEntry = chkEntry.getValue();
                         }
                     }
