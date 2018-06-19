@@ -31,7 +31,6 @@ public class FunTypeNode implements Node{
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        //TODO
         return new ArrayList<SemanticError>();
     }
 

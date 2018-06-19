@@ -47,6 +47,10 @@ public class FunNode  implements Node {
         if ( hm.put(idKey,entry) != null) {
             semanticErrors.add(new SemanticError("Fun " + id + "already declared !"));
         } else {
+            for (Node node: listVar) {
+                semanticErrors.addAll(node.checkSemantics(env));
+            }
+
             //Create new HashMap
             HashMap<String, STentry> hmNew = new HashMap<String, STentry>();
             env.addHashMapNL(hmNew);
