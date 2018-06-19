@@ -30,12 +30,24 @@ public class FunNode  implements Node {
         return returnString;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public Node getType() {
+        return type;
+    }
+
+    public ArrayList<Node> getListVar() {
+        return listVar;
+    }
+
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         HashMap<String,STentry> hm = env.getHashMapNL(env.getNestingLevel());
         STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
 
-        //create key
+        //create key todo
         String idKey = "fun#"+ id +"%";
         idKey += ((TypeNode) type).getType();
         ArrayList<Node> parList = new ArrayList<Node>();
@@ -44,8 +56,8 @@ public class FunNode  implements Node {
             idKey += "%" + typeVar.getType();
         }
 
-        if ( hm.put(idKey,entry) != null) {
-            semanticErrors.add(new SemanticError("Fun " + id + "already declared !"));
+        if ( hm.get(idKey) == null) {
+            semanticErrors.add(new SemanticError("Fun " + id + " already declared !"));
         } else {
             for (Node node: listVar) {
                 semanticErrors.addAll(node.checkSemantics(env));

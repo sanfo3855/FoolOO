@@ -1,4 +1,4 @@
-class classe1 (int s, int z){
+class classe1 extends pippo (int s, int z){
 
         int ss(int q){
             z=0;

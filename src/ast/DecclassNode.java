@@ -27,6 +27,10 @@ public class DecclassNode implements Node {
         this.idExt= null;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String toPrint(String s) {
         String returnString = s + "DecclassNode\n";
         if(idExt!=null){
@@ -49,33 +53,54 @@ public class DecclassNode implements Node {
         STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
 
 
-        if ( hashMap.put("class%"+id,entryTable) != null ){
+        if ( hashMap.get("class%"+id) == null ){
             semanticErrors.add(new SemanticError("Class "+id+" is not declared"));
         }else{
             if( idExt!=null && hashMap.get("class%"+idExt) == null ){
-                semanticErrors.add(new SemanticError("Class idExtends "+idExt+" already declared"));
+                semanticErrors.add(new SemanticError("Class idExtends "+idExt+" not is declared"));
             }else{
                 
 
-                HashMap<String,STentry> hashMapVar = new HashMap<String,STentry> ();
-                env.addHashMapNL(hashMapVar);
+                HashMap<String,STentry> hashMapClass = new HashMap<String,STentry> ();
+                env.addHashMapNL(hashMapClass);
+                STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
                 ArrayList<Node> varTypes = new ArrayList<Node>();
                 int paroffset=1;
 
                 for(Node varNode : listVar){
                     VarDecNode arguments = (VarDecNode) varNode;
                     varTypes.add(arguments.getType());
-                    if ( hashMapVar.put(arguments.getId(),new STentry(env.getNestingLevel(),arguments.getType(),paroffset++)) != null  ){
+                    if ( hashMapClass.put(arguments.getId(),new STentry(env.getNestingLevel(),arguments.getType(),paroffset++)) != null  ){
                         semanticErrors.add(new SemanticError("Parameter id "+arguments.getId()+" already declared"));
                     }
                 }
+
+
+                //create key
                 if(listFun.size() > 0){
+                    String idKey;
+                    for(Node fun : listFun){
+                        idKey = "fun#";
+                        if(fun instanceof FunNode){
+                            FunNode funNode=(FunNode) fun;
+                            idKey += funNode.getId() +"%";
+                            idKey += ((TypeNode)funNode.getType()).getType();
+                            ArrayList<Node> parList = funNode.getListVar();
+                            for (Node node : parList) {
+                                TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
+                                idKey += "%" + typeVar.getType();
+                            }
+                            if ( hashMapClass.put(idKey,entry) != null) {
+                                semanticErrors.add(new SemanticError("FunClass " + idKey + "already declared !"));
+                            }
+                        }
+                    }
                     env.setOffset(-2);
                     for(Node fun : listFun){
                         semanticErrors.addAll(fun.checkSemantics(env));
                     }
                 }
-                for (String keyfun: hashMapVar.keySet()) {
+                for (String keyfun: hashMapClass.keySet()) {
                     if (keyfun.split("#")[0].equals("fun")){
                         if ( hashMap.put(keyfun+"%class%"+id,entryTable) != null ){
                             semanticErrors.add(new SemanticError(keyfun+" already defined in class "+id+ ""));
