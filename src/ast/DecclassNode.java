@@ -90,7 +90,8 @@ public class DecclassNode implements Node {
                                 TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
                                 idKey += "%" + typeVar.getType();
                             }
-                            if ( hashMapClass.put(idKey,entry) != null) {
+                            idKey+="%class%"+id;
+                            if ( hashMap.put(idKey,entry) != null) {
                                 semanticErrors.add(new SemanticError("FunClass " + idKey + " already declared !"));
                             }
                         }

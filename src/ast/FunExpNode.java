@@ -10,6 +10,7 @@ import java.util.Map;
 public class FunExpNode implements Node {
 
     private String id;
+    private String typeClassMethod;
     private ArrayList<Node> listParam;
     private STentry entry;
     private int nestinglevel;
@@ -17,6 +18,10 @@ public class FunExpNode implements Node {
     public FunExpNode (String id, ArrayList<Node> listParam) {
         this.id =id;
         this.listParam = listParam;
+    }
+
+    public void setTypeClassMethod(String typeClassMethod) {
+        this.typeClassMethod = typeClassMethod;
     }
 
     public String toPrint(String s) {
@@ -40,14 +45,19 @@ public class FunExpNode implements Node {
                 String keysharp[] = chkEntry.getKey().split("#");
                 if(keysharp[0].equals("fun")) {
                     String key[] = keysharp[1].split("%");
-                    if (((key.length - 2) == listParam.size()) && (key[0].equals(id))) {
+                    int keylength=key.length;
+                    if ((keylength-2 == listParam.size()) && (key[0].equals(id))) {
                         tmpEntry = chkEntry.getValue();
+                    }else{
+                        if (key[0].equals(id)  && (keylength-4)==listParam.size() && key[keylength-2].equals("class") && key[keylength-1].equals(typeClassMethod)) {
+                            tmpEntry = chkEntry.getValue();
+                        }
                     }
                 }
             }
         }
         if(tmpEntry==null){
-            semanticErrors.add(new SemanticError("Funz id " + id + " is not declared"));
+            semanticErrors.add(new SemanticError("Funzio id " + id + " is not declared"));
         }
 
         //checkSemantics per listParam

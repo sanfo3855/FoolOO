@@ -1,52 +1,19 @@
-class classe1 extends pippo (int s, int z){
+class classe1  (int s, int z){
 
         int ss(int a, int q){
+        let
+
+            classe1 c=new classe1();
+            in
             z=0;
-            q=funz(s,z);
+            q=c.funz(s,z);
         }
     int funz(int x, bool a){
     let
         int q=a;
-        int z=ss(x, a);
+            classe1 c=new classe1();
+        int z=c.ss(x, a);
        in
-        q=funz(x,a);
+        q=c.funz(x,a);
     }
 }
-class pippo extends classe1 (int x){
-
-    void pippo(int a, int c){
-    let
-        int z=111;
-        in
-        c=0;
-    }
-
-    int  somma(int a,int b){
-    let
-        int c=0;
-    in
-    c == a+b
-    }
-}
-
-void main(){
-    let
-        bool x=1;
-        int s(){
-            x=0;
-        }
-        int s(){
-            x=0;
-        }
-        int a=s();
-        int som=1;
-        int som1=2;
-        classe1 o=null;
-        pippo w=new pippo(1,2);
-        int q= w.somma(1,2);
-    in
-        a=0;
-        //a.q(a,c).r().s(a);
-}
-
-//todo fun costruttore

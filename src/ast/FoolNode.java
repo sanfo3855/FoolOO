@@ -26,16 +26,18 @@ public class FoolNode implements Node {
         ArrayList<SemanticError> semanticErrors= new ArrayList<SemanticError>();
         env.addHashMapNL(new HashMap<String,STentry>());
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
-        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
+        STentry entryTable; //separo introducendo "entry"
         String idPutHM;
         for(Node nodo : listNodi){
             if(nodo instanceof DecclassNode ){
+                entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
                 idPutHM=((DecclassNode)nodo).getId();
                 if ( hashMap.put("class%"+idPutHM,entryTable) != null ){
                     semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
                 }
             }
             if(nodo instanceof FunNode ){
+                entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
                 idPutHM = "fun#";
                 FunNode funNode=(FunNode) nodo;
                 idPutHM += funNode.getId() +"%";

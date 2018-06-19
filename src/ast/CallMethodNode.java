@@ -11,6 +11,7 @@ import java.util.Map;
 public class CallMethodNode implements Node {
 
     private String id;
+    private String idType;
     private ArrayList<Node> listSubFun;
     private STentry entry;
     private int nestinglevel;
@@ -43,8 +44,14 @@ public class CallMethodNode implements Node {
         }else{
             this.entry = entryTableTemp;
             this.nestinglevel = env.getNestingLevel();
+
+            STentry entryID=env.getHashMapNL(env.getNestingLevel()).get(id);
+            idType=((TypeNode)entryID.getType()).getType();
             for(Node fun : listSubFun){
-                semanticErrors.addAll(fun.checkSemantics(env));
+                if(fun instanceof FunExpNode){
+                    ((FunExpNode) fun).setTypeClassMethod(idType);
+                    semanticErrors.addAll(fun.checkSemantics(env));
+                }
             }
         }
 
