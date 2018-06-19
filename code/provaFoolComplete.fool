@@ -13,11 +13,19 @@ class classe1 extends pippo (int s, int z){
     }
 }
 class pippo extends classe1 (int x){
+
     void pippo(int a, int c){
     let
         int z=111;
         in
         c=0;
+    }
+
+    int  somma(int a,int b){
+    let
+        int c=0;
+    in
+    c == a+b
     }
 }
 
@@ -28,12 +36,14 @@ void main(){
             x=0;
         }
         int a=s();
+        int som=1;
+        int som1=2;
         classe1 o=null;
-        pippo w=new pippo(a,o);
-        int q=w.t(q).d(ee, ee).y();
+        pippo w=new pippo(1,2);
+        int q= w.somma(1,2);
     in
-    a=0;
-        a.q(a,c).r().s(a);
+        a=0;
+        //a.q(a,c).r().s(a);
 }
 
 //todo fun costruttore

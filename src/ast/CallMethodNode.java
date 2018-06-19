@@ -5,6 +5,7 @@ import util.SemanticError;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CallMethodNode implements Node {
@@ -35,7 +36,7 @@ public class CallMethodNode implements Node {
         STentry entryTableTemp=null;
 
         while (envNL>=0 && entryTableTemp==null){
-            entryTableTemp=env.getHashMapNL(envNL--).get("class%"+id);
+            entryTableTemp=env.getHashMapNL(envNL--).get(id);
         }
         if (entryTableTemp==null){
             semanticErrors.add(new SemanticError("Id "+id+" not declared"));

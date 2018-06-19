@@ -1,0 +1,38 @@
+class classe1(){
+    int funz(int x, int y){
+        let
+            int z = 0;
+        in
+        z == x+y
+
+    }
+}
+
+/*class pippo extends classe1 (int x){
+    void pippo(int a, int c){
+    let
+        int a=111;
+        in
+        s=0;
+    }
+}*/
+
+void main(){
+    let
+        int funz(int x, int y){
+                let
+                    int z = x+y;
+                in
+                (z)
+            }
+        int a = 3;
+        int b = 2;
+        classe1 abc = new classe1();
+        int z = 0;
+    in
+        z = funz(a);
+        abc.funz(a,b);
+
+}
+
+//todo fun costruttore
