@@ -1,0 +1,63 @@
+class classe1  (int s, int z){
+    int ss(int a, int q){
+        let
+            classe1 c=new classe1();
+        in
+            z=0;
+            q=c.funz(s,z);
+    }
+
+    int funz(int x, bool a){
+        let
+            int q=a;
+                classe1 c=new classe1();
+            int z=c.ss(x, a);
+        in
+            q=c.funz(x,a);
+    }
+}
+class classe2 extends classe1  (int s, int z){
+    int ss(int a, int q){
+        let
+            classe1 c=new classe1();
+        in
+            z=0;
+            q=c.funz(s,z);
+    }
+
+    int funz(int x, bool a){
+        let
+            int q=a;
+                classe1 c=new classe1();
+            int z=c.ss(x, a);
+        in
+            q=c.funz(x,a);
+    }
+}
+class classe3 extends classe2  (int s, int z){
+    int ss(int a, int q){
+        let
+            classe1 c=new classe1();
+        in
+            z=0;
+            q=c.funz(s,z);
+    }
+
+    int funz(int x, bool a){
+        let
+            int q=a;
+                classe1 c=new classe1();
+            int z=c.ss(x, a);
+        in
+            q=c.funz(x,a);
+    }
+}
+
+
+void main(){
+    let
+        classe3 w=new classe3();
+        classe2 y=new classe3();
+    in
+        w.ss(1,2);
+}

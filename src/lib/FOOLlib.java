@@ -2,6 +2,8 @@ package lib;
 
 import ast.*;
 
+import java.util.ArrayList;
+
 public class FOOLlib {
   
   private static int labCount=0; 
@@ -33,12 +35,10 @@ public class FOOLlib {
         if( nomeClasseA.equals(nomeClasseB) ){
           res=true;
         }else{
-          String extClassB="";//todo funzione che mi ritorna ext
-          while(extClassB!=null){
+          for(String extClassB: ((IdTypeNode) b).getExtClassId()){
             if( nomeClasseA.equals(extClassB) ){
               res=true;
             }
-            extClassB="";//todo funzione che mi ritorna ext o null
           }
         }
       }else{

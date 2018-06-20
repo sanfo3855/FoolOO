@@ -4,17 +4,18 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class IdTypeNode implements TypeNode {
 
     String id;
-    private String[] extClassId;
+    private ArrayList<String> extClassId= new ArrayList<String>();
 
     public IdTypeNode(String id) {
         this.id=id;
     }
 
-    public String[] getExtClassId() {
+    public ArrayList<String> getExtClassId() {
         return extClassId;
     }
 
@@ -41,8 +42,30 @@ public class IdTypeNode implements TypeNode {
         }
         if (tmpEntry == null) {
             semanticErrors.add(new SemanticError("Class Id " + id + " is not declared"));
-        }
+        }else{
+            ArrayList<String> tempArrayClass=new ArrayList<String>();
+            for (String classex:env.getHashMapNL(0).keySet()) {
+                if(classex.contains("class%")){
+                    if(!classex.contains("fun#")){
+                        tempArrayClass.add(classex.substring(6, classex.length()));
+                    }
+                }
+            }
 
+            boolean cond=true;
+            String idExtClass=id;
+            while (cond){
+                cond=false;
+                for (String classex:tempArrayClass) {
+                    String[] arrExt=classex.split("@");
+                    if(idExtClass.equals(arrExt[0]) && arrExt.length==2){
+                        idExtClass=arrExt[1];
+                        extClassId.add(arrExt[1]);
+                        cond=true;
+                    }
+                }
+            }
+        }
         return semanticErrors;
     }
 
