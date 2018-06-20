@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -29,7 +30,11 @@ public class ExpNode implements Node {
     }
 
     public Node typeCheck() {
-        return left.typeCheck();
+        if (!(FOOLlib.isSubtype(left.typeCheck(), new IntTypeNode()) || FOOLlib.isSubtype(right.typeCheck(), new IntTypeNode()))) {
+            System.out.println("Operations are allowed only between integers");
+            System.exit(0);
+        }
+        return new IntTypeNode();
     }
 
     public String codeGeneration() {

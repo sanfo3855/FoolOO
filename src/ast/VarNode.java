@@ -35,6 +35,7 @@ public class VarNode implements Node {
     }
 
     public Node typeCheck() {
+
         return value.typeCheck();
     }
 

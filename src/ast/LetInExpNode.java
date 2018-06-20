@@ -56,6 +56,8 @@ public class LetInExpNode implements Node {
     }
 
     public Node typeCheck() {
+        for (Node node : listDec)
+            node.typeCheck();
         return exp.typeCheck();
     }
 
