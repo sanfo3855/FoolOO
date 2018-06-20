@@ -37,6 +37,7 @@ public class AsmNode implements Node {
     }
 
     public Node typeCheck() {
+        //todo
         return value.typeCheck();
     }
 

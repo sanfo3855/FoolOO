@@ -67,6 +67,7 @@ public class NewClassNode implements Node{
     }
 
     public Node typeCheck() {
+        //todo
         return null;
     }
 

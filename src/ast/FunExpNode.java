@@ -87,6 +87,7 @@ public class FunExpNode implements Node {
     }
 
     public Node typeCheck() {
+        //todo
         return null;
     }
 

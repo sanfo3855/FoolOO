@@ -77,11 +77,6 @@ public class FunNode  implements Node {
     }
 
     public Node typeCheck() {
-        if (listVar!=null) {
-            for (Node var : listVar) {
-                var.typeCheck();
-            }
-        }
         if (!(FOOLlib.isSubtype(progNode.typeCheck(),type))){
             System.out.println("Wrong return type for function " + id);
             System.exit(0);

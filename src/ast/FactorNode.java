@@ -31,13 +31,12 @@ public class FactorNode implements Node {
 
     public Node typeCheck() {
         Node leftNode = left.typeCheck();
-        if (right != null){
-            Node rightNode = right.typeCheck();
-            if (!(FOOLlib.isSubtype(leftNode, rightNode))||FOOLlib.isSubtype(rightNode,leftNode)){
-                System.out.println("Incompatible types in Factor");
-                System.exit(0);
-            }
+        Node rightNode = right.typeCheck();
+        if (!(FOOLlib.isSubtype(leftNode, rightNode))||FOOLlib.isSubtype(rightNode,leftNode)){
+            System.out.println("Incompatible types in Factor");
+            System.exit(0);
         }
+
         return new BoolTypeNode();
     }
 

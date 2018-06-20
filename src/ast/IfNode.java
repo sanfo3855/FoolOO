@@ -44,6 +44,7 @@ public class IfNode implements Node {
     }
 
     public Node typeCheck() {
+        //todo
         return cond.typeCheck();
     }
 

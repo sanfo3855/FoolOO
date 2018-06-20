@@ -38,6 +38,7 @@ public class IdNode implements Node {
     }
 
     public Node typeCheck() {
+        //todo
         return null;
     }
 

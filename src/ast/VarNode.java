@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -35,8 +36,11 @@ public class VarNode implements Node {
     }
 
     public Node typeCheck() {
-
-        return value.typeCheck();
+        if (! (FOOLlib.isSubtype(value.typeCheck(),varDec.typeCheck())) ){
+            System.out.println("incompatible value for variable "+((VarDecNode)varDec).getId());
+            System.exit(0);
+        }
+        return null;
     }
 
     public String codeGeneration() {

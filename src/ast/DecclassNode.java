@@ -117,6 +117,7 @@ public class DecclassNode implements Node {
     }
 
     public Node typeCheck() {
+        //todo
         return null;
     }
 

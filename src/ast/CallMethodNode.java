@@ -61,6 +61,7 @@ public class CallMethodNode implements Node {
     }
 
     public Node typeCheck() {
+        //todo
         return null;
     }
 

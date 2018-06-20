@@ -44,7 +44,7 @@ public class VarDecNode implements Node {
     }
 
     public Node typeCheck() {
-        return type.typeCheck();
+        return type;
     }
 
     public String codeGeneration() {
