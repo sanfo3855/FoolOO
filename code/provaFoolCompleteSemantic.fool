@@ -47,5 +47,6 @@ void main(){
         int q= w.somma(1,2);
     in
         a=0;
+        o=w;
         //a.q(a,c).r().s(a);
 }

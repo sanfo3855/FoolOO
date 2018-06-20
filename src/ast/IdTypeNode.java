@@ -8,9 +8,14 @@ import java.util.ArrayList;
 public class IdTypeNode implements TypeNode {
 
     String id;
+    private String[] extClassId;
 
     public IdTypeNode(String id) {
         this.id=id;
+    }
+
+    public String[] getExtClassId() {
+        return extClassId;
     }
 
     public String toPrint(String s) {
@@ -26,7 +31,7 @@ public class IdTypeNode implements TypeNode {
     }
 
     @Override
-    public ArrayList<SemanticError> checkSemantics(Environment env) {
+    public ArrayList<SemanticError> checkSemantics(Environment env) {//todo array extClassId
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
         int j = env.getNestingLevel();

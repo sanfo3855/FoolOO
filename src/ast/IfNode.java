@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -44,8 +45,22 @@ public class IfNode implements Node {
     }
 
     public Node typeCheck() {
-        //todo
-        return cond.typeCheck();
+        Node nodo=null;
+        if (!(FOOLlib.isSubtype(cond.typeCheck(),new BoolTypeNode()))) {
+            System.out.println("non boolean condition in if");
+            System.exit(0);
+        }
+        Node thenB = thenBranch.typeCheck();
+        Node elseB = elseBranch.typeCheck();
+        if (FOOLlib.isSubtype(thenB,elseB))
+            nodo= elseB;
+        if (FOOLlib.isSubtype(elseB,thenB))
+            nodo= thenB;
+        if(nodo==null) {
+            System.out.println("Incompatible types in then else branches");
+            System.exit(0);
+        }
+        return nodo;
     }
 
     public String codeGeneration() {
