@@ -46,13 +46,13 @@ public class CallMethodNode implements Node {
             this.nestinglevel = env.getNestingLevel();
 
             STentry entryID=null;
+            entryID=env.getHashMapNL(env.getNestingLevel()).get(id);
+            idType=((TypeNode)entryID.getType()).getType();
             for(Node fun : listSubFun){
-                //todo modificare in base al ritorno della funzione
-                entryID=env.getHashMapNL(env.getNestingLevel()).get(id);
-                idType=((TypeNode)entryID.getType()).getType();
                 if(fun instanceof FunExpNode){
                     ((FunExpNode) fun).setTypeClassMethod(idType);
                     semanticErrors.addAll(fun.checkSemantics(env));
+                    idType=null;
                 }
             }
         }

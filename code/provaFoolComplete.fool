@@ -33,6 +33,22 @@ class pippo extends classe1 (int x){
     }
 }
 
+class pippo1 (int x){
+    void pippo1(int a, int c){
+        let
+            int z=111;
+        in
+            c=0;
+    }
+
+    classe1 somma1(int a,int b){
+        let
+            int c=0;
+        in
+            c == a+b
+    }
+}
+
 void main(){
     let
         bool x=1;
@@ -42,10 +58,13 @@ void main(){
         int a=s();
         int som=1;
         int som1=2;
-        classe1 o=null;
+        pippo1 o=null;
         pippo w=new pippo(1,2);
-        int q= w.somma(1,2).ss(3,4);
+        int q= w.somma(1,2).somma1(3,4);//dave dare errore ne TypeCheck
+        int zzzz= w.somma(1,2).ss(3,4);
     in
         a=0;
+        o=w.ss(1,2);
+        //o=o.ss(1,2);
         //a.q(a,c).r().s(a);
 }

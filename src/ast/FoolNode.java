@@ -35,6 +35,12 @@ public class FoolNode implements Node {
                 if ( hashMap.put("class%"+idPutHM,entryTable) != null ){
                     semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
                 }
+                if(((DecclassNode)nodo).getIdExt()!=null){
+                    idPutHM+="@"+((DecclassNode)nodo).getIdExt();
+                    if ( hashMap.put("class%"+idPutHM,entryTable) != null ){
+                        semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
+                    }
+                }
             }
             if(nodo instanceof FunNode ){
                 entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"

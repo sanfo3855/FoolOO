@@ -36,5 +36,3 @@ void main(){
         //d.pippo(a,4);
         //q.q(a,c).r().s(a);
 }
-
-//todo fun costruttore

@@ -49,5 +49,3 @@ void main(){
         a=0;
         //a.q(a,c).r().s(a);
 }
-
-//todo fun costruttore

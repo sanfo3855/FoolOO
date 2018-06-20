@@ -31,6 +31,10 @@ public class DecclassNode implements Node {
         return id;
     }
 
+    public String getIdExt() {
+        return idExt;
+    }
+
     public String toPrint(String s) {
         String returnString = s + "DecclassNode\n";
         if(idExt!=null){
@@ -51,16 +55,16 @@ public class DecclassNode implements Node {
 
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
         STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
-
-
-        if ( hashMap.get("class%"+id) == null ){
+        String idClass="class%"+id;
+        if(idExt!=null){
+            idClass+="@"+idExt;
+        }
+        if ( hashMap.get(idClass) == null ){
             semanticErrors.add(new SemanticError("Class "+id+" is not declared"));
         }else{
             if( idExt!=null && hashMap.get("class%"+idExt) == null ){
                 semanticErrors.add(new SemanticError("Class idExtends "+idExt+" not is declared"));
             }else{
-                
-
                 HashMap<String,STentry> hashMapClass = new HashMap<String,STentry> ();
                 env.addHashMapNL(hashMapClass);
                 STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
@@ -74,8 +78,6 @@ public class DecclassNode implements Node {
                         semanticErrors.add(new SemanticError("Parameter id "+arguments.getId()+" already declared"));
                     }
                 }
-
-
                 //create key
                 if(listFun.size() > 0){
                     String idKey;

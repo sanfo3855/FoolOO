@@ -6,6 +6,7 @@ import util.SemanticError;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class FunExpNode implements Node {
 
@@ -39,7 +40,8 @@ public class FunExpNode implements Node {
         int j=env.getNestingLevel();
         STentry tmpEntry = null;
         HashMap<String,STentry> tmpHm=null;
-        while (j>=0 && tmpEntry==null){
+        HashMap<String,STentry> hmClassExt=env.getHashMapNL(0);
+        while (j>=0 /*&& tmpEntry==null*/){
             tmpHm = env.getHashMapNL(j--);
             for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
                 String keysharp[] = chkEntry.getKey().split("#");
@@ -49,9 +51,24 @@ public class FunExpNode implements Node {
                     if ((keylength-2 == listParam.size()) && (key[0].equals(id))) {
                         tmpEntry = chkEntry.getValue();
                     }else{
-                        //todo &&  key[1].equals(tipo)
-                        if (key[0].equals(id) && (keylength-4)==listParam.size() && key[keylength-2].equals("class") && key[keylength-1].equals(typeClassMethod)) {
-                            tmpEntry = chkEntry.getValue();
+                        if(typeClassMethod!=null) {
+                            if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class") && key[keylength - 1].equals(typeClassMethod)) {
+                                tmpEntry = chkEntry.getValue();
+                            } else {
+                                for (String keyfun : hmClassExt.keySet()) {
+                                    String[] splitKey = keyfun.split("@");
+                                    if (splitKey.length > 1 && splitKey[0].split("%")[1].equals(typeClassMethod)) {
+                                        if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class") && key[keylength - 1].equals(splitKey[1])) {
+                                            tmpEntry = chkEntry.getValue();
+                                        }
+                                    }
+                                }
+
+                            }
+                        }else{
+                            if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class")) {
+                                tmpEntry = chkEntry.getValue();
+                            }
                         }
                     }
                 }
