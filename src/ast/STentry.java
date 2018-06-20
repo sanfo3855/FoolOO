@@ -33,10 +33,19 @@ public class STentry {
         return this.nestinglevel;
     }
 
-    public String toPrint(String s) { //
-        return s + "STentry: nestlev " + Integer.toString(this.nestinglevel) + "\n" +
-                s + "STentry: type\n" +
-//                this.type.toPrint(s + "  ") +
-                s + "STentry: offset " + Integer.toString(this.offset) + "\n";
+    public String toPrint(String s) {
+        String returnPrint;
+        if(type!=null){
+            returnPrint = s + "STentry: nestlev " + Integer.toString(this.nestinglevel) + "\n" +
+                    s + "STentry: type\n" +
+                    this.type.toPrint(s + "  ") +
+                    s + "STentry: offset " + Integer.toString(this.offset) + "\n";
+        } else {
+            returnPrint = s + "STentry: nestlev " + Integer.toString(this.nestinglevel) + "\n" +
+                    s + "STentry: type\n" +
+                    this.type.toPrint(s + "  ") +
+                    s + "STentry: offset " + Integer.toString(this.offset) + "\n";
+        }
+        return returnPrint;
     }
 }  
