@@ -38,8 +38,7 @@ public class IdNode implements Node {
     }
 
     public Node typeCheck() {
-        //todo
-        return null;
+        return new IdTypeNode(id);
     }
 
     public String codeGeneration() {
