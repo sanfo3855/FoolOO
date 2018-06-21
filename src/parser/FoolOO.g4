@@ -34,7 +34,11 @@ varasm  : vardec ASM exp SEMIC      #expDecAsignment
         |  vardec ASM stms          #stmDecAsignment
         ;
 
-fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog CRPAR
+fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog (ret)? CRPAR
+        ;
+
+ret     : RETURN exp SEMIC                                      #returnFunExp
+        | RETURN stms                                           #returnFunStms
         ;
 
 dec     : varasm           #varAssignment
@@ -72,7 +76,6 @@ stms    : (stm)+
 
 value   : INTEGER                               #intVal
         | ( TRUE | FALSE )                      #boolVal
-        | RETURN exp                            #returnFun
         | LPAR exp RPAR                         #baseExp
         | IF cond=exp THEN CLPAR thenBranch=exp CRPAR (ELSE CLPAR elseBranch=exp CRPAR)?       #ifExp
         | stms                                  #stmsExp

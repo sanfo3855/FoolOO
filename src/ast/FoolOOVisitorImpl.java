@@ -28,7 +28,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         Node typeNode = visit(ctx.type());
         Node progNode= visit(ctx.prog());
 
-        return new FunNode(ctx.MAIN().getText(), typeNode, listVar, progNode);
+        return new FunNode(ctx.MAIN().getText(), typeNode, listVar, progNode, null);
     }
 
     @Override public Node visitClassDeclaration(ClassDeclarationContext ctx) {
@@ -105,8 +105,22 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
             listVar.add( visit(dec) );
         }
         Node progNode= visit(ctx.prog());
+        Node retNode=null;
+        if(ctx.ret()!=null){
+            retNode= visit(ctx.ret());
+        }
 
-        return new FunNode(ctx.ID().getText(), typeNode, listVar, progNode);
+        return new FunNode(ctx.ID().getText(), typeNode, listVar, progNode, retNode);
+    }
+
+    @Override
+    public Node visitReturnFunExp(ReturnFunExpContext ctx) {
+        return visit(ctx.exp());
+    }
+
+    @Override
+    public Node visitReturnFunStms(ReturnFunStmsContext ctx) {
+        return visit(ctx.stms());
     }
 
     @Override
@@ -249,11 +263,6 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitBoolVal(BoolValContext ctx) {
         return new BoolNode(Boolean.parseBoolean(ctx.getText()));
-    }
-
-    @Override
-    public Node visitReturnFun(ReturnFunContext ctx) {
-        return visit(ctx.exp());
     }
 
     @Override

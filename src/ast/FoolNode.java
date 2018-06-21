@@ -65,12 +65,10 @@ public class FoolNode implements Node {
     }
 
     public Node typeCheck() {
-
-        Node nodoRes=null;
         for(Node nodo : listNodi){
-            nodoRes = nodo.typeCheck();
+            nodo.typeCheck();
         }
-        return nodoRes;
+        return new VoidTypeNode();
     }
 
     public String codeGeneration() {

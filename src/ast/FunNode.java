@@ -13,13 +13,15 @@ public class FunNode  implements Node {
     private Node type;
     private ArrayList<Node> listVar;
     private Node progNode;
+    private Node retNode;
 
 
-    public FunNode (String id, Node type, ArrayList<Node> listVar, Node progNode) {
+    public FunNode (String id, Node type, ArrayList<Node> listVar, Node progNode, Node retNode) {
         this.id=id;
         this.type=type;
         this.listVar=listVar;
         this.progNode=progNode;
+        this.retNode=retNode;
     }
 
     public String toPrint(String s) {
@@ -47,39 +49,32 @@ public class FunNode  implements Node {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         HashMap<String,STentry> hm = env.getHashMapNL(env.getNestingLevel());
         STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
-
         ArrayList<Node> parList = new ArrayList<Node>();
-
-        //create key
-//        String idKey = "fun#"+ id +"%";
-//        idKey += ((TypeNode) type).getType();
-//        for (Node node : listVar) {
-//            TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
-//            idKey += "%" + typeVar.getType();
-//        }
-//
-//        if ( hm.get(idKey) == null) {
-//            semanticErrors.add(new SemanticError("Fun " + id + " already declared !"));
-//        } else {
-            env.addHashMapNL( new HashMap<String, STentry>());
-
-            for (Node node: listVar) {
-                parList.add(((VarDecNode) node).getType());
-                semanticErrors.addAll(node.checkSemantics(env));
+        env.addHashMapNL( new HashMap<String, STentry>());
+        for (Node node: listVar) {
+            parList.add(((VarDecNode) node).getType());
+            semanticErrors.addAll(node.checkSemantics(env));
+        }
+        entry.addType(new FunTypeNode(parList, type));
+        semanticErrors.addAll(progNode.checkSemantics(env));
+        if(retNode!=null){
+            semanticErrors.addAll(retNode.checkSemantics(env));
+        }else{
+            if (!(type instanceof VoidTypeNode)){//diverso da void
+                semanticErrors.add(new SemanticError("Missing return"));
             }
-            //add type to current entry
-            entry.addType(new FunTypeNode(parList, type));
-            semanticErrors.addAll(progNode.checkSemantics(env));
-            //close scope
-            env.removeHashMapNL();
-//        }
+        }
+        env.removeHashMapNL();
+
         return semanticErrors;
     }
 
     public Node typeCheck() {
-        if (!(FOOLlib.isSubtype(progNode.typeCheck(),type))){
-            System.out.println("Wrong return type for function " + id);
-            System.exit(0);
+        if(retNode!=null){
+            if( !FOOLlib.isSubtype(type, retNode.typeCheck()) ){
+                System.out.println("Wrong return type for function " + id );
+                System.exit(0);
+            }
         }
         return null;
     }

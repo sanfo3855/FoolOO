@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class FoolOOMain {
     public static void main(String[] args) throws Exception {
 
-        String fileName = "code/provaExtendsMult.fool";
+        String fileName = "code/provaFoolComplete.fool";
 
         FileInputStream is = new FileInputStream(fileName);
         ANTLRInputStream input = new ANTLRInputStream(is);
@@ -46,9 +46,9 @@ public class FoolOOMain {
 
                 System.out.println("Visualizing AST...");
            //     System.out.println(ast.toPrint(""));
-//
-//                Node type = ast.typeCheck(); //type-checking bottom-up
-//                System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
+
+                Node type = ast.typeCheck(); //type-checking bottom-up
+                System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
 //
 //
 //                // CODE GENERATION  prova.fool.asm

@@ -38,7 +38,18 @@ public class IdNode implements Node {
     }
 
     public Node typeCheck() {
-        return new IdTypeNode(id);
+        String type=((TypeNode) entry.getType()).getType();
+        TypeNode typeNode;
+        if (type.equals("int")){
+            typeNode=new IntTypeNode();
+        }else{
+            if (type.equals("bool")){
+                typeNode=new BoolTypeNode();
+            }else{
+                typeNode=new IdTypeNode(type);
+            }
+        }
+        return typeNode;
     }
 
     public String codeGeneration() {

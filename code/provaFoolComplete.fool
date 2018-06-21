@@ -1,10 +1,17 @@
 class classe1  (int s, int z){
+    void classe1(int a, int c){
+        let
+            int z=111;
+        in
+            c=0;
+    }
     int ss(int a, int q){
         let
             classe1 c=new classe1();
         in
             z=0;
-            q=c.funz(s,z);
+            //q=c.funz(s, );
+            return 2;
     }
 
     int funz(int x, bool a){
@@ -14,6 +21,7 @@ class classe1  (int s, int z){
             int z=c.ss(x, a);
         in
             q=c.funz(x,a);
+            return x;
     }
 }
 
@@ -30,6 +38,7 @@ class pippo extends classe1 (int x){
             int c=0;
         in
             c == a+b
+            return new classe1(a,b);
     }
 }
 
@@ -46,6 +55,7 @@ class pippo1 (int x){
             int c=0;
         in
             c == a+b
+            return new classe1();
     }
 }
 
@@ -54,6 +64,7 @@ void main(){
         bool x=1;
         int s(){
             x=0;
+            return 0;
         }
         int a=s();
         int som=1;

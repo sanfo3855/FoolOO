@@ -12,6 +12,7 @@ public class DecclassNode implements Node {
     private String idExt;
     private ArrayList<Node> listVar;
     private ArrayList<Node> listFun;
+    private ArrayList<String> extClassId= new ArrayList<String>();
 
 
     public DecclassNode (String id, ArrayList<Node> listVar, ArrayList<Node> listFun, String idExt) {
@@ -113,12 +114,43 @@ public class DecclassNode implements Node {
                 env.removeHashMapNL();
             }
         }
+        ArrayList<String> tempArrayClass=new ArrayList<String>();
+        for (String classex:env.getHashMapNL(0).keySet()) {
+            if(classex.contains("class%")){
+                if(!classex.contains("fun#")){
+                    tempArrayClass.add(classex.substring(6, classex.length()));
+                }
+            }
+        }
+
+        boolean cond=true;
+        String idExtClass=id;
+        while (cond){
+            cond=false;
+            for (String classex:tempArrayClass) {
+                String[] arrExt=classex.split("@");
+                if(idExtClass.equals(arrExt[0]) && arrExt.length==2){
+                    idExtClass=arrExt[1];
+                    extClassId.add(arrExt[1]);
+                    cond=true;
+                }
+            }
+        }
         return semanticErrors;
     }
 
     public Node typeCheck() {
-        //todo
-        return null;
+        if(idExt!= null)
+        for (String idExtClass: extClassId) {
+            if(id.equals(idExtClass)){
+                System.out.println("Cyclic inheritance involving "+ id);
+                System.exit(0);
+            }
+        }
+        for(Node nodo : listFun){
+            nodo.typeCheck();
+        }
+        return new VoidTypeNode();
     }
 
     public String codeGeneration() {

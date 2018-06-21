@@ -15,31 +15,39 @@ public class FOOLlib {
   //valuta se il tipo "a" è <= al tipo "b", dove "a" e "b" sono tipi di base: int o bool
   public static boolean isSubtype (Node a, Node b) {
     boolean res=false;
-    if(a instanceof IdTypeNode && b instanceof NullNode){
-      res=true;
-    }
-    if(!res && ((a instanceof BoolTypeNode) && (b instanceof IntTypeNode))){
-      res=true;
-    }
-    if(!res && a.getClass().equals(b.getClass())){
-      if(a instanceof IdTypeNode){
+    if(a!=null){
+      if(a instanceof IdTypeNode && b instanceof NullNode){
+        res=true;
+      }
+      if(!res && ((a instanceof BoolTypeNode) && (b instanceof IntTypeNode))){
+        res=true;
+      }
+      if(b!=null){
+        if(!res && a.getClass().equals(b.getClass())){
+          if(a instanceof IdTypeNode){
 
-        String nomeClasseA= ((IdTypeNode) a).getType();
-        String nomeClasseB= ((IdTypeNode) b).getType();
-        if( nomeClasseA.equals(nomeClasseB) ){
-          res=true;
-        }else{
-          for(String extClassB: ((IdTypeNode) b).getExtClassId()){
-            if( nomeClasseA.equals(extClassB) ){
+            String nomeClasseA= ((IdTypeNode) a).getType();
+            String nomeClasseB= ((IdTypeNode) b).getType();
+            if( nomeClasseA.equals(nomeClasseB) ){
               res=true;
+            }else{
+              for(String extClassB: ((IdTypeNode) b).getExtClassId()){
+                if( nomeClasseA.equals(extClassB) ){
+                  res=true;
+                }
+              }
             }
+          }else{
+            res=true;
           }
         }
       }else{
-        res=true;
+        if(a instanceof IdTypeNode){
+          res=true;
+        }
       }
-    }
 
+    }
     return res;
   } 
   
