@@ -19,6 +19,10 @@ public class IdTypeNode implements TypeNode {
         return extClassId;
     }
 
+    public void setExtClassId(ArrayList<String> extClassId) {
+        this.extClassId = extClassId;
+    }
+
     public String toPrint(String s) {
         return s+"IdType\n";
     }
@@ -32,7 +36,7 @@ public class IdTypeNode implements TypeNode {
     }
 
     @Override
-    public ArrayList<SemanticError> checkSemantics(Environment env) {//todo array extClassId
+    public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
         int j = env.getNestingLevel();

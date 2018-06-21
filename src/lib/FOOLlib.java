@@ -21,12 +21,6 @@ public class FOOLlib {
     if(!res && ((a instanceof BoolTypeNode) && (b instanceof IntTypeNode))){
       res=true;
     }
-//    if(!res && ((a instanceof BoolTypeNode) && (b instanceof BoolTypeNode))){
-//      res=true;
-//    }
-//    if(!res && ((a instanceof IntTypeNode) && (b instanceof IntTypeNode))){
-//      res=true;
-//    }
     if(!res && a.getClass().equals(b.getClass())){
       if(a instanceof IdTypeNode){
 

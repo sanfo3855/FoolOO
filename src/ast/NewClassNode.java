@@ -10,12 +10,12 @@ import java.util.Map;
 public class NewClassNode implements Node{
     private String id;
     private ArrayList<Node> listPar;
+    private ArrayList<String> extClassId= new ArrayList<String>();
 
     public NewClassNode (String id, ArrayList<Node> listPar) {
         this.id = id;
         this.listPar = listPar;
     }
-
 
     public String toPrint(String s) {
         String returnString = s + "NewClassNode\n";
@@ -51,6 +51,7 @@ public class NewClassNode implements Node{
                             keylength=key.length;
                             if(key[0].equals(id) && key[1].equals("void") && (keylength-4)==listPar.size() && key[keylength-2].equals("class") && key[keylength-1].equals(id) ){
                                 entryTableTemp=chkEntry.getValue();
+
                             }
                         }
                     }
@@ -62,13 +63,40 @@ public class NewClassNode implements Node{
                     semanticErrors.addAll(parNode.checkSemantics(env));
                 }
             }
+            ArrayList<String> tempArrayClass=new ArrayList<String>();
+            for (String classex:env.getHashMapNL(0).keySet()) {
+                if(classex.contains("class%")){
+                    if(!classex.contains("fun#")){
+                        tempArrayClass.add(classex.substring(6, classex.length()));
+                    }
+                }
+            }
+
+            boolean cond=true;
+            String idExtClass=id;
+            while (cond){
+                cond=false;
+                for (String classex:tempArrayClass) {
+                    String[] arrExt=classex.split("@");
+                    if(idExtClass.equals(arrExt[0]) && arrExt.length==2){
+                        idExtClass=arrExt[1];
+                        extClassId.add(arrExt[1]);
+                        cond=true;
+                    }
+                }
+            }
         }
         return semanticErrors;
     }
 
     public Node typeCheck() {
         //todo
-        return null;
+
+
+
+        Node idTypeNode=new IdTypeNode(id);
+        ((IdTypeNode) idTypeNode).setExtClassId(extClassId);
+        return idTypeNode;
     }
 
     public String codeGeneration() {
