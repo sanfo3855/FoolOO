@@ -93,7 +93,6 @@ public class NewClassNode implements Node{
     }
 
     public Node typeCheck() {
-        System.out.println("CiAO "+listPar.size());
         if (listPar.size() > 0) {
             Node parTypeNode;
             String keyTemp[] = constructor.split("%");
@@ -109,7 +108,7 @@ public class NewClassNode implements Node{
                     parTypeNode = new IdTypeNode(id);
                 }
                 if (!(FOOLlib.isSubtype(listPar.get(i).typeCheck(), parTypeNode))) {
-                    System.out.println("Type mismatch: Espected" + type);
+                    System.out.println("Type mismatch: Espected " + type);
                     System.exit(0);
                 }
             }

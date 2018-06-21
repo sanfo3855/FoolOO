@@ -70,6 +70,7 @@ public class FunNode  implements Node {
     }
 
     public Node typeCheck() {
+        progNode.typeCheck();
         if(retNode!=null){
             if( !FOOLlib.isSubtype(type, retNode.typeCheck()) ){
                 System.out.println("Wrong return type for function " + id );

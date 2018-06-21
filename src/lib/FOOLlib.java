@@ -31,8 +31,8 @@ public class FOOLlib {
             if( nomeClasseA.equals(nomeClasseB) ){
               res=true;
             }else{
-              for(String extClassB: ((IdTypeNode) b).getExtClassId()){
-                if( nomeClasseA.equals(extClassB) ){
+              for(String extClassA: ((IdTypeNode) a).getExtClassId()){
+                if( nomeClasseB.equals(extClassA) ){
                   res=true;
                 }
               }

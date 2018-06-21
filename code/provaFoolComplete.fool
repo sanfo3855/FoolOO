@@ -7,7 +7,8 @@ class classe1  (int s, int z){
     }
     int ss(int a, int q){
         let
-            classe1 c=new classe1();
+            classe1 c=new classe1(a,q);//non fa il typeCheck
+            int z=0;
         in
             z=0;
             //q=c.funz(s, );
@@ -17,10 +18,10 @@ class classe1  (int s, int z){
     int funz(int x, bool a){
         let
             int q=a;
-                classe1 c=new classe1();
-            int z=c.ss(x, a);
+            classe1 c=new pippo();
+            //int z=c.ss(x, a);
         in
-            q=c.funz(x,a);
+            //q=c.funz(x,a);
             return x;
     }
 }
@@ -35,10 +36,11 @@ class pippo extends classe1 (int x){
 
     classe1 somma(int a,int b){
         let
-            int c=0;
+            bool c= true;
+            classe1 x= new classe1();
         in
-            c == a+b
-            return new classe1(a,b);
+            c = false;
+            return new classe1(1,b);
     }
 }
 
@@ -54,7 +56,7 @@ class pippo1 (int x){
         let
             int c=0;
         in
-            c == a+b
+            c = (a+b);
             return new classe1();
     }
 }
