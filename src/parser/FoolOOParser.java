@@ -260,8 +260,8 @@ public class FoolOOParser extends Parser {
 		public LetContext let() {
 			return getRuleContext(LetContext.class,0);
 		}
-		public ExpContext exp() {
-			return getRuleContext(ExpContext.class,0);
+		public StmsContext stms() {
+			return getRuleContext(StmsContext.class,0);
 		}
 		public LetInExpContext(ProgContext ctx) { copyFrom(ctx); }
 		@Override
@@ -271,8 +271,8 @@ public class FoolOOParser extends Parser {
 		}
 	}
 	public static class SingleExpContext extends ProgContext {
-		public ExpContext exp() {
-			return getRuleContext(ExpContext.class,0);
+		public StmsContext stms() {
+			return getRuleContext(StmsContext.class,0);
 		}
 		public SingleExpContext(ProgContext ctx) { copyFrom(ctx); }
 		@Override
@@ -290,18 +290,10 @@ public class FoolOOParser extends Parser {
 			setState(59);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case MINUS:
-			case NOT:
-			case TRUE:
-			case FALSE:
-			case LPAR:
 			case CRPAR:
 			case IF:
 			case PRINT:
 			case RETURN:
-			case NEW:
-			case NULL:
-			case INTEGER:
 			case ID:
 				_localctx = new SingleExpContext(_localctx);
 				enterOuterAlt(_localctx, 1);
@@ -309,10 +301,10 @@ public class FoolOOParser extends Parser {
 				setState(53);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << TRUE) | (1L << FALSE) | (1L << LPAR) | (1L << IF) | (1L << PRINT) | (1L << NEW) | (1L << NULL) | (1L << INTEGER) | (1L << ID))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << PRINT) | (1L << ID))) != 0)) {
 					{
 					setState(52);
-					exp();
+					stms();
 					}
 				}
 
@@ -327,10 +319,10 @@ public class FoolOOParser extends Parser {
 				setState(57);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << TRUE) | (1L << FALSE) | (1L << LPAR) | (1L << IF) | (1L << PRINT) | (1L << NEW) | (1L << NULL) | (1L << INTEGER) | (1L << ID))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << PRINT) | (1L << ID))) != 0)) {
 					{
 					setState(56);
-					exp();
+					stms();
 					}
 				}
 
@@ -1878,8 +1870,8 @@ public class FoolOOParser extends Parser {
 		"\2\2 \u00d1\3\2\2\2\"\u00e0\3\2\2\2$\u0108\3\2\2\2&(\5\4\3\2\'&\3\2\2"+
 		"\2()\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*\3\3\2\2\2+,\5\26\f\2,-\7(\2\2-.\7\24"+
 		"\2\2./\7\25\2\2/\60\7\26\2\2\60\61\5\6\4\2\61\62\7\27\2\2\62\65\3\2\2"+
-		"\2\63\65\5\b\5\2\64+\3\2\2\2\64\63\3\2\2\2\65\5\3\2\2\2\668\5\30\r\2\67"+
-		"\66\3\2\2\2\678\3\2\2\28>\3\2\2\29;\5\n\6\2:<\5\30\r\2;:\3\2\2\2;<\3\2"+
+		"\2\63\65\5\b\5\2\64+\3\2\2\2\64\63\3\2\2\2\65\5\3\2\2\2\668\5\"\22\2\67"+
+		"\66\3\2\2\2\678\3\2\2\28>\3\2\2\29;\5\n\6\2:<\5\"\22\2;:\3\2\2\2;<\3\2"+
 		"\2\2<>\3\2\2\2=\67\3\2\2\2=9\3\2\2\2>\7\3\2\2\2?@\7$\2\2@C\7*\2\2AB\7"+
 		"%\2\2BD\7*\2\2CA\3\2\2\2CD\3\2\2\2DE\3\2\2\2EN\7\24\2\2FK\5\f\7\2GH\7"+
 		"\6\2\2HJ\5\f\7\2IG\3\2\2\2JM\3\2\2\2KI\3\2\2\2KL\3\2\2\2LO\3\2\2\2MK\3"+
