@@ -42,8 +42,6 @@ public class STentry {
                     s + "STentry: offset " + Integer.toString(this.offset) + "\n";
         } else {
             returnPrint = s + "STentry: nestlev " + Integer.toString(this.nestinglevel) + "\n" +
-                    s + "STentry: type\n" +
-                    this.type.toPrint(s + "  ") +
                     s + "STentry: offset " + Integer.toString(this.offset) + "\n";
         }
         return returnPrint;

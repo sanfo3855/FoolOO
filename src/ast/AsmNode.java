@@ -42,7 +42,7 @@ public class AsmNode implements Node {
 
     public Node typeCheck() {
         if( !FOOLlib.isSubtype(entry.getType(), value.typeCheck()) ){
-            System.out.println("TypeCheck error for assignement to" + id );
+            System.out.println("TypeCheck error for assignement to " + id );
             System.exit(0);
         }
         return new VoidTypeNode();
