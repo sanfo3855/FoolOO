@@ -10,18 +10,22 @@ class classe1  (int s, int z){
             classe1 c=new classe1(a,q);//non fa il typeCheck
             int z=0;
         in
-            z=0;
-            //q=c.funz(s, );
+            //z=0;
             return 2;
+    }
+
+    int retFunz(){
+        return 23;
     }
 
     int funz(int x, bool a){
         let
             int q=a;
             classe1 c=new pippo();
-            //int z=c.ss(x, a);
+            int z=c.ss(x, a);
         in
-            //q=c.funz(x,a);
+            q=c.funz(x,a);
+            q=2;
             return x;
     }
 }
@@ -63,7 +67,7 @@ class pippo1 (int x){
 
 void main(){
     let
-        bool x=1;
+        int x=true;
         int s(){
             x=0;
             return 0;

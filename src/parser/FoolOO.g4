@@ -17,8 +17,8 @@ block   : type MAIN LPAR RPAR CLPAR prog CRPAR       #mainDeclaration
         | decclass    #classDeclaration
         ;
 
-prog    : exp       #singleExp
-        | let exp   #letInExp
+prog    : (exp)?       #singleExp
+        | let (exp)?   #letInExp
         ;
 
 decclass   : CLASS ID ( EXTENDS ID )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun)+ CRPAR

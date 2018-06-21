@@ -29,7 +29,10 @@ public class FunNode  implements Node {
         for(Node ntp : this.listVar){
             returnString += s + ntp.toPrint(s + "   ") + "\n";
         }
-        returnString += s + this.progNode.toPrint(s + "   ");
+        if (progNode!=null){
+            returnString += s + this.progNode.toPrint(s + "   ");
+        }
+
         return returnString;
     }
 
@@ -56,7 +59,9 @@ public class FunNode  implements Node {
             semanticErrors.addAll(node.checkSemantics(env));
         }
         entry.addType(new FunTypeNode(parList, type));
-        semanticErrors.addAll(progNode.checkSemantics(env));
+        if (progNode!=null) {
+            semanticErrors.addAll(progNode.checkSemantics(env));
+        }
         if(retNode!=null){
             semanticErrors.addAll(retNode.checkSemantics(env));
         }else{
@@ -70,7 +75,9 @@ public class FunNode  implements Node {
     }
 
     public Node typeCheck() {
-        progNode.typeCheck();
+        if (progNode!=null) {
+            progNode.typeCheck();
+        }
         if(retNode!=null){
             if( !FOOLlib.isSubtype(type, retNode.typeCheck()) ){
                 System.out.println("Wrong return type for function " + id );

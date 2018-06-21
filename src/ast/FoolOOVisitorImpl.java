@@ -37,7 +37,11 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitSingleExp(SingleExpContext ctx) {
-        return visit(ctx.exp());
+        Node node = null;
+        if (ctx.exp() != null) {
+            node = visit(ctx.exp());
+        }
+        return node;
     }
 
     @Override
@@ -46,8 +50,10 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         for(DecContext dec : ctx.let().dec()){
             listDec.add( visit(dec) );
         }
-        Node exp = visit( ctx.exp() );
-
+        Node exp = null;
+        if (ctx.exp() != null) {
+            exp = visit(ctx.exp());
+        }
         return new LetInExpNode(listDec,  exp);
     }
 

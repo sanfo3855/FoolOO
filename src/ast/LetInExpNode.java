@@ -21,7 +21,10 @@ public class LetInExpNode implements Node {
         for(Node ntp : listDec){
             returnString += s + ntp.toPrint(s + "   ") + "\n";
         }
-        returnString += s + this.exp.toPrint(s + "   ") + "\n";
+        if (exp!=null) {
+            returnString += s + this.exp.toPrint(s + "   ") + "\n";
+        }
+
         return returnString;
     }
 
@@ -49,16 +52,22 @@ public class LetInExpNode implements Node {
         for(Node ntc : listDec){
             semanticErrors.addAll(ntc.checkSemantics(env));
         }
-        semanticErrors.addAll(exp.checkSemantics(env));
-
+        if (exp!=null) {
+            semanticErrors.addAll(exp.checkSemantics(env));
+        }
 
         return semanticErrors;
     }
 
     public Node typeCheck() {
-        for (Node node : listDec)
+
+        for (Node node : listDec) {
             node.typeCheck();
-        return exp.typeCheck();
+        }
+        if (exp!=null){
+            exp.typeCheck();
+        }
+        return new VoidTypeNode();
     }
 
     public String codeGeneration() {
