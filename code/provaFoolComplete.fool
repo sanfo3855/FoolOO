@@ -22,9 +22,9 @@ class classe1  (int s, int z){
         let
             int q=a;
             classe1 c=new pippo();
-            int z=c.ss(x, a);
+            //int z=c.ss(x, a);
         in
-            q=c.funz(x,a);
+            //q=c.funz(x,a);
             q=2;
             return x;
     }
