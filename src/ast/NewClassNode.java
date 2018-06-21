@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -11,6 +12,7 @@ public class NewClassNode implements Node{
     private String id;
     private ArrayList<Node> listPar;
     private ArrayList<String> extClassId= new ArrayList<String>();
+    private String constructor;
 
     public NewClassNode (String id, ArrayList<Node> listPar) {
         this.id = id;
@@ -51,6 +53,7 @@ public class NewClassNode implements Node{
                             keylength=key.length;
                             if(key[0].equals(id) && key[1].equals("void") && (keylength-4)==listPar.size() && key[keylength-2].equals("class") && key[keylength-1].equals(id) ){
                                 entryTableTemp=chkEntry.getValue();
+                                constructor = chkEntry.getKey();
 
                             }
                         }
@@ -90,9 +93,31 @@ public class NewClassNode implements Node{
     }
 
     public Node typeCheck() {
-        //todo
+        if (listPar.size() > 0) {
+            Node parTypeNode;
+            ArrayList<String> constructorParType = new ArrayList<String>();
+            String keyTemp[] = constructor.split("%");
+            int keylength = keyTemp.length-2;
+            for (int i = 2; i <= keylength; i++) {
+                constructorParType.add(keyTemp[i]);
+            }
+            for (Node node : listPar) {
+                for (String type : constructorParType) {
+                    if (type.equals("int")) {
+                        parTypeNode = new IntTypeNode();
+                    } else if (type.equals("bool")) {
+                        parTypeNode = new BoolTypeNode();
+                    } else {
+                        parTypeNode = new IdTypeNode(id);
+                    }
 
-
+                    if (!(FOOLlib.isSubtype(node.typeCheck(), parTypeNode))) {
+                        System.out.println("Type mismatch: Espected" + type);
+                        System.exit(0);
+                    }
+                }
+            }
+        }
 
         Node idTypeNode=new IdTypeNode(id);
         ((IdTypeNode) idTypeNode).setExtClassId(extClassId);
