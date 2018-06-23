@@ -21,7 +21,7 @@ prog    : (stms)?       #singleExp
         | let (stms)?   #letInExp
         ;
 
-decclass   : CLASS ID ( EXTENDS ID )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun)+ CRPAR
+decclass   : CLASS ID ( EXTENDS ID )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun | funconstructor)+ CRPAR
         ;
 
 let     : LET (dec)+ IN
@@ -36,6 +36,10 @@ varasm  : vardec ASM exp SEMIC      #expDecAsignment
 
 fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog (ret)? CRPAR
         ;
+
+funconstructor  : ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog CRPAR
+                ;
+
 
 ret     : RETURN exp SEMIC                                      #returnFunExp
         | RETURN stms                                           #returnFunStms

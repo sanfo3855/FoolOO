@@ -1,4 +1,4 @@
-// Generated from /Users/MatteoMarchesini/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
+// Generated from /home/andrea/IdeaProjects/compilatori/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
 package parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -25,13 +25,13 @@ public class FoolOOParser extends Parser {
 		BLOCKCOMENTS=43, ERR=44;
 	public static final int
 		RULE_start = 0, RULE_block = 1, RULE_prog = 2, RULE_decclass = 3, RULE_let = 4, 
-		RULE_vardec = 5, RULE_varasm = 6, RULE_fun = 7, RULE_ret = 8, RULE_dec = 9, 
-		RULE_type = 10, RULE_exp = 11, RULE_term = 12, RULE_factor = 13, RULE_stm = 14, 
-		RULE_funExp = 15, RULE_stms = 16, RULE_value = 17;
+		RULE_vardec = 5, RULE_varasm = 6, RULE_fun = 7, RULE_funconstructor = 8, 
+		RULE_ret = 9, RULE_dec = 10, RULE_type = 11, RULE_exp = 12, RULE_term = 13, 
+		RULE_factor = 14, RULE_stm = 15, RULE_funExp = 16, RULE_stms = 17, RULE_value = 18;
 	public static final String[] ruleNames = {
 		"start", "block", "prog", "decclass", "let", "vardec", "varasm", "fun", 
-		"ret", "dec", "type", "exp", "term", "factor", "stm", "funExp", "stms", 
-		"value"
+		"funconstructor", "ret", "dec", "type", "exp", "term", "factor", "stm", 
+		"funExp", "stms", "value"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -123,17 +123,17 @@ public class FoolOOParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(37); 
+			setState(39); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(36);
+				setState(38);
 				block();
 				}
 				}
-				setState(39); 
+				setState(41); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << VOID) | (1L << CLASS) | (1L << ID))) != 0) );
@@ -196,7 +196,7 @@ public class FoolOOParser extends Parser {
 		BlockContext _localctx = new BlockContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_block);
 		try {
-			setState(50);
+			setState(52);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INT:
@@ -206,19 +206,19 @@ public class FoolOOParser extends Parser {
 				_localctx = new MainDeclarationContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(41);
-				type();
-				setState(42);
-				match(MAIN);
 				setState(43);
-				match(LPAR);
+				type();
 				setState(44);
-				match(RPAR);
+				match(MAIN);
 				setState(45);
-				match(CLPAR);
+				match(LPAR);
 				setState(46);
-				prog();
+				match(RPAR);
 				setState(47);
+				match(CLPAR);
+				setState(48);
+				prog();
+				setState(49);
 				match(CRPAR);
 				}
 				break;
@@ -226,7 +226,7 @@ public class FoolOOParser extends Parser {
 				_localctx = new ClassDeclarationContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(49);
+				setState(51);
 				decclass();
 				}
 				break;
@@ -287,7 +287,7 @@ public class FoolOOParser extends Parser {
 		enterRule(_localctx, 4, RULE_prog);
 		int _la;
 		try {
-			setState(59);
+			setState(61);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case CRPAR:
@@ -298,12 +298,12 @@ public class FoolOOParser extends Parser {
 				_localctx = new SingleExpContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(53);
+				setState(55);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << PRINT) | (1L << ID))) != 0)) {
 					{
-					setState(52);
+					setState(54);
 					stms();
 					}
 				}
@@ -314,14 +314,14 @@ public class FoolOOParser extends Parser {
 				_localctx = new LetInExpContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(55);
-				let();
 				setState(57);
+				let();
+				setState(59);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << PRINT) | (1L << ID))) != 0)) {
 					{
-					setState(56);
+					setState(58);
 					stms();
 					}
 				}
@@ -366,6 +366,12 @@ public class FoolOOParser extends Parser {
 		public FunContext fun(int i) {
 			return getRuleContext(FunContext.class,i);
 		}
+		public List<FunconstructorContext> funconstructor() {
+			return getRuleContexts(FunconstructorContext.class);
+		}
+		public FunconstructorContext funconstructor(int i) {
+			return getRuleContext(FunconstructorContext.class,i);
+		}
 		public List<TerminalNode> COMMA() { return getTokens(FoolOOParser.COMMA); }
 		public TerminalNode COMMA(int i) {
 			return getToken(FoolOOParser.COMMA, i);
@@ -388,69 +394,81 @@ public class FoolOOParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61);
+			setState(63);
 			match(CLASS);
-			setState(62);
+			setState(64);
 			match(ID);
-			setState(65);
+			setState(67);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==EXTENDS) {
 				{
-				setState(63);
+				setState(65);
 				match(EXTENDS);
-				setState(64);
+				setState(66);
 				match(ID);
 				}
 			}
 
-			setState(67);
+			setState(69);
 			match(LPAR);
-			setState(76);
+			setState(78);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << VOID) | (1L << ID))) != 0)) {
 				{
-				setState(68);
+				setState(70);
 				vardec();
-				setState(73);
+				setState(75);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(69);
+					setState(71);
 					match(COMMA);
-					setState(70);
+					setState(72);
 					vardec();
 					}
 					}
-					setState(75);
+					setState(77);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(78);
+			setState(80);
 			match(RPAR);
-			setState(79);
+			setState(81);
 			match(CLPAR);
-			setState(81); 
+			setState(84); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
-				{
-				setState(80);
-				fun();
+				setState(84);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+				case 1:
+					{
+					setState(82);
+					fun();
+					}
+					break;
+				case 2:
+					{
+					setState(83);
+					funconstructor();
+					}
+					break;
 				}
 				}
-				setState(83); 
+				setState(86); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << VOID) | (1L << ID))) != 0) );
-			setState(85);
+			setState(88);
 			match(CRPAR);
 			}
 		}
@@ -492,23 +510,23 @@ public class FoolOOParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(87);
+			setState(90);
 			match(LET);
-			setState(89); 
+			setState(92); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(88);
+				setState(91);
 				dec();
 				}
 				}
-				setState(91); 
+				setState(94); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << VOID) | (1L << ID))) != 0) );
-			setState(93);
+			setState(96);
 			match(IN);
 			}
 		}
@@ -545,9 +563,9 @@ public class FoolOOParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(95);
+			setState(98);
 			type();
-			setState(96);
+			setState(99);
 			match(ID);
 			}
 		}
@@ -609,20 +627,20 @@ public class FoolOOParser extends Parser {
 		VarasmContext _localctx = new VarasmContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_varasm);
 		try {
-			setState(107);
+			setState(110);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				_localctx = new ExpDecAsignmentContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(98);
-				vardec();
-				setState(99);
-				match(ASM);
-				setState(100);
-				exp();
 				setState(101);
+				vardec();
+				setState(102);
+				match(ASM);
+				setState(103);
+				exp();
+				setState(104);
 				match(SEMIC);
 				}
 				break;
@@ -630,11 +648,11 @@ public class FoolOOParser extends Parser {
 				_localctx = new StmDecAsignmentContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(103);
+				setState(106);
 				vardec();
-				setState(104);
+				setState(107);
 				match(ASM);
-				setState(105);
+				setState(108);
 				stms();
 				}
 				break;
@@ -694,55 +712,143 @@ public class FoolOOParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(109);
+			setState(112);
 			type();
-			setState(110);
+			setState(113);
 			match(ID);
-			setState(111);
+			setState(114);
 			match(LPAR);
-			setState(120);
+			setState(123);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << VOID) | (1L << ID))) != 0)) {
 				{
-				setState(112);
+				setState(115);
 				vardec();
-				setState(117);
+				setState(120);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(113);
+					setState(116);
 					match(COMMA);
-					setState(114);
+					setState(117);
 					vardec();
 					}
 					}
-					setState(119);
+					setState(122);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(122);
+			setState(125);
 			match(RPAR);
-			setState(123);
-			match(CLPAR);
-			setState(124);
-			prog();
 			setState(126);
+			match(CLPAR);
+			setState(127);
+			prog();
+			setState(129);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==RETURN) {
 				{
-				setState(125);
+				setState(128);
 				ret();
 				}
 			}
 
-			setState(128);
+			setState(131);
+			match(CRPAR);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class FunconstructorContext extends ParserRuleContext {
+		public TerminalNode ID() { return getToken(FoolOOParser.ID, 0); }
+		public TerminalNode LPAR() { return getToken(FoolOOParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(FoolOOParser.RPAR, 0); }
+		public TerminalNode CLPAR() { return getToken(FoolOOParser.CLPAR, 0); }
+		public ProgContext prog() {
+			return getRuleContext(ProgContext.class,0);
+		}
+		public TerminalNode CRPAR() { return getToken(FoolOOParser.CRPAR, 0); }
+		public List<VardecContext> vardec() {
+			return getRuleContexts(VardecContext.class);
+		}
+		public VardecContext vardec(int i) {
+			return getRuleContext(VardecContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(FoolOOParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(FoolOOParser.COMMA, i);
+		}
+		public FunconstructorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_funconstructor; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FoolOOVisitor ) return ((FoolOOVisitor<? extends T>)visitor).visitFunconstructor(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final FunconstructorContext funconstructor() throws RecognitionException {
+		FunconstructorContext _localctx = new FunconstructorContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_funconstructor);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(133);
+			match(ID);
+			setState(134);
+			match(LPAR);
+			setState(143);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << VOID) | (1L << ID))) != 0)) {
+				{
+				setState(135);
+				vardec();
+				setState(140);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==COMMA) {
+					{
+					{
+					setState(136);
+					match(COMMA);
+					setState(137);
+					vardec();
+					}
+					}
+					setState(142);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
+				}
+			}
+
+			setState(145);
+			match(RPAR);
+			setState(146);
+			match(CLPAR);
+			setState(147);
+			prog();
+			setState(148);
 			match(CRPAR);
 			}
 		}
@@ -796,20 +902,20 @@ public class FoolOOParser extends Parser {
 
 	public final RetContext ret() throws RecognitionException {
 		RetContext _localctx = new RetContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_ret);
+		enterRule(_localctx, 18, RULE_ret);
 		try {
-			setState(136);
+			setState(156);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 			case 1:
 				_localctx = new ReturnFunExpContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(130);
+				setState(150);
 				match(RETURN);
-				setState(131);
+				setState(151);
 				exp();
-				setState(132);
+				setState(152);
 				match(SEMIC);
 				}
 				break;
@@ -817,9 +923,9 @@ public class FoolOOParser extends Parser {
 				_localctx = new ReturnFunStmsContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(134);
+				setState(154);
 				match(RETURN);
-				setState(135);
+				setState(155);
 				stms();
 				}
 				break;
@@ -872,16 +978,16 @@ public class FoolOOParser extends Parser {
 
 	public final DecContext dec() throws RecognitionException {
 		DecContext _localctx = new DecContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_dec);
+		enterRule(_localctx, 20, RULE_dec);
 		try {
-			setState(140);
+			setState(160);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
 			case 1:
 				_localctx = new VarAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(138);
+				setState(158);
 				varasm();
 				}
 				break;
@@ -889,7 +995,7 @@ public class FoolOOParser extends Parser {
 				_localctx = new FunDeclarationContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(139);
+				setState(159);
 				fun();
 				}
 				break;
@@ -924,12 +1030,12 @@ public class FoolOOParser extends Parser {
 
 	public final TypeContext type() throws RecognitionException {
 		TypeContext _localctx = new TypeContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_type);
+		enterRule(_localctx, 22, RULE_type);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(142);
+			setState(162);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << VOID) | (1L << ID))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -979,29 +1085,29 @@ public class FoolOOParser extends Parser {
 
 	public final ExpContext exp() throws RecognitionException {
 		ExpContext _localctx = new ExpContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_exp);
+		enterRule(_localctx, 24, RULE_exp);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(145);
+			setState(165);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==MINUS) {
 				{
-				setState(144);
+				setState(164);
 				match(MINUS);
 				}
 			}
 
-			setState(147);
+			setState(167);
 			((ExpContext)_localctx).left = term();
-			setState(150);
+			setState(170);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==PLUS || _la==MINUS) {
 				{
-				setState(148);
+				setState(168);
 				_la = _input.LA(1);
 				if ( !(_la==PLUS || _la==MINUS) ) {
 				_errHandler.recoverInline(this);
@@ -1011,7 +1117,7 @@ public class FoolOOParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(149);
+				setState(169);
 				((ExpContext)_localctx).right = exp();
 				}
 			}
@@ -1053,19 +1159,19 @@ public class FoolOOParser extends Parser {
 
 	public final TermContext term() throws RecognitionException {
 		TermContext _localctx = new TermContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_term);
+		enterRule(_localctx, 26, RULE_term);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(152);
+			setState(172);
 			((TermContext)_localctx).left = factor();
-			setState(155);
+			setState(175);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==TIMES || _la==DIV) {
 				{
-				setState(153);
+				setState(173);
 				_la = _input.LA(1);
 				if ( !(_la==TIMES || _la==DIV) ) {
 				_errHandler.recoverInline(this);
@@ -1075,7 +1181,7 @@ public class FoolOOParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(154);
+				setState(174);
 				((TermContext)_localctx).right = term();
 				}
 			}
@@ -1124,29 +1230,29 @@ public class FoolOOParser extends Parser {
 
 	public final FactorContext factor() throws RecognitionException {
 		FactorContext _localctx = new FactorContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_factor);
+		enterRule(_localctx, 28, RULE_factor);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(158);
+			setState(178);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NOT) {
 				{
-				setState(157);
+				setState(177);
 				match(NOT);
 				}
 			}
 
-			setState(160);
+			setState(180);
 			((FactorContext)_localctx).left = value();
-			setState(166);
+			setState(186);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << AND) | (1L << OR) | (1L << GTEQ) | (1L << LTEQ))) != 0)) {
 				{
-				setState(161);
+				setState(181);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << AND) | (1L << OR) | (1L << GTEQ) | (1L << LTEQ))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -1156,17 +1262,17 @@ public class FoolOOParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(163);
+				setState(183);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==NOT) {
 					{
-					setState(162);
+					setState(182);
 					match(NOT);
 					}
 				}
 
-				setState(165);
+				setState(185);
 				((FactorContext)_localctx).right = value();
 				}
 			}
@@ -1301,40 +1407,40 @@ public class FoolOOParser extends Parser {
 
 	public final StmContext stm() throws RecognitionException {
 		StmContext _localctx = new StmContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_stm);
+		enterRule(_localctx, 30, RULE_stm);
 		int _la;
 		try {
-			setState(205);
+			setState(225);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
 			case 1:
 				_localctx = new StmIfContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(168);
+				setState(188);
 				match(IF);
-				setState(169);
+				setState(189);
 				((StmIfContext)_localctx).cond = exp();
-				setState(170);
+				setState(190);
 				match(THEN);
-				setState(171);
+				setState(191);
 				match(CLPAR);
-				setState(172);
+				setState(192);
 				((StmIfContext)_localctx).thenBranch = stms();
-				setState(173);
+				setState(193);
 				match(CRPAR);
-				setState(179);
+				setState(199);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==ELSE) {
 					{
-					setState(174);
+					setState(194);
 					match(ELSE);
-					setState(175);
+					setState(195);
 					match(CLPAR);
-					setState(176);
+					setState(196);
 					((StmIfContext)_localctx).elseBranch = stms();
-					setState(177);
+					setState(197);
 					match(CRPAR);
 					}
 				}
@@ -1345,11 +1451,11 @@ public class FoolOOParser extends Parser {
 				_localctx = new StmPrintContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(181);
+				setState(201);
 				match(PRINT);
-				setState(182);
+				setState(202);
 				exp();
-				setState(183);
+				setState(203);
 				match(SEMIC);
 				}
 				break;
@@ -1357,9 +1463,9 @@ public class FoolOOParser extends Parser {
 				_localctx = new CallFunExpContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(185);
+				setState(205);
 				funExp();
-				setState(186);
+				setState(206);
 				match(SEMIC);
 				}
 				break;
@@ -1367,25 +1473,25 @@ public class FoolOOParser extends Parser {
 				_localctx = new CallMethodContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(188);
+				setState(208);
 				match(ID);
-				setState(191); 
+				setState(211); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(189);
+					setState(209);
 					match(DOT);
-					setState(190);
+					setState(210);
 					funExp();
 					}
 					}
-					setState(193); 
+					setState(213); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==DOT );
-				setState(195);
+				setState(215);
 				match(SEMIC);
 				}
 				break;
@@ -1393,11 +1499,11 @@ public class FoolOOParser extends Parser {
 				_localctx = new StmAsignmentContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(197);
+				setState(217);
 				match(ID);
-				setState(198);
+				setState(218);
 				match(ASM);
-				setState(199);
+				setState(219);
 				stms();
 				}
 				break;
@@ -1405,13 +1511,13 @@ public class FoolOOParser extends Parser {
 				_localctx = new StmValAsignmentContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(200);
+				setState(220);
 				match(ID);
-				setState(201);
+				setState(221);
 				match(ASM);
-				setState(202);
+				setState(222);
 				value();
-				setState(203);
+				setState(223);
 				match(SEMIC);
 				}
 				break;
@@ -1455,42 +1561,42 @@ public class FoolOOParser extends Parser {
 
 	public final FunExpContext funExp() throws RecognitionException {
 		FunExpContext _localctx = new FunExpContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_funExp);
+		enterRule(_localctx, 32, RULE_funExp);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(207);
+			setState(227);
 			match(ID);
-			setState(208);
+			setState(228);
 			match(LPAR);
-			setState(217);
+			setState(237);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << TRUE) | (1L << FALSE) | (1L << LPAR) | (1L << IF) | (1L << PRINT) | (1L << NEW) | (1L << NULL) | (1L << INTEGER) | (1L << ID))) != 0)) {
 				{
-				setState(209);
+				setState(229);
 				exp();
-				setState(214);
+				setState(234);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(210);
+					setState(230);
 					match(COMMA);
-					setState(211);
+					setState(231);
 					exp();
 					}
 					}
-					setState(216);
+					setState(236);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(219);
+			setState(239);
 			match(RPAR);
 			}
 		}
@@ -1525,12 +1631,12 @@ public class FoolOOParser extends Parser {
 
 	public final StmsContext stms() throws RecognitionException {
 		StmsContext _localctx = new StmsContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_stms);
+		enterRule(_localctx, 34, RULE_stms);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(222); 
+			setState(242); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -1538,7 +1644,7 @@ public class FoolOOParser extends Parser {
 				case 1:
 					{
 					{
-					setState(221);
+					setState(241);
 					stm();
 					}
 					}
@@ -1546,9 +1652,9 @@ public class FoolOOParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(224); 
+				setState(244); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,27,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,30,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
@@ -1688,17 +1794,17 @@ public class FoolOOParser extends Parser {
 
 	public final ValueContext value() throws RecognitionException {
 		ValueContext _localctx = new ValueContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_value);
+		enterRule(_localctx, 36, RULE_value);
 		int _la;
 		try {
-			setState(262);
+			setState(282);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,31,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
 			case 1:
 				_localctx = new IntValContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(226);
+				setState(246);
 				match(INTEGER);
 				}
 				break;
@@ -1706,7 +1812,7 @@ public class FoolOOParser extends Parser {
 				_localctx = new BoolValContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(227);
+				setState(247);
 				_la = _input.LA(1);
 				if ( !(_la==TRUE || _la==FALSE) ) {
 				_errHandler.recoverInline(this);
@@ -1722,11 +1828,11 @@ public class FoolOOParser extends Parser {
 				_localctx = new BaseExpContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(228);
+				setState(248);
 				match(LPAR);
-				setState(229);
+				setState(249);
 				exp();
-				setState(230);
+				setState(250);
 				match(RPAR);
 				}
 				break;
@@ -1734,30 +1840,30 @@ public class FoolOOParser extends Parser {
 				_localctx = new IfExpContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(232);
+				setState(252);
 				match(IF);
-				setState(233);
+				setState(253);
 				((IfExpContext)_localctx).cond = exp();
-				setState(234);
+				setState(254);
 				match(THEN);
-				setState(235);
+				setState(255);
 				match(CLPAR);
-				setState(236);
+				setState(256);
 				((IfExpContext)_localctx).thenBranch = exp();
-				setState(237);
+				setState(257);
 				match(CRPAR);
-				setState(243);
+				setState(263);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==ELSE) {
 					{
-					setState(238);
+					setState(258);
 					match(ELSE);
-					setState(239);
+					setState(259);
 					match(CLPAR);
-					setState(240);
+					setState(260);
 					((IfExpContext)_localctx).elseBranch = exp();
-					setState(241);
+					setState(261);
 					match(CRPAR);
 					}
 				}
@@ -1768,7 +1874,7 @@ public class FoolOOParser extends Parser {
 				_localctx = new StmsExpContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(245);
+				setState(265);
 				stms();
 				}
 				break;
@@ -1776,7 +1882,7 @@ public class FoolOOParser extends Parser {
 				_localctx = new VarExpContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(246);
+				setState(266);
 				match(ID);
 				}
 				break;
@@ -1784,7 +1890,7 @@ public class FoolOOParser extends Parser {
 				_localctx = new NullValContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(247);
+				setState(267);
 				match(NULL);
 				}
 				break;
@@ -1792,39 +1898,39 @@ public class FoolOOParser extends Parser {
 				_localctx = new NewClassContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(248);
+				setState(268);
 				match(NEW);
-				setState(249);
+				setState(269);
 				match(ID);
-				setState(250);
+				setState(270);
 				match(LPAR);
-				setState(259);
+				setState(279);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << TRUE) | (1L << FALSE) | (1L << LPAR) | (1L << IF) | (1L << PRINT) | (1L << NEW) | (1L << NULL) | (1L << INTEGER) | (1L << ID))) != 0)) {
 					{
-					setState(251);
+					setState(271);
 					exp();
-					setState(256);
+					setState(276);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(252);
+						setState(272);
 						match(COMMA);
-						setState(253);
+						setState(273);
 						exp();
 						}
 						}
-						setState(258);
+						setState(278);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 				}
 
-				setState(261);
+				setState(281);
 				match(RPAR);
 				}
 				break;
@@ -1842,97 +1948,105 @@ public class FoolOOParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3.\u010b\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3.\u011f\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\3\2\6\2(\n\2\r\2\16\2)\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\5\3\65\n\3\3\4\5\48\n\4\3\4\3\4\5\4<\n\4\5\4>\n\4\3\5\3\5\3\5\3\5\5\5"+
-		"D\n\5\3\5\3\5\3\5\3\5\7\5J\n\5\f\5\16\5M\13\5\5\5O\n\5\3\5\3\5\3\5\6\5"+
-		"T\n\5\r\5\16\5U\3\5\3\5\3\6\3\6\6\6\\\n\6\r\6\16\6]\3\6\3\6\3\7\3\7\3"+
-		"\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bn\n\b\3\t\3\t\3\t\3\t\3\t\3"+
-		"\t\7\tv\n\t\f\t\16\ty\13\t\5\t{\n\t\3\t\3\t\3\t\3\t\5\t\u0081\n\t\3\t"+
-		"\3\t\3\n\3\n\3\n\3\n\3\n\3\n\5\n\u008b\n\n\3\13\3\13\5\13\u008f\n\13\3"+
-		"\f\3\f\3\r\5\r\u0094\n\r\3\r\3\r\3\r\5\r\u0099\n\r\3\16\3\16\3\16\5\16"+
-		"\u009e\n\16\3\17\5\17\u00a1\n\17\3\17\3\17\3\17\5\17\u00a6\n\17\3\17\5"+
-		"\17\u00a9\n\17\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20"+
-		"\5\20\u00b6\n\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\6\20"+
-		"\u00c2\n\20\r\20\16\20\u00c3\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3"+
-		"\20\3\20\5\20\u00d0\n\20\3\21\3\21\3\21\3\21\3\21\7\21\u00d7\n\21\f\21"+
-		"\16\21\u00da\13\21\5\21\u00dc\n\21\3\21\3\21\3\22\6\22\u00e1\n\22\r\22"+
-		"\16\22\u00e2\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3"+
-		"\23\3\23\3\23\3\23\3\23\3\23\5\23\u00f6\n\23\3\23\3\23\3\23\3\23\3\23"+
-		"\3\23\3\23\3\23\3\23\7\23\u0101\n\23\f\23\16\23\u0104\13\23\5\23\u0106"+
-		"\n\23\3\23\5\23\u0109\n\23\3\23\2\2\24\2\4\6\b\n\f\16\20\22\24\26\30\32"+
-		"\34\36 \"$\2\7\4\2 \"**\3\2\t\n\3\2\13\f\4\2\7\7\r\20\3\2\22\23\2\u0122"+
-		"\2\'\3\2\2\2\4\64\3\2\2\2\6=\3\2\2\2\b?\3\2\2\2\nY\3\2\2\2\fa\3\2\2\2"+
-		"\16m\3\2\2\2\20o\3\2\2\2\22\u008a\3\2\2\2\24\u008e\3\2\2\2\26\u0090\3"+
-		"\2\2\2\30\u0093\3\2\2\2\32\u009a\3\2\2\2\34\u00a0\3\2\2\2\36\u00cf\3\2"+
-		"\2\2 \u00d1\3\2\2\2\"\u00e0\3\2\2\2$\u0108\3\2\2\2&(\5\4\3\2\'&\3\2\2"+
-		"\2()\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*\3\3\2\2\2+,\5\26\f\2,-\7(\2\2-.\7\24"+
-		"\2\2./\7\25\2\2/\60\7\26\2\2\60\61\5\6\4\2\61\62\7\27\2\2\62\65\3\2\2"+
-		"\2\63\65\5\b\5\2\64+\3\2\2\2\64\63\3\2\2\2\65\5\3\2\2\2\668\5\"\22\2\67"+
-		"\66\3\2\2\2\678\3\2\2\28>\3\2\2\29;\5\n\6\2:<\5\"\22\2;:\3\2\2\2;<\3\2"+
-		"\2\2<>\3\2\2\2=\67\3\2\2\2=9\3\2\2\2>\7\3\2\2\2?@\7$\2\2@C\7*\2\2AB\7"+
-		"%\2\2BD\7*\2\2CA\3\2\2\2CD\3\2\2\2DE\3\2\2\2EN\7\24\2\2FK\5\f\7\2GH\7"+
-		"\6\2\2HJ\5\f\7\2IG\3\2\2\2JM\3\2\2\2KI\3\2\2\2KL\3\2\2\2LO\3\2\2\2MK\3"+
-		"\2\2\2NF\3\2\2\2NO\3\2\2\2OP\3\2\2\2PQ\7\25\2\2QS\7\26\2\2RT\5\20\t\2"+
-		"SR\3\2\2\2TU\3\2\2\2US\3\2\2\2UV\3\2\2\2VW\3\2\2\2WX\7\27\2\2X\t\3\2\2"+
-		"\2Y[\7\36\2\2Z\\\5\24\13\2[Z\3\2\2\2\\]\3\2\2\2][\3\2\2\2]^\3\2\2\2^_"+
-		"\3\2\2\2_`\7\37\2\2`\13\3\2\2\2ab\5\26\f\2bc\7*\2\2c\r\3\2\2\2de\5\f\7"+
-		"\2ef\7\b\2\2fg\5\30\r\2gh\7\4\2\2hn\3\2\2\2ij\5\f\7\2jk\7\b\2\2kl\5\""+
-		"\22\2ln\3\2\2\2md\3\2\2\2mi\3\2\2\2n\17\3\2\2\2op\5\26\f\2pq\7*\2\2qz"+
-		"\7\24\2\2rw\5\f\7\2st\7\6\2\2tv\5\f\7\2us\3\2\2\2vy\3\2\2\2wu\3\2\2\2"+
-		"wx\3\2\2\2x{\3\2\2\2yw\3\2\2\2zr\3\2\2\2z{\3\2\2\2{|\3\2\2\2|}\7\25\2"+
-		"\2}~\7\26\2\2~\u0080\5\6\4\2\177\u0081\5\22\n\2\u0080\177\3\2\2\2\u0080"+
-		"\u0081\3\2\2\2\u0081\u0082\3\2\2\2\u0082\u0083\7\27\2\2\u0083\21\3\2\2"+
-		"\2\u0084\u0085\7#\2\2\u0085\u0086\5\30\r\2\u0086\u0087\7\4\2\2\u0087\u008b"+
-		"\3\2\2\2\u0088\u0089\7#\2\2\u0089\u008b\5\"\22\2\u008a\u0084\3\2\2\2\u008a"+
-		"\u0088\3\2\2\2\u008b\23\3\2\2\2\u008c\u008f\5\16\b\2\u008d\u008f\5\20"+
-		"\t\2\u008e\u008c\3\2\2\2\u008e\u008d\3\2\2\2\u008f\25\3\2\2\2\u0090\u0091"+
-		"\t\2\2\2\u0091\27\3\2\2\2\u0092\u0094\7\n\2\2\u0093\u0092\3\2\2\2\u0093"+
-		"\u0094\3\2\2\2\u0094\u0095\3\2\2\2\u0095\u0098\5\32\16\2\u0096\u0097\t"+
-		"\3\2\2\u0097\u0099\5\30\r\2\u0098\u0096\3\2\2\2\u0098\u0099\3\2\2\2\u0099"+
-		"\31\3\2\2\2\u009a\u009d\5\34\17\2\u009b\u009c\t\4\2\2\u009c\u009e\5\32"+
-		"\16\2\u009d\u009b\3\2\2\2\u009d\u009e\3\2\2\2\u009e\33\3\2\2\2\u009f\u00a1"+
-		"\7\21\2\2\u00a0\u009f\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a1\u00a2\3\2\2\2"+
-		"\u00a2\u00a8\5$\23\2\u00a3\u00a5\t\5\2\2\u00a4\u00a6\7\21\2\2\u00a5\u00a4"+
-		"\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00a7\3\2\2\2\u00a7\u00a9\5$\23\2\u00a8"+
-		"\u00a3\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\35\3\2\2\2\u00aa\u00ab\7\32\2"+
-		"\2\u00ab\u00ac\5\30\r\2\u00ac\u00ad\7\33\2\2\u00ad\u00ae\7\26\2\2\u00ae"+
-		"\u00af\5\"\22\2\u00af\u00b5\7\27\2\2\u00b0\u00b1\7\34\2\2\u00b1\u00b2"+
-		"\7\26\2\2\u00b2\u00b3\5\"\22\2\u00b3\u00b4\7\27\2\2\u00b4\u00b6\3\2\2"+
-		"\2\u00b5\u00b0\3\2\2\2\u00b5\u00b6\3\2\2\2\u00b6\u00d0\3\2\2\2\u00b7\u00b8"+
-		"\7\35\2\2\u00b8\u00b9\5\30\r\2\u00b9\u00ba\7\4\2\2\u00ba\u00d0\3\2\2\2"+
-		"\u00bb\u00bc\5 \21\2\u00bc\u00bd\7\4\2\2\u00bd\u00d0\3\2\2\2\u00be\u00c1"+
-		"\7*\2\2\u00bf\u00c0\7\3\2\2\u00c0\u00c2\5 \21\2\u00c1\u00bf\3\2\2\2\u00c2"+
-		"\u00c3\3\2\2\2\u00c3\u00c1\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4\u00c5\3\2"+
-		"\2\2\u00c5\u00c6\7\4\2\2\u00c6\u00d0\3\2\2\2\u00c7\u00c8\7*\2\2\u00c8"+
-		"\u00c9\7\b\2\2\u00c9\u00d0\5\"\22\2\u00ca\u00cb\7*\2\2\u00cb\u00cc\7\b"+
-		"\2\2\u00cc\u00cd\5$\23\2\u00cd\u00ce\7\4\2\2\u00ce\u00d0\3\2\2\2\u00cf"+
-		"\u00aa\3\2\2\2\u00cf\u00b7\3\2\2\2\u00cf\u00bb\3\2\2\2\u00cf\u00be\3\2"+
-		"\2\2\u00cf\u00c7\3\2\2\2\u00cf\u00ca\3\2\2\2\u00d0\37\3\2\2\2\u00d1\u00d2"+
-		"\7*\2\2\u00d2\u00db\7\24\2\2\u00d3\u00d8\5\30\r\2\u00d4\u00d5\7\6\2\2"+
-		"\u00d5\u00d7\5\30\r\2\u00d6\u00d4\3\2\2\2\u00d7\u00da\3\2\2\2\u00d8\u00d6"+
-		"\3\2\2\2\u00d8\u00d9\3\2\2\2\u00d9\u00dc\3\2\2\2\u00da\u00d8\3\2\2\2\u00db"+
-		"\u00d3\3\2\2\2\u00db\u00dc\3\2\2\2\u00dc\u00dd\3\2\2\2\u00dd\u00de\7\25"+
-		"\2\2\u00de!\3\2\2\2\u00df\u00e1\5\36\20\2\u00e0\u00df\3\2\2\2\u00e1\u00e2"+
-		"\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e2\u00e3\3\2\2\2\u00e3#\3\2\2\2\u00e4"+
-		"\u0109\7)\2\2\u00e5\u0109\t\6\2\2\u00e6\u00e7\7\24\2\2\u00e7\u00e8\5\30"+
-		"\r\2\u00e8\u00e9\7\25\2\2\u00e9\u0109\3\2\2\2\u00ea\u00eb\7\32\2\2\u00eb"+
-		"\u00ec\5\30\r\2\u00ec\u00ed\7\33\2\2\u00ed\u00ee\7\26\2\2\u00ee\u00ef"+
-		"\5\30\r\2\u00ef\u00f5\7\27\2\2\u00f0\u00f1\7\34\2\2\u00f1\u00f2\7\26\2"+
-		"\2\u00f2\u00f3\5\30\r\2\u00f3\u00f4\7\27\2\2\u00f4\u00f6\3\2\2\2\u00f5"+
-		"\u00f0\3\2\2\2\u00f5\u00f6\3\2\2\2\u00f6\u0109\3\2\2\2\u00f7\u0109\5\""+
-		"\22\2\u00f8\u0109\7*\2\2\u00f9\u0109\7\'\2\2\u00fa\u00fb\7&\2\2\u00fb"+
-		"\u00fc\7*\2\2\u00fc\u0105\7\24\2\2\u00fd\u0102\5\30\r\2\u00fe\u00ff\7"+
-		"\6\2\2\u00ff\u0101\5\30\r\2\u0100\u00fe\3\2\2\2\u0101\u0104\3\2\2\2\u0102"+
-		"\u0100\3\2\2\2\u0102\u0103\3\2\2\2\u0103\u0106\3\2\2\2\u0104\u0102\3\2"+
-		"\2\2\u0105\u00fd\3\2\2\2\u0105\u0106\3\2\2\2\u0106\u0107\3\2\2\2\u0107"+
-		"\u0109\7\25\2\2\u0108\u00e4\3\2\2\2\u0108\u00e5\3\2\2\2\u0108\u00e6\3"+
-		"\2\2\2\u0108\u00ea\3\2\2\2\u0108\u00f7\3\2\2\2\u0108\u00f8\3\2\2\2\u0108"+
-		"\u00f9\3\2\2\2\u0108\u00fa\3\2\2\2\u0109%\3\2\2\2\")\64\67;=CKNU]mwz\u0080"+
-		"\u008a\u008e\u0093\u0098\u009d\u00a0\u00a5\u00a8\u00b5\u00c3\u00cf\u00d8"+
-		"\u00db\u00e2\u00f5\u0102\u0105\u0108";
+		"\4\23\t\23\4\24\t\24\3\2\6\2*\n\2\r\2\16\2+\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\3\5\3\67\n\3\3\4\5\4:\n\4\3\4\3\4\5\4>\n\4\5\4@\n\4\3\5\3\5\3"+
+		"\5\3\5\5\5F\n\5\3\5\3\5\3\5\3\5\7\5L\n\5\f\5\16\5O\13\5\5\5Q\n\5\3\5\3"+
+		"\5\3\5\3\5\6\5W\n\5\r\5\16\5X\3\5\3\5\3\6\3\6\6\6_\n\6\r\6\16\6`\3\6\3"+
+		"\6\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bq\n\b\3\t\3\t\3"+
+		"\t\3\t\3\t\3\t\7\ty\n\t\f\t\16\t|\13\t\5\t~\n\t\3\t\3\t\3\t\3\t\5\t\u0084"+
+		"\n\t\3\t\3\t\3\n\3\n\3\n\3\n\3\n\7\n\u008d\n\n\f\n\16\n\u0090\13\n\5\n"+
+		"\u0092\n\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u009f"+
+		"\n\13\3\f\3\f\5\f\u00a3\n\f\3\r\3\r\3\16\5\16\u00a8\n\16\3\16\3\16\3\16"+
+		"\5\16\u00ad\n\16\3\17\3\17\3\17\5\17\u00b2\n\17\3\20\5\20\u00b5\n\20\3"+
+		"\20\3\20\3\20\5\20\u00ba\n\20\3\20\5\20\u00bd\n\20\3\21\3\21\3\21\3\21"+
+		"\3\21\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u00ca\n\21\3\21\3\21\3\21\3\21"+
+		"\3\21\3\21\3\21\3\21\3\21\3\21\6\21\u00d6\n\21\r\21\16\21\u00d7\3\21\3"+
+		"\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u00e4\n\21\3\22\3\22"+
+		"\3\22\3\22\3\22\7\22\u00eb\n\22\f\22\16\22\u00ee\13\22\5\22\u00f0\n\22"+
+		"\3\22\3\22\3\23\6\23\u00f5\n\23\r\23\16\23\u00f6\3\24\3\24\3\24\3\24\3"+
+		"\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\5\24\u010a"+
+		"\n\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\7\24\u0115\n\24\f\24"+
+		"\16\24\u0118\13\24\5\24\u011a\n\24\3\24\5\24\u011d\n\24\3\24\2\2\25\2"+
+		"\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&\2\7\4\2 \"**\3\2\t\n\3\2\13"+
+		"\f\4\2\7\7\r\20\3\2\22\23\2\u0138\2)\3\2\2\2\4\66\3\2\2\2\6?\3\2\2\2\b"+
+		"A\3\2\2\2\n\\\3\2\2\2\fd\3\2\2\2\16p\3\2\2\2\20r\3\2\2\2\22\u0087\3\2"+
+		"\2\2\24\u009e\3\2\2\2\26\u00a2\3\2\2\2\30\u00a4\3\2\2\2\32\u00a7\3\2\2"+
+		"\2\34\u00ae\3\2\2\2\36\u00b4\3\2\2\2 \u00e3\3\2\2\2\"\u00e5\3\2\2\2$\u00f4"+
+		"\3\2\2\2&\u011c\3\2\2\2(*\5\4\3\2)(\3\2\2\2*+\3\2\2\2+)\3\2\2\2+,\3\2"+
+		"\2\2,\3\3\2\2\2-.\5\30\r\2./\7(\2\2/\60\7\24\2\2\60\61\7\25\2\2\61\62"+
+		"\7\26\2\2\62\63\5\6\4\2\63\64\7\27\2\2\64\67\3\2\2\2\65\67\5\b\5\2\66"+
+		"-\3\2\2\2\66\65\3\2\2\2\67\5\3\2\2\28:\5$\23\298\3\2\2\29:\3\2\2\2:@\3"+
+		"\2\2\2;=\5\n\6\2<>\5$\23\2=<\3\2\2\2=>\3\2\2\2>@\3\2\2\2?9\3\2\2\2?;\3"+
+		"\2\2\2@\7\3\2\2\2AB\7$\2\2BE\7*\2\2CD\7%\2\2DF\7*\2\2EC\3\2\2\2EF\3\2"+
+		"\2\2FG\3\2\2\2GP\7\24\2\2HM\5\f\7\2IJ\7\6\2\2JL\5\f\7\2KI\3\2\2\2LO\3"+
+		"\2\2\2MK\3\2\2\2MN\3\2\2\2NQ\3\2\2\2OM\3\2\2\2PH\3\2\2\2PQ\3\2\2\2QR\3"+
+		"\2\2\2RS\7\25\2\2SV\7\26\2\2TW\5\20\t\2UW\5\22\n\2VT\3\2\2\2VU\3\2\2\2"+
+		"WX\3\2\2\2XV\3\2\2\2XY\3\2\2\2YZ\3\2\2\2Z[\7\27\2\2[\t\3\2\2\2\\^\7\36"+
+		"\2\2]_\5\26\f\2^]\3\2\2\2_`\3\2\2\2`^\3\2\2\2`a\3\2\2\2ab\3\2\2\2bc\7"+
+		"\37\2\2c\13\3\2\2\2de\5\30\r\2ef\7*\2\2f\r\3\2\2\2gh\5\f\7\2hi\7\b\2\2"+
+		"ij\5\32\16\2jk\7\4\2\2kq\3\2\2\2lm\5\f\7\2mn\7\b\2\2no\5$\23\2oq\3\2\2"+
+		"\2pg\3\2\2\2pl\3\2\2\2q\17\3\2\2\2rs\5\30\r\2st\7*\2\2t}\7\24\2\2uz\5"+
+		"\f\7\2vw\7\6\2\2wy\5\f\7\2xv\3\2\2\2y|\3\2\2\2zx\3\2\2\2z{\3\2\2\2{~\3"+
+		"\2\2\2|z\3\2\2\2}u\3\2\2\2}~\3\2\2\2~\177\3\2\2\2\177\u0080\7\25\2\2\u0080"+
+		"\u0081\7\26\2\2\u0081\u0083\5\6\4\2\u0082\u0084\5\24\13\2\u0083\u0082"+
+		"\3\2\2\2\u0083\u0084\3\2\2\2\u0084\u0085\3\2\2\2\u0085\u0086\7\27\2\2"+
+		"\u0086\21\3\2\2\2\u0087\u0088\7*\2\2\u0088\u0091\7\24\2\2\u0089\u008e"+
+		"\5\f\7\2\u008a\u008b\7\6\2\2\u008b\u008d\5\f\7\2\u008c\u008a\3\2\2\2\u008d"+
+		"\u0090\3\2\2\2\u008e\u008c\3\2\2\2\u008e\u008f\3\2\2\2\u008f\u0092\3\2"+
+		"\2\2\u0090\u008e\3\2\2\2\u0091\u0089\3\2\2\2\u0091\u0092\3\2\2\2\u0092"+
+		"\u0093\3\2\2\2\u0093\u0094\7\25\2\2\u0094\u0095\7\26\2\2\u0095\u0096\5"+
+		"\6\4\2\u0096\u0097\7\27\2\2\u0097\23\3\2\2\2\u0098\u0099\7#\2\2\u0099"+
+		"\u009a\5\32\16\2\u009a\u009b\7\4\2\2\u009b\u009f\3\2\2\2\u009c\u009d\7"+
+		"#\2\2\u009d\u009f\5$\23\2\u009e\u0098\3\2\2\2\u009e\u009c\3\2\2\2\u009f"+
+		"\25\3\2\2\2\u00a0\u00a3\5\16\b\2\u00a1\u00a3\5\20\t\2\u00a2\u00a0\3\2"+
+		"\2\2\u00a2\u00a1\3\2\2\2\u00a3\27\3\2\2\2\u00a4\u00a5\t\2\2\2\u00a5\31"+
+		"\3\2\2\2\u00a6\u00a8\7\n\2\2\u00a7\u00a6\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8"+
+		"\u00a9\3\2\2\2\u00a9\u00ac\5\34\17\2\u00aa\u00ab\t\3\2\2\u00ab\u00ad\5"+
+		"\32\16\2\u00ac\u00aa\3\2\2\2\u00ac\u00ad\3\2\2\2\u00ad\33\3\2\2\2\u00ae"+
+		"\u00b1\5\36\20\2\u00af\u00b0\t\4\2\2\u00b0\u00b2\5\34\17\2\u00b1\u00af"+
+		"\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\35\3\2\2\2\u00b3\u00b5\7\21\2\2\u00b4"+
+		"\u00b3\3\2\2\2\u00b4\u00b5\3\2\2\2\u00b5\u00b6\3\2\2\2\u00b6\u00bc\5&"+
+		"\24\2\u00b7\u00b9\t\5\2\2\u00b8\u00ba\7\21\2\2\u00b9\u00b8\3\2\2\2\u00b9"+
+		"\u00ba\3\2\2\2\u00ba\u00bb\3\2\2\2\u00bb\u00bd\5&\24\2\u00bc\u00b7\3\2"+
+		"\2\2\u00bc\u00bd\3\2\2\2\u00bd\37\3\2\2\2\u00be\u00bf\7\32\2\2\u00bf\u00c0"+
+		"\5\32\16\2\u00c0\u00c1\7\33\2\2\u00c1\u00c2\7\26\2\2\u00c2\u00c3\5$\23"+
+		"\2\u00c3\u00c9\7\27\2\2\u00c4\u00c5\7\34\2\2\u00c5\u00c6\7\26\2\2\u00c6"+
+		"\u00c7\5$\23\2\u00c7\u00c8\7\27\2\2\u00c8\u00ca\3\2\2\2\u00c9\u00c4\3"+
+		"\2\2\2\u00c9\u00ca\3\2\2\2\u00ca\u00e4\3\2\2\2\u00cb\u00cc\7\35\2\2\u00cc"+
+		"\u00cd\5\32\16\2\u00cd\u00ce\7\4\2\2\u00ce\u00e4\3\2\2\2\u00cf\u00d0\5"+
+		"\"\22\2\u00d0\u00d1\7\4\2\2\u00d1\u00e4\3\2\2\2\u00d2\u00d5\7*\2\2\u00d3"+
+		"\u00d4\7\3\2\2\u00d4\u00d6\5\"\22\2\u00d5\u00d3\3\2\2\2\u00d6\u00d7\3"+
+		"\2\2\2\u00d7\u00d5\3\2\2\2\u00d7\u00d8\3\2\2\2\u00d8\u00d9\3\2\2\2\u00d9"+
+		"\u00da\7\4\2\2\u00da\u00e4\3\2\2\2\u00db\u00dc\7*\2\2\u00dc\u00dd\7\b"+
+		"\2\2\u00dd\u00e4\5$\23\2\u00de\u00df\7*\2\2\u00df\u00e0\7\b\2\2\u00e0"+
+		"\u00e1\5&\24\2\u00e1\u00e2\7\4\2\2\u00e2\u00e4\3\2\2\2\u00e3\u00be\3\2"+
+		"\2\2\u00e3\u00cb\3\2\2\2\u00e3\u00cf\3\2\2\2\u00e3\u00d2\3\2\2\2\u00e3"+
+		"\u00db\3\2\2\2\u00e3\u00de\3\2\2\2\u00e4!\3\2\2\2\u00e5\u00e6\7*\2\2\u00e6"+
+		"\u00ef\7\24\2\2\u00e7\u00ec\5\32\16\2\u00e8\u00e9\7\6\2\2\u00e9\u00eb"+
+		"\5\32\16\2\u00ea\u00e8\3\2\2\2\u00eb\u00ee\3\2\2\2\u00ec\u00ea\3\2\2\2"+
+		"\u00ec\u00ed\3\2\2\2\u00ed\u00f0\3\2\2\2\u00ee\u00ec\3\2\2\2\u00ef\u00e7"+
+		"\3\2\2\2\u00ef\u00f0\3\2\2\2\u00f0\u00f1\3\2\2\2\u00f1\u00f2\7\25\2\2"+
+		"\u00f2#\3\2\2\2\u00f3\u00f5\5 \21\2\u00f4\u00f3\3\2\2\2\u00f5\u00f6\3"+
+		"\2\2\2\u00f6\u00f4\3\2\2\2\u00f6\u00f7\3\2\2\2\u00f7%\3\2\2\2\u00f8\u011d"+
+		"\7)\2\2\u00f9\u011d\t\6\2\2\u00fa\u00fb\7\24\2\2\u00fb\u00fc\5\32\16\2"+
+		"\u00fc\u00fd\7\25\2\2\u00fd\u011d\3\2\2\2\u00fe\u00ff\7\32\2\2\u00ff\u0100"+
+		"\5\32\16\2\u0100\u0101\7\33\2\2\u0101\u0102\7\26\2\2\u0102\u0103\5\32"+
+		"\16\2\u0103\u0109\7\27\2\2\u0104\u0105\7\34\2\2\u0105\u0106\7\26\2\2\u0106"+
+		"\u0107\5\32\16\2\u0107\u0108\7\27\2\2\u0108\u010a\3\2\2\2\u0109\u0104"+
+		"\3\2\2\2\u0109\u010a\3\2\2\2\u010a\u011d\3\2\2\2\u010b\u011d\5$\23\2\u010c"+
+		"\u011d\7*\2\2\u010d\u011d\7\'\2\2\u010e\u010f\7&\2\2\u010f\u0110\7*\2"+
+		"\2\u0110\u0119\7\24\2\2\u0111\u0116\5\32\16\2\u0112\u0113\7\6\2\2\u0113"+
+		"\u0115\5\32\16\2\u0114\u0112\3\2\2\2\u0115\u0118\3\2\2\2\u0116\u0114\3"+
+		"\2\2\2\u0116\u0117\3\2\2\2\u0117\u011a\3\2\2\2\u0118\u0116\3\2\2\2\u0119"+
+		"\u0111\3\2\2\2\u0119\u011a\3\2\2\2\u011a\u011b\3\2\2\2\u011b\u011d\7\25"+
+		"\2\2\u011c\u00f8\3\2\2\2\u011c\u00f9\3\2\2\2\u011c\u00fa\3\2\2\2\u011c"+
+		"\u00fe\3\2\2\2\u011c\u010b\3\2\2\2\u011c\u010c\3\2\2\2\u011c\u010d\3\2"+
+		"\2\2\u011c\u010e\3\2\2\2\u011d\'\3\2\2\2%+\669=?EMPVX`pz}\u0083\u008e"+
+		"\u0091\u009e\u00a2\u00a7\u00ac\u00b1\u00b4\u00b9\u00bc\u00c9\u00d7\u00e3"+
+		"\u00ec\u00ef\u00f6\u0109\u0116\u0119\u011c";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

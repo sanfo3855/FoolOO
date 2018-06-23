@@ -52,17 +52,35 @@ public class CallMethodNode implements Node {
                 if(fun instanceof FunExpNode){
                     ((FunExpNode) fun).setTypeClassMethod(idType);
                     semanticErrors.addAll(fun.checkSemantics(env));
-                    idType=null;
+                    idType="nullTypeReturn";
                 }
             }
+            idType=((TypeNode)entryID.getType()).getType();
         }
 
         return semanticErrors;
     }
 
     public Node typeCheck() {
-        //todo
-        return null;
+        TypeNode typeReturn;
+        if(idType.equals("int")){
+            typeReturn =new IntTypeNode();
+        }
+        else if (idType.equals("bool")) {
+            typeReturn =new BoolTypeNode();
+        }
+        else {
+            typeReturn = new IdTypeNode(idType);
+        }
+        for(Node fun : listSubFun){
+            if(fun instanceof FunExpNode){
+                ((FunExpNode) fun).setTypeClassMethod(typeReturn.getType());
+                typeReturn=(TypeNode)fun.typeCheck();
+            }
+        }
+
+
+        return typeReturn;//return tipo ultima funzione
     }
 
     public String codeGeneration() {

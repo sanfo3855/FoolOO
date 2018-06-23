@@ -70,8 +70,15 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
                 listVar.add(visit(vardec));
             }
         }
-        for(FunContext fun : ctx.fun()){
-            listFun.add( visit(fun) );
+        if(ctx.fun()!=null){
+            for(FunContext fun : ctx.fun()){
+                listFun.add( visit(fun) );
+            }
+        }
+        if(ctx.funconstructor()!=null){
+            for(FunconstructorContext funconstructor : ctx.funconstructor()){
+                listFun.add( visit(funconstructor) );
+            }
         }
         if(ctx.ID(1)==null){
            decNode= new DecclassNode(ctx.ID(0).getText(), listVar, listFun);
@@ -117,6 +124,17 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         }
 
         return new FunNode(ctx.ID().getText(), typeNode, listVar, progNode, retNode);
+    }
+
+    @Override
+    public Node visitFunconstructor(FunconstructorContext ctx) {
+        ArrayList<Node> listVar = new ArrayList<Node>();
+        for(VardecContext dec : ctx.vardec()){
+            listVar.add( visit(dec) );
+        }
+        Node progNode= visit(ctx.prog());
+
+        return new FunConstructorNode(ctx.ID().getText(), listVar, progNode);
     }
 
     @Override

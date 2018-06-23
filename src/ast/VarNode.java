@@ -36,12 +36,10 @@ public class VarNode implements Node {
     }
 
     public Node typeCheck() {
-//        System.out.println("VarNode - "+((VarDecNode)varDec).getId()+" - "+((TypeNode)varDec.typeCheck()).getType()+" - "+value.typeCheck());
-
-        System.out.println("VarNode - "+((VarDecNode)varDec).getId()+" - "+varDec.typeCheck()+" - "+value.typeCheck());
+        //System.out.println("VarNode - "+((VarDecNode)varDec).getId()+" - "+varDec.typeCheck()+" - "+value.typeCheck());
 
         if (! (FOOLlib.isSubtype(value.typeCheck(), varDec.typeCheck())) ){
-            System.out.println("incompatible value for variable "+((VarDecNode)varDec).getId());
+            System.out.println("Incompatible value for variable "+((VarDecNode)varDec).getId());
             System.exit(0);
         }
         return null;

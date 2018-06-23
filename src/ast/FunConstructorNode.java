@@ -7,25 +7,23 @@ import util.SemanticError;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FunNode  implements FunInterfaceNode {
+public class FunConstructorNode implements FunInterfaceNode {
 
     private String id;
     private Node type;
     private ArrayList<Node> listVar;
     private Node progNode;
-    private Node retNode;
 
 
-    public FunNode (String id, Node type, ArrayList<Node> listVar, Node progNode, Node retNode) {
+    public FunConstructorNode (String id, ArrayList<Node> listVar, Node progNode) {
         this.id=id;
-        this.type=type;
         this.listVar=listVar;
         this.progNode=progNode;
-        this.retNode=retNode;
+        this.type=new IdTypeNode(id);
     }
 
     public String toPrint(String s) {
-        String returnString = s + "FunNode" + "\n";
+        String returnString = s + "FunConstructorNode" + "\n";
         for(Node ntp : this.listVar){
             returnString += s + ntp.toPrint(s + "   ") + "\n";
         }
@@ -62,13 +60,6 @@ public class FunNode  implements FunInterfaceNode {
         if (progNode!=null) {
             semanticErrors.addAll(progNode.checkSemantics(env));
         }
-        if(retNode!=null){
-            semanticErrors.addAll(retNode.checkSemantics(env));
-        }else{
-            if (!(type instanceof VoidTypeNode)){//diverso da void
-                semanticErrors.add(new SemanticError("Missing return"));
-            }
-        }
         env.removeHashMapNL();
 
         return semanticErrors;
@@ -78,17 +69,10 @@ public class FunNode  implements FunInterfaceNode {
         if (progNode!=null) {
             progNode.typeCheck();
         }
-        if(retNode!=null){
-            if( !FOOLlib.isSubtype(type, retNode.typeCheck()) ){
-                System.out.println("Wrong return type for function " + id );
-                System.exit(0);
-            }
-        }
         return null;
     }
 
     public String codeGeneration() {
         return type.codeGeneration()+"halt\n";
     }
-
 }

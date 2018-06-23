@@ -28,8 +28,9 @@ public class FoolNode implements Node {
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
         STentry entryTable; //separo introducendo "entry"
         String idPutHM;
+        ArrayList<Node> listVar;
         for(Node nodo : listNodi){
-            if(nodo instanceof DecclassNode ){
+            if(nodo instanceof DecclassNode ){// todo parsare i nomi delle funzioni - ora viene fatto in DecclassNode
                 entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
                 idPutHM=((DecclassNode)nodo).getId();
                 if ( hashMap.put("class%"+idPutHM,entryTable) != null ){
@@ -39,6 +40,17 @@ public class FoolNode implements Node {
                     idPutHM+="@"+((DecclassNode)nodo).getIdExt();
                     if ( hashMap.put("class%"+idPutHM,entryTable) != null ){
                         semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
+                    }
+                }
+                listVar=((DecclassNode)nodo).getListVar();
+                if(listVar.size()>0){
+                    for (Node varNode:listVar) {//"fieldClass#idclasse%nomeVar%tipoVar"
+                        idPutHM="fieldClass#"+((DecclassNode)nodo).getId();
+                        idPutHM+="%"+((VarDecNode)varNode).getId();
+                        idPutHM+="%"+((TypeNode)((VarDecNode)varNode).getType()).getType();
+                        if ( hashMap.put(idPutHM,entryTable) != null ){
+                            semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
+                        }
                     }
                 }
             }
@@ -61,6 +73,11 @@ public class FoolNode implements Node {
         for(Node nodo : listNodi){
             semanticErrors.addAll(nodo.checkSemantics(env));
         }
+
+//        for (String k:hashMap.keySet()) {
+//            if(k.contains("fun#"))
+//            System.out.println(k);
+//        }
         return semanticErrors;
     }
 

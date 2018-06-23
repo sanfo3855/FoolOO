@@ -1,17 +1,28 @@
-class classe1  (int s, int z){
-    void classe1(int a, int c){
+class pluto extends classe1(int y){
+ pluto(int e){
+    e=0;
+
+}
+
+}
+
+class classe1  (int x, int s, int z){
+    classe1(int a, int c){
         let
             int z=111;
         in
             c=0;
     }
+    //pippo1 ss(int a, int q){
     int ss(int a, int q){
         let
             classe1 c=new classe1(a,q);//non fa il typeCheck
+            //pippo1 qqqq= new pippo1(1,2);
             int z=0;
         in
-            //z=0;
-            return 2;
+            z=0;
+            return 1;
+            //return qqqq;
     }
 
     int retFunz(){
@@ -30,12 +41,12 @@ class classe1  (int s, int z){
     }
 }
 
-class pippo extends classe1 (int x){
-    void pippo(int a, int c){
+class pippo extends classe1 (int f){
+    pippo(int a, int c){
         let
-            int z=111;
+            int z=s;
         in
-            c=0;
+            c=x;
     }
 
     classe1 somma(int a,int b){
@@ -48,10 +59,11 @@ class pippo extends classe1 (int x){
     }
 }
 
+
 class pippo1 (int x){
-    void pippo1(int a, int c){
+    pippo1(int a, int c){
         let
-            int z=111;
+            int z=0;
         in
             c=0;
     }
@@ -63,25 +75,31 @@ class pippo1 (int x){
             c = (a+b);
             return new classe1();
     }
+    int ciao(int a,int b){
+        let
+            int c=0;
+        in
+            c = (a+b);
+            return 1;
+    }
 }
-
 void main(){
     let
         int x=true;
-        int s(){
+        bool oi(int e){
             x=0;
             return 0;
         }
-        int a=s();
+        int a=oi(1);
         int som=1;
         int som1=2;
         pippo1 o=null;
         pippo w=new pippo(1,2);
-        int q= w.somma(1,2).somma1(3,4);//dave dare errore ne TypeCheck
+        //int q= w.somma(1,2).somma1(3,4);//dave dare errore ne TypeCheck
         int zzzz= w.somma(1,2).ss(3,4);
     in
         a=0;
-        o=w.ss(1,2);
+        a=w.ss(1,2);
         //o=o.ss(1,2);
         //a.q(a,c).r().s(a);
 }

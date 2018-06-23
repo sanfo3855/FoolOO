@@ -36,6 +36,10 @@ public class DecclassNode implements Node {
         return idExt;
     }
 
+    public ArrayList<Node> getListVar() {
+        return listVar;
+    }
+
     public String toPrint(String s) {
         String returnString = s + "DecclassNode\n";
         if(idExt!=null){
@@ -64,14 +68,57 @@ public class DecclassNode implements Node {
             semanticErrors.add(new SemanticError("Class "+id+" is not declared"));
         }else{
             if( idExt!=null && hashMap.get("class%"+idExt) == null ){
-                semanticErrors.add(new SemanticError("Class idExtends "+idExt+" not is declared"));
+                semanticErrors.add(new SemanticError("Class idExtends "+idExt+" is not declared"));
             }else{
+                //crea lista estenzioni della classe
+                ArrayList<String> tempArrayClass=new ArrayList<String>();
+                for (String classex:env.getHashMapNL(0).keySet()) {
+                    if(classex.contains("class%")){
+                        if(!classex.contains("fun#")){
+                            tempArrayClass.add(classex.substring(6, classex.length()));
+                        }
+                    }
+                }
+                boolean cond=true;
+                String idExtClass=id;
+                while (cond){
+                    cond=false;
+                    for (String classex:tempArrayClass) {
+                        String[] arrExt=classex.split("@");
+                        if(idExtClass.equals(arrExt[0]) && arrExt.length==2){
+                            idExtClass=arrExt[1];
+                            extClassId.add(arrExt[1]);
+                            cond=true;
+                        }
+                    }
+                }
+
                 HashMap<String,STentry> hashMapClass = new HashMap<String,STentry> ();
                 env.addHashMapNL(hashMapClass);
                 STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
                 ArrayList<Node> varTypes = new ArrayList<Node>();
                 int paroffset=1;
 
+                if(idExt!=null){
+                    for (String nameClassExt: extClassId) {
+                        for (String classex:env.getHashMapNL(0).keySet()) {
+                            if(classex.contains("fieldClass#"+nameClassExt+"%")){
+                                String[] fieldClass=classex.split("%");
+                                Node nodeType;
+                                if(fieldClass[2].equals("int")){
+                                    nodeType= new IntTypeNode();
+                                }else if(fieldClass[2].equals("bool")){
+                                    nodeType= new BoolTypeNode();
+                                }else{
+                                    nodeType= new IdTypeNode(fieldClass[2]);
+                                }
+                                if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel(),nodeType,paroffset++)) != null  ){
+                                    semanticErrors.add(new SemanticError("Field id "+fieldClass[1]+" already declared"));
+                                }
+                            }
+                        }
+                    }
+                }
                 for(Node varNode : listVar){
                     VarDecNode arguments = (VarDecNode) varNode;
                     varTypes.add(arguments.getType());
@@ -84,8 +131,8 @@ public class DecclassNode implements Node {
                     String idKey;
                     for(Node fun : listFun){
                         idKey = "fun#";
-                        if(fun instanceof FunNode){
-                            FunNode funNode=(FunNode) fun;
+                        if(fun instanceof FunInterfaceNode){
+                            FunInterfaceNode funNode=(FunInterfaceNode) fun;
                             idKey += funNode.getId() +"%";
                             idKey += ((TypeNode)funNode.getType()).getType();
                             ArrayList<Node> parList = funNode.getListVar();
@@ -104,36 +151,15 @@ public class DecclassNode implements Node {
                         semanticErrors.addAll(fun.checkSemantics(env));
                     }
                 }
-                for (String keyfun: hashMapClass.keySet()) {
-                    if (keyfun.split("#")[0].equals("fun")){
-                        if ( hashMap.put(keyfun+"%class%"+id,entryTable) != null ){
-                            semanticErrors.add(new SemanticError(keyfun+" already defined in class "+id+ ""));
-                        }
-                    }
-                }
+//                for (String keyfun: hashMapClass.keySet()) {
+//                    if (keyfun.split("#")[0].equals("fun")){
+//                        System.out.println("CIAO");
+//                        if ( hashMap.put(keyfun+"%class%"+id,entryTable) != null ){
+//                            semanticErrors.add(new SemanticError(keyfun+" already defined in class "+id+ ""));
+//                        }
+//                    }
+//                }
                 env.removeHashMapNL();
-            }
-        }
-        ArrayList<String> tempArrayClass=new ArrayList<String>();
-        for (String classex:env.getHashMapNL(0).keySet()) {
-            if(classex.contains("class%")){
-                if(!classex.contains("fun#")){
-                    tempArrayClass.add(classex.substring(6, classex.length()));
-                }
-            }
-        }
-
-        boolean cond=true;
-        String idExtClass=id;
-        while (cond){
-            cond=false;
-            for (String classex:tempArrayClass) {
-                String[] arrExt=classex.split("@");
-                if(idExtClass.equals(arrExt[0]) && arrExt.length==2){
-                    idExtClass=arrExt[1];
-                    extClassId.add(arrExt[1]);
-                    cond=true;
-                }
             }
         }
         return semanticErrors;

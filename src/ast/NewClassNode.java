@@ -51,7 +51,7 @@ public class NewClassNode implements Node{
                         if(keysharp[0].equals("fun")) {
                             String key[] = keysharp[1].split("%");
                             keylength=key.length;
-                            if(key[0].equals(id) && key[1].equals("void") && (keylength-4)==listPar.size() && key[keylength-2].equals("class") && key[keylength-1].equals(id) ){
+                            if(key[0].equals(id) && key[1].equals(id) && (keylength-4)==listPar.size() && key[keylength-2].equals("class") && key[keylength-1].equals(id) ){
                                 entryTableTemp=chkEntry.getValue();
                                 constructor = chkEntry.getKey();
 
