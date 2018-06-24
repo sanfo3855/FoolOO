@@ -29,23 +29,28 @@ public class FoolNode implements Node {
         STentry entryTable; //separo introducendo "entry"
         String idPutHM;
         ArrayList<Node> listVar;
+        DecclassNode decclassNode;
+        FunNode funMainNode;
+        ArrayList<Node> listFun;
+        FunInterfaceNode funNode;
         for(Node nodo : listNodi){
-            if(nodo instanceof DecclassNode ){// todo parsare i nomi delle funzioni - ora viene fatto in DecclassNode
+            if(nodo instanceof DecclassNode ){
+                decclassNode=(DecclassNode)nodo;
                 entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
-                idPutHM=((DecclassNode)nodo).getId();
+                idPutHM=decclassNode.getId();
                 if ( hashMap.put("class%"+idPutHM,entryTable) != null ){
                     semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
                 }
-                if(((DecclassNode)nodo).getIdExt()!=null){
-                    idPutHM+="@"+((DecclassNode)nodo).getIdExt();
+                if(decclassNode.getIdExt()!=null){
+                    idPutHM+="@"+decclassNode.getIdExt();
                     if ( hashMap.put("class%"+idPutHM,entryTable) != null ){
                         semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
                     }
                 }
-                listVar=((DecclassNode)nodo).getListVar();
+                listVar=decclassNode.getListVar();
                 if(listVar.size()>0){
                     for (Node varNode:listVar) {//"fieldClass#idclasse%nomeVar%tipoVar"
-                        idPutHM="fieldClass#"+((DecclassNode)nodo).getId();
+                        idPutHM="fieldClass#"+decclassNode.getId();
                         idPutHM+="%"+((VarDecNode)varNode).getId();
                         idPutHM+="%"+((TypeNode)((VarDecNode)varNode).getType()).getType();
                         if ( hashMap.put(idPutHM,entryTable) != null ){
@@ -53,14 +58,35 @@ public class FoolNode implements Node {
                         }
                     }
                 }
+                listFun=decclassNode.getListFun();
+                if(listFun.size() > 0) {
+                    String idKey;
+                    for (Node fun : listFun) {
+                        idKey = "fun#";
+                        if (fun instanceof FunInterfaceNode) {
+                            funNode = (FunInterfaceNode) fun;
+                            idKey += funNode.getId() + "%";
+                            idKey += ((TypeNode) funNode.getType()).getType();
+                            ArrayList<Node> parList = funNode.getListVar();
+                            for (Node node : parList) {
+                                TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
+                                idKey += "%" + typeVar.getType();
+                            }
+                            idKey += "%class%" + decclassNode.getId();
+                            if (hashMap.put(idKey, entryTable) != null) {
+                                semanticErrors.add(new SemanticError("FunClass " + idKey + " already declared !"));
+                            }
+                        }
+                    }
+                }
             }
             if(nodo instanceof FunNode ){
                 entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
                 idPutHM = "fun#";
-                FunNode funNode=(FunNode) nodo;
-                idPutHM += funNode.getId() +"%";
-                idPutHM += ((TypeNode)funNode.getType()).getType();
-                ArrayList<Node> parList = funNode.getListVar();
+                funMainNode=(FunNode) nodo;
+                idPutHM += funMainNode.getId() +"%";
+                idPutHM += ((TypeNode)funMainNode.getType()).getType();
+                ArrayList<Node> parList = funMainNode.getListVar();
                 for (Node node : parList) {
                     TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
                     idPutHM += "%" + typeVar.getType();

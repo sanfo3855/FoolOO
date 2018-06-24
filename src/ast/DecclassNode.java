@@ -40,6 +40,10 @@ public class DecclassNode implements Node {
         return listVar;
     }
 
+    public ArrayList<Node> getListFun() {
+        return listFun;
+    }
+
     public String toPrint(String s) {
         String returnString = s + "DecclassNode\n";
         if(idExt!=null){
@@ -129,23 +133,6 @@ public class DecclassNode implements Node {
                 //create key
                 if(listFun.size() > 0){
                     String idKey;
-                    for(Node fun : listFun){
-                        idKey = "fun#";
-                        if(fun instanceof FunInterfaceNode){
-                            FunInterfaceNode funNode=(FunInterfaceNode) fun;
-                            idKey += funNode.getId() +"%";
-                            idKey += ((TypeNode)funNode.getType()).getType();
-                            ArrayList<Node> parList = funNode.getListVar();
-                            for (Node node : parList) {
-                                TypeNode typeVar = (TypeNode) ((VarDecNode) node).getType();
-                                idKey += "%" + typeVar.getType();
-                            }
-                            idKey+="%class%"+id;
-                            if ( hashMap.put(idKey,entry) != null) {
-                                semanticErrors.add(new SemanticError("FunClass " + idKey + " already declared !"));
-                            }
-                        }
-                    }
                     env.setOffset(-2);
                     for(Node fun : listFun){
                         semanticErrors.addAll(fun.checkSemantics(env));
