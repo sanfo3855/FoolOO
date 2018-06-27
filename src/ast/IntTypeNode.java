@@ -14,14 +14,6 @@ public class IntTypeNode implements TypeNode {
         return s+"IntType\n";
     }
 
-    public Node typeCheck() {
-        return null;
-    }
-
-    public String codeGeneration() {
-        return "";
-    }
-  
     @Override
 	public ArrayList<SemanticError> checkSemantics(Environment env) {
         return new ArrayList<SemanticError>();
@@ -31,4 +23,11 @@ public class IntTypeNode implements TypeNode {
         return "int";
     }
 
+    public Node typeCheck() {
+        return null;
+    }
+
+    public String codeGeneration() {
+        return "";
+    }
 }  

@@ -10,15 +10,16 @@ public class TermNode implements Node {
 
     private Node left;
     private Node right;
-
+    private String operator;
+    //TODO toPrint da correggere e finire TIMES and DIV
     public TermNode (Node left, Node right) {
         this.left=left;
         this.right=right;
     }
 
     public String toPrint(String s) {
-        return s + "LeftTernNode\n" + left.toPrint(s +"  ") + "\n" ;
-                //s + "RightTermNode\n" + right.toPrint(s + "  ") + "\n";
+        return s + "LeftTermNode\n" + left.toPrint(s +"  ") + "\n" +
+                s + "RightTermNode\n" + right.toPrint(s + "  ") + "\n";
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
@@ -39,7 +40,9 @@ public class TermNode implements Node {
     }
 
     public String codeGeneration() {
-        return left.codeGeneration()+"halt\n";
+        return left.codeGeneration()+
+                right.codeGeneration()+
+                "\n";
     }
 
 }

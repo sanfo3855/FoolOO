@@ -1,9 +1,7 @@
 class pluto extends classe1(int y){
- pluto(int e){
-    e=0;
-
-}
-
+    pluto(int e){
+        e=0;
+    }
 }
 
 class classe1  (int x, int s, int z){

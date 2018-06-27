@@ -27,12 +27,8 @@ public class IdTypeNode implements TypeNode {
         return s+"IdType\n";
     }
 
-    public Node typeCheck() {
-        return null;
-    }
-
-    public String codeGeneration() {
-        return "";
+    public String getType(){
+        return id;
     }
 
     @Override
@@ -73,8 +69,12 @@ public class IdTypeNode implements TypeNode {
         return semanticErrors;
     }
 
-
-    public String getType(){
-        return id;
+    public Node typeCheck() {
+        return null;
     }
+
+    public String codeGeneration() {
+        return "";
+    }
+
 }  

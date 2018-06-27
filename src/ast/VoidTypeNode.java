@@ -13,14 +13,6 @@ public class VoidTypeNode implements TypeNode {
   public String toPrint(String s) {
 	return s+"VoidType\n";
   }
-
-  public Node typeCheck() {
-    return null;
-  }
-
-  public String codeGeneration() {
-		return "";
-  }
   
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
@@ -31,4 +23,11 @@ public class VoidTypeNode implements TypeNode {
         return "void";
     }
 
+    public Node typeCheck() {
+      return null;
+    }
+
+    public String codeGeneration() {
+      return "";
+    }
 }  

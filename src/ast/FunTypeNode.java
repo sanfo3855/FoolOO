@@ -14,11 +14,11 @@ public class FunTypeNode implements Node{
         this.listVar = listVar;
         this.returnType= returnType;
     }
-    public String toPrint(String s) { //
+    public String toPrint(String s) {
         String varlst="";
         for (Node var:listVar)
             varlst+=var.toPrint(s+"  ");
-        return s+"ArrowType\n" + varlst + returnType.toPrint(s+"  ->") ;
+        return s+"FunTypeNode\n" + varlst + returnType.toPrint(s+"  ") ;
     }
 
     public Node getReturn () { //

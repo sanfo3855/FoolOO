@@ -28,7 +28,7 @@ public class BoolNode implements Node {
     }
 
     public String codeGeneration() {
-        return "";
+        return "push "+(val?1:0)+"\n";
     }
 
 }

@@ -10,15 +10,22 @@ public class ExpNode implements Node {
 
     private Node left;
     private Node right;
+    private String operator;
 
-    public ExpNode (Node left,Node right) {
+    public ExpNode (Node left,Node right, String operator) {
         this.left=left;
         this.right=right;
+        this.operator=operator;
     }
 
     public String toPrint(String s) {
-        return s + "LeftExpNode\n" + left.toPrint(s +"  ") + "\n";
-                //+s + "RightExpNode\n" + right.toPrint(s + "  ") + "\n"
+        String retString = s + "LeftExpNode\n" + left.toPrint(s +"  ") + "\n";
+        if(right!=null){
+            retString += s + operator + "\n" +
+                    s + "RightExpNode\n" + right.toPrint(s + "  ") + "\n";
+        }
+        return retString;
+
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
@@ -38,7 +45,16 @@ public class ExpNode implements Node {
     }
 
     public String codeGeneration() {
-        return left.codeGeneration()+"halt\n";
+        String cgenString = left.codeGeneration() + "\n";
+        if(right!=null){
+            cgenString += left.codeGeneration() + "\n";
+            if(operator.equals("+")){
+                cgenString += "add\n";
+            } else {
+                cgenString += "sub\n";
+            }
+        }
+        return cgenString;
     }
 
 }

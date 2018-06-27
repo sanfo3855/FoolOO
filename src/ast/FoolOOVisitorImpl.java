@@ -185,10 +185,17 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitExp(ExpContext ctx) {
         Node node;
+        System.out.println(ctx.MINUS() + " # " + ctx.PLUS());
         if (ctx.right==null) {
             node= visit(ctx.left);
         }else{
-            node=new ExpNode(visit(ctx.left), visit(ctx.right));
+            String operator="";
+            if((ctx.PLUS()!=null)) {
+                operator = "+";
+            } else {
+                operator = "-";
+            }
+            node=new ExpNode(visit(ctx.left), visit(ctx.right),operator);
         }
 
         return node;
