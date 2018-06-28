@@ -61,8 +61,10 @@ exp     : (MINUS)? left=term ((PLUS | MINUS) right=exp)?
 term    : left=factor ((TIMES | DIV) right=term)?
         ;
 
-factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) (NOT)? right=value)?
+factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) factorRight)?
         ;
+
+factorRight: (NOT)? right=value;
 
 stm     : IF cond=exp THEN CLPAR thenBranch=stms CRPAR (ELSE CLPAR elseBranch=stms CRPAR)?       #stmIf
         | PRINT exp SEMIC                                       #stmPrint

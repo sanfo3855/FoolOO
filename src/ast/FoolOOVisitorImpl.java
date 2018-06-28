@@ -226,9 +226,18 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitFactor(FactorContext ctx) {
         Node node;
-        if (ctx.right==null) {
+        String notLeft = "0";
+        String notRight = "1";
+        if (ctx.NOT()!=null){
+            notLeft = "1";
+        }
+        System.out.println(ctx.NOT());
+        if (ctx.factorRight()==null) {
             node= visit(ctx.left);
         }else{
+            if (ctx.factorRight().NOT()!=null){
+                notRight = "1";
+            }
             String operator = "";
             if (ctx.EQ()!=null){
                 operator = "==";
@@ -242,7 +251,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
                 operator = "||";
             }
 
-            node=new FactorNode(visit(ctx.left), visit(ctx.right), operator);
+            node=new FactorNode(visit(ctx.left), visit(ctx.factorRight().right), operator, notLeft, notRight);
         }
 
         return node;

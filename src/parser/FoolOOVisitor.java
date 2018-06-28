@@ -1,4 +1,4 @@
-// Generated from /home/andrea/IdeaProjects/compilatori/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
+// Generated from /Users/MatteoMarchesini/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
 package parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -140,6 +140,12 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFactor(FoolOOParser.FactorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FoolOOParser#factorRight}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFactorRight(FoolOOParser.FactorRightContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code stmIf}
 	 * labeled alternative in {@link FoolOOParser#stm}.
