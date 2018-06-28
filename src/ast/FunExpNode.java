@@ -62,24 +62,18 @@ public class FunExpNode implements Node {
                             tmpEntry = chkEntry.getValue();
                         } else {
                             if (typeClassMethod != null) {//controlla se la funzione ricercata è da ricercare fra i metodi di classe o fra le funzioni definite nel main
-                                if (!(typeClassMethod.equals("nullTypeReturn"))) {//codifica per CallMethodNode
-                                    if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class") && key[keylength - 1].equals(typeClassMethod)) {
-                                        tmpEntry = chkEntry.getValue();
-                                    } else {
-                                        for (String keyfun : hmClassExt.keySet()) {
-                                            String[] splitKey = keyfun.split("@");
-                                            if (splitKey.length > 1 && splitKey[0].split("%")[1].equals(typeClassMethod)) {
-                                                if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class") && key[keylength - 1].equals(splitKey[1])) {
-                                                    tmpEntry = chkEntry.getValue();
-                                                }
+                                if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class") && key[keylength - 1].equals(typeClassMethod)) {
+                                    tmpEntry = chkEntry.getValue();
+                                } else {
+                                    for (String keyfun : hmClassExt.keySet()) {
+                                        String[] splitKey = keyfun.split("@");
+                                        if (splitKey.length > 1 && splitKey[0].split("%")[1].equals(typeClassMethod)) {
+                                            if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class") && key[keylength - 1].equals(splitKey[1])) {
+                                                tmpEntry = chkEntry.getValue();
                                             }
                                         }
+                                    }
 
-                                    }
-                                } else {
-                                    if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class")) {
-                                        tmpEntry = chkEntry.getValue();
-                                    }
                                 }
                             }
                         }

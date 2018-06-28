@@ -113,8 +113,8 @@ void main(){
         int som1=2;
         pippo o=null;
         pippo w=new pippo(1,2);
-        int q= w.somma(1,2).somma1(3,4).ciao(1,3).ciao(1,3).ciao(1,3).ciao(1,3);//dave dare errore nel TypeCheck
-        int zzzz= w.somma(1,2).ss(3,4).ciao(1,3);
+        classe1 q= w.somma(1,2);
+        int zzzz= w.retFunz();
     in
         a=o.retFunz();
         //a=w.ss(1,2).ciao(1,3);

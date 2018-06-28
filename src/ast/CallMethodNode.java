@@ -3,30 +3,26 @@ package ast;
 import util.Environment;
 import util.SemanticError;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CallMethodNode implements Node {
 
     private String id;
     private String idType;
-    private ArrayList<Node> listSubFun;
+    private Node subFun;
     private STentry entry;
     private int nestinglevel;
 
 
-    public CallMethodNode (String id, ArrayList<Node> listSubFun) {
+    public CallMethodNode (String id, Node subFun) {
         this.id =id;
-        this.listSubFun=listSubFun;
+        this.subFun =subFun;
     }
 
     public String toPrint(String s) {
         String returnString = s + "CallMethodNode\n";
-        for( Node ntp : listSubFun){
-            returnString += s + ntp.toPrint(s + "   ") + "\n";
-        }
+        returnString += s + subFun.toPrint(s + "   ") + "\n";
+
 
         return returnString;
     }
@@ -48,38 +44,21 @@ public class CallMethodNode implements Node {
             STentry entryID=null;
             entryID=env.getHashMapNL(env.getNestingLevel()).get(id);
             idType=((TypeNode)entryID.getType()).getType();
-            for(Node fun : listSubFun){
-                if(fun instanceof FunExpNode){
-                    ((FunExpNode) fun).setTypeClassMethod(idType);
-                    semanticErrors.addAll(fun.checkSemantics(env));
-                    idType="nullTypeReturn";
-                }
+            if(subFun instanceof FunExpNode){
+                ((FunExpNode) subFun).setTypeClassMethod(idType);
+                semanticErrors.addAll(subFun.checkSemantics(env));
             }
-            idType=((TypeNode)entryID.getType()).getType();
         }
-
         return semanticErrors;
     }
 
     public Node typeCheck() {
-        TypeNode typeReturn;
-        if(idType.equals("int")){
-            typeReturn =new IntTypeNode();
-        }
-        else if (idType.equals("bool")) {
-            typeReturn =new BoolTypeNode();
-        }
-        else {
-            typeReturn = new IdTypeNode(idType);
-        }
-        for(Node fun : listSubFun){
-            if(fun instanceof FunExpNode){
-                ((FunExpNode) fun).setTypeClassMethod(typeReturn.getType());
-                typeReturn=(TypeNode)fun.typeCheck();
-            }
+        TypeNode typeReturn=null;
+        if(subFun instanceof FunExpNode){
+            typeReturn=(TypeNode)subFun.typeCheck();
         }
 
-        return typeReturn;//return tipo ultima funzione
+        return typeReturn;
     }
 
     public String codeGeneration() {

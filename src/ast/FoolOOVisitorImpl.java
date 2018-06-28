@@ -283,11 +283,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitCallMethod(CallMethodContext ctx) {
-        ArrayList<Node> listSubFun= new ArrayList<Node>();
-        for(FunExpContext funExpContext : ctx.funExp()){
-                listSubFun.add(visit(funExpContext));
-        }
-        return new CallMethodNode(ctx.ID().getText(), listSubFun);
+        return new CallMethodNode(ctx.ID().getText(), visit(ctx.funExp()));
     }
 
     @Override

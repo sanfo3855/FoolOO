@@ -67,7 +67,7 @@ factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) (NOT)? right=value)?
 stm     : IF cond=exp THEN CLPAR thenBranch=stms CRPAR (ELSE CLPAR elseBranch=stms CRPAR)?       #stmIf
         | PRINT exp SEMIC                                       #stmPrint
         | funExp SEMIC                   #callFunExp
-        | ID (DOT funExp)+ SEMIC    #callMethod
+        | ID DOT funExp SEMIC    #callMethod
         //|ID ASM exp SEMIC                                     #stmExpAsignment
         | ID ASM stms                                            #stmAsignment
         | ID ASM value SEMIC                                    #stmValAsignment
