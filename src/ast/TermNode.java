@@ -18,8 +18,12 @@ public class TermNode implements Node {
     }
 
     public String toPrint(String s) {
-        return s + "LeftTermNode\n" + left.toPrint(s +"  ") + "\n" +
-                s + "RightTermNode\n" + right.toPrint(s + "  ") + "\n";
+        String returnString = s + "LeftTermNode\n" + s + left.toPrint(s +"  ") + "\n";
+        if(right!=null){
+            returnString += s + operator + "\n" +
+                    s + "RightTermNode\n"+ s + right.toPrint(s + "  ") + "\n";
+        }
+        return returnString;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

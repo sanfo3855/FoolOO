@@ -23,7 +23,8 @@ public class VarNode implements Node {
 
     public String toPrint(String s) {
 
-        return s + this.varDec.toPrint(s + "   ") + "\n" +
+        return s + "VarNode\n" +
+                s + this.varDec.toPrint(s + "   ") + "\n" +
                 s + this.value.toPrint(s + "  ") + "\n" ;
     }
 

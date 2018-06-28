@@ -24,10 +24,10 @@ public class IfNode implements Node {
     }
 
     public String toPrint(String s) {
-        String returnString = s + "IfNodeCond\n" + cond.toPrint("  ") +"\n" +
-                s + "IfNodeThenBranch\n" + thenBranch.toPrint("  ") +"\n";
+        String returnString = s + "IfNodeCond\n" + s + cond.toPrint("  ") +"\n" +
+                s + "IfNodeThenBranch\n" + s + thenBranch.toPrint("  ") +"\n";
         if(this.elseBranch!=null){
-            returnString += s + "IfNodeElseBranch\n" + cond.toPrint("  ") +"\n";
+            returnString += s + "IfNodeElseBranch\n" + s +cond.toPrint("  ") +"\n";
         }
         return returnString;
 

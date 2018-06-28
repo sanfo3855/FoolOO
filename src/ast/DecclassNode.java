@@ -51,7 +51,7 @@ public class DecclassNode implements Node {
         }
 
         for(Node varDec :  listVar){
-            returnString += s + varDec.toPrint("   ") + "\n";
+            returnString += s + varDec.toPrint(s + "   ") + "\n";
         }
         for(Node fun : listFun){
             returnString += s + fun.toPrint(s + "   ") + "\n";

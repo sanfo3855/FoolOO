@@ -15,7 +15,7 @@ public class NullNode implements Node {
 
     public String toPrint(String s) {
 
-        return "Null\n " ;
+        return s+"Null\n " ;
     }
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {

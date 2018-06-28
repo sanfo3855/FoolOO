@@ -6,6 +6,7 @@ import parser.FoolOOParser.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -187,15 +188,23 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         Node node;
         System.out.println(ctx.MINUS() + " # " + ctx.PLUS());
         if (ctx.right==null) {
-            node= visit(ctx.left);
+            String startMinus=null;
+            if(ctx.MINUS().size()==2){
+                startMinus="-";
+            }
+            node=new ExpNode(visit(ctx.left), null,null,startMinus);
         }else{
-            String operator="";
+            String startMinus=null;
+            if(ctx.MINUS().size()==2){
+                startMinus="-";
+            }
+            String operator=null;
             if((ctx.PLUS()!=null)) {
                 operator = "+";
             } else {
                 operator = "-";
             }
-            node=new ExpNode(visit(ctx.left), visit(ctx.right),operator);
+            node=new ExpNode(visit(ctx.left), visit(ctx.right),operator,startMinus);
         }
 
         return node;
