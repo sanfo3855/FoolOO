@@ -54,6 +54,9 @@ assembly:
 	    | BRANCHLESSEQ l=LABEL  {code[i++] = BRANCHLESSEQ;
                                 labelRef.put(i++,$l.text);}
 
+        | BRANCHGREATEREQ l=LABEL  {code[i++] = BRANCHGREATEREQ;
+                                        labelRef.put(i++,$l.text);}
+
 	    | JS                    {code[i++] = JS;}
 
 	    | LOADRA                {code[i++] = LOADRA;}
@@ -98,7 +101,8 @@ STOREW	        : 'sw' ; 	// store in the memory cell pointed by top the value ne
 LOADW	        : 'lw' ;	// load a value from the memory cell pointed by top
 BRANCH	        : 'b' ;	    // jump to label
 BRANCHEQ        : 'beq' ;	// jump to label if top == next
-BRANCHLESSEQ    : 'bleq' ;	// jump to label if top <= next
+BRANCHLESSEQ    : 'bleq' ;  // jump to label if top <= next
+BRANCHGREATEREQ : 'bgeq';   // jump to label if top >= next
 JS	            : 'js' ;	// jump to instruction pointed by top of stack and store next instruction in ra
 LOADRA	        : 'lra' ;	// load from ra
 STORERA         : 'sra' ;	// store top into ra

@@ -45,9 +45,9 @@ public class TermNode implements Node {
     }
 
     public String codeGeneration() {
-        String cgenString = left.codeGeneration() +"\n";
+        String cgenString = left.codeGeneration();
         if (right!=null){
-            cgenString+= right.codeGeneration() + "\n";
+            cgenString+= right.codeGeneration();
             if(operator.equals("*")){
                 cgenString += "mult\n";
             } else {

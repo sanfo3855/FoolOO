@@ -43,7 +43,33 @@ public class FactorNode implements Node {
     }
 
     public String codeGeneration() {
-        return left.codeGeneration()+"halt\n";
+        String cgenString = left.codeGeneration();
+        if (right != null) {
+            cgenString+= right.codeGeneration();
+            String trueBranch= FOOLlib.freshLabel();
+            String exit = FOOLlib.freshLabel();
+            switch (operator){
+                case ("=="):
+                    cgenString+= "beq "+ trueBranch+"\n"+
+                                 "push 0\n"+
+                                 "b "+ exit +"\n"+
+                                 trueBranch+":\n"+
+                                 "push 1\n"+
+                                 exit+":\n";
+                    break;
+                case (">="):
+                    cgenString+= "bgeq "+ trueBranch+"\n"+
+                            "push 0\n"+
+                            "b "+ exit +"\n"+
+                            trueBranch+":\n"+
+                            "push 1\n"+
+                            exit+":\n";
+
+
+            }
+        }
+
+        return cgenString;
     }
 
 }
