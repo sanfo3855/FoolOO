@@ -61,6 +61,7 @@ public class CallMethodNode implements Node {
         return typeReturn;
     }
 
+
     public String codeGeneration() {
         return "";
     }
