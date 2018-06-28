@@ -20,6 +20,11 @@ public class FunExpNode implements Node {
         this.id =id;
         this.listParam = listParam;
     }
+//    public FunExpNode (String id, String typeClassMethod, ArrayList<Node> listParam) {
+//        this.id =id;
+//        this.typeClassMethod=typeClassMethod;
+//        this.listParam = listParam;
+//    }
 
     public void setTypeClassMethod(String typeClassMethod) {
         this.typeClassMethod = typeClassMethod;
@@ -35,7 +40,6 @@ public class FunExpNode implements Node {
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
-        //da controllare
         //Cerco una funzione con listParam.length() parametri
         int j=env.getNestingLevel();
         STentry tmpEntry = null;
@@ -130,6 +134,8 @@ public class FunExpNode implements Node {
                 System.exit(0);
             }
         }
+//        System.out.println( id+" - "+entry.toPrint(""));
+//        System.out.println(( (IdTypeNode)entry.getType()).getType());
         return entry.getType();
     }
 

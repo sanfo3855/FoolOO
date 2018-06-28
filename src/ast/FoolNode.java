@@ -99,6 +99,9 @@ public class FoolNode implements Node {
         for(Node nodo : listNodi){
             semanticErrors.addAll(nodo.checkSemantics(env));
         }
+        if(listNodi.size()==3){
+            System.out.println("  ");
+        }
 
 //        for (String k:hashMap.keySet()) {
 //            if(k.contains("fun#"))

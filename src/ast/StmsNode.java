@@ -4,6 +4,8 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class StmsNode implements Node {
 
@@ -23,7 +25,18 @@ public class StmsNode implements Node {
 
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> err= new ArrayList<SemanticError>();
+
+        Set<String> keySetTemp = env.getHashMapNL(1).keySet();
+        String classTemp=null;
+        for (String s:keySetTemp) {
+            if(s.contains("class%")){
+                classTemp=s.split("%")[1];
+            }
+        }
         for(Node nodo : listNodi){
+            if(classTemp!=null && nodo instanceof FunExpNode){
+                ((FunExpNode) nodo).setTypeClassMethod(classTemp);
+            }
             err.addAll(nodo.checkSemantics(env));
         }
         return err;

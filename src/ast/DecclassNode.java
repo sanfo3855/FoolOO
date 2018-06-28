@@ -74,6 +74,8 @@ public class DecclassNode implements Node {
             if( idExt!=null && hashMap.get("class%"+idExt) == null ){
                 semanticErrors.add(new SemanticError("Class idExtends "+idExt+" is not declared"));
             }else{
+
+
                 //crea lista estenzioni della classe
                 ArrayList<String> tempArrayClass=new ArrayList<String>();
                 for (String classex:env.getHashMapNL(0).keySet()) {
@@ -85,6 +87,7 @@ public class DecclassNode implements Node {
                 }
                 boolean cond=true;
                 String idExtClass=id;
+                idClass="class%"+id;
                 while (cond){
                     cond=false;
                     for (String classex:tempArrayClass) {
@@ -102,6 +105,7 @@ public class DecclassNode implements Node {
                 STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
                 ArrayList<Node> varTypes = new ArrayList<Node>();
                 int paroffset=1;
+                hashMapClass.put(idClass,new STentry(env.getNestingLevel(),paroffset++));
 
                 if(idExt!=null){
                     for (String nameClassExt: extClassId) {
