@@ -186,7 +186,6 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitExp(ExpContext ctx) {
         Node node;
-        System.out.println(ctx.MINUS() + " # " + ctx.PLUS());
         if (ctx.right==null) {
             String startMinus=null;
             if(ctx.MINUS().size()==2){
@@ -216,7 +215,13 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         if (ctx.right==null) {
             node= visit(ctx.left);
         }else{
-            node=new TermNode(visit(ctx.left), visit(ctx.right));
+            String operator="";
+            if ((ctx.TIMES()!= null)){
+                operator = "*";
+            }else {
+                operator = "/";
+            }
+            node=new TermNode(visit(ctx.left), visit(ctx.right),operator);
         }
 
         return node;
@@ -228,7 +233,20 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         if (ctx.right==null) {
             node= visit(ctx.left);
         }else{
-            node=new FactorNode(visit(ctx.left), visit(ctx.right));
+            String operator = "";
+            if (ctx.EQ()!=null){
+                operator = "==";
+            }else if (ctx.GTEQ()!=null){
+                operator = ">=";
+            }else if (ctx.LTEQ()!=null){
+                operator = "<=";
+            }else if (ctx.AND()!=null){
+                operator = "&&";
+            }else if (ctx.OR()!=null){
+                operator = "||";
+            }
+
+            node=new FactorNode(visit(ctx.left), visit(ctx.right), operator);
         }
 
         return node;

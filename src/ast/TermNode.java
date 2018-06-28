@@ -12,9 +12,10 @@ public class TermNode implements Node {
     private Node right;
     private String operator;
     //TODO toPrint da correggere e finire TIMES and DIV
-    public TermNode (Node left, Node right) {
+    public TermNode (Node left, Node right, String operator) {
         this.left=left;
         this.right=right;
+        this.operator = operator;
     }
 
     public String toPrint(String s) {
@@ -44,9 +45,16 @@ public class TermNode implements Node {
     }
 
     public String codeGeneration() {
-        return left.codeGeneration()+
-                right.codeGeneration()+
-                "\n";
+        String cgenString = left.codeGeneration() +"\n";
+        if (right!=null){
+            cgenString+= right.codeGeneration() + "\n";
+            if(operator.equals("*")){
+                cgenString += "mult\n";
+            } else {
+                cgenString += "div\n";
+            }
+        }
+        return cgenString;
     }
 
 }

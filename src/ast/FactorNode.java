@@ -10,10 +10,12 @@ public class FactorNode implements Node {
 
     private Node left;
     private Node right;
+    private String operator;
 
-    public FactorNode (Node left, Node right){
+    public FactorNode (Node left, Node right, String operator){
         this.left=left;
         this.right=right;
+        this.operator = operator;
     }
 
     public String toPrint(String s) {
