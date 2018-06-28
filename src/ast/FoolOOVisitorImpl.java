@@ -187,11 +187,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     public Node visitExp(ExpContext ctx) {
         Node node;
         if (ctx.right==null) {
-            String startMinus=null;
-            if(ctx.MINUS().size()==2){
-                startMinus="-";
-            }
-            node=new ExpNode(visit(ctx.left), null,null,startMinus);
+            node=visit(ctx.left);
         }else{
             String startMinus=null;
             if(ctx.MINUS().size()==2){
@@ -203,7 +199,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
             } else {
                 operator = "-";
             }
-            node=new ExpNode(visit(ctx.left), visit(ctx.right),operator,startMinus);
+            node=new ExpNode(visit(ctx.left), visit(ctx.right),operator);
         }
 
         return node;

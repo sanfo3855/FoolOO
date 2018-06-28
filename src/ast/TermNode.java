@@ -11,7 +11,7 @@ public class TermNode implements Node {
     private Node left;
     private Node right;
     private String operator;
-    //TODO toPrint da correggere e finire TIMES and DIV
+
     public TermNode (Node left, Node right, String operator) {
         this.left=left;
         this.right=right;

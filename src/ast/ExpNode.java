@@ -11,20 +11,15 @@ public class ExpNode implements Node {
     private Node left;
     private Node right;
     private String operator;
-    private String startMinus;
 
-    public ExpNode (Node left,Node right, String operator, String startMinus) {
+    public ExpNode (Node left,Node right, String operator) {
         this.left=left;
         this.right=right;
         this.operator=operator;
-        this.startMinus=startMinus;
     }
 
     public String toPrint(String s) {
         String retString="";
-        if(startMinus!=null){
-            retString+= s + "-\n";
-        }
         retString += s + "LeftExpNode\n" +
                 s + left.toPrint(s +"  ") + "\n";
         if(right!=null){
