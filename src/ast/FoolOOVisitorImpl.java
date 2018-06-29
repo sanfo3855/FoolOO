@@ -189,10 +189,6 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         if (ctx.right==null) {
             node=visit(ctx.left);
         }else{
-            String startMinus=null;
-            if(ctx.MINUS().size()==2){
-                startMinus="-";
-            }
             String operator=null;
             if((ctx.PLUS()!=null)) {
                 operator = "+";
