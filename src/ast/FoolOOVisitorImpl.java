@@ -171,15 +171,10 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
                 if(type.equals("void")){
                     typeNode= new VoidTypeNode();
                 }else{
-                    Pattern pattern = Pattern.compile("[a-zA-Z]+[a-zA-Z0-9]");
-                    Matcher matcher = pattern.matcher(type);
-                    if (matcher.matches()){
-                        typeNode= new IdTypeNode(type);
-                    }
+                    typeNode= new IdTypeNode(type);
                 }
             }
         }
-
         return typeNode;
     }
 
@@ -227,7 +222,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         if (ctx.NOT()!=null){
             notLeft = "1";
         }
-        System.out.println(ctx.NOT());
+//        System.out.println(ctx.NOT());
         if (ctx.factorRight()==null) {
             node= visit(ctx.left);
         }else{

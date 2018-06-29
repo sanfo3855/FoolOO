@@ -67,6 +67,12 @@ public class VarDecNode implements Node {
             //viene generato un errore semantico nel caso in cui sia già stata inizializzata
             semanticErrors.add(new SemanticError("Multiple declaration of " + id + " at " + env.getNestingLevel()));
         }
+
+//        System.out.println(type.toPrint(""));
+//        if(type instanceof IdTypeNode){
+//            System.out.println(((IdTypeNode)type).getType());
+//        }
+
         //si richiama il check semantics nel type
         semanticErrors.addAll(type.checkSemantics(env));
 

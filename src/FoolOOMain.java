@@ -32,6 +32,10 @@ public class FoolOOMain {
 
             Node ast = visitor.visit(parser.start()); //generazione AST
 
+
+//            System.out.println("Visualizing AST...");
+//            System.out.println(ast.toPrint(""));
+
             Environment env = new Environment();
             ArrayList<SemanticError> err = ast.checkSemantics(env);
 
@@ -44,13 +48,10 @@ public class FoolOOMain {
 
 
 
-                System.out.println("Visualizing AST...");
-                //System.out.println(ast.toPrint(""));
-
                 Node type = ast.typeCheck(); //type-checking bottom-up
                 System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
-//
-//
+
+
 //                // CODE GENERATION  prova.fool.asm
 //                String code=ast.codeGeneration();
 //                BufferedWriter out = new BufferedWriter(new FileWriter(fileName+".asm"));

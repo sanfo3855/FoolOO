@@ -71,6 +71,7 @@ class pippo2 extends pippo (int c){
     classe1 somma(int a,int b){
         let
             bool c= true;
+            classe1 wert= new pippo();
             classe1 x= new classe1();
         in
             c = false;
@@ -95,10 +96,11 @@ class pippo1 (int x){
     }
     int ciao(int a,int b){
         let
-            int c=0;
+            classe1 c=new classe1();
+            int ccc=ciao(a,b);
         in
-            c = (a+b);
-            return 1;
+            a= c.retFunz();
+            return 0;
     }
 }
 void main(){

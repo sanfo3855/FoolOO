@@ -1,4 +1,4 @@
-// Generated from /Users/MatteoMarchesini/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
+// Generated from /home/andrea/IdeaProjects/compilatori/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
 package parser;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -129,7 +129,7 @@ public class FoolOOLexer extends Lexer {
 	private void ERR_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 0:
-			 System.out.println("Invalid char: "+ getText()); lexicalErrors++; 
+			 System.err.println("Invalid char: "+ getText()); lexicalErrors++;System.exit(1); 
 			break;
 		}
 	}
