@@ -14,11 +14,21 @@ public class NewClassNode implements Node{
     private ArrayList<String> extClassId= new ArrayList<String>();
     private String constructor;
 
+    /**
+     * Constructor for NewClassNode
+     * @param id --> class name
+     * @param listPar --> class parameters
+     */
     public NewClassNode (String id, ArrayList<Node> listPar) {
         this.id = id;
         this.listPar = listPar;
     }
 
+    /**
+     * Print structure of NewClassNode
+     * @param s parent Indentation, incremented at every toPrint
+     * @return updated string that prints Abstract Syntax Tree Structure
+     */
     public String toPrint(String s) {
         String returnString = s + "NewClassNode\n";
         for(Node ntp : listPar){
@@ -27,21 +37,30 @@ public class NewClassNode implements Node{
         return returnString;
     }
 
+    /**
+     * Checks NewClassNode's semantic and call checkSemantic method on every child Node
+     *
+     * @param env -> Environment that holds previously parsed information
+     * @return updated ArrayList of semantic errors
+     */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        //creazione arraylist di errori semantici
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
+        //ottengo iterativamente il nome della classe scorrendo i vari nesting level
         int envNL=env.getNestingLevel();
         STentry entryTableTemp=null;
         while (envNL>=0 && entryTableTemp==null){
             entryTableTemp=env.getHashMapNL(envNL--).get("class%"+id);
         }
         if (entryTableTemp==null){
+            //se non esiste un entry con il dato id restituisce errore semantico
             semanticErrors.add(new SemanticError("New Class "+id+" not declared"));
         }else{
             if(!(listPar.isEmpty())){
                 envNL=env.getNestingLevel();
                 entryTableTemp=null;
-                HashMap<String,STentry> tmpHm=null;
+                HashMap<String,STentry> tmpHm;
                 int keylength;
                 while (envNL>=0 && entryTableTemp==null){
                     tmpHm = env.getHashMapNL(envNL--);
