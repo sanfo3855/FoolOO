@@ -73,7 +73,7 @@ public class IfNode implements Node {
     /**
      * Check that type check of condition's content is subtype of boolTypeNode. Check that branches are compatible.
      * Call type check for each condition's branch
-     * @return instance of VoidTypeNode()
+     * @return node
      */
     public Node typeCheck() {
         //Nodo di ritorno
