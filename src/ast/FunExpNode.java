@@ -24,6 +24,7 @@ public class FunExpNode implements Node {
     public FunExpNode (String id, ArrayList<Node> listParam) {
         this.id =id;
         this.listParam = listParam;
+        this.typeClassMethod=null;
     }
 
     /**
@@ -57,36 +58,66 @@ public class FunExpNode implements Node {
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
-        //Cerco una funzione con listParam.length() parametri
         int j=env.getNestingLevel();
         STentry tmpEntry = null;
-        HashMap<String,STentry> tmpHm=null;
         HashMap<String,STentry> hmClassExt=env.getHashMapNL(0);
         ArrayList<String> keyType= new ArrayList<String>();
         int keylength=0;
+        Iterator iteratorHM;
+        Map.Entry<String,STentry> entryHM;
+        /*
+        Scorro tutti gli ambienti, pertendo dal più interno, per ricercare
+        l'identificatore della funzione o del metodo della classe.
+         */
         while (j>=0 && tmpEntry==null){
-            tmpHm = env.getHashMapNL(j--);
-            for (Map.Entry<String,STentry> chkEntry : tmpHm.entrySet()) {
-                if (tmpEntry == null) {
-                    keyType = new ArrayList<String>();
-                    String keysharp[] = chkEntry.getKey().split("#");
-                    if (keysharp[0].equals("fun")) {
-                        String[] key = keysharp[1].split("%");
-                        keyType.addAll(Arrays.asList(key));
-
-                        keylength = key.length;
-                        if ((keylength - 2 == listParam.size()) && (key[0].equals(id))) {
-                            tmpEntry = chkEntry.getValue();
+            iteratorHM = env.getHashMapNL(j--).entrySet().iterator();
+            /*
+            Scorro tutte le entry dell'hashMap al livello j caricando ogni entry in entryHM
+            Inoltre poichè scorro tutta l'hashmap dell'entry corrente devo controllare che l'entry ricercata
+            non sia già stata trovata quindi tmpEntry==null
+             */
+            while(iteratorHM.hasNext() && tmpEntry==null){
+                entryHM = (Map.Entry<String,STentry>)iteratorHM.next();
+                keyType = new ArrayList<String>();
+                //divido l'dentificatore in corrispondenza del simbolo "#"
+                String keysharp[] = entryHM.getKey().split("#");
+                /*
+                Controlla se la prima parte dell'identificatore corrisponde alla stringa "fun".
+                Se ciò avviene vuol dire che tale entry identifica una funzione e quindi è da controllare.
+                 */
+                if (keysharp[0].equals("fun")) {
+                    /*
+                    Essendo l'identificatore di una fiìunzione nel keysharp[1] avrò tutte
+                    le informazioni che identificano una funzione separate dal simbolo "%".
+                    Quindi le divido e le salvo nell'ArrayList keyType.
+                     */
+                    keyType.addAll(Arrays.asList(keysharp[1].split("%")));
+                    keylength = keyType.size();
+                    //controllo se il nome della funzione nell'entry corrisponde all'id
+                    if(keyType.get(0).equals(id)){
+                        //se i parametri passati sono di numero uguale a qualli dell'entry ho trovato l'entry che cercavo
+                        if (keylength - 2 == listParam.size()) {
+                            tmpEntry = entryHM.getValue();
                         } else {
-                            if (typeClassMethod != null) {//controlla se la funzione ricercata è da ricercare fra i metodi di classe o fra le funzioni definite nel main
-                                if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class") && key[keylength - 1].equals(typeClassMethod)) {
-                                    tmpEntry = chkEntry.getValue();
+                            /*
+                            Controlla se la funzione che si sta cercando è da ricercare fra i metodi di
+                            una specifica classe definita in typeClassMethod. Se la funzione non dovrà essere
+                            cercata in tale ambiente typeClassMethod sarà inizializzato a null.
+
+                             */
+                            if (typeClassMethod != null && (keylength - 4) == listParam.size() && keyType.get(keylength - 2).equals("class")) {
+                                /*
+                                Se la classe di appartenenza del metodo è la stessa definita in typeClassMethod, ho trovato l'entry ricercata.
+                                Altrimenti cerco fra le sovraclassi della classe definita in typeClassMethod.
+                                 */
+                                if (keyType.get(keylength - 1).equals(typeClassMethod)) {
+                                    tmpEntry = entryHM.getValue();
                                 } else {
                                     for (String keyfun : hmClassExt.keySet()) {
                                         String[] splitKey = keyfun.split("@");
                                         if (splitKey.length > 1 && splitKey[0].split("%")[1].equals(typeClassMethod)) {
-                                            if (key[0].equals(id) && (keylength - 4) == listParam.size() && key[keylength - 2].equals("class") && key[keylength - 1].equals(splitKey[1])) {
-                                                tmpEntry = chkEntry.getValue();
+                                            if (keyType.get(keylength - 1).equals(splitKey[1])) {
+                                                tmpEntry = entryHM.getValue();
                                             }
                                         }
                                     }
@@ -95,37 +126,48 @@ public class FunExpNode implements Node {
                             }
                         }
                     }
+
                 }
             }
         }
         if(tmpEntry==null){
-            semanticErrors.add(new SemanticError("Funzio id " + id + " is not declared"));
+            semanticErrors.add(new SemanticError("Funz id " + id + " is not declared"));
         } else {
+            /*
+            Se l'entry è stata trovata vuol dire che esiste una funzione che corrisponde a quella ricercata,
+            quindi salviamo nella variabile di classe typeParam la lista dei tipi dei parametri della funzione trovata e
+            settiamo il tipo dell'entry con il tipo di ritorno della funzione
+             */
             int keySub=0;
             if (!(keylength-2 == listParam.size()) && (keyType.get(0).equals(id))) {
                 keySub=2;
             }
             for(int i=1; i<keylength-keySub; i++){
-                if(keyType.get(i).equals("int")){
-                    if(i==1){
-                        tmpEntry.addType(new IntTypeNode());
-                    }else{
-                        typeParam.add(new IntTypeNode());
-                    }
-                }
-                else if (keyType.get(i).equals("bool")) {
-                    if(i==1){
-                        tmpEntry.addType(new BoolTypeNode());
-                    }else{
-                        typeParam.add(new BoolTypeNode());
-                    }
-                }
-                else {
-                    if(i==1){
-                        tmpEntry.addType(new IdTypeNode(keyType.get(i)));
-                    }else{
-                        typeParam.add(new IdTypeNode(keyType.get(i)));
-                    }
+                /*
+                Nel keyType avrò delle stringhe quindi per avere la classe corrispondente dovrò
+                parsarle e aggire di conseguenza. ciò avviene nel seguente switch-case
+                 */
+                switch (keyType.get(i)){
+                    case "int":
+                        if(i==1){
+                            tmpEntry.addType(new IntTypeNode());
+                        }else{
+                            typeParam.add(new IntTypeNode());
+                        }
+                        break;
+                    case "bool":
+                        if(i==1){
+                            tmpEntry.addType(new BoolTypeNode());
+                        }else{
+                            typeParam.add(new BoolTypeNode());
+                        }
+                        break;
+                    default:
+                        if(i==1){
+                            tmpEntry.addType(new IdTypeNode(keyType.get(i)));
+                        }else{
+                            typeParam.add(new IdTypeNode(keyType.get(i)));
+                        }
                 }
             }
             entry=tmpEntry;

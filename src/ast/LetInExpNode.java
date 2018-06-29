@@ -30,10 +30,14 @@ public class LetInExpNode implements Node {
      */
     public String toPrint(String s) {
         String returnString = s + "LetInExpNode" + "\n";
+
+        returnString += s + "Let " + "\n";
         for(Node ntp : listDec){
             //richiama il toPrint per ciascun nodo dichiarazione
             returnString += s + ntp.toPrint(s + "   ") + "\n";
         }
+        returnString += s + "In " + "\n";
+
         if (exp!=null) {
             returnString += s + this.exp.toPrint(s + "   ") + "\n";
         }

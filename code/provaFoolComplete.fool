@@ -112,6 +112,8 @@ void main(){
             x=0;
             return 0;
         }
+        int b=0;
+        int bbb=0;
         int a=oi(1);
         int som=1;
         int som1=2;
@@ -120,6 +122,11 @@ void main(){
         classe1 q= w.somma(1,2);
         int zzzz= w.retFunz();
     in
+        zzzz= w.retFunz();
+        bbb=0;
+        a=w.funz(1, false);
+        b=0;
+        zzzz= w.retFunz();
+        a=0;
         a=o.retFunz();
-        //a=w.ss(1,2).ciao(1,3);
 }

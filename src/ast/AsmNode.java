@@ -1,5 +1,6 @@
 package ast;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.IntType;
 import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
@@ -83,7 +84,8 @@ public class AsmNode implements Node {
      * @return instance of VoidTypeNode()
      */
     public Node typeCheck() {
-
+        System.out.println(value.toPrint(""));
+        System.out.println(id+" - "+entry.getType() +" - "+value.typeCheck());
         if( !FOOLlib.isSubtype(value.typeCheck(), entry.getType()) ){
             /* Stampa un errore di tipo e blocca l'esecuzione */
             System.out.println("TypeCheck error for assignement to " + id );
