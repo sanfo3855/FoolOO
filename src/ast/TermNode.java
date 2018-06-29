@@ -30,12 +30,9 @@ public class TermNode implements Node {
      * @return updated string that prints Abstract Syntax Tree Structure
      */
     public String toPrint(String s) {
-        String returnString = s + "LeftTermNode\n" + s + left.toPrint(s +"  ") + "\n";
-        if(right!=null){
-            //se il nodo right è definito stampa il nodo right e il simbolo dell'operatore
-            returnString += s + operator + "\n" +
-                    s + "RightTermNode\n"+ s + right.toPrint(s + "  ") + "\n";
-        }
+        String returnString = s + "LeftTermNode\n" + s + left.toPrint(s +"  ") + "\n"  + s + operator + "\n" +
+                              s + "RightTermNode\n"+ s + right.toPrint(s + "  ") + "\n";
+
         return returnString;
     }
 
@@ -72,16 +69,12 @@ public class TermNode implements Node {
      */
     public String codeGeneration() {
         //Viene popolata la stringadi ritorno del metodo
-        String cgenString = left.codeGeneration();
-
-        if (right!=null){
-            cgenString+= right.codeGeneration();
+        String cgenString = left.codeGeneration() + right.codeGeneration();
             if(operator.equals("*")){
                 cgenString += "mult\n";
             } else {
                 cgenString += "div\n";
             }
-        }
         return cgenString;
     }
 
