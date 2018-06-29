@@ -13,7 +13,8 @@ public class IntTypeNode implements TypeNode {
     }
 
     /**
-     * Print structure of IntTypeNode
+     * Print structure of IntTypeNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -22,7 +23,8 @@ public class IntTypeNode implements TypeNode {
     }
 
     /**
-     * Checks IntTypeNode's semantic
+     * Checks IntTypeNode's semantic.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return Empty ArrayList of semantic errors
      */
@@ -32,15 +34,16 @@ public class IntTypeNode implements TypeNode {
 	}
 
 	/**
-     * Returns the int type
-     * @return bool
+     *
+     * @return int type
      */
     public String getType(){
         return "int";
     }
 
     /**
-     * Type check is empty because it's a terminal node
+     * Type check is empty because it's a terminal node.
+     *
      * @return null
      */
     public Node typeCheck() {
@@ -48,7 +51,8 @@ public class IntTypeNode implements TypeNode {
     }
 
     /**
-     * It's a terminal Node, than the codeGeneration is empty
+     * It's a terminal Node, than the codeGeneration is empty.
+     *
      * @return Empty String
      */
     public String codeGeneration() {

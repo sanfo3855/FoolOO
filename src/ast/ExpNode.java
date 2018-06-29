@@ -15,7 +15,6 @@ public class ExpNode implements Node {
     /**
      * Constructor for ExpNode.
      *
-     * It takes 3 parameters:
      * @param left -> Left child Node
      * @param right -> right child Node
      * @param operator -> Exp operator (+ or -)
@@ -27,7 +26,7 @@ public class ExpNode implements Node {
     }
 
     /**
-     * Prints structure of ExpNode and call toPrint method on every child node
+     * Prints structure of ExpNode and call toPrint method on every child node.
      *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
@@ -47,7 +46,7 @@ public class ExpNode implements Node {
     }
 
     /**
-     * Checks ExpNode's semantic calling checkSemantic method on every child Node
+     * Checks ExpNode's semantic calling checkSemantic method on every child Node.
      *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
@@ -65,7 +64,7 @@ public class ExpNode implements Node {
 
     /**
      * Check that left and right nodes are subtype of IntType
-     * because + or - operation needs IntType operators
+     * because + or - operation needs IntType operators.
      *
      * @return instance of VoidTypeNode()
      */
@@ -81,7 +80,7 @@ public class ExpNode implements Node {
     /**
      * Calls codeGeneration() on left and right node.
      * Left return's string is concatenated with right's,
-     * then with "add" or "sub" assembly operator based on node's operator field
+     * then with "add" or "sub" assembly operator based on node's operator field.
      *
      * @return string of generated code
      */

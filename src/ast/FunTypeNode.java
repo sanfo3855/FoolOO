@@ -11,7 +11,8 @@ public class FunTypeNode implements Node{
     private Node returnType;
 
     /**
-     * Constructor fo FunTypeNode
+     * Constructor fo FunTypeNode.
+     *
      * @param listVar --> Function parameters
      * @param returnType --> Function return type
      */
@@ -21,7 +22,8 @@ public class FunTypeNode implements Node{
     }
 
     /**
-     * Prints structure of FunTypeNode and call toPrint method on every child node
+     * Prints structure of FunTypeNode and call toPrint method on every child node.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -33,15 +35,16 @@ public class FunTypeNode implements Node{
     }
 
     /**
-     * Method that return the return type
-     * @return private Node returnType
+     *
+     * @return returnType node
      */
     public Node getReturn () { //
         return returnType;
     }
 
     /**
-     * Checks FunTypeNode's semantic
+     * Checks FunTypeNode's semantic.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return Empty ArrayList of semantic errors
      */
@@ -51,7 +54,8 @@ public class FunTypeNode implements Node{
     }
 
     /**
-     * Type check is empty because it's a terminal node
+     * Type check is empty because it's a terminal node.
+     *
      * @return null
      */
     public Node typeCheck () {

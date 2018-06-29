@@ -23,39 +23,78 @@ public class Environment {
 		return symTable;
 	}
 
+	/**
+	 * Return the i-th hashmap of the symbol table
+	 * @param i -> nesting level needed
+	 * @return i-th hashmap of the symbol table
+	 */
 	public HashMap<String,STentry> getHashMapNL(int i) {
 		return symTable.get(i);
 	}
 
+	/**
+	 * Return current nesting level
+	 *
+	 * @return current nesting level
+	 */
 	public int getNestingLevel() {
 		return this.nestingLevel;
 	}
 
+	/**
+	 * Return offset
+	 *
+	 * @return offset
+	 */
 	public int getOffset() {
 		return offset;
 	}
 
+	/**
+	 * Return decremented offset
+	 *
+	 * @return decremented offset
+	 */
 	public int getOffsetDec() {
 		return offset--;
 	}
 
+	/**
+	 * Set symTable
+	 *
+	 * @param symTable
+	 */
 	public void setSymTable(ArrayList<HashMap<String,STentry>> symTable) {
 		this.symTable = symTable;
 	}
 
+	/**
+	 * Increment Nesting Level and add new HashMap (at
+	 * @param hm
+	 */
 	public void addHashMapNL(HashMap<String,STentry> hm){
 		symTable.add(++nestingLevel,hm);
 	}
 
+	/**
+	 * Remove hashmap at current nesting level and decrement nesting level
+	 */
 	public void removeHashMapNL(){
 		symTable.remove(nestingLevel--);
 	}
 
-
+	/**
+	 * Set nesting level
+	 * @param nestingLevel
+	 */
 	public void setNestingLevel(int nestingLevel) {
 		this.nestingLevel=nestingLevel;
 	}
 
+	/**
+	 * Set offset
+	 * @param offset
+	 */
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}

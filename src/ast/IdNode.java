@@ -12,7 +12,8 @@ public class IdNode implements Node {
     private int nestinglevel;
 
     /**
-     * Constructor for IdNode
+     * Constructor for IdNode.
+     *
      * @param id --> name of Node
      */
     public IdNode(String id) {
@@ -20,7 +21,8 @@ public class IdNode implements Node {
     }
 
     /**
-     * Print structure of IdNode
+     * Print structure of IdNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -30,7 +32,7 @@ public class IdNode implements Node {
 
     /**
      * Check IdNode's semantic.
-     * Child node: ProgNode and listVar
+     *
      * @param env -> Environment that holds previously parsed information
      * @return  updated ArrayList of semantic errors
      */

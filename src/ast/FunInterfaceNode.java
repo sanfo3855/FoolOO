@@ -9,22 +9,20 @@ import java.util.ArrayList;
 public interface FunInterfaceNode extends Node {
 
     /**
-     * Return ID of a function
      *
      * @return Function's ID
      */
     String getId();
 
     /**
-     * Return an instance of TypeNode that represent node's type
      *
-     * @return TypeNode's instance
+     * @return instance of TypeNode that represent node's type
      */
     Node getType();
 
     /**
-     * Return a Node's ArrayList variables
-     * @return
+     *
+     * @return Node's ArrayList variables
      */
     ArrayList<Node> getListVar();
 

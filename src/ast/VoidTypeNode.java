@@ -13,7 +13,8 @@ public class VoidTypeNode implements TypeNode {
    }
 
     /**
-     * Print structure of VoidTypeNode
+     * Print structure of VoidTypeNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -22,7 +23,8 @@ public class VoidTypeNode implements TypeNode {
   }
 
     /**
-     * Checks VoidTypeNode's semantic
+     * Checks VoidTypeNode's semantic.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return Empty ArrayList of semantic errors
      */
@@ -32,7 +34,8 @@ public class VoidTypeNode implements TypeNode {
     }
 
     /**
-     * Type check is empty because it's a terminal node
+     * Type check is empty because it's a terminal node.
+     *
      * @return null
      */
     public Node typeCheck() {
@@ -40,7 +43,8 @@ public class VoidTypeNode implements TypeNode {
     }
 
     /**
-     * It's a terminal Node, than the codeGeneration is empty
+     * It's a terminal Node, than the codeGeneration is empty.
+     *
      * @return Empty String
      */
     public String codeGeneration() {
@@ -48,7 +52,8 @@ public class VoidTypeNode implements TypeNode {
     }
 
     /**
-     * return the void type
+     * return the void type.
+     *
      * @return void
      */
     public String getType(){

@@ -11,7 +11,7 @@ import util.SemanticError;
 public interface Node {
 
     /**
-     * Prints structure of Node
+     * Prints structure of Node.
      *
      * @param indent parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
@@ -23,21 +23,21 @@ public interface Node {
     //  per una dichiarazione, "null"
 
     /**
-     * Check type of Node
+     * Check type of Node.
      *
      * @return type of Node
      */
     Node typeCheck();
 
     /**
-     * Generate assembly code for Node
+     * Generate assembly code for Node.
      *
      * @return string of generated code
      */
     String codeGeneration();
 
     /**
-     * Checks Node's semantic
+     * Checks Node's semantic.
      *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors

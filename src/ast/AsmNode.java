@@ -15,7 +15,6 @@ public class AsmNode implements Node {
     /**
      * Constructor for AsmNode.
      *
-     * It takes 2 parameters:
      * @param id -> Variable's ID
      * @param value -> Value assigned to id
      */
@@ -43,7 +42,6 @@ public class AsmNode implements Node {
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        /* Lista degli errori semantici del nodo */
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
         /* NestingLevel attuale*/

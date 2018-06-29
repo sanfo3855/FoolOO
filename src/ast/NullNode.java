@@ -10,14 +10,15 @@ public class NullNode implements Node {
     private Object val;
 
     /**
-     * Constructor for NullNode
+     * Constructor for NullNode.
      */
     public NullNode() {
         this.val = null;
     }
 
     /**
-     * Print structure of NullNode
+     * Print structure of NullNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -27,7 +28,8 @@ public class NullNode implements Node {
     }
 
     /**
-     * Checks NullNode's semantic
+     * Checks NullNode's semantic.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return Empty ArrayList of semantic errors
      */
@@ -35,7 +37,8 @@ public class NullNode implements Node {
         return new ArrayList<SemanticError>();
     }
     /**
-     * Type check is empty because it's a terminal node
+     * Type check is empty because it's a terminal node.
+     *
      * @return null
      */
     public Node typeCheck() {
@@ -43,7 +46,8 @@ public class NullNode implements Node {
     }
 
     /**
-     * It's a terminal Node, than the codeGeneration is empty
+     * It's a terminal Node, than the codeGeneration is empty.
+     *
      * @return Empty String
      */
     public String codeGeneration() {

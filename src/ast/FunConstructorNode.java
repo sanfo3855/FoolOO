@@ -16,7 +16,8 @@ public class FunConstructorNode implements FunInterfaceNode {
 
 
     /**
-     * Constructor fo Function Constructor Node
+     * Constructor fo Function Constructor Node.
+     *
      * @param id --> Constructor name
      * @param listVar --> Constructor parameters
      * @param progNode --> Constructor body
@@ -29,7 +30,8 @@ public class FunConstructorNode implements FunInterfaceNode {
     }
 
     /**
-     * Prints structure of FunConstructorNode
+     * Prints structure of FunConstructorNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -48,63 +50,76 @@ public class FunConstructorNode implements FunInterfaceNode {
     }
 
     /**
-     * Method that return Constructor's name
-     * @return id
+     *
+     * @return Constructor's name (id)
      */
     public String getId() {
         return id;
     }
 
     /**
-     * Method that return Constructor's type
-     * @return type
+     *
+     * @return Constructor's type
      */
     public Node getType() {
         return type;
     }
 
     /**
-     * Method that return Constructor's parameters
-     * @return listVar --> Parameters arraylist
+     *
+     * @return ArrayList of Constructor's parameters
      */
     public ArrayList<Node> getListVar() {
         return listVar;
     }
 
     /**
-     * Check FunConstructorNode's semantic and call checkSemantic method on every childNode,
+     * Check FunConstructorNode's semantic and call checkSemantic method on every childNode.
+     *
      * Child node: ProgNode and listVar
+     *
      * @param env -> Environment that holds previously parsed information
      * @return  updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+
         //Arraylist per errori semantici
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
         //Creazione nuova entry
         STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
+
         //Arraylist per lista dei parrametri
         ArrayList<Node> parList = new ArrayList<Node>();
+
         //Viene creata una nuova hashmap nell'ambiente
         env.addHashMapNL( new HashMap<String, STentry>());
+
         for (Node node: listVar) {
             //si ottiene il tipo di ciascun parametro del costruttore
             parList.add(((VarDecNode) node).getType());
+
             //si richiam check semantic per ciascun parametro
             semanticErrors.addAll(node.checkSemantics(env));
         }
+
         //Aggiunge il tipo nella entry corrente
         entry.addType(new FunTypeNode(parList, type));
+
         //Viene richiamato il checkSemantics nel corpo del costruttore se != null
         if (progNode!=null) {
             semanticErrors.addAll(progNode.checkSemantics(env));
         }
+
         //rimuove l'hashmap dall'ambiente
         env.removeHashMapNL();
+
         return semanticErrors;
     }
 
     /**
-     *  It call typeCheck for ProgNode Child.
+     *  Calls typeCheck() for ProgNode Child.
+     *
      * @return instance of VoidTypeNode()
      */
     public Node typeCheck() {

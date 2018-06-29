@@ -16,7 +16,8 @@ public class FunNode  implements FunInterfaceNode {
     private Node retNode;
 
     /**
-     * Constructor for FunctionNode
+     * Constructor for FunctionNode.
+     *
      * @param id --> Function name
      * @param type --> Function type
      * @param listVar --> Function parameters
@@ -32,7 +33,8 @@ public class FunNode  implements FunInterfaceNode {
     }
 
     /**
-     * Prints structure of FunctionNode
+     * Prints structure of FunctionNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -50,72 +52,84 @@ public class FunNode  implements FunInterfaceNode {
     }
 
     /**
-     * Method that return Function's name
-     * @return id
+     *
+     * @return Function's name (id)
      */
     public String getId() {
         return id;
     }
 
     /**
-     * Method that return Function's type
-     * @return type
+     *
+     * @return Function's type
      */
     public Node getType() {
         return type;
     }
 
     /**
-     * Method that return Function's parameters
-     * @return listVar --> Parameters arraylist
+     *
+     * @return Arraylist of Function's parameters
      */
     public ArrayList<Node> getListVar() {
         return listVar;
     }
 
     /**
-     * Check FunctionNode's semantic and call checkSemantic method on every childNode,
-     * Child node: ProgNode and listVar
+     * Check FunctionNode's semantic and call checkSemantic method on every childNode.
+     *
+     * Child node: listVar, ProgNode and retNode
+     *
      * @param env -> Environment that holds previously parsed information
      * @return  updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        //Arraylist per errori semantici
+
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
         //Creazione nuova entry
         STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
+
         //Arraylist per lista dei parametri
         ArrayList<Node> parList = new ArrayList<Node>();
+
         //Viene creata una nuova hashmap nell'ambiente
         env.addHashMapNL( new HashMap<String, STentry>());
 
         for (Node node: listVar) {
             //Si ottiene il tipo di ciascun parametro
             parList.add(((VarDecNode) node).getType());
+
             //Richiamato checkSemantics per ciascun nodo parametro
             semanticErrors.addAll(node.checkSemantics(env));
         }
+
         //Aggiunto il tipo nella entry corrente
         entry.addType(new FunTypeNode(parList, type));
+
         //Viene richiamato il checkSemantics nel corpo della funzione se != null
         if (progNode!=null) {
             semanticErrors.addAll(progNode.checkSemantics(env));
         }
+
         //Viene richiamato il checkSemantics nel return della funzione se != null
         if(retNode!=null){
             semanticErrors.addAll(retNode.checkSemantics(env));
         }else{
-            if (!(type instanceof VoidTypeNode)){//Errore nel ritorno se != void
+            //Errore nel ritorno se type non è void
+            if (!(type instanceof VoidTypeNode)){
                 semanticErrors.add(new SemanticError("Missing return"));
             }
         }
+
         //Rimuove l'hashMap dall'ambiente
         env.removeHashMapNL();
         return semanticErrors;
     }
 
     /**
-     * Check that return is subtype of function type. It call typeCheck for ProgNode Child.
+     * Calls typeCheck for ProgNode Child and Check that return type is subtype of function type.
+     *
      * @return instance of VoidTypeNode()
      */
     public Node typeCheck() {
@@ -124,6 +138,7 @@ public class FunNode  implements FunInterfaceNode {
         }
         if(retNode!=null){
             //Sottotipo tra tipo funzione e return
+            //TODO type e retNode.typeCheck()
             if( !FOOLlib.isSubtype(type, retNode.typeCheck()) ){
                 System.out.println("Wrong return type for function " + id );
                 System.exit(0);

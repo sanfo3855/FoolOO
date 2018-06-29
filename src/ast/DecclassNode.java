@@ -16,8 +16,8 @@ public class DecclassNode implements Node {
 
 
     /**
-     * Constructor for FoolNode.
-     * It takes 4 parameters:
+     * Constructor for DecclassNode (with extends).
+     *
      * @param id id class
      * @param listVar list of fields of this class node
      * @param listFun list of methods of this class node
@@ -31,8 +31,8 @@ public class DecclassNode implements Node {
     }
 
     /**
-     * Constructor for FoolNode.
-     * It takes 3 parameters:
+     * Constructor for DecclassNode (without extends).
+     *
      * @param id id class
      * @param listVar list of fields of this class node
      * @param listFun list of methods of this class node
@@ -73,7 +73,8 @@ public class DecclassNode implements Node {
     }
 
     /**
-     * Prints structure of DecclassNode and call toPrint method on every child node
+     * Prints structure of DecclassNode and call toPrint method on every child node.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -93,7 +94,8 @@ public class DecclassNode implements Node {
     }
 
     /**
-     * Checks DecclassNode's semantic and call checkSemantic method on every child Node
+     * Checks DecclassNode's semantic and call checkSemantic method on every child Node.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
      */
@@ -176,7 +178,7 @@ public class DecclassNode implements Node {
 
             //richiamo il checkSemantics sui nodi funzione di questo nodo classe
             if(listFun.size() > 0){
-                env.setOffset(-2);
+                //env.setOffset(-2);
                 for(Node fun : listFun){
                     semanticErrors.addAll(fun.checkSemantics(env));
                 }

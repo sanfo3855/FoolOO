@@ -7,7 +7,8 @@ public class STentry {
     private int offset;
 
     /**
-     * Constructor for STentry without type
+     * Constructor for STentry without type.
+     *
      * @param nestinglevel --> entry nesting level
      * @param offset --> entry offset
      */
@@ -17,7 +18,8 @@ public class STentry {
     }
 
     /**
-     * Constructor for Stentry with type
+     * Constructor for STentry with type.
+     *
      * @param nestinglevel --> entry nesting level
      * @param type --> entry type
      * @param offset --> entry offset
@@ -29,7 +31,8 @@ public class STentry {
     }
 
     /**
-     * Add the type of the entry
+     * Add the type of the entry.
+     *
      * @param type
      */
     public void addType(Node type) {
@@ -37,31 +40,32 @@ public class STentry {
     }
 
     /**
-     * Return the type of the entry
-     * @return type
+     *
+     * @return type of the entry
      */
     public Node getType() {
         return this.type;
     }
 
     /**
-     * Return the offset of the entry
-     * @return offset
+     *
+     * @return offset of the entry
      */
     public int getOffset() {
         return this.offset;
     }
 
     /**
-     * Get the nesting level of the entry
-     * @return nesting level
+     *
+     * @return nesting level of the entry
      */
     public int getNestinglevel() {
         return this.nestinglevel;
     }
 
     /**
-     * Print structure of STentry
+     * Print structure of STentry.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */

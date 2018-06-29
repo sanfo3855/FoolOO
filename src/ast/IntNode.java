@@ -11,7 +11,7 @@ public class IntNode implements Node {
 
     /**
      * Constructor for IntNode.
-     * It takes 1 parameter:
+     *
      * @param val -> integer value
      */
     public IntNode(Integer val) {
@@ -19,7 +19,8 @@ public class IntNode implements Node {
     }
 
     /**
-     * Print structure of IntNode
+     * Print structure of IntNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -28,7 +29,8 @@ public class IntNode implements Node {
     }
 
     /**
-     * Checks IntNode's semantic
+     * Checks IntNode's semantic.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return Empty ArrayList of semantic errors
      */
@@ -37,7 +39,8 @@ public class IntNode implements Node {
     }
 
     /**
-     * Type check is empty because it's a terminal node
+     * Type check is empty because it's a terminal node.
+     *
      * @return instance of BoolTypeNode()
      */
     public Node typeCheck() {
@@ -45,7 +48,8 @@ public class IntNode implements Node {
     }
 
     /**
-     * It push the integer value. 0 or 1
+     * It push the integer value. 0 or 1.
+     *
      * @return pushed value
      */
     public String codeGeneration() {

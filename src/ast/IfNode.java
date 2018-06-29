@@ -13,7 +13,8 @@ public class IfNode implements Node {
     private Node elseBranch;
 
     /**
-     * Constructor for IfNode with elseBranch
+     * Constructor for IfNode with elseBranch.
+     *
      * @param cond --> Condition Node
      * @param thenBranch --> Then Node
      * @param elseBranch --> Else Node
@@ -25,7 +26,8 @@ public class IfNode implements Node {
     }
 
     /**
-     * Constructor for If node without elseBranch
+     * Constructor for IfNode without elseBranch.
+     *
      * @param cond
      * @param thenBranch
      */
@@ -35,7 +37,8 @@ public class IfNode implements Node {
     }
 
     /**
-     * Prints structure of IfNode
+     * Prints structure of IfNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -50,30 +53,40 @@ public class IfNode implements Node {
     }
 
     /**
-     * Check IfNode's semantic and call checkSemantic method on every childNode,
-     * Child node: condition, thenBranch and elseBranch
+     * Check IfNode's semantic and Calls checkSemantic method on every childNode.
+     *
+     * Child node: condition, thenBranch and elseBranch.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return  updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        //creazione arraylist di errori semantici
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
         //richiamo check semantic nel nodo condizione
         semanticErrors.addAll(cond.checkSemantics(env));
+
         //richiamo check semantic nel nodo then
         semanticErrors.addAll(thenBranch.checkSemantics(env));
+
         //se esiste, richiamo il check semantic nel nodo else
         if(elseBranch!=null){
             semanticErrors.addAll(elseBranch.checkSemantics(env));
         }
+
         //ritorno l'arraylist di errori semantici
         return semanticErrors;
     }
 
     /**
      * Check that type check of condition's content is subtype of boolTypeNode. Check that branches are compatible.
-     * Call type check for each condition's branch
-     * @return node
+     *
+     * Call type check for each condition's branch.
+     *
+     * Returns TypeNode of a branch, only if is written something like:
+     *      a = if(cond) then value else value
+     *
+     * @return TypeNode or null
      */
     public Node typeCheck() {
         //Nodo di ritorno
@@ -83,14 +96,16 @@ public class IfNode implements Node {
             System.out.println("If condition is not boolean");
             System.exit(0);
         }
+
         //richiama type check per ogni branch
         Node thenB = thenBranch.typeCheck();
         Node elseB = elseBranch.typeCheck();
         //controllo che then ed else siano sottotipi tra loro, altrimenti restituisco errore
+        //TODO ESEMPIO classA a = if(cond) then new classB() else new classA() solo se classB è sottotipo di classA
         if (FOOLlib.isSubtype(thenB,elseB))
-            node= elseB;
+            node = elseB;
         if (FOOLlib.isSubtype(elseB,thenB))
-            node= thenB;
+            node = thenB;
         if(node==null) {
             System.out.println("Incompatible types in then else branches");
             System.exit(0);

@@ -13,7 +13,8 @@ public class TermNode implements Node {
     private String operator;
 
     /**
-     * Constructor for TermNode
+     * Constructor for TermNode.
+     *
      * @param left --> Left node
      * @param right --> Right node
      * @param operator --> Operator tha indicates the operation between the nodes
@@ -25,7 +26,8 @@ public class TermNode implements Node {
     }
 
     /**
-     * Print structure of TermNode
+     * Print structure of TermNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -37,13 +39,17 @@ public class TermNode implements Node {
     }
 
     /**
-     * Check TermNode's semantic and call checkSemantic method on every childNode,
-     * Child node: ProgNode and listVar
+     * Check TermNode's semantic and call checkSemantic method on every childNode.
+     *
+     * Child node: ProgNode and listVar.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return  updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
         //richiama il checkSemantic per ciascun nodo (left e right)
         semanticErrors.addAll(left.checkSemantics(env));
         semanticErrors.addAll(right.checkSemantics(env));
@@ -51,7 +57,8 @@ public class TermNode implements Node {
         return semanticErrors;
     }
     /**
-     * Check that the nodes are subtypes of IntTypeNode
+     * Check that the nodes are subtypes of IntTypeNode.
+     *
      * @return instance of IntTypeNode()
      */
     public Node typeCheck() {
@@ -64,7 +71,8 @@ public class TermNode implements Node {
     }
 
     /**
-     * Generates assembly code based on logical operator and call codeGeneration on each Node
+     * Generates assembly code based on logical operator and call codeGeneration on each Node.
+     *
      * @return updated string with assembly code.
      */
     public String codeGeneration() {

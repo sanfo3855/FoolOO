@@ -13,7 +13,8 @@ public class IdTypeNode implements TypeNode {
     private ArrayList<String> extClassId= new ArrayList<String>();
 
     /**
-     * Constructor fo IdTypeNode
+     * Constructor fo IdTypeNode.
+     *
      * @param id --> id string
      */
     public IdTypeNode(String id) {
@@ -21,23 +22,25 @@ public class IdTypeNode implements TypeNode {
     }
 
     /**
-     * Returns the extended class arraylist
-     * @return
+     *
+     * @return ArrayList of extended class
      */
     public ArrayList<String> getExtClassId() {
         return extClassId;
     }
 
     /**
-     * Set the extended class arraylist
-     * @param extClassId
+     * Set the extended class' arraylist.
+     *
+     * @param extClassId -> ArrayList of extended class
      */
     public void setExtClassId(ArrayList<String> extClassId) {
         this.extClassId = extClassId;
     }
 
     /**
-     * Print structure of IdTypeNode
+     * Print structure of IdTypeNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -46,8 +49,8 @@ public class IdTypeNode implements TypeNode {
     }
 
     /**
-     * Return the id type
-     * @return type
+     *
+     * @return id type
      */
     public String getType(){
         return id;
@@ -55,25 +58,30 @@ public class IdTypeNode implements TypeNode {
 
     /**
      * Check IdTypeNode's semantic.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return Empty ArrayList of semantic errors
      */
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        //crea arraylist di errori semantici
+
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
-        //ottengo nesting level corrente
+
+        // nesting level corrente
         int j = env.getNestingLevel();
         STentry tmpEntry = null;
+
         while (j >= 0 && tmpEntry == null) {
             //controllo iterativamente che esista una classe con il relativo id
             tmpEntry = env.getHashMapNL(j--).get("class%"+id);
         }
+
         if (tmpEntry == null) {
             //se la classe non esiste restituisco un errore
             semanticErrors.add(new SemanticError("Class Id " + id + " is not declared"));
         }else{
-            //creo una lista delle estensioni di questo nodo classe, risalendo classe per classe le loro dichiarazioni
+            /* creo una lista delle estensioni di questo nodo classe,
+            risalendo classe per classe le loro dichiarazioni */
             ArrayList<String> tempArrayClass=new ArrayList<String>();
             for (String classex:env.getHashMapNL(0).keySet()) {
                 if(classex.contains("class%")){
@@ -83,7 +91,6 @@ public class IdTypeNode implements TypeNode {
                     }
                 }
             }
-
             boolean cond=true;
             String idExtClass=id;
             while (cond){
@@ -98,11 +105,13 @@ public class IdTypeNode implements TypeNode {
                 }
             }
         }
+
         return semanticErrors;
     }
 
     /**
-     * Type check is empty because it's a terminal node
+     * Type check is empty because it's a terminal node.
+     *
      * @return null
      */
     public Node typeCheck() {

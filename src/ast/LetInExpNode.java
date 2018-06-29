@@ -12,7 +12,8 @@ public class LetInExpNode implements Node {
     private Node exp;
 
     /**
-     * Constructor for LetInExpNode
+     * Constructor for LetInExpNode.
+     *
      * @param listDec --> Arraylist of declarations inside Let In
      * @param exp --> Node expression
      */
@@ -22,7 +23,8 @@ public class LetInExpNode implements Node {
     }
 
     /**
-     * Prints structure of LetInExpNode
+     * Prints structure of LetInExpNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -40,34 +42,44 @@ public class LetInExpNode implements Node {
     }
 
     /**
-     * Check LetInExpNode's semantic and call checkSemantic method on every childNode,
+     * Check LetInExpNode's semantic and call checkSemantic method on every childNode.
+     *
      * Child node: listDec (list declaration)
+     *
      * @param env -> Environment that holds previously parsed information
      * @return  updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        //Arraylyst per errori semantici
+
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
         //Si ottiene l'hashmap dello scope corrente
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
+
         //creazione nuova entry
-        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec()); //separo introducendo "entry"
+        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec());
+
         //nome della chiave del nodo
         String idPutHM;
+
         for(Node node : listDec){
             //controllo nodo funzione
             if(node instanceof FunNode ){
                 idPutHM = "fun#";
+
                 //casting del nodo in FunNode
                 FunNode funNode=(FunNode) node;
+
                 //creazione chiave del nodo funzione
                 idPutHM += funNode.getId() +"%";
                 idPutHM += ((TypeNode)funNode.getType()).getType();
+
                 //arraylist di parametri della funzione
                 ArrayList<Node> parList = funNode.getListVar();
                 for (Node nodePar : parList) {
                     //ottengo il type di ciascun parametro
                     TypeNode typeVar = (TypeNode) ((VarDecNode) nodePar).getType();
+
                     //completata creazione stringa chiave
                     idPutHM += "%" + typeVar.getType();
                 }
@@ -77,20 +89,24 @@ public class LetInExpNode implements Node {
                 }
             }
         }
+
         //richiamo checkSemantic per ciascun nodo di listDec all'interno di let in
         for(Node ntc : listDec){
             semanticErrors.addAll(ntc.checkSemantics(env));
         }
+
         //richiamo checkSemantic nella exp se esiste
         if (exp!=null) {
             semanticErrors.addAll(exp.checkSemantics(env));
         }
+
         //ritorno l'arraylist di errori semantici
         return semanticErrors;
     }
 
     /**
-     *  It call typeCheck for every declaration child and for exp child
+     *  It call typeCheck for every declaration child and for exp child.
+     *
      * @return instance of VoidTypeNode()
      */
     public Node typeCheck() {

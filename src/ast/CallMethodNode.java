@@ -15,7 +15,7 @@ public class CallMethodNode implements Node {
 
     /**
      * Constructor for CallMethodNode.
-     * It takes 2 parameters:
+     *
      * @param id object's id calling the method
      * @param methodCall id Method call
      */
@@ -25,7 +25,8 @@ public class CallMethodNode implements Node {
     }
 
     /**
-     * Prints structure of CallMethodNode and call toPrint method on every child node
+     * Prints structure of CallMethodNode and call toPrint method on every child node.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -36,7 +37,8 @@ public class CallMethodNode implements Node {
     }
 
     /**
-     * Checks CallMethodNode's semantic and call checkSemantic method on every child Node
+     * Checks CallMethodNode's semantic and call checkSemantic method on every child Node.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
      */
@@ -71,7 +73,8 @@ public class CallMethodNode implements Node {
     }
 
     /**
-     *Call the typeCheck on methodCall that is a node FunExpNode
+     * Calls the typeCheck on methodCall that is a node FunExpNode.
+     *
      * @return instance of TypeNode
      */
     public Node typeCheck() {

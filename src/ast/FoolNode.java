@@ -12,6 +12,7 @@ public class FoolNode implements Node {
 
     /**
      * Constructor for FoolNode.
+     *
      * @param listNodi list of all the program's macro nodes, ie classes and main
      */
     public FoolNode (ArrayList<Node> listNodi) {
@@ -19,7 +20,8 @@ public class FoolNode implements Node {
     }
 
     /**
-     * Prints structure of FoolNode and call toPrint method on every child node
+     * Prints structure of FoolNode and call toPrint method on every child node.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -32,7 +34,8 @@ public class FoolNode implements Node {
     }
 
     /**
-     * Checks FoolNode's semantic and call checkSemantic method on every child Node
+     * Checks FoolNode's semantic and call checkSemantic method on every child Node.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
      */
@@ -154,7 +157,8 @@ public class FoolNode implements Node {
     }
 
     /**
-     * Calls the typeCheck on all its child nodes
+     * Calls the typeCheck on all its child nodes.
+     *
      * @return instance of VoidTypeNode()
      */
     public Node typeCheck() {
@@ -166,7 +170,8 @@ public class FoolNode implements Node {
     }
 
     /**
-     * Calls the codeGeneration on all its child nodes
+     * Calls the codeGeneration on all its child nodes.
+     *
      * @return the generated assembly code
      */
     public String codeGeneration() {

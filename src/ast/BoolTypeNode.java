@@ -6,6 +6,7 @@ import util.SemanticError;
 import java.util.ArrayList;
 
 public class BoolTypeNode implements TypeNode {
+
     /**
      * Constructor for BoolTypeNode.
      */
@@ -14,6 +15,7 @@ public class BoolTypeNode implements TypeNode {
 
     /**
      * Print structure of BoolTypeNode
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -23,6 +25,7 @@ public class BoolTypeNode implements TypeNode {
 
     /**
      * Checks BoolTypeNode's semantic
+     *
      * @param env -> Environment that holds previously parsed information
      * @return Empty ArrayList of semantic errors
      */
@@ -31,7 +34,8 @@ public class BoolTypeNode implements TypeNode {
     }
 
     /**
-     * Type check is empty because it's a terminal node
+     * Type check is empty because it's a terminal node.
+     *
      * @return null
      */
     public Node typeCheck() {
@@ -39,7 +43,8 @@ public class BoolTypeNode implements TypeNode {
     }
 
     /**
-     * It's a terminal Node, than the codeGeneration is empty
+     * It's a terminal Node, than the codeGeneration is empty.
+     *
      * @return Empty String
      */
     public String codeGeneration() {
@@ -47,8 +52,8 @@ public class BoolTypeNode implements TypeNode {
     }
 
     /**
-     * return the bool type
-     * @return bool
+     *
+     * @return bool type
      */
     public String getType(){
         return "bool";

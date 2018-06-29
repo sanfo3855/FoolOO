@@ -17,7 +17,6 @@ public class FactorNode implements Node {
     /**
      * Constructor for ExpNode.
      *
-     * It takes 5 parameters:
      * @param left -> left child node
      * @param right -> right child node
      * @param operator -> FactorNode operator (>=, <=, ==, &&, ||)
@@ -33,7 +32,7 @@ public class FactorNode implements Node {
     }
 
     /**
-     * Prints structure of FactorNode and call toPrint method on every child node
+     * Prints structure of FactorNode and call toPrint method on every child node.
      *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
@@ -46,7 +45,7 @@ public class FactorNode implements Node {
     }
 
     /**
-     * Checks FactorNode's semantic and call checkSemantic method on every child Node
+     * Checks FactorNode's semantic and call checkSemantic method on every child Node.
      *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors

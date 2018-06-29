@@ -12,7 +12,8 @@ public class VarDecNode implements Node {
     private Node type;
 
     /**
-     * Constructor for Declaration Variable
+     * Constructor for Declaration Variable.
+     *
      * @param id --> Variable's name
      * @param type --> Variable's type
      */
@@ -22,23 +23,24 @@ public class VarDecNode implements Node {
     }
 
     /**
-     * Method that return Variable's name
-     * @return id
+     *
+     * @return Variable's name (id)
      */
     public String getId(){
         return id;
     }
 
     /**
-     * Method that return Variable's type
-     * @return type
+     *
+     * @return Variable's type
      */
     public Node getType(){
         return type;
     }
 
     /**
-     * Prints structure of VarDecNode
+     * Prints structure of VarDecNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -49,16 +51,20 @@ public class VarDecNode implements Node {
     }
 
     /**
-     * Check VarDecNode's semantic. It checks that there aren't multiple declarations of the same variables
-     * Child node: ProgNode and listVar
+     * Check VarDecNode's semantic. It checks that there aren't multiple declarations of the same variables.
+     *
+     * Child node: ProgNode and listVar.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return  updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        //arraylist per errori semantici
+
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
         //si ottiene l'hashmap del livello corrente
         HashMap<String,STentry> hm = env.getHashMapNL(env.getNestingLevel());
+
         //viene creata una nuova entry per la dichiarazione della variabile con il relativo tipo
         STentry entry = new STentry(env.getNestingLevel(),type,env.getOffsetDec());
 
@@ -81,8 +87,9 @@ public class VarDecNode implements Node {
     }
 
     /**
-     * The type check of a variable returns the variable's type
-     * @return type --> Type of the declared variable
+     * The type check of a variable returns the variable's type.
+     *
+     * @return variable's type
      */
     public Node typeCheck() {
         return type;

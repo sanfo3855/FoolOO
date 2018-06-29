@@ -15,7 +15,8 @@ public class NewClassNode implements Node{
     private String constructor;
 
     /**
-     * Constructor for NewClassNode
+     * Constructor for NewClassNode.
+     *
      * @param id --> class name
      * @param listPar --> class parameters
      */
@@ -25,7 +26,8 @@ public class NewClassNode implements Node{
     }
 
     /**
-     * Print structure of NewClassNode
+     * Print structure of NewClassNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -38,11 +40,12 @@ public class NewClassNode implements Node{
     }
 
     /**
-     * Checks NewClassNode's semantic and call checkSemantic method on every child Node
+     * Checks NewClassNode's semantic and call checkSemantic method on every child Node.
      *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
      */
+    //todo finire commenti e javadoc
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         //creazione arraylist di errori semantici
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();

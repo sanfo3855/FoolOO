@@ -17,7 +17,7 @@ public class FunExpNode implements Node {
 
     /**
      * Constructor for FunExpNode.
-     * It takes 2 parameters:
+     *
      * @param id function name
      * @param listParam list of function parameters
      */
@@ -27,15 +27,17 @@ public class FunExpNode implements Node {
     }
 
     /**
-     * set typeClassMethod
-     * @param typeClassMethod name of the class on which the function is searched
+     * Set the name of the class on which the function is searched.
+     *
+     * @param typeClassMethod Function Class Name
      */
     public void setTypeClassMethod(String typeClassMethod) {
         this.typeClassMethod = typeClassMethod;
     }
 
     /**
-     * Prints structure of FunExpNode and call toPrint method on every child node
+     * Prints structure of FunExpNode and call toPrint method on every child node.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -48,7 +50,8 @@ public class FunExpNode implements Node {
     }
 
     /**
-     * Checks FunExpNode's semantic and call checkSemantic method on every child Node
+     * Checks FunExpNode's semantic and call checkSemantic method on every child Node.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
      */
@@ -136,7 +139,8 @@ public class FunExpNode implements Node {
     }
 
     /**
-     * check that each parameter is a subtype of the corresponding one in the function declaration
+     * Check that each parameter is a subtype of the corresponding one in the function declaration.
+     *
      * @return the type of return of the function
      */
     public Node typeCheck() {

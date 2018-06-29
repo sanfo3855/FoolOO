@@ -10,7 +10,8 @@ public class StmsNode implements Node {
     private ArrayList<Node> listNode;
 
     /**
-     * Constructor for stmsNode
+     * Constructor for stmsNode.
+     *
      * @param listNodi --> child nodes
      */
     public StmsNode(ArrayList<Node> listNodi) {
@@ -18,7 +19,8 @@ public class StmsNode implements Node {
     }
 
     /**
-     * Print structure of StmsNode
+     * Print structure of StmsNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -31,15 +33,18 @@ public class StmsNode implements Node {
     }
 
     /**
-     * Check Stms's semantic and call checkSemantic method on every childNode
+     * Check Stms's semantic and call checkSemantic method on every childNode.
+     *
      * @param env -> Environment that holds previously parsed information
      * @return  updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        //creo arraylist di errori
+
         ArrayList<SemanticError> semanticErrors= new ArrayList<SemanticError>();
+
         //ottengo gli id al livello 1 di tutte le chiavi per ottenere il nome della classe
         Set<String> keySetTemp = env.getHashMapNL(1).keySet();
+
         //stringa temp per salvare il nome della classe
         String classTemp=null;
         for (String s:keySetTemp) {
@@ -54,15 +59,18 @@ public class StmsNode implements Node {
                 //set della classe al cui appartiene il metodo
                 ((FunExpNode) node).setTypeClassMethod(classTemp);
             }
+
             //richiamo check semantic per ciascun nodo presente
             semanticErrors.addAll(node.checkSemantics(env));
         }
+
         //ritorna l'arraylist di errori semantici
         return semanticErrors;
     }
 
     /**
      * It call typeCheck for every child of listNode.
+     *
      * @return a node nodeRes
      */
     public Node typeCheck() {
