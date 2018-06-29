@@ -4,32 +4,41 @@ import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.*;
 
 public class FunExpNode implements Node {
 
-    private String id;
-    private String typeClassMethod;
-    private ArrayList<Node> listParam;
-    private STentry entry;
+    private String id;//nome della funzione
+    private String typeClassMethod;//nome della classe su cui viene ricercata la funzione
+    private ArrayList<Node> listParam;//lista dei parametri della funzione
     private ArrayList<Node> typeParam=new ArrayList<Node>();
-    private int nestinglevel;
+    private STentry entry;////entry table dell'id
+    private int nestinglevel;//nestinglevel dell'entry
 
+    /**
+     * Constructor for FunExpNode.
+     * It takes 2 parameters:
+     * @param id function name
+     * @param listParam list of function parameters
+     */
     public FunExpNode (String id, ArrayList<Node> listParam) {
         this.id =id;
         this.listParam = listParam;
     }
-//    public FunExpNode (String id, String typeClassMethod, ArrayList<Node> listParam) {
-//        this.id =id;
-//        this.typeClassMethod=typeClassMethod;
-//        this.listParam = listParam;
-//    }
 
+    /**
+     * set typeClassMethod
+     * @param typeClassMethod name of the class on which the function is searched
+     */
     public void setTypeClassMethod(String typeClassMethod) {
         this.typeClassMethod = typeClassMethod;
     }
 
+    /**
+     * Prints structure of FunExpNode and call toPrint method on every child node
+     * @param s parent Indentation, incremented at every toPrint
+     * @return updated string that prints Abstract Syntax Tree Structure
+     */
     public String toPrint(String s) {
         String returnString = s + "FunExpNode" + "\n";
         for(Node ntp : listParam){
@@ -38,6 +47,11 @@ public class FunExpNode implements Node {
         return returnString;
     }
 
+    /**
+     * Checks FunExpNode's semantic and call checkSemantic method on every child Node
+     * @param env -> Environment that holds previously parsed information
+     * @return updated ArrayList of semantic errors
+     */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         //Cerco una funzione con listParam.length() parametri
@@ -121,6 +135,10 @@ public class FunExpNode implements Node {
         return semanticErrors;
     }
 
+    /**
+     * check that each parameter is a subtype of the corresponding one in the function declaration
+     * @return the type of return of the function
+     */
     public Node typeCheck() {
         for(int i=0; i<listParam.size(); i++){
             if(!FOOLlib.isSubtype(listParam.get(i).typeCheck(),typeParam.get(i))){
@@ -128,11 +146,13 @@ public class FunExpNode implements Node {
                 System.exit(0);
             }
         }
-//        System.out.println( id+" - "+entry.toPrint(""));
-//        System.out.println(( (IdTypeNode)entry.getType()).getType());
         return entry.getType();
     }
 
+    /**
+     * codeGeneration
+     * @return string code
+     */
     public String codeGeneration() {
         return "";
     }

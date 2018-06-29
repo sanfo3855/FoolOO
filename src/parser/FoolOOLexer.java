@@ -129,7 +129,7 @@ public class FoolOOLexer extends Lexer {
 	private void ERR_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 0:
-			 System.err.println("Invalid char: "+ getText()); lexicalErrors++;System.exit(1); 
+			 System.out.println("Invalid char: "+ getText()); lexicalErrors++; 
 			break;
 		}
 	}

@@ -79,12 +79,12 @@ class pippo2 extends pippo (int c){
     }
 }
 
-class pippo1 (int x){
+class pippo1 (int x, classe1 cccc){
     pippo1(int a, int c){
         let
             int z=0;
         in
-            c=0;
+            c=cccc.retFunz();
     }
 
     classe1 somma1(int a,int b){
@@ -98,8 +98,10 @@ class pippo1 (int x){
         let
             classe1 c=new classe1();
             int ccc=ciao(a,b);
+            print(1);
         in
             a= c.retFunz();
+            print(1+4);
             return 0;
     }
 }

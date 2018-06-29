@@ -104,7 +104,7 @@ public class DecclassNode implements Node {
         if( idExt!=null && hashMap.get("class%"+idExt) == null ){
             semanticErrors.add(new SemanticError("Class idExtends "+idExt+" is not declared"));
         }else{
-            //creo una lista delle estenzioni di questo nodo classe, risalendo classe per classe le loro dichiarazioni
+            //creo una lista delle estensioni di questo nodo classe, risalendo classe per classe le loro dichiarazioni
             ArrayList<String> tempArrayClass=new ArrayList<String>();
             for (String classex:env.getHashMapNL(0).keySet()) {
                 if(classex.contains("class%")){
