@@ -218,7 +218,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     public Node visitFactor(FactorContext ctx) {
         Node node;
         String notLeft = "0";
-        String notRight = "1";
+        String notRight = "0";
         if (ctx.NOT()!=null){
             notLeft = "1";
         }

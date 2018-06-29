@@ -6,11 +6,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Environment {
-	
+
+	/* SymbolTable*/
 	private ArrayList<HashMap<String,STentry>>  symTable = new ArrayList<>();
+	/* Current nesting level*/
 	private int nestingLevel = -1;
+
 	private int offset = 0;
 
+	/**
+	 * Return a list of hashmap, each one contains the symbol table of one nesting level
+	 *
+	 * @return List of HashMap of every NestingLevel
+	 */
 	public ArrayList<HashMap<String,STentry>> getSymTable() {
 		return symTable;
 	}
@@ -51,9 +59,6 @@ public class Environment {
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
-
-	//livello ambiente con dichiarazioni piu' esterno è 0 (prima posizione ArrayList) invece che 1 (slides)
-	//il "fronte" della lista di tabelle è symTable.get(nestingLevel)
 	
 	
 	

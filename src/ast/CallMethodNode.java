@@ -38,8 +38,8 @@ public class CallMethodNode implements Node {
         if (entryTableTemp==null){
             semanticErrors.add(new SemanticError("Id "+id+" not declared"));
         }else{
-            this.entry = entryTableTemp;
-            this.nestinglevel = env.getNestingLevel();
+            entry = entryTableTemp;
+            nestinglevel = env.getNestingLevel();
 
             STentry entryID=null;
             entryID=env.getHashMapNL(env.getNestingLevel()).get(id);

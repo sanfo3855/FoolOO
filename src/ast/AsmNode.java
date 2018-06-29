@@ -14,6 +14,7 @@ public class AsmNode implements Node {
 
     /**
      * Constructor for AsmNode.
+     *
      * It takes 2 parameters:
      * @param id -> Variable's ID
      * @param value -> Value assigned to id
@@ -24,7 +25,8 @@ public class AsmNode implements Node {
     }
 
     /**
-     * Prints structure of AsmNode
+     * Prints structure of AsmNode.
+     *
      * @param s parent Indentation, incremented at every toPrint
      * @return updated string that prints Abstract Syntax Tree Structure
      */
@@ -35,35 +37,57 @@ public class AsmNode implements Node {
 
     /**
      * Checks AsmNode's semantic and call checkSemantic method on every child Node
+     *
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+
+        /* Lista degli errori semantici del nodo */
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
+        /* NestingLevel attuale*/
         int j=env.getNestingLevel();
+
+        /* Dichiarazione di STentry in cui salvare
+        la dichiarazione della variabile (se trovata) */
         STentry tmpEntry=null;
+
+        /* Ciclo che scorre tutti i NestingLevel superiori
+        per cercare una dichiarazione delle variabile */
         while (j>=0 && tmpEntry==null){
+            /* Effettuo una ricerca nell'HashMap relativa al j-esimo nestingLevel
+            della chiave "id". Se la trova salva l'entry relativa ed esce dal ciclo. */
             tmpEntry = env.getHashMapNL(j--).get(id);
         }
-        //System.out.println(tmpEntry.toPrint(""));
+
+        /* Controlla se trova l'entry della dichiarazione */
         if(tmpEntry==null){
+            /* Se non la trova
+            Aggiungo un errore semantico nella Lista degli errori per "Variabile non dichiarata */
             semanticErrors.add(new SemanticError("Id " + id + " is not declared"));
         } else {
+            /* Salvo l'entry della variabile dichiarate nei nestingLevel precedenti nel nodo
+            (per avere l'informazione del tipo) */
             entry=tmpEntry;
         }
+
+        /* richiama il checkSemantic sul nodo value e
+        aggiunge tutti gli eventuali errori semantici all'array degli errori */
         semanticErrors.addAll(value.checkSemantics(env));
+
         return semanticErrors;
     }
 
     /**
      * Check that value field is subtype of id's type (saved in node's entry field)
+     *
      * @return instance of VoidTypeNode()
      */
     public Node typeCheck() {
-           // System.out.println("AsmNode - "+id+" - "+entry.getType()+" - "+value.typeCheck());
 
         if( !FOOLlib.isSubtype(value.typeCheck(), entry.getType()) ){
+            /* Stampa un errore di tipo e blocca l'esecuzione */
             System.out.println("TypeCheck error for assignement to " + id );
             System.exit(0);
         }
