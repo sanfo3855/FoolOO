@@ -1,4 +1,4 @@
-// Generated from /home/andrea/IdeaProjects/compilatori/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
+// Generated from /Users/MatteoMarchesini/FoolOO/src/parser/FoolOO.g4 by ANTLR 4.7
 package parser;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -151,6 +151,13 @@ public class FoolOOBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitFactor(FoolOOParser.FactorContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFactorRight(FoolOOParser.FactorRightContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

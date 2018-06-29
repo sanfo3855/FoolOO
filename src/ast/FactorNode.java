@@ -11,11 +11,15 @@ public class FactorNode implements Node {
     private Node left;
     private Node right;
     private String operator;
+    private String notLeft;
+    private String notRight;
 
-    public FactorNode (Node left, Node right, String operator){
+    public FactorNode (Node left, Node right, String operator, String notLeft, String notRight){
         this.left=left;
         this.right=right;
         this.operator = operator;
+        this.notLeft = notLeft;
+        this.notRight = notRight;
     }
 
     public String toPrint(String s) {
@@ -45,27 +49,65 @@ public class FactorNode implements Node {
     public String codeGeneration() {
         String cgenString = left.codeGeneration();
         if (right != null) {
-            cgenString+= right.codeGeneration();
             String trueBranch= FOOLlib.freshLabel();
+            String trueBranch_2= FOOLlib.freshLabel();
             String exit = FOOLlib.freshLabel();
             switch (operator){
                 case ("=="):
+                    cgenString+= right.codeGeneration();
                     cgenString+= "beq "+ trueBranch+"\n"+
                                  "push 0\n"+
                                  "b "+ exit +"\n"+
                                  trueBranch+":\n"+
-                                 "push 1\n"+
+                                    "push 1\n"+
                                  exit+":\n";
                     break;
                 case (">="):
+                    cgenString+= right.codeGeneration();
                     cgenString+= "bgeq "+ trueBranch+"\n"+
-                            "push 0\n"+
-                            "b "+ exit +"\n"+
-                            trueBranch+":\n"+
-                            "push 1\n"+
-                            exit+":\n";
-
-
+                                 "push 0\n"+
+                                 "b "+ exit +"\n"+
+                                 trueBranch+":\n"+
+                                    "push 1\n"+
+                                 exit+":\n";
+                    break;
+                case ("<="):
+                    cgenString+= right.codeGeneration();
+                    cgenString+= "bleq "+ trueBranch+"\n"+
+                                 "push 0\n"+
+                                 "b "+ exit +"\n"+
+                                 trueBranch+":\n"+
+                                    "push 1\n"+
+                                 exit+":\n";
+                    break;
+                case ("&&"):
+                    cgenString+= "push 0\n" +
+                                 "beq "+ trueBranch+"\n"+
+                                 right.codeGeneration() + "push 0\n"+
+                                 "beq "+ trueBranch_2+"\n"+
+                                 "push 1\n"+
+                                 "b "+ exit +"\n"+
+                                 trueBranch+":\n"+
+                                        "push 0\n"+
+                                        "b "+ exit +"\n"+
+                                 trueBranch_2+":\n"+
+                                        "push 0\n"+
+                                 exit+":\n";
+                    break;
+                case("||"):
+                    cgenString+= "push 1\n" +
+                                 "beq "+ trueBranch+"\n"+
+                                 right.codeGeneration() + "push 1\n"+
+                                 "beq "+ trueBranch_2+"\n"+
+                                 "push 0\n"+
+                                 "b "+ exit +"\n"+
+                                 trueBranch+":\n"+
+                                    "push 1\n"+
+                                    "b "+ exit +"\n"+
+                                 trueBranch_2+":\n"+
+                                    "push 1\n"+
+                                 exit+":\n";
+                    break;
             }
         }
 
