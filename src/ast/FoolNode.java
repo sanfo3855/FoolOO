@@ -175,6 +175,7 @@ public class FoolNode implements Node {
      * @return the generated assembly code
      */
     public String codeGeneration() {
+        //todo
         String code= "";
         for(Node nodo : listNodi){
             code += nodo.codeGeneration();

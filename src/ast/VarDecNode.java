@@ -100,6 +100,7 @@ public class VarDecNode implements Node {
      * @return
      */
     public String codeGeneration() {
+        //todo
         return type.codeGeneration()+"halt\n";
     }
 

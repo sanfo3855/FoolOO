@@ -141,6 +141,7 @@ public class NewClassNode implements Node{
     }
 
     public String codeGeneration() {
+        //todo
         return "";
     }
 

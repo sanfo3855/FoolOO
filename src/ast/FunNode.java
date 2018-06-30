@@ -151,6 +151,7 @@ public class FunNode  implements FunInterfaceNode {
      * @return
      */
     public String codeGeneration() {
+        //todo
         return type.codeGeneration()+"halt\n";
     }
 

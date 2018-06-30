@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class FoolOOMain {
     public static void main(String[] args) throws Exception {
 
-        String fileName = "code/ProvaCodeGenPlus.fool";
+        String fileName = "code/provaReturnFunctionType.fool";
 
         FileInputStream is = new FileInputStream(fileName);
         ANTLRInputStream input = new ANTLRInputStream(is);
