@@ -110,7 +110,7 @@ void main(){
         int x=true;
         bool oi(int e){
             x=0;
-            return 0;
+            return true;
         }
         int b=0;
         int bbb=0;

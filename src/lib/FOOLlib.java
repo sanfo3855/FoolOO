@@ -10,9 +10,27 @@ public class FOOLlib {
   
   private static int funLabCount=0; 
 
-  private static String funCode=""; 
+  private static String funCode="";
 
-  //valuta se il tipo "a" è <= al tipo "b", dove "a" e "b" sono tipi di base: int o bool
+  /**
+   * Checks subtyping between Node a and Node b
+   *
+   * Node a <: Node b (Is Node a subtype of Node b?)
+   *
+   * Nodes can be: Int, Bool, Null or Class
+   *
+   *
+   * SUBTYPING PATTERN
+   * Bool <: Int
+   * Null <: Class
+   * Class A <: Class B if
+   *    - A extends B
+   *    - A extends C   and   C extends B
+   *
+   * @param a -> Node a
+   * @param b -> Node a
+   * @return true or false
+   */
   public static boolean isSubtype (Node a, Node b) {
     boolean res=false;
     if(b!=null){

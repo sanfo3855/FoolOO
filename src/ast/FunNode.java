@@ -138,8 +138,7 @@ public class FunNode  implements FunInterfaceNode {
         }
         if(retNode!=null){
             //Sottotipo tra tipo funzione e return
-            //TODO type e retNode.typeCheck()
-            if( !FOOLlib.isSubtype(type, retNode.typeCheck()) ){
+            if( !FOOLlib.isSubtype(retNode.typeCheck(),type) ){
                 System.out.println("Wrong return type for function " + id );
                 System.exit(0);
             }
