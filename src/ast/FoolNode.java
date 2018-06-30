@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -175,12 +176,12 @@ public class FoolNode implements Node {
      * @return the generated assembly code
      */
     public String codeGeneration() {
-        //todo
+        //todo FOOLlib.getCode();
         String code= "";
         for(Node nodo : listNodi){
             code += nodo.codeGeneration();
         }
-        return code+"halt\n";
+        return code+"halt\n"+ FOOLlib.getCode();
     }
 
 }

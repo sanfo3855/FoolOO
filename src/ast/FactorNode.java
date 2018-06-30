@@ -120,74 +120,75 @@ public class FactorNode implements Node {
      * @return string of generated code
      */
     public String codeGeneration() {
-
-        String cgenString = left.codeGeneration();
-        
-        /* genera label per il codegen*/
-        String trueBranch= FOOLlib.freshLabel();
-        String trueBranch_2= FOOLlib.freshLabel();
-        String exit = FOOLlib.freshLabel();
+        String cgenString = "";
+        if (right==null) {
+            cgenString = left.codeGeneration();
+        }else {
+            /* genera label per il codegen*/
+            String trueBranch = FOOLlib.freshLabel();
+            String trueBranch_2 = FOOLlib.freshLabel();
+            String exit = FOOLlib.freshLabel();
 
         /* switch-case che controlla l'operatore logico
         e genera la stringa di code relativo */
-        switch (operator){
-            case ("=="):
-                cgenString+= right.codeGeneration();
-                cgenString+= "beq "+ trueBranch+"\n"+
-                             "push 0\n"+
-                             "b "+ exit +"\n"+
-                             trueBranch+":\n"+
-                                "push 1\n"+
-                             exit+":\n";
-                break;
-            case (">="):
-                cgenString+= right.codeGeneration();
-                cgenString+= "bgeq "+ trueBranch+"\n"+
-                             "push 0\n"+
-                             "b "+ exit +"\n"+
-                             trueBranch+":\n"+
-                                "push 1\n"+
-                             exit+":\n";
-                break;
-            case ("<="):
-                cgenString+= right.codeGeneration();
-                cgenString+= "bleq "+ trueBranch+"\n"+
-                             "push 0\n"+
-                             "b "+ exit +"\n"+
-                             trueBranch+":\n"+
-                                "push 1\n"+
-                             exit+":\n";
-                break;
-            case ("&&"):
-                cgenString+= "push 0\n" +
-                             "beq "+ trueBranch+"\n"+
-                             right.codeGeneration() + "push 0\n"+
-                             "beq "+ trueBranch_2+"\n"+
-                             "push 1\n"+
-                             "b "+ exit +"\n"+
-                             trueBranch+":\n"+
-                                    "push 0\n"+
-                                    "b "+ exit +"\n"+
-                             trueBranch_2+":\n"+
-                                    "push 0\n"+
-                             exit+":\n";
-                break;
-            case("||"):
-                cgenString+= "push 1\n" +
-                             "beq "+ trueBranch+"\n"+
-                             right.codeGeneration() + "push 1\n"+
-                             "beq "+ trueBranch_2+"\n"+
-                             "push 0\n"+
-                             "b "+ exit +"\n"+
-                             trueBranch+":\n"+
-                                "push 1\n"+
-                                "b "+ exit +"\n"+
-                             trueBranch_2+":\n"+
-                                "push 1\n"+
-                             exit+":\n";
-                break;
+            switch (operator) {
+                case ("=="):
+                    cgenString += right.codeGeneration();
+                    cgenString += "beq " + trueBranch + "\n" +
+                            "push 0\n" +
+                            "b " + exit + "\n" +
+                            trueBranch + ":\n" +
+                            "push 1\n" +
+                            exit + ":\n";
+                    break;
+                case (">="):
+                    cgenString += right.codeGeneration();
+                    cgenString += "bgeq " + trueBranch + "\n" +
+                            "push 0\n" +
+                            "b " + exit + "\n" +
+                            trueBranch + ":\n" +
+                            "push 1\n" +
+                            exit + ":\n";
+                    break;
+                case ("<="):
+                    cgenString += right.codeGeneration();
+                    cgenString += "bleq " + trueBranch + "\n" +
+                            "push 0\n" +
+                            "b " + exit + "\n" +
+                            trueBranch + ":\n" +
+                            "push 1\n" +
+                            exit + ":\n";
+                    break;
+                case ("&&"):
+                    cgenString += "push 0\n" +
+                            "beq " + trueBranch + "\n" +
+                            right.codeGeneration() + "push 0\n" +
+                            "beq " + trueBranch_2 + "\n" +
+                            "push 1\n" +
+                            "b " + exit + "\n" +
+                            trueBranch + ":\n" +
+                            "push 0\n" +
+                            "b " + exit + "\n" +
+                            trueBranch_2 + ":\n" +
+                            "push 0\n" +
+                            exit + ":\n";
+                    break;
+                case ("||"):
+                    cgenString += "push 1\n" +
+                            "beq " + trueBranch + "\n" +
+                            right.codeGeneration() + "push 1\n" +
+                            "beq " + trueBranch_2 + "\n" +
+                            "push 0\n" +
+                            "b " + exit + "\n" +
+                            trueBranch + ":\n" +
+                            "push 1\n" +
+                            "b " + exit + "\n" +
+                            trueBranch_2 + ":\n" +
+                            "push 1\n" +
+                            exit + ":\n";
+                    break;
+            }
         }
-
 
         return cgenString;
     }
