@@ -31,7 +31,7 @@ vardec  : type ID
         ;
 
 varasm  : vardec ASM exp SEMIC      #expDecAsignment
-        |  vardec ASM stms          #stmDecAsignment
+        |  vardec ASM stm          #stmDecAsignment
         ;
 
 fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog (ret)? CRPAR
@@ -42,7 +42,7 @@ funconstructor  : ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog CRPAR
 
 
 ret     : RETURN exp SEMIC                                      #returnFunExp
-        | RETURN stms                                           #returnFunStms
+        | RETURN stm                                           #returnFunStms
         ;
 
 dec     : varasm           #varAssignment
@@ -83,7 +83,7 @@ value   : INTEGER                               #intVal
         | ( TRUE | FALSE )                      #boolVal
         | LPAR exp RPAR                         #baseExp
         | IF cond=exp THEN CLPAR thenBranch=exp CRPAR (ELSE CLPAR elseBranch=exp CRPAR)?       #ifExp
-        | stms                                  #stmsExp
+        | stm                                  #stmsExp
         | ID                                    #varExp
         | NULL                                  #nullVal
         | NEW ID LPAR (exp (COMMA exp)* )? RPAR #newClass

@@ -106,9 +106,9 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitStmDecAsignment(StmDecAsignmentContext ctx) {
         Node varDecNode = visit(ctx.vardec());
-        Node stmsNode = visit(ctx.stms());
+        Node stmNode = visit(ctx.stm());
 
-        return new VarNode(varDecNode, stmsNode);
+        return new VarNode(varDecNode, stmNode);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitReturnFunStms(ReturnFunStmsContext ctx) {
-        return visit(ctx.stms());
+        return visit(ctx.stm());
     }
 
     @Override
@@ -334,7 +334,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitStmsExp(StmsExpContext ctx) {
-        return visit(ctx.stms());
+        return visit(ctx.stm());
     }
 
     @Override
