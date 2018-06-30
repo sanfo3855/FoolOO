@@ -36,7 +36,7 @@ public class FoolOOMain {
             System.out.println("Visualizing AST...");
             System.out.println(ast.toPrint(""));
 
-            System.out.println("EBD AST...");
+            System.out.println("END AST...");
             Environment env = new Environment();
             ArrayList<SemanticError> err = ast.checkSemantics(env);
 

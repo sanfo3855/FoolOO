@@ -67,12 +67,11 @@ factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) factorRight)?
 factorRight: (NOT)? right=value;
 
 stm     : IF cond=exp THEN CLPAR thenBranch=stms CRPAR (ELSE CLPAR elseBranch=stms CRPAR)?       #stmIf
-        | PRINT exp SEMIC                                       #stmPrint
-        | funExp SEMIC                   #callFunExp
-        | ID DOT funExp SEMIC    #callMethod
-        //|ID ASM exp SEMIC                                     #stmExpAsignment
+        | PRINT LPAR exp RPAR SEMIC                                       #stmPrint
+        | funExp SEMIC                                          #callFunExp
+        | ID DOT funExp SEMIC                                   #callMethod
         | ID ASM stm                                            #stmAssignment
-        | ID ASM value SEMIC                                    #stmValAssignment
+        | ID ASM exp SEMIC                                      #stmValAssignment
         ;
 
 funExp: ID LPAR (exp (COMMA exp)* )? RPAR  ;
@@ -88,6 +87,8 @@ value   : INTEGER                               #intVal
         | ID                                    #varExp
         | NULL                                  #nullVal
         | NEW ID LPAR (exp (COMMA exp)* )? RPAR #newClass
+        | funExp                                #funExpValue
+        | ID DOT funExp                         #callMethodValue
         ;
 
 

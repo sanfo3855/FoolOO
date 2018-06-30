@@ -2,7 +2,7 @@ class pluto extends classe1(int y){
     pluto(int e){
         let
             int x=0;
-            int qwerty2=retFunz();
+            int qwerty2=retFunz()+3;
             int qwerty=funz(y,false);
         in
             e=0;
@@ -123,12 +123,13 @@ void main(){
         int zzzz= w.retFunz();
     in
 
-        b=0;
-        b=oi(1);
+        b=print(1);
+        b=3+oi(1)+3;
+        b=oi(1)+3;
         zzzz= w.retFunz();
-        a=0;
-        a=o.retFunz();
-        zzzz= w.retFunz();
+        a=a+a+0;
+        a=3+o.retFunz()+5;
+        zzzz= w.retFunz()+5;
         bbb=0;
-        //a=w.funz(1, false);
+        a=w.funz(1, false);
 }

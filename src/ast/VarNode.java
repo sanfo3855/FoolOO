@@ -4,6 +4,7 @@ import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class VarNode implements Node {
 
@@ -41,10 +42,8 @@ public class VarNode implements Node {
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
-
         //chiamo check semantics nel nodo vardec
         semanticErrors.addAll(varDec.checkSemantics(env));
-
         //chiamo check semantics nel nodo value
         semanticErrors.addAll(value.checkSemantics(env));
 

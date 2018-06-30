@@ -1,6 +1,5 @@
 package ast;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.IntType;
 import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
