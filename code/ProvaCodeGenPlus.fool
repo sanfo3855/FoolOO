@@ -1,0 +1,14 @@
+void main(){
+    let
+        int x=0;
+        bool c=false;
+    in
+
+    if(!false == c ) then {
+        x=2;
+    }else{
+        x=3;
+    }
+
+
+}

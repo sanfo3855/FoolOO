@@ -42,7 +42,7 @@ public class NullNode implements Node {
      * @return null
      */
     public Node typeCheck() {
-        return null;
+        return new NullNode();
     }
 
     /**

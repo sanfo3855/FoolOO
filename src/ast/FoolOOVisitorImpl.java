@@ -1,15 +1,9 @@
 package ast;
 
-import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.FoolOOBaseVisitor;
 import parser.FoolOOParser.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
@@ -217,17 +211,22 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitFactor(FactorContext ctx) {
         Node node;
-        String notLeft = "0";
-        String notRight = "0";
-        if (ctx.NOT()!=null){
-            notLeft = "1";
-        }
-//        System.out.println(ctx.NOT());
+        boolean notLeft = false;
+        boolean notRight = false;
+
         if (ctx.factorRight()==null) {
-            node= visit(ctx.left);
+            if (ctx.NOT()!=null){
+               node = new FactorNode(visit(ctx.left), true);
+            }else{
+                node= visit(ctx.left);
+            }
+
         }else{
+            if (ctx.NOT()!=null){
+                notLeft = true;
+            }
             if (ctx.factorRight().NOT()!=null){
-                notRight = "1";
+                notRight = true;
             }
             String operator = "";
             if (ctx.EQ()!=null){
@@ -256,7 +255,6 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     public Node visitStmValAssignment(StmValAssignmentContext ctx) {
         return new AsmNode(ctx.ID().getText(), visit(ctx.exp()));
     }
-
 
     @Override
     public Node visitStmIf(StmIfContext ctx) {

@@ -66,6 +66,9 @@ public class IdNode implements Node {
         //ottiene il tipo dell'id
         String type=((TypeNode) entry.getType()).getType();
         TypeNode typeNode;
+//        switch (typeNode){
+//
+//        }
         if (type.equals("int")){
             //identifico typeNode come un nodo IntTypeNode
             typeNode=new IntTypeNode();

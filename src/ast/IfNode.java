@@ -43,10 +43,13 @@ public class IfNode implements Node {
      * @return updated string that prints Abstract Syntax Tree Structure
      */
     public String toPrint(String s) {
-        String returnString = s + "IfNodeCond\n" + s + cond.toPrint("  ") +"\n" +
-                s + "IfNodeThenBranch\n" + s + thenBranch.toPrint("  ") +"\n";
+        String returnString = s + "IfNodeCond\n" +
+                s+s + cond.toPrint(s +"  ") +"\n" +
+                s + "IfNodeThenBranch\n"
+                + s+s + thenBranch.toPrint(s + "  ") +"\n";
         if(this.elseBranch!=null){
-            returnString += s + "IfNodeElseBranch\n" + s +cond.toPrint("  ") +"\n";
+            returnString += s + "IfNodeElseBranch\n" +
+                    s+s +elseBranch.toPrint(s + "  ") +"\n";
         }
         return returnString;
 
