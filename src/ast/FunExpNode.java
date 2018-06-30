@@ -57,6 +57,28 @@ public class FunExpNode implements Node {
      * @return updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        //Se typeClassMethod!=null sto effettuando una chiamata di metodo tramite x.m(); con m FunExpNode
+        if(typeClassMethod==null){
+            /*
+            Se typeClassMethod==null controllo che l'ambiente in cui sto
+            richiamando la funzione sia una classe. Se lo è salvo in typeClassMethod
+            il nome della classe attuale, per poter utilizzare le funzioni definite
+            nella classe e nelle superclassi.
+             */
+            Set<String> keySetTemp = env.getHashMapNL(1).keySet();
+            String classTemp=null;
+            for (String s:keySetTemp) {
+                if(s.contains("class%")){
+                    //ottengo il nome della classe
+                    classTemp=s.split("%")[1];
+                }
+            }
+            if(classTemp!=null ){
+                //set della classe al cui appartiene il metodo
+                typeClassMethod=classTemp;
+            }
+        }
+
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         int j=env.getNestingLevel();
         STentry tmpEntry = null;
@@ -103,7 +125,6 @@ public class FunExpNode implements Node {
                             Controlla se la funzione che si sta cercando è da ricercare fra i metodi di
                             una specifica classe definita in typeClassMethod. Se la funzione non dovrà essere
                             cercata in tale ambiente typeClassMethod sarà inizializzato a null.
-
                              */
                             if (typeClassMethod != null && (keylength - 4) == listParam.size() && keyType.get(keylength - 2).equals("class")) {
                                 /*
@@ -121,12 +142,10 @@ public class FunExpNode implements Node {
                                             }
                                         }
                                     }
-
                                 }
                             }
                         }
                     }
-
                 }
             }
         }

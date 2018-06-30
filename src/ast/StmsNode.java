@@ -54,12 +54,6 @@ public class StmsNode implements Node {
             }
         }
         for(Node node : listNode){
-            //controllo che il tipo di node sia FunExp e che esista tale classe
-            if(classTemp!=null && node instanceof FunExpNode){
-                //set della classe al cui appartiene il metodo
-                ((FunExpNode) node).setTypeClassMethod(classTemp);
-            }
-
             //richiamo check semantic per ciascun nodo presente
             semanticErrors.addAll(node.checkSemantics(env));
         }

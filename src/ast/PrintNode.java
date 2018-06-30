@@ -23,7 +23,8 @@ public class PrintNode implements Node{
     }
 
     public Node typeCheck() {
-        return exp.typeCheck();
+        exp.typeCheck();
+        return new VoidTypeNode();
     }
 
     public String codeGeneration() {

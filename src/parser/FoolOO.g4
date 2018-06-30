@@ -31,7 +31,7 @@ vardec  : type ID
         ;
 
 varasm  : vardec ASM exp SEMIC      #expDecAsignment
-        |  vardec ASM stms          #stmDecAsignment
+        |  vardec ASM stm          #stmDecAsignment
         ;
 
 fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog (ret)? CRPAR
@@ -42,7 +42,7 @@ funconstructor  : ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog CRPAR
 
 
 ret     : RETURN exp SEMIC                                      #returnFunExp
-        | RETURN stms                                           #returnFunStms
+        | RETURN stm                                           #returnFunStms
         ;
 
 dec     : varasm           #varAssignment
@@ -67,12 +67,11 @@ factor  : (NOT)? left=value ((EQ|GTEQ|LTEQ|AND|OR) factorRight)?
 factorRight: (NOT)? right=value;
 
 stm     : IF cond=exp THEN CLPAR thenBranch=stms CRPAR (ELSE CLPAR elseBranch=stms CRPAR)?       #stmIf
-        | PRINT exp SEMIC                                       #stmPrint
-        | funExp SEMIC                   #callFunExp
-        | ID DOT funExp SEMIC    #callMethod
-        //|ID ASM exp SEMIC                                     #stmExpAsignment
+        | PRINT LPAR exp RPAR SEMIC                                       #stmPrint
+        | funExp SEMIC                                          #callFunExp
+        | ID DOT funExp SEMIC                                   #callMethod
         | ID ASM stm                                            #stmAssignment
-        | ID ASM value SEMIC                                    #stmValAssignment
+        | ID ASM exp SEMIC                                      #stmValAssignment
         ;
 
 funExp: ID LPAR (exp (COMMA exp)* )? RPAR  ;
@@ -84,10 +83,12 @@ value   : INTEGER                               #intVal
         | ( TRUE | FALSE )                      #boolVal
         | LPAR exp RPAR                         #baseExp
         | IF cond=exp THEN CLPAR thenBranch=exp CRPAR (ELSE CLPAR elseBranch=exp CRPAR)?       #ifExp
-        | stms                                  #stmsExp
+        | stm                                  #stmsExp
         | ID                                    #varExp
         | NULL                                  #nullVal
         | NEW ID LPAR (exp (COMMA exp)* )? RPAR #newClass
+        | funExp                                #funExpValue
+        | ID DOT funExp                         #callMethodValue
         ;
 
 
