@@ -11,8 +11,8 @@ public class FactorNode implements Node {
     private Node left;  //Nodo figlio sinistro
     private Node right; //Nodo figlio destro
     private String operator;    //operatore (>=, <=, ==, &&, ||) del FactorNode
-    private String notLeft;     //operatore not (!) prima del left node
-    private String notRight;    //operatore not (!) prima del right node
+    private boolean notLeft;     //operatore not (!) prima del left node
+    private boolean notRight;    //operatore not (!) prima del right node
 
     /**
      * Constructor for ExpNode.
@@ -23,12 +23,18 @@ public class FactorNode implements Node {
      * @param notLeft -> not (!) operator before left node
      * @param notRight -> not (!) operator before right node
      */
-    public FactorNode (Node left, Node right, String operator, String notLeft, String notRight){
+    public FactorNode (Node left, Node right, String operator, boolean notLeft, boolean notRight){
         this.left=left;
         this.right=right;
         this.operator = operator;
         this.notLeft = notLeft;
         this.notRight = notRight;
+    }
+
+    public FactorNode (Node left, boolean notLeft){
+        this.left=left;
+        this.right=null;
+        this.notLeft = notLeft;
     }
 
     /**
@@ -38,10 +44,24 @@ public class FactorNode implements Node {
      * @return updated string that prints Abstract Syntax Tree Structure
      */
     public String toPrint(String s) {
-        return s + "LeftFactorNode\n" +
-                left.toPrint(s + "  ") + "\n"+
-               s + "RightFactorNode\n" +
-                right.toPrint(s + "  ") + "\n";
+        String returnString="";
+        System.out.println(notLeft +"NOTLEFT");
+        if (notLeft){
+            System.out.println("NOTLEFT");
+            returnString = s+ "!\n";
+        }
+        returnString+= s + "LeftFactorNode\n" + s +
+                left.toPrint(s + "  ") + "\n" + s +
+                operator + "\n";
+        if (right != null) {
+            if (notRight) {
+                returnString = s + "!\n";
+            }
+            returnString += s + "RightFactorNode\n" + s +
+                    right.toPrint(s + "  ") + "\n";
+        }
+        return returnString;
+
     }
 
     /**
@@ -53,8 +73,9 @@ public class FactorNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         semanticErrors.addAll(left.checkSemantics(env));
-        semanticErrors.addAll(right.checkSemantics(env));
-
+        if (right!= null) {
+            semanticErrors.addAll(right.checkSemantics(env));
+        }
         return semanticErrors;
     }
 
@@ -67,11 +88,27 @@ public class FactorNode implements Node {
      */
     public Node typeCheck() {
         Node leftNode = left.typeCheck();
-        Node rightNode = right.typeCheck();
-        if (!(FOOLlib.isSubtype(leftNode, rightNode))||FOOLlib.isSubtype(rightNode,leftNode)){
-            /* Stampa un errore di tipo e blocca l'esecuzione */
-            System.out.println("Incompatible types in Factor");
-            System.exit(0);
+        if (notLeft){
+            if (!(leftNode instanceof BoolTypeNode)){
+                System.out.println("Boolean expression needed for NOT operator");
+                System.exit(0);
+            }
+        }
+
+        if (right!=null) {
+            Node rightNode = right.typeCheck();
+            if (notRight){
+                if (!(rightNode instanceof BoolTypeNode)){
+                    System.out.println("Boolean expression needed for NOT operator");
+                    System.exit(0);
+                }
+            }
+
+            if (!(FOOLlib.isSubtype(leftNode, rightNode)) || FOOLlib.isSubtype(rightNode, leftNode)) {
+                /* Stampa un errore di tipo e blocca l'esecuzione */
+                System.out.println("Incompatible types in Factor");
+                System.exit(0);
+            }
         }
 
         return new BoolTypeNode();
