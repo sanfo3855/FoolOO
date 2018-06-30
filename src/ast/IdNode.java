@@ -66,28 +66,24 @@ public class IdNode implements Node {
         //ottiene il tipo dell'id
         String type=((TypeNode) entry.getType()).getType();
         TypeNode typeNode;
-//        switch (typeNode){
-//
-//        }
-        if (type.equals("int")){
-            //identifico typeNode come un nodo IntTypeNode
-            typeNode=new IntTypeNode();
-        }else{
-            if (type.equals("bool")){
+        switch (type){
+            case "int":
+                //identifico typeNode come un nodo IntTypeNode
+                typeNode=new IntTypeNode();
+                break;
+            case "bool":
                 //identifico typeNode come un nodo BoolTypeNode
                 typeNode=new BoolTypeNode();
-            }else{
+                break;
+            default:
                 //identifico typeNode come un nodo IdTypeNode, e quindi un oggetto type
                 typeNode=new IdTypeNode(type);
-            }
         }
         return typeNode;
     }
-
 
     public String codeGeneration() {
         //todo
         return "";
     }
-
 }

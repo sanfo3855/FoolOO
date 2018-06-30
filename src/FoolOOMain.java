@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class FoolOOMain {
     public static void main(String[] args) throws Exception {
 
-        String fileName = "code/provaReturnFunctionType.fool";
+        String fileName = "code/ProvaCodeGenPlus.fool";
 
         FileInputStream is = new FileInputStream(fileName);
         ANTLRInputStream input = new ANTLRInputStream(is);
@@ -54,7 +54,8 @@ public class FoolOOMain {
 
 
 //                // CODE GENERATION  prova.fool.asm
-//                String code=ast.codeGeneration();
+                String code=ast.codeGeneration();
+                System.out.println(code);
 //                BufferedWriter out = new BufferedWriter(new FileWriter(fileName+".asm"));
 //                out.write(code);
 //                out.close();
