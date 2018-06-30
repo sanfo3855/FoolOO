@@ -176,12 +176,14 @@ public class FoolNode implements Node {
      * @return the generated assembly code
      */
     public String codeGeneration() {
-        //todo FOOLlib.getCode();
-        String code= "";
+        String code= "push 0\n";
+        String end=FOOLlib.freshFunLabel();
+        FOOLlib.putLabelEnd(end);
         for(Node nodo : listNodi){
             code += nodo.codeGeneration();
         }
-        return code+"halt\n"+ FOOLlib.getCode();
+        code+="b "+FOOLlib.getLabelMain()+"\n";
+        return code+end+":\nhalt\n"+ FOOLlib.getCode();
     }
 
 }

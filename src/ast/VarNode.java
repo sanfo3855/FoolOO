@@ -69,8 +69,7 @@ public class VarNode implements Node {
      * @return
      */
     public String codeGeneration() {
-        //todo
-        return value.codeGeneration()+"halt\n";
+        return value.codeGeneration();
     }
 
 }

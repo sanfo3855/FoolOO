@@ -22,6 +22,10 @@ public class LetInExpNode implements Node {
         this.stms=stms;
     }
 
+    public int getListDecSize() {
+        return listDec.size();
+    }
+
     /**
      * Prints structure of LetInExpNode.
      *

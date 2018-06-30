@@ -119,14 +119,14 @@ public class ExecuteVM {
             return;
         }
       }
-    } 
-    
-    private int pop() {
-      return memory[sp++];
     }
-    
+
+    private int pop() {
+        return memory[sp++];
+    }
+
     private void push(int v) {
-      memory[--sp] = v;
+        memory[--sp] = v;
     }
     
 }

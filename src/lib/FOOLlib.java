@@ -8,9 +8,12 @@ public class FOOLlib {
   
   private static int labCount=0; 
   
-  private static int funLabCount=0; 
+  private static int funLabCount=0;
 
   private static String funCode="";
+
+  private static String labelMain="";
+  private static String labelEnd="";
 
   /**
    * Checks subtyping between Node a and Node b
@@ -76,7 +79,22 @@ public class FOOLlib {
   
   public static String getCode() { 
     return funCode;
-  } 
+  }
+
+  public static void putLabelMain(String label) {
+    labelMain=label;
+  }
+
+  public static String getLabelMain() {
+    return labelMain;
+  }
+  public static void putLabelEnd(String label) {
+    labelEnd=label;
+  }
+
+  public static String getLabelEnd() {
+    return labelEnd;
+  }
 
 
 }

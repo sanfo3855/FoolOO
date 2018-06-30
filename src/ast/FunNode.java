@@ -151,8 +151,41 @@ public class FunNode  implements FunInterfaceNode {
      * @return
      */
     public String codeGeneration() {
-        //todo
-        return type.codeGeneration()+"halt\n";
+
+
+        String popDec="";
+        if (progNode instanceof LetInExpNode){
+            for (int i=0; i<((LetInExpNode)progNode).getListDecSize();i++){
+                popDec+="pop\n";
+            }
+        }
+
+        String popVar="";
+        for (Node dec:listVar)
+            popVar+="pop\n";
+
+        String funl=FOOLlib.freshFunLabel();
+        String end="";
+        if(id.equals("main")){
+            FOOLlib.putLabelMain(funl);
+            end="b "+FOOLlib.getLabelEnd()+"\n";
+        }
+        FOOLlib.putCode(funl+":\n"+
+                "cfp\n"+ //setta $fp a $sp
+                "lra\n"+ //inserimento return address
+                progNode.codeGeneration()+
+                "srv\n"+ //pop del return value
+                popDec+
+                "sra\n"+ // pop del return address
+                "pop\n"+ // pop di AL
+                popVar+
+                "sfp\n"+  // setto $fp a valore del CL
+                "lrv\n"+ // risultato della funzione sullo stack
+                "lra\n"+"js\n"+ // salta a $ra
+                end
+        );
+
+        return "push "+ funl +"\n";
     }
 
 }

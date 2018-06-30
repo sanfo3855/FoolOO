@@ -12,7 +12,7 @@ grammar FoolOO;
  *------------------------------------------------------------------*/
 start   : (block)+
         ;
-
+//todo deve esistere per forza 1 e solo 1 funzione main
 block   : type MAIN LPAR RPAR CLPAR prog CRPAR       #mainDeclaration
         | decclass    #classDeclaration
         ;
