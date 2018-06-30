@@ -33,38 +33,31 @@ public class FOOLlib {
    */
   public static boolean isSubtype (Node a, Node b) {
     boolean res=false;
-    if(b!=null){
-      if(a instanceof IdTypeNode && b instanceof NullNode){
+    if(b!=null && a!=null){
+      if(b instanceof IdTypeNode && a instanceof NullNode){
         res=true;
       }
       if(!res && ((a instanceof BoolTypeNode) && (b instanceof IntTypeNode))){
         res=true;
       }
-      if(a!=null){
-        if(!res && a.getClass().equals(b.getClass())){
-          if(a instanceof IdTypeNode){
+      if(!res && a.getClass().equals(b.getClass())){
+        if(a instanceof IdTypeNode){
 
-            String nomeClasseA= ((IdTypeNode) a).getType();
-            String nomeClasseB= ((IdTypeNode) b).getType();
-            if( nomeClasseA.equals(nomeClasseB) ){
-              res=true;
-            }else{
-              for(String extClassA: ((IdTypeNode) a).getExtClassId()){
-                if( nomeClasseB.equals(extClassA) ){
-                  res=true;
-                }
+          String nomeClasseA= ((IdTypeNode) a).getType();
+          String nomeClasseB= ((IdTypeNode) b).getType();
+          if( nomeClasseA.equals(nomeClasseB) ){
+            res=true;
+          }else{
+            for(String extClassA: ((IdTypeNode) a).getExtClassId()){
+              if( nomeClasseB.equals(extClassA) ){
+                res=true;
               }
             }
-          }else{
-            res=true;
           }
-        }
-      }else{
-        if(b instanceof IdTypeNode){
+        }else{
           res=true;
         }
       }
-
     }
     return res;
   } 
