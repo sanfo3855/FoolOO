@@ -102,13 +102,28 @@ public class IfNode implements Node {
 
         //richiama type check per ogni branch
         Node thenB = thenBranch.typeCheck();
-        Node elseB = elseBranch.typeCheck();
-        //controllo che then ed else siano sottotipi tra loro, altrimenti restituisco errore
-        //TODO ESEMPIO classA a = if(cond) then new classB() else new classA() solo se classB è sottotipo di classA
-        if (FOOLlib.isSubtype(thenB,elseB))
-            node = elseB;
-        if (FOOLlib.isSubtype(elseB,thenB))
-            node = thenB;
+        Node elseB=null;
+        if (elseBranch != null) {
+            elseB= elseBranch.typeCheck();
+        }
+
+        if (elseB != null) {
+            //controllo che then ed else siano sottotipi tra loro, altrimenti restituisco errore
+            //TODO ESEMPIO classA a = if(cond) then new classB() else new classA() solo se classB è sottotipo di classA
+            if (FOOLlib.isSubtype(thenB,elseB))
+                node = elseB;
+            if (FOOLlib.isSubtype(elseB,thenB))
+                node = thenB;
+        }else{
+            /*
+            nel caso in cui l'else non esista viene ritornato void poichè
+            se utilizzo l'if per assegnare un valore a una variabile deve
+            esistere anche l'else altrimenti deve dare errore di tipo.
+            Così facendo se esiste solo il then ritornerà sempre Void.
+             */
+            node=new VoidTypeNode();
+        }
+
         if(node==null) {
             System.out.println("Incompatible types in then else branches");
             System.exit(0);
@@ -122,8 +137,21 @@ public class IfNode implements Node {
      * @return
      */
     public String codeGeneration() {
-        //todo
-        return cond.codeGeneration()+"halt\n";
+        String code="";
+        String l1 = FOOLlib.freshLabel();
+        String l2 = FOOLlib.freshLabel();
+
+        code+= cond.codeGeneration()+
+                "push 1\n"+
+                "beq "+ l1 +"\n";
+        if(elseBranch!=null){
+            code+=elseBranch.codeGeneration();
+        }
+        code+="b " + l2 + "\n" +
+                l1 + ":\n"+
+                thenBranch.codeGeneration()+
+                l2 + ":\n";
+        return code;
     }
 
 }

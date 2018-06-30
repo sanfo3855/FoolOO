@@ -1,13 +1,17 @@
 void main(){
     let
-        int x=0;
+        int x=true==false;
         bool c=false;
     in
 
+    x=if(!false == c ) then {
+        2
+    }else{
+        3
+    };
+
     if(!false == c ) then {
         x=2;
-    }else{
-        x=3;
     }
 
 

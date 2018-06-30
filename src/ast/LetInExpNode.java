@@ -9,17 +9,17 @@ import java.util.HashMap;
 public class LetInExpNode implements Node {
 
     private ArrayList<Node> listDec;
-    private Node exp;
+    private Node stms;
 
     /**
      * Constructor for LetInExpNode.
      *
      * @param listDec --> Arraylist of declarations inside Let In
-     * @param exp --> Node expression
+     * @param stms --> Node expression
      */
-    public LetInExpNode (ArrayList<Node> listDec, Node exp) {
+    public LetInExpNode (ArrayList<Node> listDec, Node stms) {
         this.listDec=listDec;
-        this.exp=exp;
+        this.stms=stms;
     }
 
     /**
@@ -38,8 +38,8 @@ public class LetInExpNode implements Node {
         }
         returnString += s + "In " + "\n";
 
-        if (exp!=null) {
-            returnString += s + this.exp.toPrint(s + "   ") + "\n";
+        if (stms!=null) {
+            returnString += s + this.stms.toPrint(s + "   ") + "\n";
         }
 
         return returnString;
@@ -100,8 +100,8 @@ public class LetInExpNode implements Node {
         }
 
         //richiamo checkSemantic nella exp se esiste
-        if (exp!=null) {
-            semanticErrors.addAll(exp.checkSemantics(env));
+        if (stms!=null) {
+            semanticErrors.addAll(stms.checkSemantics(env));
         }
 
         //ritorno l'arraylist di errori semantici
@@ -115,13 +115,13 @@ public class LetInExpNode implements Node {
      */
     public Node typeCheck() {
         for (Node node : listDec) {
-            //richiamo il type check per ciascuna dichiarazione all'interno di ler in
+            //richiamo il type check per ciascuna dichiarazione all'interno di let in
             node.typeCheck();
         }
 
-        if (exp!=null){
+        if (stms!=null){
             //richiamo type check per exp se esiste
-            exp.typeCheck();
+            stms.typeCheck();
         }
 
         return new VoidTypeNode();
@@ -132,8 +132,13 @@ public class LetInExpNode implements Node {
      * @return
      */
     public String codeGeneration() {
-        //todo
-        return exp.codeGeneration()+"halt\n";
+        String code="";
+        for (Node node : listDec) {
+            //richiamo il codeGeneration per ciascuna dichiarazione all'interno di let in
+            code+=node.codeGeneration()+"\n";
+        }
+        code+=stms.codeGeneration()+"\n";
+        return code;
     }
 
 }
