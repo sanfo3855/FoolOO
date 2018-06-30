@@ -122,11 +122,13 @@ void main(){
         classe1 q= w.somma(1,2);
         int zzzz= w.retFunz();
     in
-        zzzz= w.retFunz();
-        bbb=0;
-        a=w.funz(1, false);
+
         b=0;
+        b=oi(1);
         zzzz= w.retFunz();
         a=0;
         a=o.retFunz();
+        zzzz= w.retFunz();
+        bbb=0;
+        //a=w.funz(1, false);
 }

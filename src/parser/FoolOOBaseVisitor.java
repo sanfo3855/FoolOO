@@ -192,14 +192,14 @@ public class FoolOOBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmAsignment(FoolOOParser.StmAsignmentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmAssignment(FoolOOParser.StmAssignmentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmValAsignment(FoolOOParser.StmValAsignmentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmValAssignment(FoolOOParser.StmValAssignmentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

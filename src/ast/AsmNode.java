@@ -22,6 +22,15 @@ public class AsmNode implements Node {
     public AsmNode(String id, Node value) {
         this.id=id;
         this.value=value;
+        this.entry=null;
+    }
+
+    /**
+     *
+     * @return id
+     */
+    public String getId() {
+        return id;
     }
 
     /**
@@ -31,8 +40,12 @@ public class AsmNode implements Node {
      * @return updated string that prints Abstract Syntax Tree Structure
      */
     public String toPrint(String s) {
-
-        return s + "AsmNode\n" + s +s + "Id:" + id ;
+        String returnString=s + "AsmNode\n" + s +s + "Id:" + id+ "\n";
+        returnString+=value.toPrint(s+"   ");
+        if(entry!=null){
+            returnString+=entry.toPrint(s+"   ");
+        }
+        return returnString;
     }
 
     /**
@@ -60,6 +73,7 @@ public class AsmNode implements Node {
             tmpEntry = env.getHashMapNL(j--).get(id);
         }
 
+
         /* Controlla se trova l'entry della dichiarazione */
         if(tmpEntry==null){
             /* Se non la trova
@@ -70,7 +84,6 @@ public class AsmNode implements Node {
             (per avere l'informazione del tipo) */
             entry=tmpEntry;
         }
-
         /* richiama il checkSemantic sul nodo value e
         aggiunge tutti gli eventuali errori semantici all'array degli errori */
         semanticErrors.addAll(value.checkSemantics(env));
@@ -84,8 +97,6 @@ public class AsmNode implements Node {
      * @return instance of VoidTypeNode()
      */
     public Node typeCheck() {
-        System.out.println(value.toPrint(""));
-        System.out.println(id+" - "+entry.getType() +" - "+value.typeCheck());
         if( !FOOLlib.isSubtype(value.typeCheck(), entry.getType()) ){
             /* Stampa un errore di tipo e blocca l'esecuzione */
             System.out.println("TypeCheck error for assignement to " + id );

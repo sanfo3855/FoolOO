@@ -249,11 +249,11 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     }
 
     @Override
-    public Node visitStmAsignment(StmAsignmentContext ctx) {
-        return new AsmNode(ctx.ID().getText(), visit(ctx.stms()));
+    public Node visitStmAssignment(StmAssignmentContext ctx) {
+        return new AsmNode(ctx.ID().getText(), visit(ctx.stm()));
     }
     @Override
-    public Node visitStmValAsignment(StmValAsignmentContext ctx) {
+    public Node visitStmValAssignment(StmValAssignmentContext ctx) {
         return new AsmNode(ctx.ID().getText(), visit(ctx.value()));
     }
 

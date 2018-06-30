@@ -175,19 +175,19 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCallMethod(FoolOOParser.CallMethodContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code stmAsignment}
+	 * Visit a parse tree produced by the {@code stmAssignment}
 	 * labeled alternative in {@link FoolOOParser#stm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmAsignment(FoolOOParser.StmAsignmentContext ctx);
+	T visitStmAssignment(FoolOOParser.StmAssignmentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code stmValAsignment}
+	 * Visit a parse tree produced by the {@code stmValAssignment}
 	 * labeled alternative in {@link FoolOOParser#stm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmValAsignment(FoolOOParser.StmValAsignmentContext ctx);
+	T visitStmValAssignment(FoolOOParser.StmValAssignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#funExp}.
 	 * @param ctx the parse tree

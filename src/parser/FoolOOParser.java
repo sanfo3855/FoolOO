@@ -1351,6 +1351,19 @@ public class FoolOOParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class StmAssignmentContext extends StmContext {
+		public TerminalNode ID() { return getToken(FoolOOParser.ID, 0); }
+		public TerminalNode ASM() { return getToken(FoolOOParser.ASM, 0); }
+		public StmContext stm() {
+			return getRuleContext(StmContext.class,0);
+		}
+		public StmAssignmentContext(StmContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FoolOOVisitor ) return ((FoolOOVisitor<? extends T>)visitor).visitStmAssignment(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class StmIfContext extends StmContext {
 		public ExpContext cond;
 		public StmsContext thenBranch;
@@ -1382,20 +1395,6 @@ public class FoolOOParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class StmValAsignmentContext extends StmContext {
-		public TerminalNode ID() { return getToken(FoolOOParser.ID, 0); }
-		public TerminalNode ASM() { return getToken(FoolOOParser.ASM, 0); }
-		public ValueContext value() {
-			return getRuleContext(ValueContext.class,0);
-		}
-		public TerminalNode SEMIC() { return getToken(FoolOOParser.SEMIC, 0); }
-		public StmValAsignmentContext(StmContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FoolOOVisitor ) return ((FoolOOVisitor<? extends T>)visitor).visitStmValAsignment(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class StmPrintContext extends StmContext {
 		public TerminalNode PRINT() { return getToken(FoolOOParser.PRINT, 0); }
 		public ExpContext exp() {
@@ -1421,16 +1420,17 @@ public class FoolOOParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class StmAsignmentContext extends StmContext {
+	public static class StmValAssignmentContext extends StmContext {
 		public TerminalNode ID() { return getToken(FoolOOParser.ID, 0); }
 		public TerminalNode ASM() { return getToken(FoolOOParser.ASM, 0); }
-		public StmsContext stms() {
-			return getRuleContext(StmsContext.class,0);
+		public ValueContext value() {
+			return getRuleContext(ValueContext.class,0);
 		}
-		public StmAsignmentContext(StmContext ctx) { copyFrom(ctx); }
+		public TerminalNode SEMIC() { return getToken(FoolOOParser.SEMIC, 0); }
+		public StmValAssignmentContext(StmContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FoolOOVisitor ) return ((FoolOOVisitor<? extends T>)visitor).visitStmAsignment(this);
+			if ( visitor instanceof FoolOOVisitor ) return ((FoolOOVisitor<? extends T>)visitor).visitStmValAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1514,7 +1514,7 @@ public class FoolOOParser extends Parser {
 				}
 				break;
 			case 5:
-				_localctx = new StmAsignmentContext(_localctx);
+				_localctx = new StmAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(217);
@@ -1522,11 +1522,11 @@ public class FoolOOParser extends Parser {
 				setState(218);
 				match(ASM);
 				setState(219);
-				stms();
+				stm();
 				}
 				break;
 			case 6:
-				_localctx = new StmValAsignmentContext(_localctx);
+				_localctx = new StmValAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(220);
@@ -2038,7 +2038,7 @@ public class FoolOOParser extends Parser {
 		"\u00d1\5\32\16\2\u00d1\u00d2\7\4\2\2\u00d2\u00e4\3\2\2\2\u00d3\u00d4\5"+
 		"$\23\2\u00d4\u00d5\7\4\2\2\u00d5\u00e4\3\2\2\2\u00d6\u00d7\7*\2\2\u00d7"+
 		"\u00d8\7\3\2\2\u00d8\u00d9\5$\23\2\u00d9\u00da\7\4\2\2\u00da\u00e4\3\2"+
-		"\2\2\u00db\u00dc\7*\2\2\u00dc\u00dd\7\b\2\2\u00dd\u00e4\5&\24\2\u00de"+
+		"\2\2\u00db\u00dc\7*\2\2\u00dc\u00dd\7\b\2\2\u00dd\u00e4\5\"\22\2\u00de"+
 		"\u00df\7*\2\2\u00df\u00e0\7\b\2\2\u00e0\u00e1\5(\25\2\u00e1\u00e2\7\4"+
 		"\2\2\u00e2\u00e4\3\2\2\2\u00e3\u00c2\3\2\2\2\u00e3\u00cf\3\2\2\2\u00e3"+
 		"\u00d3\3\2\2\2\u00e3\u00d6\3\2\2\2\u00e3\u00db\3\2\2\2\u00e3\u00de\3\2"+
