@@ -112,6 +112,7 @@ public class AsmNode implements Node {
     public String codeGeneration() {
 
         String returnString =
+                value.codeGeneration()+//Carico in cima allo stack il valore da assegnare
                 "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
                 "lfp\n"; //carico il fp sullo stack
 
@@ -122,7 +123,6 @@ public class AsmNode implements Node {
 
         returnString +=
                 "add\n"+ //Carico in cima allo stack il valore dell'inidirizzo in cui è salvata la variabile nello stack
-                "push "+value.codeGeneration()+"\n"+//Carico in cima allo stack il valore da assegnare
                 "sw\n"; //Sovrascrivo sullo stack il valore da assegnare all'indirizzo ottenuto
 
         return returnString;

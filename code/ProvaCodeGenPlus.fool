@@ -1,18 +1,21 @@
 void main(){
     let
-        int x=true==false;
-        bool c=false;
+        bool c=true;
+        int x=3;
     in
 
-    x=if(!false == c ) then {
-        2
-    }else{
-        true
-    };
+//    x=if(!false == c ) then {
+//        2
+ //   }else{
+ //       true
+//    };
 
-    if(!false == c ) then {
+    if(!false) then {
         x=2;
+        print(x);
     }
-
+        x=77;
+    print(8);
+    print(x);
 
 }

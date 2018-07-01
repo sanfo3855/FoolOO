@@ -120,10 +120,8 @@ public class FactorNode implements Node {
      * @return string of generated code
      */
     public String codeGeneration() {
-        String cgenString = "";
-        if (right==null) {
-            cgenString = left.codeGeneration();
-        }else {
+        String cgenString = left.codeGeneration();
+        if (right!=null) {
             /* genera label per il codegen*/
             String trueBranch = FOOLlib.freshLabel();
             String trueBranch_2 = FOOLlib.freshLabel();

@@ -12,10 +12,7 @@ public class NewClassNode implements Node{
 
     private FunExpNode funExpNode;
     private String id;
-//    private ArrayList<Node> listPar;
     private ArrayList<String> extClassId= new ArrayList<String>();
-//    private String constructor;
-
 
     /**
      * Constructor for NewClassNode.

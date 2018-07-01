@@ -163,18 +163,20 @@ public class FunNode  implements FunInterfaceNode {
                 popDec+="pop\n";
             }
         }
-
         String popVar="";
-        for (Node dec:listVar)
+        for (Node dec:listVar){
             popVar+="pop\n";
-
+        }
         String funl=FOOLlib.freshFunLabel();
         String end="";
         if(id.equals("main")){
             FOOLlib.putLabelMain(funl);
             end="b "+FOOLlib.getLabelEnd()+"\n";
+        }else{
+            end= "sfp\n"+  // setto $fp a valore del CL
+                    "lrv\n"+ // risultato della funzione sullo stack
+                    "lra\n"+"js\n"; // salta a $ra
         }
-
         String retCod="";
         if(retNode!=null){
             retCod=retNode.codeGeneration();
@@ -189,9 +191,6 @@ public class FunNode  implements FunInterfaceNode {
                 "sra\n"+ // pop del return address
                 "pop\n"+ // pop di AL
                 popVar+
-                "sfp\n"+  // setto $fp a valore del CL
-                "lrv\n"+ // risultato della funzione sullo stack
-                "lra\n"+"js\n"+ // salta a $ra
                 end
         );
 
