@@ -10,7 +10,7 @@ void main(){
  //       true
 //    };
 
-    if(!false) then {
+    if(true == !false) then {
         x=2;
         print(x);
     }
