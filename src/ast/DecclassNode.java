@@ -134,8 +134,8 @@ public class DecclassNode implements Node {
             //creo l'ambiente di livello 1 ovvero l'ambiente della classe caricando l'hashMapClass
             env.addHashMapNL(hashMapClass);
             ArrayList<Node> varTypes = new ArrayList<Node>();
-            int paroffset=1;
-            hashMapClass.put(idClass,new STentry(env.getNestingLevel(),paroffset++));
+            int offsetListVar=0;
+            hashMapClass.put(idClass,new STentry(env.getNestingLevel(),offsetListVar++));
 
             /*
             se questo nodo classe estende un'altra classe carico nell'ambiente della classe
@@ -159,7 +159,7 @@ public class DecclassNode implements Node {
                                 default:
                                     nodeType= new IdTypeNode(fieldClass[2]);
                             }
-                            if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel(),nodeType,paroffset++)) != null  ){
+                            if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel(),nodeType,offsetListVar++)) != null  ){
                                 semanticErrors.add(new SemanticError("Field id "+fieldClass[1]+" already declared"));
                             }
                         }
@@ -171,14 +171,13 @@ public class DecclassNode implements Node {
             for(Node varNode : listVar){
                 VarDecNode arguments = (VarDecNode) varNode;
                 varTypes.add(arguments.getType());
-                if ( hashMapClass.put(arguments.getId(),new STentry(env.getNestingLevel(),arguments.getType(),paroffset++)) != null  ){
+                if ( hashMapClass.put(arguments.getId(),new STentry(env.getNestingLevel(),arguments.getType(),offsetListVar++)) != null  ){
                     semanticErrors.add(new SemanticError("Parameter id "+arguments.getId()+" already declared"));
                 }
             }
 
             //richiamo il checkSemantics sui nodi funzione di questo nodo classe
             if(listFun.size() > 0){
-                //env.setOffset(-2);
                 for(Node fun : listFun){
                     semanticErrors.addAll(fun.checkSemantics(env));
                 }

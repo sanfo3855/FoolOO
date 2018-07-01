@@ -91,8 +91,6 @@ public class CallMethodNode implements Node {
      * @return
      */
     public String codeGeneration() {
-        //todo
-        return "";
+        return methodCall.codeGeneration();
     }
-
 }

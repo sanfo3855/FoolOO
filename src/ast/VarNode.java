@@ -4,7 +4,6 @@ import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class VarNode implements Node {
 

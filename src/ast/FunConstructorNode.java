@@ -92,15 +92,19 @@ public class FunConstructorNode implements FunInterfaceNode {
         //Arraylist per lista dei parrametri
         ArrayList<Node> parList = new ArrayList<Node>();
 
+        HashMap<String,STentry> entryHashMap = new HashMap<String,STentry> ();
         //Viene creata una nuova hashmap nell'ambiente
-        env.addHashMapNL( new HashMap<String, STentry>());
-
+        env.addHashMapNL(entryHashMap);
+        STentry entryListVar = null;
+        int offsetListVar=1;
         for (Node node: listVar) {
-            //si ottiene il tipo di ciascun parametro del costruttore
-            parList.add(((VarDecNode) node).getType());
-
-            //si richiam check semantic per ciascun parametro
-            semanticErrors.addAll(node.checkSemantics(env));
+            VarDecNode varDecNode = (VarDecNode) node;
+            //Si ottiene il tipo di ciascun parametro
+            parList.add(varDecNode.getType());
+            entryListVar=new STentry(env.getNestingLevel(),varDecNode.getType(),offsetListVar++);
+            if ( entryHashMap.put(varDecNode.getId(),entryListVar) != null  ){
+                semanticErrors.add(new SemanticError("Parameter id "+varDecNode.getId()+" already declared"));
+            }
         }
 
         //Aggiunge il tipo nella entry corrente

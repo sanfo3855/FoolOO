@@ -93,15 +93,19 @@ public class FunNode  implements FunInterfaceNode {
         //Arraylist per lista dei parametri
         ArrayList<Node> parList = new ArrayList<Node>();
 
+        HashMap<String,STentry> entryHashMap = new HashMap<String,STentry> ();
         //Viene creata una nuova hashmap nell'ambiente
-        env.addHashMapNL( new HashMap<String, STentry>());
-
+        env.addHashMapNL(entryHashMap);
+        STentry entryListVar = null;
+        int offsetListVar=1;
         for (Node node: listVar) {
+            VarDecNode varDecNode = (VarDecNode) node;
             //Si ottiene il tipo di ciascun parametro
-            parList.add(((VarDecNode) node).getType());
-
-            //Richiamato checkSemantics per ciascun nodo parametro
-            semanticErrors.addAll(node.checkSemantics(env));
+            parList.add(varDecNode.getType());
+            entryListVar=new STentry(env.getNestingLevel(),varDecNode.getType(),offsetListVar++);
+            if ( entryHashMap.put(varDecNode.getId(),entryListVar) != null  ){
+                semanticErrors.add(new SemanticError("Parameter id "+varDecNode.getId()+" already declared"));
+            }
         }
 
         //Aggiunto il tipo nella entry corrente
@@ -170,10 +174,16 @@ public class FunNode  implements FunInterfaceNode {
             FOOLlib.putLabelMain(funl);
             end="b "+FOOLlib.getLabelEnd()+"\n";
         }
+
+        String retCod="";
+        if(retNode!=null){
+            retCod=retNode.codeGeneration();
+        }
         FOOLlib.putCode(funl+":\n"+
                 "cfp\n"+ //setta $fp a $sp
                 "lra\n"+ //inserimento return address
                 progNode.codeGeneration()+
+                retCod+
                 "srv\n"+ //pop del return value
                 popDec+
                 "sra\n"+ // pop del return address

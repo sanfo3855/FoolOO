@@ -65,7 +65,7 @@ public class LetInExpNode implements Node {
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
 
         //creazione nuova entry
-        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec());
+        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec());//todo
 
         //nome della chiave del nodo
         String idPutHM;
@@ -98,6 +98,7 @@ public class LetInExpNode implements Node {
             }
         }
 
+        env.setOffset(-2);
         //richiamo checkSemantic per ciascun nodo di listDec all'interno di let in
         for(Node ntc : listDec){
             semanticErrors.addAll(ntc.checkSemantics(env));
@@ -144,5 +145,4 @@ public class LetInExpNode implements Node {
         code+=stms.codeGeneration();
         return code;
     }
-
 }

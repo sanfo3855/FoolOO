@@ -57,6 +57,7 @@ public class FunExpNode implements Node {
      * @return updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         //Se typeClassMethod!=null sto effettuando una chiamata di metodo tramite x.m(); con m FunExpNode
         if(typeClassMethod==null){
             /*
@@ -79,7 +80,6 @@ public class FunExpNode implements Node {
             }
         }
 
-        ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         int j=env.getNestingLevel();
         STentry tmpEntry = null;
         HashMap<String,STentry> hmClassExt=env.getHashMapNL(0);
