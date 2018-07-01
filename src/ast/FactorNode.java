@@ -120,8 +120,39 @@ public class FactorNode implements Node {
      * @return string of generated code
      */
     public String codeGeneration() {
-        String cgenString = left.codeGeneration();
+        String cgenString = "";
+        String labelNotLeft = FOOLlib.freshLabel();
+        String endNotLeft = FOOLlib.freshLabel();
+        if (notLeft){
+            cgenString+= left.codeGeneration()+
+                        "push 1\n"+
+                        "beq " + labelNotLeft + "\n"+
+                        "push 1\n"+
+                        "b " + endNotLeft +"\n"+
+                        labelNotLeft+":\n"+
+                        "push 0"+
+                        endNotLeft+ ":\n";
+        }else{
+            cgenString += left.codeGeneration();
+        }
+
         if (right!=null) {
+            String rightString = "";
+            String labelNotRight = FOOLlib.freshLabel();
+            String endNotRight = FOOLlib.freshLabel();
+            if (notRight){
+                rightString+= right.codeGeneration()+
+                        "push 1\n"+
+                        "beq " + labelNotRight + "\n"+
+                        "push 1\n"+
+                        "b " + endNotRight +"\n"+
+                        labelNotRight+":\n"+
+                        "push 0"+
+                        endNotRight+ ":\n";
+            }else{
+                rightString += right.codeGeneration();
+            }
+
             /* genera label per il codegen*/
             String trueBranch = FOOLlib.freshLabel();
             String trueBranch_2 = FOOLlib.freshLabel();
@@ -131,7 +162,7 @@ public class FactorNode implements Node {
         e genera la stringa di code relativo */
             switch (operator) {
                 case ("=="):
-                    cgenString += right.codeGeneration();
+                    cgenString += rightString;
                     cgenString += "beq " + trueBranch + "\n" +
                             "push 0\n" +
                             "b " + exit + "\n" +
@@ -140,7 +171,7 @@ public class FactorNode implements Node {
                             exit + ":\n";
                     break;
                 case (">="):
-                    cgenString += right.codeGeneration();
+                    cgenString += rightString;
                     cgenString += "bgeq " + trueBranch + "\n" +
                             "push 0\n" +
                             "b " + exit + "\n" +
@@ -149,7 +180,7 @@ public class FactorNode implements Node {
                             exit + ":\n";
                     break;
                 case ("<="):
-                    cgenString += right.codeGeneration();
+                    cgenString += rightString;
                     cgenString += "bleq " + trueBranch + "\n" +
                             "push 0\n" +
                             "b " + exit + "\n" +
@@ -160,7 +191,7 @@ public class FactorNode implements Node {
                 case ("&&"):
                     cgenString += "push 0\n" +
                             "beq " + trueBranch + "\n" +
-                            right.codeGeneration() + "push 0\n" +
+                            rightString + "push 0\n" +
                             "beq " + trueBranch_2 + "\n" +
                             "push 1\n" +
                             "b " + exit + "\n" +
@@ -174,7 +205,7 @@ public class FactorNode implements Node {
                 case ("||"):
                     cgenString += "push 1\n" +
                             "beq " + trueBranch + "\n" +
-                            right.codeGeneration() + "push 1\n" +
+                            rightString + "push 1\n" +
                             "beq " + trueBranch_2 + "\n" +
                             "push 0\n" +
                             "b " + exit + "\n" +
