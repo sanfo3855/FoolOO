@@ -88,7 +88,16 @@ public class IdNode implements Node {
     }
 
     public String codeGeneration() {
-        //todo
-        return "";
+        String returnString = "push "+entry.getOffset()+"\n"+ //push offset sullo stack
+                              "lfp\n"; //carica frame pointer sullo stack
+
+        for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++) {
+            returnString+= "lw\n"; //esegue loadword per ciascun livello da risalire
+        }
+
+        returnString+=  "add\n"+ //accede alla posizione della entry
+                        "lw\n"; //carica sullo stack il valore all'indirizzo ottenuto
+
+        return returnString;
     }
 }
