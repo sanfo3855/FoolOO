@@ -155,8 +155,6 @@ public class FunNode  implements FunInterfaceNode {
      * @return
      */
     public String codeGeneration() {
-
-
         String popDec="";
         if (progNode instanceof LetInExpNode){
             for (int i=0; i<((LetInExpNode)progNode).getListDecSize();i++){

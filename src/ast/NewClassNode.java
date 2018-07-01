@@ -50,9 +50,11 @@ public class NewClassNode implements Node{
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
      */
-    //todo finire commenti e javadoc
+
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
+
+        //Ottiene la lista degli id delle classi dall'ambiente più esterno
         ArrayList<String> tempArrayClass=new ArrayList<String>();
         for (String classex:env.getHashMapNL(0).keySet()) {
             if(classex.contains("class%")){
@@ -61,6 +63,7 @@ public class NewClassNode implements Node{
                 }
             }
         }
+        //Riempie la lista delle classi da cui la nuova classe eredita
         boolean cond=true;
         String idExtClass=id;
         while (cond){
@@ -75,6 +78,7 @@ public class NewClassNode implements Node{
             }
         }
 
+        //Chiama il checkSemantic di funExpNode
         if(funExpNode!=null){
             semanticErrors.addAll(funExpNode.checkSemantics(env));
         }
@@ -85,6 +89,7 @@ public class NewClassNode implements Node{
         if(funExpNode!=null){
             funExpNode.typeCheck();
         }
+        //Setta come tipo l'Id della classe
         Node idTypeNode=new IdTypeNode(id);
         ((IdTypeNode) idTypeNode).setExtClassId(extClassId);
         return idTypeNode;
