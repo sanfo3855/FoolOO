@@ -80,7 +80,6 @@ public class StmsNode implements Node {
      * @return
      */
     public String codeGeneration() {
-        //todo
         String code= "";
         for(Node nodo : listNode){
             code += nodo.codeGeneration();

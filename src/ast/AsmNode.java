@@ -11,7 +11,7 @@ public class AsmNode implements Node {
     private String id;  //Variable's ID
     private Node value; //Value assigned to id
     private STentry entry; //field that holds AsmNode SymbolTable entry
-
+    private int nestingLevel;
     /**
      * Constructor for AsmNode.
      *
@@ -82,6 +82,7 @@ public class AsmNode implements Node {
             /* Salvo l'entry della variabile dichiarate nei nestingLevel precedenti nel nodo
             (per avere l'informazione del tipo) */
             entry=tmpEntry;
+            nestingLevel=env.getNestingLevel();
         }
         /* richiama il checkSemantic sul nodo value e
         aggiunge tutti gli eventuali errori semantici all'array degli errori */

@@ -68,7 +68,7 @@ public class CallMethodNode implements Node {
         }
         //salvo l'STentry dell'id e il relativo nes
         entry = entryTableTemp;
-        nestinglevel = envNL;
+        nestinglevel = env.getNestingLevel();
         return semanticErrors;
     }
 

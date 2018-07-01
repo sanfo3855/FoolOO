@@ -109,7 +109,6 @@ public class IfNode implements Node {
 
         if (elseB != null) {
             //controllo che then ed else siano sottotipi tra loro, altrimenti restituisco errore
-            //TODO ESEMPIO classA a = if(cond) then new classB() else new classA() solo se classB è sottotipo di classA
             if (FOOLlib.isSubtype(thenB,elseB))
                 node = elseB;
             if (FOOLlib.isSubtype(elseB,thenB))

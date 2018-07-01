@@ -13,7 +13,7 @@ public class FunExpNode implements Node {
     private ArrayList<Node> listParam;//lista dei parametri della funzione
     private ArrayList<Node> typeParam=new ArrayList<Node>();
     private STentry entry;////entry table dell'id
-    private int nestinglevel;//nestinglevel dell'entry
+    private int nestingLevel;//nestinglevel dell'entry
 
     /**
      * Constructor for FunExpNode.
@@ -190,6 +190,7 @@ public class FunExpNode implements Node {
                 }
             }
             entry=tmpEntry;
+            nestingLevel=env.getNestingLevel();
         }
         //checkSemantics per listParam
         for(Node ntc : listParam){

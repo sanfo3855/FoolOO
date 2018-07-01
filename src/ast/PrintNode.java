@@ -28,8 +28,7 @@ public class PrintNode implements Node{
     }
 
     public String codeGeneration() {
-        //todo
-        return exp.codeGeneration();
+        return exp.codeGeneration()+"print\n";
     }
 
 }

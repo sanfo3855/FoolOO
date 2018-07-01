@@ -7,7 +7,7 @@ void main(){
     x=if(!false == c ) then {
         2
     }else{
-        3
+        true
     };
 
     if(!false == c ) then {
