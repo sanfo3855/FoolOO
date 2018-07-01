@@ -10,11 +10,10 @@ grammar FoolOO;
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
-start   : (block)+
+start   : (decclass)* main
         ;
-//todo deve esistere per forza 1 e solo 1 funzione main
-block   : type MAIN LPAR RPAR CLPAR prog CRPAR       #mainDeclaration
-        | decclass    #classDeclaration
+
+main   : type MAIN LPAR RPAR CLPAR prog CRPAR
         ;
 
 prog    : (stms)?       #singleExp

@@ -10,24 +10,22 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitStart(StartContext ctx) {
         ArrayList<Node> listBlock = new ArrayList<Node>();
-        for(BlockContext block : ctx.block()){
-            listBlock.add( visit(block) );
+        if(ctx.decclass()!=null){
+            for(DecclassContext decclassContext : ctx.decclass()){
+                listBlock.add( visit(decclassContext) );
+            }
         }
-
+        listBlock.add( visit(ctx.main()) );
         return new FoolNode(listBlock);
     }
 
     @Override
-    public Node visitMainDeclaration(MainDeclarationContext ctx) {
+    public Node visitMain(MainContext ctx) {
         ArrayList<Node> listVar = new ArrayList<Node>();
         Node typeNode = visit(ctx.type());
         Node progNode= visit(ctx.prog());
 
         return new FunNode(ctx.MAIN().getText(), typeNode, listVar, progNode, null);
-    }
-
-    @Override public Node visitClassDeclaration(ClassDeclarationContext ctx) {
-        return visit(ctx.decclass());
     }
 
     @Override

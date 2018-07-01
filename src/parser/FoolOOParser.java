@@ -24,13 +24,13 @@ public class FoolOOParser extends Parser {
 		EXTENDS=35, NEW=36, NULL=37, MAIN=38, INTEGER=39, ID=40, WS=41, LINECOMENTS=42, 
 		BLOCKCOMENTS=43, ERR=44;
 	public static final int
-		RULE_start = 0, RULE_block = 1, RULE_prog = 2, RULE_decclass = 3, RULE_let = 4, 
+		RULE_start = 0, RULE_main = 1, RULE_prog = 2, RULE_decclass = 3, RULE_let = 4, 
 		RULE_vardec = 5, RULE_varasm = 6, RULE_fun = 7, RULE_funconstructor = 8, 
 		RULE_ret = 9, RULE_dec = 10, RULE_type = 11, RULE_exp = 12, RULE_term = 13, 
 		RULE_factor = 14, RULE_factorRight = 15, RULE_stm = 16, RULE_funExp = 17, 
 		RULE_stms = 18, RULE_value = 19;
 	public static final String[] ruleNames = {
-		"start", "block", "prog", "decclass", "let", "vardec", "varasm", "fun", 
+		"start", "main", "prog", "decclass", "let", "vardec", "varasm", "fun", 
 		"funconstructor", "ret", "dec", "type", "exp", "term", "factor", "factorRight", 
 		"stm", "funExp", "stms", "value"
 	};
@@ -100,11 +100,14 @@ public class FoolOOParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class StartContext extends ParserRuleContext {
-		public List<BlockContext> block() {
-			return getRuleContexts(BlockContext.class);
+		public MainContext main() {
+			return getRuleContext(MainContext.class,0);
 		}
-		public BlockContext block(int i) {
-			return getRuleContext(BlockContext.class,i);
+		public List<DecclassContext> decclass() {
+			return getRuleContexts(DecclassContext.class);
+		}
+		public DecclassContext decclass(int i) {
+			return getRuleContext(DecclassContext.class,i);
 		}
 		public StartContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -124,20 +127,22 @@ public class FoolOOParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(41); 
+			setState(43);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			do {
+			while (_la==CLASS) {
 				{
 				{
 				setState(40);
-				block();
+				decclass();
 				}
 				}
-				setState(43); 
+				setState(45);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << VOID) | (1L << CLASS) | (1L << ID))) != 0) );
+			}
+			setState(46);
+			main();
 			}
 		}
 		catch (RecognitionException re) {
@@ -151,18 +156,7 @@ public class FoolOOParser extends Parser {
 		return _localctx;
 	}
 
-	public static class BlockContext extends ParserRuleContext {
-		public BlockContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_block; }
-	 
-		public BlockContext() { }
-		public void copyFrom(BlockContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class MainDeclarationContext extends BlockContext {
+	public static class MainContext extends ParserRuleContext {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
@@ -174,65 +168,37 @@ public class FoolOOParser extends Parser {
 			return getRuleContext(ProgContext.class,0);
 		}
 		public TerminalNode CRPAR() { return getToken(FoolOOParser.CRPAR, 0); }
-		public MainDeclarationContext(BlockContext ctx) { copyFrom(ctx); }
+		public MainContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_main; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FoolOOVisitor ) return ((FoolOOVisitor<? extends T>)visitor).visitMainDeclaration(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class ClassDeclarationContext extends BlockContext {
-		public DecclassContext decclass() {
-			return getRuleContext(DecclassContext.class,0);
-		}
-		public ClassDeclarationContext(BlockContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FoolOOVisitor ) return ((FoolOOVisitor<? extends T>)visitor).visitClassDeclaration(this);
+			if ( visitor instanceof FoolOOVisitor ) return ((FoolOOVisitor<? extends T>)visitor).visitMain(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final BlockContext block() throws RecognitionException {
-		BlockContext _localctx = new BlockContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_block);
+	public final MainContext main() throws RecognitionException {
+		MainContext _localctx = new MainContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_main);
 		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(48);
+			type();
+			setState(49);
+			match(MAIN);
+			setState(50);
+			match(LPAR);
+			setState(51);
+			match(RPAR);
+			setState(52);
+			match(CLPAR);
+			setState(53);
+			prog();
 			setState(54);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case INT:
-			case BOOL:
-			case VOID:
-			case ID:
-				_localctx = new MainDeclarationContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(45);
-				type();
-				setState(46);
-				match(MAIN);
-				setState(47);
-				match(LPAR);
-				setState(48);
-				match(RPAR);
-				setState(49);
-				match(CLPAR);
-				setState(50);
-				prog();
-				setState(51);
-				match(CRPAR);
-				}
-				break;
-			case CLASS:
-				_localctx = new ClassDeclarationContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(53);
-				decclass();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			match(CRPAR);
 			}
 		}
 		catch (RecognitionException re) {
@@ -450,7 +416,7 @@ public class FoolOOParser extends Parser {
 				{
 				setState(86);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 				case 1:
 					{
 					setState(84);
@@ -630,7 +596,7 @@ public class FoolOOParser extends Parser {
 		try {
 			setState(112);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				_localctx = new ExpDecAsignmentContext(_localctx);
 				enterOuterAlt(_localctx, 1);
@@ -907,7 +873,7 @@ public class FoolOOParser extends Parser {
 		try {
 			setState(158);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
 			case 1:
 				_localctx = new ReturnFunExpContext(_localctx);
 				enterOuterAlt(_localctx, 1);
@@ -983,7 +949,7 @@ public class FoolOOParser extends Parser {
 		try {
 			setState(162);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 			case 1:
 				_localctx = new VarAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 1);
@@ -1444,7 +1410,7 @@ public class FoolOOParser extends Parser {
 		try {
 			setState(227);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
 			case 1:
 				_localctx = new StmIfContext(_localctx);
 				enterOuterAlt(_localctx, 1);
@@ -1841,7 +1807,7 @@ public class FoolOOParser extends Parser {
 		try {
 			setState(288);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,33,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
 			case 1:
 				_localctx = new IntValContext(_localctx);
 				enterOuterAlt(_localctx, 1);
@@ -2013,8 +1979,8 @@ public class FoolOOParser extends Parser {
 		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3.\u0125\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\4\25\t\25\3\2\6\2,\n\2\r\2\16\2-\3\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\3\3\5\39\n\3\3\4\5\4<\n\4\3\4\3\4\5\4@\n\4\5\4B\n\4\3"+
+		"\4\23\t\23\4\24\t\24\4\25\t\25\3\2\7\2,\n\2\f\2\16\2/\13\2\3\2\3\2\3\3"+
+		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\5\4<\n\4\3\4\3\4\5\4@\n\4\5\4B\n\4\3"+
 		"\5\3\5\3\5\3\5\5\5H\n\5\3\5\3\5\3\5\3\5\7\5N\n\5\f\5\16\5Q\13\5\5\5S\n"+
 		"\5\3\5\3\5\3\5\3\5\6\5Y\n\5\r\5\16\5Z\3\5\3\5\3\6\3\6\6\6a\n\6\r\6\16"+
 		"\6b\3\6\3\6\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bs\n\b\3"+
@@ -2033,26 +1999,26 @@ public class FoolOOParser extends Parser {
 		"\25\u010c\n\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\7\25\u0117"+
 		"\n\25\f\25\16\25\u011a\13\25\5\25\u011c\n\25\3\25\3\25\3\25\3\25\3\25"+
 		"\5\25\u0123\n\25\3\25\2\2\26\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \""+
-		"$&(\2\7\4\2 \"**\3\2\t\n\3\2\13\f\4\2\7\7\r\20\3\2\22\23\2\u013e\2+\3"+
-		"\2\2\2\48\3\2\2\2\6A\3\2\2\2\bC\3\2\2\2\n^\3\2\2\2\ff\3\2\2\2\16r\3\2"+
-		"\2\2\20t\3\2\2\2\22\u0089\3\2\2\2\24\u00a0\3\2\2\2\26\u00a4\3\2\2\2\30"+
-		"\u00a6\3\2\2\2\32\u00a9\3\2\2\2\34\u00b0\3\2\2\2\36\u00b6\3\2\2\2 \u00be"+
-		"\3\2\2\2\"\u00e5\3\2\2\2$\u00e7\3\2\2\2&\u00f6\3\2\2\2(\u0122\3\2\2\2"+
-		"*,\5\4\3\2+*\3\2\2\2,-\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\3\3\2\2\2/\60\5\30"+
-		"\r\2\60\61\7(\2\2\61\62\7\24\2\2\62\63\7\25\2\2\63\64\7\26\2\2\64\65\5"+
-		"\6\4\2\65\66\7\27\2\2\669\3\2\2\2\679\5\b\5\28/\3\2\2\28\67\3\2\2\29\5"+
-		"\3\2\2\2:<\5&\24\2;:\3\2\2\2;<\3\2\2\2<B\3\2\2\2=?\5\n\6\2>@\5&\24\2?"+
-		">\3\2\2\2?@\3\2\2\2@B\3\2\2\2A;\3\2\2\2A=\3\2\2\2B\7\3\2\2\2CD\7$\2\2"+
-		"DG\7*\2\2EF\7%\2\2FH\7*\2\2GE\3\2\2\2GH\3\2\2\2HI\3\2\2\2IR\7\24\2\2J"+
-		"O\5\f\7\2KL\7\6\2\2LN\5\f\7\2MK\3\2\2\2NQ\3\2\2\2OM\3\2\2\2OP\3\2\2\2"+
-		"PS\3\2\2\2QO\3\2\2\2RJ\3\2\2\2RS\3\2\2\2ST\3\2\2\2TU\7\25\2\2UX\7\26\2"+
-		"\2VY\5\20\t\2WY\5\22\n\2XV\3\2\2\2XW\3\2\2\2YZ\3\2\2\2ZX\3\2\2\2Z[\3\2"+
-		"\2\2[\\\3\2\2\2\\]\7\27\2\2]\t\3\2\2\2^`\7\36\2\2_a\5\26\f\2`_\3\2\2\2"+
-		"ab\3\2\2\2b`\3\2\2\2bc\3\2\2\2cd\3\2\2\2de\7\37\2\2e\13\3\2\2\2fg\5\30"+
-		"\r\2gh\7*\2\2h\r\3\2\2\2ij\5\f\7\2jk\7\b\2\2kl\5\32\16\2lm\7\4\2\2ms\3"+
-		"\2\2\2no\5\f\7\2op\7\b\2\2pq\5\"\22\2qs\3\2\2\2ri\3\2\2\2rn\3\2\2\2s\17"+
-		"\3\2\2\2tu\5\30\r\2uv\7*\2\2v\177\7\24\2\2w|\5\f\7\2xy\7\6\2\2y{\5\f\7"+
-		"\2zx\3\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\u0080\3\2\2\2~|\3\2\2\2\177"+
+		"$&(\2\7\4\2 \"**\3\2\t\n\3\2\13\f\4\2\7\7\r\20\3\2\22\23\2\u013d\2-\3"+
+		"\2\2\2\4\62\3\2\2\2\6A\3\2\2\2\bC\3\2\2\2\n^\3\2\2\2\ff\3\2\2\2\16r\3"+
+		"\2\2\2\20t\3\2\2\2\22\u0089\3\2\2\2\24\u00a0\3\2\2\2\26\u00a4\3\2\2\2"+
+		"\30\u00a6\3\2\2\2\32\u00a9\3\2\2\2\34\u00b0\3\2\2\2\36\u00b6\3\2\2\2 "+
+		"\u00be\3\2\2\2\"\u00e5\3\2\2\2$\u00e7\3\2\2\2&\u00f6\3\2\2\2(\u0122\3"+
+		"\2\2\2*,\5\b\5\2+*\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\60\3\2\2\2/"+
+		"-\3\2\2\2\60\61\5\4\3\2\61\3\3\2\2\2\62\63\5\30\r\2\63\64\7(\2\2\64\65"+
+		"\7\24\2\2\65\66\7\25\2\2\66\67\7\26\2\2\678\5\6\4\289\7\27\2\29\5\3\2"+
+		"\2\2:<\5&\24\2;:\3\2\2\2;<\3\2\2\2<B\3\2\2\2=?\5\n\6\2>@\5&\24\2?>\3\2"+
+		"\2\2?@\3\2\2\2@B\3\2\2\2A;\3\2\2\2A=\3\2\2\2B\7\3\2\2\2CD\7$\2\2DG\7*"+
+		"\2\2EF\7%\2\2FH\7*\2\2GE\3\2\2\2GH\3\2\2\2HI\3\2\2\2IR\7\24\2\2JO\5\f"+
+		"\7\2KL\7\6\2\2LN\5\f\7\2MK\3\2\2\2NQ\3\2\2\2OM\3\2\2\2OP\3\2\2\2PS\3\2"+
+		"\2\2QO\3\2\2\2RJ\3\2\2\2RS\3\2\2\2ST\3\2\2\2TU\7\25\2\2UX\7\26\2\2VY\5"+
+		"\20\t\2WY\5\22\n\2XV\3\2\2\2XW\3\2\2\2YZ\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2["+
+		"\\\3\2\2\2\\]\7\27\2\2]\t\3\2\2\2^`\7\36\2\2_a\5\26\f\2`_\3\2\2\2ab\3"+
+		"\2\2\2b`\3\2\2\2bc\3\2\2\2cd\3\2\2\2de\7\37\2\2e\13\3\2\2\2fg\5\30\r\2"+
+		"gh\7*\2\2h\r\3\2\2\2ij\5\f\7\2jk\7\b\2\2kl\5\32\16\2lm\7\4\2\2ms\3\2\2"+
+		"\2no\5\f\7\2op\7\b\2\2pq\5\"\22\2qs\3\2\2\2ri\3\2\2\2rn\3\2\2\2s\17\3"+
+		"\2\2\2tu\5\30\r\2uv\7*\2\2v\177\7\24\2\2w|\5\f\7\2xy\7\6\2\2y{\5\f\7\2"+
+		"zx\3\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\u0080\3\2\2\2~|\3\2\2\2\177"+
 		"w\3\2\2\2\177\u0080\3\2\2\2\u0080\u0081\3\2\2\2\u0081\u0082\7\25\2\2\u0082"+
 		"\u0083\7\26\2\2\u0083\u0085\5\6\4\2\u0084\u0086\5\24\13\2\u0085\u0084"+
 		"\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u0087\3\2\2\2\u0087\u0088\7\27\2\2"+
@@ -2109,7 +2075,7 @@ public class FoolOOParser extends Parser {
 		"\u0123\5$\23\2\u0122\u00fa\3\2\2\2\u0122\u00fb\3\2\2\2\u0122\u00fc\3\2"+
 		"\2\2\u0122\u0100\3\2\2\2\u0122\u010d\3\2\2\2\u0122\u010e\3\2\2\2\u0122"+
 		"\u010f\3\2\2\2\u0122\u0110\3\2\2\2\u0122\u011e\3\2\2\2\u0122\u011f\3\2"+
-		"\2\2\u0123)\3\2\2\2$-8;?AGORXZbr|\177\u0085\u0090\u0093\u00a0\u00a4\u00a9"+
+		"\2\2\u0123)\3\2\2\2#-;?AGORXZbr|\177\u0085\u0090\u0093\u00a0\u00a4\u00a9"+
 		"\u00ae\u00b3\u00b6\u00bb\u00be\u00cd\u00e5\u00ee\u00f1\u00f8\u010b\u0118"+
 		"\u011b\u0122";
 	public static final ATN _ATN =
