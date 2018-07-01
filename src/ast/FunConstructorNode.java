@@ -1,20 +1,12 @@
 package ast;
 
-import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FunConstructorNode implements FunInterfaceNode {
-
-    private String id;
-    private Node type;
-    private ArrayList<Node> listVar;
-    private Node progNode;
-
-
+public class FunConstructorNode extends FunAbstractNode {
     /**
      * Constructor fo Function Constructor Node.
      *
@@ -27,6 +19,7 @@ public class FunConstructorNode implements FunInterfaceNode {
         this.listVar=listVar;
         this.progNode=progNode;
         this.type=new IdTypeNode(id);
+        this.retNode=null;
     }
 
     /**
@@ -40,37 +33,12 @@ public class FunConstructorNode implements FunInterfaceNode {
         for(Node ntp : this.listVar){
             returnString += s + ntp.toPrint(s + "   ") + "\n";
         }
-
         if (progNode!=null){
             //Aggiunge il corpo del programma alla stringa da stampare
             returnString += s + this.progNode.toPrint(s + "   ");
         }
 
         return returnString;
-    }
-
-    /**
-     *
-     * @return Constructor's name (id)
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     *
-     * @return Constructor's type
-     */
-    public Node getType() {
-        return type;
-    }
-
-    /**
-     *
-     * @return ArrayList of Constructor's parameters
-     */
-    public ArrayList<Node> getListVar() {
-        return listVar;
     }
 
     /**
@@ -133,12 +101,5 @@ public class FunConstructorNode implements FunInterfaceNode {
         return new VoidTypeNode();
     }
 
-    /**
-     *
-     * @return
-     */
-    public String codeGeneration() {
-        //todo
-        return type.codeGeneration()+"halt\n";
-    }
+
 }

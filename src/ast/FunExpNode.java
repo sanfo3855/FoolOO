@@ -27,6 +27,14 @@ public class FunExpNode implements Node {
         this.typeClassMethod=null;
     }
 
+    public int getSizeListParam() {
+        return listParam.size();
+    }
+
+    public STentry getEntry() {
+        return entry;
+    }
+
     /**
      * Set the name of the class on which the function is searched.
      *

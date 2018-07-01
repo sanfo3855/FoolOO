@@ -65,7 +65,7 @@ public class LetInExpNode implements Node {
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
 
         //creazione nuova entry
-        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec());//todo
+        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec());
 
         //nome della chiave del nodo
         String idPutHM;
@@ -91,6 +91,10 @@ public class LetInExpNode implements Node {
                     //completata creazione stringa chiave
                     idPutHM += "%" + typeVar.getType();
                 }
+                /*
+                Inseriamo nell'ambiente l'identificatore della funzione con un'entry fasulla,
+                cambiata in seguito con l'entry corretta.
+                 */
                 if ( hashMap.put(idPutHM,entryTable) != null ){
                     //funzione già dichiarata nell'ambiente corrente
                     semanticErrors.add(new SemanticError("Fun "+idPutHM+" already declared"));

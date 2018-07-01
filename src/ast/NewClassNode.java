@@ -1,13 +1,9 @@
 package ast;
 
-import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class NewClassNode implements Node{
 
     private FunExpNode funExpNode;
@@ -22,12 +18,8 @@ public class NewClassNode implements Node{
      */
     public NewClassNode (String id, ArrayList<Node> listPar) {
         this.id=id;
-        if(listPar.size() > 0){
-            this.funExpNode = new FunExpNode(id, listPar);
-            this.funExpNode.setTypeClassMethod(id);
-        }else{
-            this.funExpNode = null;
-        }
+        this.funExpNode = new FunExpNode(id, listPar);
+        this.funExpNode.setTypeClassMethod(id);
     }
 
     /**
@@ -38,9 +30,7 @@ public class NewClassNode implements Node{
      */
     public String toPrint(String s) {
         String returnString=s + "NewClassNode\n";
-        if(funExpNode!=null){
-            returnString+=funExpNode.toPrint(s+"   ");
-        }
+        returnString+=funExpNode.toPrint(s+"   ");
         return returnString;
     }
 
@@ -79,14 +69,16 @@ public class NewClassNode implements Node{
         }
 
         //Chiama il checkSemantic di funExpNode
-        if(funExpNode!=null){
+        if(funExpNode.getSizeListParam()==0){
+            funExpNode.checkSemantics(env);
+        }else{
             semanticErrors.addAll(funExpNode.checkSemantics(env));
         }
         return semanticErrors;
     }
 
     public Node typeCheck() {
-        if(funExpNode!=null){
+        if(funExpNode.getSizeListParam()>0){
             funExpNode.typeCheck();
         }
         //Setta come tipo l'Id della classe
@@ -97,7 +89,7 @@ public class NewClassNode implements Node{
 
     public String codeGeneration() {
         String code="";
-        if(funExpNode!=null){
+        if(funExpNode.getEntry()!=null){
             code=funExpNode.codeGeneration();
         }
         return code;

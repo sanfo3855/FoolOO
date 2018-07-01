@@ -50,7 +50,7 @@ public class FoolNode implements Node {
         DecclassNode decclassNode;
         FunNode funMainNode;
         ArrayList<Node> listFun;
-        FunInterfaceNode funNode;
+        FunAbstractNode funNode;
         //Effettuo una prima passata dei nodi figli di FoolNode salvando nell'ambiente più esterno(env 0) gli identificatori globali
         for(Node nodo : listNodi){ //listNodi è formata da nodi di tipo DecclassNode e FunNode
             //se il nodo esaminato e di tipo DecclassNode lo parso salvando le relative informazioni nell'ambiente
@@ -101,8 +101,8 @@ public class FoolNode implements Node {
                     String idKey;
                     for (Node fun : listFun) {
                         idKey = "fun#";
-                        if (fun instanceof FunInterfaceNode) {
-                            funNode = (FunInterfaceNode) fun;
+                        if (fun instanceof FunAbstractNode) {
+                            funNode = (FunAbstractNode) fun;
                             /*
                             "fun#[idFun]%[tipoFun]%[tipoPar1]%.....%[tipoParN]%class%[idclasse]"
                             Struttura dell'identificatore di un singolo metodo di una classe
@@ -143,10 +143,10 @@ public class FoolNode implements Node {
                 if ( hashMap.put(idPutHM,entryTable) != null ){
                     semanticErrors.add(new SemanticError("Fun "+idPutHM+" already declared"));
                 }
-                //controllo che esista una sola funzione main
-                if ( hashMap.put("fun%main",entryTable) != null ){
-                    semanticErrors.add(new SemanticError("Main already declared"));
-                }
+//                //controllo che esista una sola funzione main
+//                if ( hashMap.put("fun%main",entryTable) != null ){
+//                    semanticErrors.add(new SemanticError("Main already declared"));
+//                }
             }
         }
         // richiamo il checkSemantics su tutti i nodi figli di FoolNode
