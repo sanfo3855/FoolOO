@@ -139,9 +139,9 @@ public class LetInExpNode implements Node {
         String code="";
         for (Node node : listDec) {
             //richiamo il codeGeneration per ciascuna dichiarazione all'interno di let in
-            code+=node.codeGeneration()+"\n";
+            code+=node.codeGeneration();
         }
-        code+=stms.codeGeneration()+"\n";
+        code+=stms.codeGeneration();
         return code;
     }
 

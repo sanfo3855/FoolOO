@@ -104,14 +104,12 @@ public class AsmNode implements Node {
         return new VoidTypeNode();
     }
 
-
     /**
      *
      * @return
      */
     public String codeGeneration() {
         //todo
-        return value.codeGeneration()+"halt\n";
+        return value.codeGeneration();
     }
-
 }

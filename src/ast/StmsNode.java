@@ -83,9 +83,9 @@ public class StmsNode implements Node {
         //todo
         String code= "";
         for(Node nodo : listNode){
-            code += nodo.codeGeneration()+"halt\n";
+            code += nodo.codeGeneration();
         }
-        return code+"halt\n";
+        return code;
     }
 
 }

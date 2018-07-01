@@ -187,5 +187,4 @@ public class FunNode  implements FunInterfaceNode {
 
         return "push "+ funl +"\n";
     }
-
 }
