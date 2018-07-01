@@ -27,7 +27,12 @@ public class IdNode implements Node {
      * @return updated string that prints Abstract Syntax Tree Structure
      */
     public String toPrint(String s) {
-        return s+"Id:" + id + " at nestlev " + nestinglevel +"\n" ;
+        String returnString = s+"Id:" + id + " at nestlev " + nestinglevel +"\n";
+        if(entry!=null){
+            returnString +=s+entry.toPrint(s +"   ");
+        }
+        return returnString;
+
     }
 
     /**

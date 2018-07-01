@@ -97,11 +97,11 @@ public class VarDecNode implements Node {
 
     /**
      *
-     * @return
+     * @return empty string
      */
     public String codeGeneration() {
-        //todo
-        return type.codeGeneration()+"halt\n";
+        /* Non devo generare code*/
+        return "";
     }
 
 }
