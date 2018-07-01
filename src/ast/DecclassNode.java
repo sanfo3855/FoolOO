@@ -214,8 +214,11 @@ public class DecclassNode implements Node {
      * @return
      */
     public String codeGeneration() {
-        //todo
-        return "";
+        String returnString = "";
+        for (Node fun: listFun) {
+            returnString+= fun.codeGeneration();
+        }
+        return returnString;
     }
 
 }
