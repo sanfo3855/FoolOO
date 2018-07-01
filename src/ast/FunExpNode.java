@@ -220,8 +220,24 @@ public class FunExpNode implements Node {
      * @return string code
      */
     public String codeGeneration() {
-        //todo
-        return "";
+        String returnString = "lfp\n"; //carico il frame pointer sullo stack
+        String AR = "";
+        for (int i = listParam.size()-1; i>=0; i--){
+            returnString += listParam.get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
+        }
+
+        for (int i=0; i<nestingLevel-entry.getNestinglevel(); i++) {
+            AR+= "lw\n"; //esegue loadword per ciascun livello da risalire
+        }
+
+        returnString+= "lfp\n"+ AR + //carico frame pointer nello stack e risalgo catena statica
+                        "push "+ entry.getOffset() +"\n" + //push dell'offset sullo stack
+                        "lfp\n"+AR + //risale catena statica
+                        "add\n"+
+                        "lw\n"+ //carico sullo stack il valore all'indirizzo ottenuto
+                        "js\n";
+
+        return returnString;
     }
 
 }
