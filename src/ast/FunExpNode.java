@@ -27,6 +27,10 @@ public class FunExpNode implements Node {
         this.typeClassMethod=null;
     }
 
+    public ArrayList<Node> getListParam() {
+        return listParam;
+    }
+
     public int getSizeListParam() {
         return listParam.size();
     }
@@ -46,6 +50,10 @@ public class FunExpNode implements Node {
      */
     public void setTypeClassMethod(String typeClassMethod) {
         this.typeClassMethod = typeClassMethod;
+    }
+
+    public String getTypeClassMethod() {
+        return typeClassMethod;
     }
 
     /**

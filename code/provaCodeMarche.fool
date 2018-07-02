@@ -1,0 +1,18 @@
+void main(){
+    let
+        int y=5;
+        int x=4;
+        int a=oi(1);
+        int oi(int e){
+            let
+                int c = 2;
+                int returnString = 0;
+            in
+            returnString = c * e;
+            return returnString;
+        }
+
+    in
+        print(a);
+
+}
