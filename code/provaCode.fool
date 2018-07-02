@@ -1,15 +1,29 @@
+class classe1(int x){
+    classe1(){
+        x=0;
+    }
+    int funClass1(int q){
+        let
+            int f=3;
+        in
+            print(f);
+            return f+q;
+    }
+}
+
 void main(){
     let
-        int y=true;
-        int x=true;//oi(1);
-        int a=7;//oi(1);
+        int y=5;
+        int x=4;
+        int a=oi(1);
         bool oi(int e){
-            x=9;
+            x=false;
             return true;
         }
-        int b=0;
+        int b=oi(1);
         int bbb=0;
-        //int a=7;//oi(1);
+        int ccc=777;
+        classe1 varClass=new classe1();
     in
         print(b);
         print(a);
@@ -18,5 +32,6 @@ void main(){
         a=6;
         b=oi(1);
         print(22);
+        //print(varClass.funClass1(2));
         //b=oi(1)+3;
 }

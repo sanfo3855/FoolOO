@@ -65,11 +65,12 @@ public class LetInExpNode implements Node {
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
 
         //creazione nuova entry
-        STentry entryTable = new STentry(env.getNestingLevel(),env.getOffsetDec());
+//        STentry entryTable = ;
 
         //nome della chiave del nodo
         String idPutHM;
 
+        env.setOffset(-2);
         for(Node node : listDec){
             //controllo nodo funzione
             if(node instanceof FunNode ){
@@ -95,17 +96,16 @@ public class LetInExpNode implements Node {
                 Inseriamo nell'ambiente l'identificatore della funzione con un'entry fasulla,
                 cambiata in seguito con l'entry corretta.
                  */
-                if ( hashMap.put(idPutHM,entryTable) != null ){
+                if ( hashMap.put(idPutHM,new STentry(env.getNestingLevel(),env.getOffsetDec())) != null ){
                     //funzione già dichiarata nell'ambiente corrente
                     semanticErrors.add(new SemanticError("Fun "+idPutHM+" already declared"));
                 }
             }
         }
 
-        env.setOffset(-2);
         //richiamo checkSemantic per ciascun nodo di listDec all'interno di let in
-        for(Node ntc : listDec){
-            semanticErrors.addAll(ntc.checkSemantics(env));
+        for(Node node : listDec){
+            semanticErrors.addAll(node.checkSemantics(env));
         }
 
         //richiamo checkSemantic nella exp se esiste
@@ -143,10 +143,20 @@ public class LetInExpNode implements Node {
     public String codeGeneration() {
         String code="";
         for (Node node : listDec) {
-            //richiamo il codeGeneration per ciascuna dichiarazione all'interno di let in
-            code+=node.codeGeneration();
+            if(node instanceof FunNode ){
+                //richiamo il codeGeneration per ciascuna dichiarazione di funzione all'interno di let
+                code+=node.codeGeneration();
+            }
         }
-        code+=stms.codeGeneration();
+        for (Node node : listDec) {
+            if(!(node instanceof FunNode)){
+                //richiamo il codeGeneration per ciascuna dichiarazione di variabile all'interno di let
+                code+=node.codeGeneration();
+            }
+        }
+        if (stms!=null){
+            code+=stms.codeGeneration();
+        }
         return code;
     }
 }

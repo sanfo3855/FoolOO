@@ -58,22 +58,22 @@ public class FunNode  extends FunAbstractNode {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
         //Creazione nuova entry
-        STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
-
-        HashMap<String,STentry> hashMapNL = env.getHashMapNL (env.getNestingLevel());
-        //genero l'identificatore della funzione
-        String temp="%"+((TypeNode)type).getType();
-        for(Node node:listVar){
-            temp+="%"+((TypeNode)((VarDecNode) node).getType()).getType();
-        }
-
-        /*
-        Rimuovo la riga corrispondente alla funzione parsata dall'hashMap del
-        livello 0 ed la sostituisco con una nuova riga con chiave uguale
-        ma entry diversa. Ciò è fatto per rettificare l'offset.
-         */
-        hashMapNL.remove("fun#"+id+temp);
-        hashMapNL.put("fun#"+id+temp, entry);
+//        STentry entry = new STentry(env.getNestingLevel(), env.getOffsetDec());
+//
+//        HashMap<String,STentry> hashMapNL = env.getHashMapNL (env.getNestingLevel());
+//        //genero l'identificatore della funzione
+//        String temp="%"+((TypeNode)type).getType();
+//        for(Node node:listVar){
+//            temp+="%"+((TypeNode)((VarDecNode) node).getType()).getType();
+//        }
+//
+//        /*
+//        Rimuovo la riga corrispondente alla funzione parsata dall'hashMap del
+//        livello 0 ed la sostituisco con una nuova riga con chiave uguale
+//        ma entry diversa. Ciò è fatto per rettificare l'offset.
+//         */
+//        hashMapNL.remove("fun#"+id+temp);
+//        hashMapNL.put("fun#"+id+temp, entry);
 
         //Arraylist per lista dei parametri
         ArrayList<Node> parList = new ArrayList<Node>();
@@ -94,7 +94,7 @@ public class FunNode  extends FunAbstractNode {
         }
 
         //Aggiunto il tipo nella entry corrente
-        entry.addType(new FunTypeNode(parList, type));
+//        entry.addType(new FunTypeNode(parList, type));
 
         //Viene richiamato il checkSemantics nel corpo della funzione se != null
         if (progNode!=null) {
