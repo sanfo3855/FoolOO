@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class CallMethodNode implements Node {
 
     private String id; //id oggetto chiamante il metodo
-    private Node methodCall; //nodo rappresentante il metodo chiamato da id
+    private FunExpNode methodCall; //nodo rappresentante il metodo chiamato da id
     private STentry entry; //entry table dell'id
     private int nestinglevel;//nestinglevel dell'entry
 
@@ -21,11 +21,27 @@ public class CallMethodNode implements Node {
      * @param id object's id calling the method
      * @param methodCall id Method call
      */
-    public CallMethodNode (String id, Node methodCall) {
+    public CallMethodNode (String id, FunExpNode methodCall) {
         this.id =id;
         this.methodCall = methodCall;
     }
 
+    public FunExpNode getMethodCall() {
+        return methodCall;
+    }
+
+    public void setMethodClass(String typeClassMethod) {
+        this.methodCall.setTypeClassMethod(typeClassMethod);
+    }
+
+
+    public int getSizeListParam() {
+        return methodCall.getSizeListParam();
+    }
+
+    public STentry getEntry() {
+        return entry;
+    }
     /**
      * Prints structure of CallMethodNode and call toPrint method on every child node.
      *
@@ -62,11 +78,9 @@ public class CallMethodNode implements Node {
         }else{
             //carico in idType il nome della classe dell'oggetto id
             String idType=((TypeNode)entryTableTemp.getType()).getType();
-            if(methodCall instanceof FunExpNode){
-                ((FunExpNode) methodCall).setTypeClassMethod(idType);
-                //invoco il checkSemantics sul nodo rappresentante il metodo chiamato dall'oggetto, ovvero un nodo FunExpNode
-                semanticErrors.addAll(methodCall.checkSemantics(env));
-            }
+            methodCall.setTypeClassMethod(idType);
+            //invoco il checkSemantics sul nodo rappresentante il metodo chiamato dall'oggetto, ovvero un nodo FunExpNode
+            semanticErrors.addAll(methodCall.checkSemantics(env));
         }
         //salvo l'STentry dell'id e il relativo nes
         entry = entryTableTemp;
@@ -81,9 +95,7 @@ public class CallMethodNode implements Node {
      */
     public Node typeCheck() {
         TypeNode typeReturn=null;
-        if(methodCall instanceof FunExpNode){
-            typeReturn=(TypeNode) methodCall.typeCheck();
-        }
+        typeReturn=(TypeNode) methodCall.typeCheck();
 
         return typeReturn;
     }

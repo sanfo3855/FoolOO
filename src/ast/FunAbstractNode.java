@@ -44,8 +44,6 @@ public abstract class FunAbstractNode implements Node {
      * @return
      */
     public String codeGeneration() {
-
-
         String popDec="";
         if (progNode instanceof LetInExpNode){
             for (int i=0; i<((LetInExpNode)progNode).getListDecSize();i++){

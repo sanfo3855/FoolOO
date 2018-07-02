@@ -302,7 +302,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitCallMethod(CallMethodContext ctx) {
-        return new CallMethodNode(ctx.ID().getText(), visit(ctx.funExp()));
+        return new CallMethodNode(ctx.ID().getText(), (FunExpNode) visit(ctx.funExp()));
     }
 
     @Override
@@ -383,6 +383,6 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
 
     @Override
     public Node visitCallMethodValue(CallMethodValueContext ctx) {
-        return new CallMethodNode(ctx.ID().getText(), visit(ctx.funExp()));
+        return new CallMethodNode(ctx.ID().getText(), (FunExpNode) visit(ctx.funExp()));
     }
 }

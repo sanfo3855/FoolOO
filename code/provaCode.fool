@@ -33,7 +33,7 @@ void main(){
         int b=oi(1);
         int bbb=0;
         int ccc=777;
-        classe1 varClass=new classe1();
+        classe1 varClass=new classe2();//todo
     in
         print(b);
         print(a);

@@ -81,8 +81,7 @@ assembly:
 
 	    | HALT                  {code[i++] = HALT;}
 
-	    | PUSHTOHP n=NUMBER     {code[i++] = PUSHTOHP;
-	                             code[i++] = Integer.parseInt($n.text);}
+	    | PUSHTOHP      {code[i++] = PUSHTOHP;}
 
     )*  {
             for (Integer refAdd: labelRef.keySet() ) {

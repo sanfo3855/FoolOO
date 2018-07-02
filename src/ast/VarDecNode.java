@@ -10,6 +10,7 @@ public class VarDecNode implements Node {
 
     private String id;
     private Node type;
+    private ArrayList<String> extClassId= new ArrayList<String>();
 
     /**
      * Constructor for Declaration Variable.
@@ -59,6 +60,31 @@ public class VarDecNode implements Node {
      * @return  updated ArrayList of semantic errors
      */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        //Ottiene la lista degli id delle classi dall'ambiente più esterno
+        ArrayList<String> tempArrayClass=new ArrayList<String>();
+        for (String classex:env.getHashMapNL(0).keySet()) {
+            if(classex.contains("class%")){
+                if(!classex.contains("fun#")){
+                    tempArrayClass.add(classex.substring(6, classex.length()));
+                }
+            }
+        }
+        //Riempie la lista delle classi da cui la nuova classe eredita
+        boolean cond=true;
+        String idTemp=((TypeNode)type).getType();
+        String[] arrExt;
+        while (cond){
+            cond=false;
+            for (String classex:tempArrayClass) {
+                arrExt=classex.split("@");
+                if(idTemp.equals(arrExt[0]) && arrExt.length==2){
+                    idTemp=arrExt[1];
+                    extClassId.add(arrExt[1]);
+                    cond=true;
+                }
+            }
+        }
+
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
         //si ottiene l'hashmap del livello corrente
         HashMap<String,STentry> hm = env.getHashMapNL(env.getNestingLevel());
@@ -82,7 +108,11 @@ public class VarDecNode implements Node {
      * @return variable's type
      */
     public Node typeCheck() {
-        return type;
+        Node idTypeNode=type;
+        if(type instanceof IdTypeNode){
+            ((IdTypeNode) type).setExtClassId(extClassId);
+        }
+        return idTypeNode;
     }
 
     /**

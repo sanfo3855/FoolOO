@@ -117,6 +117,7 @@ public class ExecuteVM {
                     break;
                 case SVMParser.PUSHTOHP:
                     memory[hp++] = pop();
+                    break;
                 case SVMParser.HALT :
                     return;
             }

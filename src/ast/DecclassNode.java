@@ -221,13 +221,24 @@ public class DecclassNode implements Node {
      */
     public String codeGeneration() {
         String returnString = "";
-        FunExpNode funExpNode;
+        FunAbstractNode funAbstractNode;
         HashMap<String,String> methodList=new HashMap<String,String>();
+        String methodDT;
         for (Node fun: listFun) {
-            funExpNode=(FunExpNode) fun;
-            methodList.put(funExpNode.getId(), funExpNode.codeGeneration());
+            funAbstractNode=(FunAbstractNode) fun;
+            methodDT=funAbstractNode.getId()+"%"+((TypeNode)funAbstractNode.getType()).getType();
+            for(Node typePar: funAbstractNode.getListVar()){
+                methodDT+="%"+((TypeNode)((VarDecNode)typePar).getType()).getType();
+            }
+            methodList.put(methodDT, funAbstractNode.codeGeneration());
         }
-
+        if(idExt!=null){
+            methodDT="";
+            for(String s: extClassId){
+                methodDT+=s+"%";
+            }
+            methodList.put("extends", methodDT);
+        }
         DispatcherTable.putDispatchEntry(id, methodList);
         return "";
     }

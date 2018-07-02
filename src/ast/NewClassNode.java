@@ -1,6 +1,5 @@
 package ast;
 
-import lib.FOOLlib;
 import parser.ExecuteVM;
 import util.Environment;
 import util.SemanticError;
@@ -12,7 +11,6 @@ public class NewClassNode implements Node{
     private String id;
     private ArrayList<String> extClassId= new ArrayList<String>();
     private int sizeListParm= 0;
-    private int hpAddress=-1;
 
     /**
      * Constructor for NewClassNode.
@@ -107,33 +105,18 @@ public class NewClassNode implements Node{
         return idTypeNode;
     }
 
-    public String codeGeneration() {//todo
-        String code="";
-//        String objectLabel=FOOLlib.freshClassLabel();
+    public String codeGeneration() {
+        String code="push "+ExecuteVM.getHp()+"\n";
+
+        for(int i=0; i<sizeListParm; i++){
+            code+="push 0\n" +
+                     "pthp\n";
+        }
 
         if(funExpNode.getEntry()!=null){
-            code=funExpNode.codeGeneration();
+            code+=funExpNode.codeGeneration();
         }
-        String pushPar="";
-        hpAddress=ExecuteVM.getHp();
-        for(int i=0; i<sizeListParm; i++){
-            pushPar+="push 0\n" +
-                     "pthp\n"; //todo implementa in SVM memory[hp++]=pop()
-        }
-//        FOOLlib.putCode(objectLabel+":\n"+
-//                "cfp\n"+ //setta $fp a $sp
-//                "lra\n"+ //inserimento return address
-//                pushPar+
-//                "sra\n"+ // pop del return address
-//                "pop\n"+ // pop di AL
-//                "sfp\n"+  // setto $fp a valore del CL
-//                "lrv\n"+ // risultato della funzione sullo stack
-//                "lra\n"+"js\n" // salta a $ra
-//        );
-
-        return
-                //"push "+ objectLabel + "\n"+
-                        code;
+        return code;
     }
 
 }
