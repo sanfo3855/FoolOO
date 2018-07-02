@@ -81,6 +81,9 @@ assembly:
 
 	    | HALT                  {code[i++] = HALT;}
 
+	    | PUSHTOHP n=NUMBER     {code[i++] = PUSHTOHP;
+	                             code[i++] = Integer.parseInt($n.text);}
+
     )*  {
             for (Integer refAdd: labelRef.keySet() ) {
                       code[refAdd]=labelAdd.get(labelRef.get(refAdd));
@@ -114,6 +117,7 @@ COPYFP          : 'cfp' ;   // copy stack pointer into frame pointer
 LOADHP	        : 'lhp' ;	// load heap pointer in the stack
 STOREHP	        : 'shp' ;	// store top into heap pointer
 PRINT	        : 'print' ;	// print top of stack
+PUSHTOHP        : 'pthp' ;  // pushes top of stack to heap
 HALT	        : 'halt' ;	// stop execution
 
 COL	        : ':' ;

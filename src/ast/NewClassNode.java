@@ -1,6 +1,7 @@
 package ast;
 
 import lib.FOOLlib;
+import parser.ExecuteVM;
 import util.Environment;
 import util.SemanticError;
 
@@ -11,6 +12,7 @@ public class NewClassNode implements Node{
     private String id;
     private ArrayList<String> extClassId= new ArrayList<String>();
     private int sizeListParm= 0;
+    private int hpAddress=-1;
 
     /**
      * Constructor for NewClassNode.
@@ -112,10 +114,12 @@ public class NewClassNode implements Node{
         if(funExpNode.getEntry()!=null){
             code=funExpNode.codeGeneration();
         }
-//        String pushPar="";
-//        for(int i=0; i<sizeListParm; i++){
-//            pushPar+="push 0\n";
-//        }
+        String pushPar="";
+        hpAddress=ExecuteVM.getHp();
+        for(int i=0; i<sizeListParm; i++){
+            pushPar+="push 0\n" +
+                     "pthp\n"; //todo implementa in SVM memory[hp++]=pop()
+        }
 //        FOOLlib.putCode(objectLabel+":\n"+
 //                "cfp\n"+ //setta $fp a $sp
 //                "lra\n"+ //inserimento return address

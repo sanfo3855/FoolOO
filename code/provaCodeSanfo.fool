@@ -1,31 +1,7 @@
-void main(){
-    let
-        int a=0;
-        bool b=false;
-        int c=0;
+lhp     push(hp)
 
-        int decrFunzTillOne(int ca){
-            if(ca>=1) then {
-                ca=decrFunzTillOne(ca-1);
+push 0
 
-            }
-            //print(ca);
-            return ca;
-        }
+pthp    memory[hp++] = pop()
 
-        int addOneTime(int input){
-            if(b==false){
-                input=input+3;
-                b=!b;
-            }
-            return input;
-        }
-    in
-        print(a);
-        print(b);
-        a=addOneTime(a);
 
-        a=decrFunzTillOne(5);
-        print(a);
-        print(b);
-}

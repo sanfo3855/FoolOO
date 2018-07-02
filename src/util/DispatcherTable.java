@@ -17,7 +17,4 @@ public class DispatcherTable {
     public static HashMap<String,String> getEntry(String idClass){
         return dispatchTable.get(idClass);
     }
-
-
-
 }
