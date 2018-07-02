@@ -33,7 +33,7 @@ void main(){
         int b=oi(1);
         int bbb=0;
         int ccc=777;
-        classe1 varClass=new classe2();//todo
+        classe2 varClass=new classe1();
     in
         print(b);
         print(a);
@@ -42,6 +42,6 @@ void main(){
         a=6;
         b=oi(1);
         print(22);
-        print(varClass.funClass1(2));
+        print(varClass.funClass7(2));
         //b=oi(1)+3;
 }

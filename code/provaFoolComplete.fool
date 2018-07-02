@@ -10,15 +10,15 @@ class pluto extends classe1(int y){
 }
 
 class classe1 (int x, int s, int z){
-    classe1(int a, int c){
+    classe1(int a, int cc){
         let
             int z=111;
         in
-            c=0;
+            cc=0;
     }
     pippo1 ss(int a, int q){
         let
-            classe1 c=new classe1(a,q);//non fa il typeCheck
+            classe1 ccc=new classe1(a,q);//non fa il typeCheck
             pippo1 qqqq= new pippo1(1,2);
             int z=retFunz();
         in
@@ -33,7 +33,7 @@ class classe1 (int x, int s, int z){
     int funz(int x, bool a){
         let
             int q=a;
-            classe1 c=new pippo();
+            classe1 c=new pippo();//todo
             //int z=c.ss(x, a);
         in
             //q=c.funz(x,a);
@@ -80,18 +80,18 @@ class pippo2 extends pippo (int c){
 }
 
 class pippo1 (int x, classe1 cccc){
-    pippo1(int a, int c){
+    pippo1(int a, int cc){
         let
             int z=0;
         in
-            c=cccc.retFunz();
+            cc=cccc.retFunz();
     }
 
     classe1 somma1(int a,int b){
         let
-            int c=0;
+            int cc=0;
         in
-            c = (a+b);
+            cc = (a+b);
             return new classe1();
     }
     int ciao(int a,int b){
