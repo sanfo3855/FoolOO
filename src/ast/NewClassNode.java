@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -9,6 +10,7 @@ public class NewClassNode implements Node{
     private FunExpNode funExpNode;
     private String id;
     private ArrayList<String> extClassId= new ArrayList<String>();
+    private int sizeListParm= 0;
 
     /**
      * Constructor for NewClassNode.
@@ -55,15 +57,31 @@ public class NewClassNode implements Node{
         }
         //Riempie la lista delle classi da cui la nuova classe eredita
         boolean cond=true;
-        String idExtClass=id;
+        String idTemp=id;
+        String[] arrExt;
         while (cond){
             cond=false;
             for (String classex:tempArrayClass) {
-                String[] arrExt=classex.split("@");
-                if(idExtClass.equals(arrExt[0]) && arrExt.length==2){
-                    idExtClass=arrExt[1];
+                arrExt=classex.split("@");
+                if(idTemp.equals(arrExt[0]) && arrExt.length==2){
+                    idTemp=arrExt[1];
                     extClassId.add(arrExt[1]);
                     cond=true;
+                }
+            }
+        }
+
+        for(int i=-1; i<extClassId.size(); i++){
+            if (i == -1) {
+                idTemp=id;
+            }else{
+                idTemp=extClassId.get(i);
+            }
+            for (String classex:env.getHashMapNL(0).keySet()) {
+                if(classex.contains("fieldClass#")){
+                    if(classex.contains(idTemp)){
+                        sizeListParm++;
+                    }
                 }
             }
         }
@@ -87,12 +105,31 @@ public class NewClassNode implements Node{
         return idTypeNode;
     }
 
-    public String codeGeneration() {
+    public String codeGeneration() {//todo
         String code="";
+//        String objectLabel=FOOLlib.freshClassLabel();
+
         if(funExpNode.getEntry()!=null){
             code=funExpNode.codeGeneration();
         }
-        return code;
+//        String pushPar="";
+//        for(int i=0; i<sizeListParm; i++){
+//            pushPar+="push 0\n";
+//        }
+//        FOOLlib.putCode(objectLabel+":\n"+
+//                "cfp\n"+ //setta $fp a $sp
+//                "lra\n"+ //inserimento return address
+//                pushPar+
+//                "sra\n"+ // pop del return address
+//                "pop\n"+ // pop di AL
+//                "sfp\n"+  // setto $fp a valore del CL
+//                "lrv\n"+ // risultato della funzione sullo stack
+//                "lra\n"+"js\n" // salta a $ra
+//        );
+
+        return
+                //"push "+ objectLabel + "\n"+
+                        code;
     }
 
 }

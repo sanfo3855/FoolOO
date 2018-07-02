@@ -116,7 +116,7 @@ public class FoolNode implements Node {
                             }
                             idKey += "%class%" + decclassNode.getId();
                             //Salvo nell'ambiente l'identificatore del metodo di una classe.
-                            if (hashMap.put(idKey, entryTable) != null) {
+                            if (hashMap.put(idKey, new STentry(env.getNestingLevel(),decclassNode.getOffsetListVarPlus())) != null) {
                                 semanticErrors.add(new SemanticError("Method " + idKey + " already declared !"));
                             }
                         }

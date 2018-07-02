@@ -31,6 +31,10 @@ public class FunExpNode implements Node {
         return listParam.size();
     }
 
+    public String getId() {
+        return id;
+    }
+
     public STentry getEntry() {
         return entry;
     }

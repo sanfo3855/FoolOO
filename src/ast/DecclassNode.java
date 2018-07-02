@@ -1,5 +1,7 @@
 package ast;
 
+import sun.rmi.server.Dispatcher;
+import util.DispatcherTable;
 import util.Environment;
 import util.SemanticError;
 
@@ -13,7 +15,7 @@ public class DecclassNode implements Node {
     private ArrayList<Node> listVar; //lista dei campi di questo nodo classe
     private ArrayList<Node> listFun; //lista dei metodi di questo nodo classe
     private ArrayList<String> extClassId= new ArrayList<String>(); //lista completa delle superclassi di questo nodo classe
-
+    private int offsetListVar=0;
 
     /**
      * Constructor for DecclassNode (with extends).
@@ -71,6 +73,11 @@ public class DecclassNode implements Node {
     public ArrayList<Node> getListFun() {
         return listFun;
     }
+
+    public int getOffsetListVarPlus() {
+        return offsetListVar++;
+    }
+
 
     /**
      * Prints structure of DecclassNode and call toPrint method on every child node.
@@ -134,7 +141,6 @@ public class DecclassNode implements Node {
             //creo l'ambiente di livello 1 ovvero l'ambiente della classe caricando l'hashMapClass
             env.addHashMapNL(hashMapClass);
             ArrayList<Node> varTypes = new ArrayList<Node>();
-            int offsetListVar=0;
             hashMapClass.put(idClass,new STentry(env.getNestingLevel(),offsetListVar++));
 
             /*
@@ -215,10 +221,15 @@ public class DecclassNode implements Node {
      */
     public String codeGeneration() {
         String returnString = "";
+        FunExpNode funExpNode;
+        HashMap<String,String> methodList=new HashMap<String,String>();
         for (Node fun: listFun) {
-            returnString+= fun.codeGeneration();
+            funExpNode=(FunExpNode) fun;
+            methodList.put(funExpNode.getId(), funExpNode.codeGeneration());
         }
-        return returnString;
+
+        DispatcherTable.putDispatchEntry(id, methodList);
+        return "";
     }
 
 }

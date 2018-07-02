@@ -67,12 +67,12 @@ public class FOOLlib {
   
   public static String freshLabel() { 
 	return "label"+(labCount++);
-  } 
+  }
 
-  public static String freshFunLabel() { 
-	return "function"+(funLabCount++);
-  } 
-  
+  public static String freshFunLabel() {
+    return "function"+(funLabCount++);
+  }
+
   public static void putCode(String c) { 
     funCode+="\n"+c; //aggiunge una linea vuota di separazione prima di funzione
   } 

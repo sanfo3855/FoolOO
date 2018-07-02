@@ -1,15 +1,25 @@
-class classe1(int x){
-    classe1(){
-        x=0;
-    }
-    int funClass1(int q){
+class classe2(int y){
+
+    int funClass7(int q){
         let
-            int f=3;
+            int f=8;
         in
             print(f);
             return f+q;
     }
 }
+class classe1 extends classe2(int x){
+ //    classe1(){
+  //       x=7;
+ //    }
+     int funClass1(int q){
+         let
+             int f=3;
+         in
+             print(f);
+             return f+q;
+     }
+ }
 
 void main(){
     let
