@@ -3,19 +3,11 @@ void main(){
         bool c=true;
         int x=3;
     in
-
-//    x=if(!false == c ) then {
-//        2
- //   }else{
- //       true
-//    };
-
-    if(true == !false) then {
-        x=2;
-        print(x);
-    }
+        if( 3 + 1 == 2 + 3) then {
+            x=2;
+            print(x);
+        }
         x=77;
-    print(8);
-    print(x);
+        print(x);
 
 }

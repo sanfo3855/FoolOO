@@ -32,6 +32,6 @@ void main(){
         a=6;
         b=oi(1);
         print(22);
-        //print(varClass.funClass1(2));
+        print(varClass.funClass1(2));
         //b=oi(1)+3;
 }
