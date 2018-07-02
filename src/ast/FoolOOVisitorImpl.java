@@ -51,6 +51,29 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     }
 
     @Override
+    public Node visitSingleExpFun(SingleExpFunContext ctx) {
+        Node node = null;
+        if (ctx.stms() != null) {
+            node = visit(ctx.stms());
+        }
+        return node;
+    }
+
+    @Override
+    public Node visitLetInExpFun(LetInExpFunContext ctx) {
+        ArrayList<Node> listDec = new ArrayList<Node>();
+        for(VarasmContext varasm : ctx.letFun().varasm()){
+            listDec.add( visit(varasm) );
+        }
+        Node exp = null;
+        if (ctx.stms() != null) {
+            exp = visit(ctx.stms());
+        }
+        return new LetInExpNode(listDec,  exp);
+    }
+
+
+    @Override
     public Node visitDecclass(DecclassContext ctx) {
         Node decNode;
         ArrayList<Node> listVar = new ArrayList<Node>();
@@ -110,7 +133,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         for(VardecContext dec : ctx.vardec()){
             listVar.add( visit(dec) );
         }
-        Node progNode= visit(ctx.prog());
+        Node progNode= visit(ctx.progFun());
         Node retNode=null;
         if(ctx.ret()!=null){
             retNode= visit(ctx.ret());
@@ -125,7 +148,7 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
         for(VardecContext dec : ctx.vardec()){
             listVar.add( visit(dec) );
         }
-        Node progNode= visit(ctx.prog());
+        Node progNode= visit(ctx.progFun());
 
         return new FunConstructorNode(ctx.ID().getText(), listVar, progNode);
     }

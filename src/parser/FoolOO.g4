@@ -13,6 +13,9 @@ grammar FoolOO;
 start   : (decclass)* main
         ;
 
+decclass   : CLASS ID ( EXTENDS ID )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun | funconstructor)+ CRPAR
+            ;
+
 main   : type MAIN LPAR RPAR CLPAR prog CRPAR
         ;
 
@@ -20,10 +23,18 @@ prog    : (stms)?       #singleExp
         | let (stms)?   #letInExp
         ;
 
-decclass   : CLASS ID ( EXTENDS ID )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun | funconstructor)+ CRPAR
+let     : LET (dec)+ IN
         ;
 
-let     : LET (dec)+ IN
+progFun : (stms)?       #singleExpFun
+        | letFun (stms)?   #letInExpFun
+        ;
+
+letFun  : LET (varasm)+ IN
+        ;
+
+dec     : varasm           #varAssignment
+        | fun              #funDeclaration
         ;
 
 vardec  : type ID
@@ -33,19 +44,14 @@ varasm  : vardec ASM exp SEMIC      #expDecAsignment
         |  vardec ASM stm          #stmDecAsignment
         ;
 
-fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog (ret)? CRPAR
-        ;
-
-funconstructor  : ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR prog CRPAR
+funconstructor  : ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR progFun CRPAR
                 ;
 
+fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR progFun (ret)? CRPAR
+        ;
 
 ret     : RETURN exp SEMIC                                      #returnFunExp
         | RETURN stm                                           #returnFunStms
-        ;
-
-dec     : varasm           #varAssignment
-        | fun              #funDeclaration
         ;
 
 type    : INT

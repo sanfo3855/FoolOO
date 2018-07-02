@@ -17,6 +17,12 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(FoolOOParser.StartContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link FoolOOParser#decclass}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecclass(FoolOOParser.DecclassContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#main}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -37,17 +43,45 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLetInExp(FoolOOParser.LetInExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FoolOOParser#decclass}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDecclass(FoolOOParser.DecclassContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#let}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitLet(FoolOOParser.LetContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code singleExpFun}
+	 * labeled alternative in {@link FoolOOParser#progFun}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSingleExpFun(FoolOOParser.SingleExpFunContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code letInExpFun}
+	 * labeled alternative in {@link FoolOOParser#progFun}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLetInExpFun(FoolOOParser.LetInExpFunContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FoolOOParser#letFun}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLetFun(FoolOOParser.LetFunContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code varAssignment}
+	 * labeled alternative in {@link FoolOOParser#dec}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarAssignment(FoolOOParser.VarAssignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code funDeclaration}
+	 * labeled alternative in {@link FoolOOParser#dec}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunDeclaration(FoolOOParser.FunDeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#vardec}.
 	 * @param ctx the parse tree
@@ -69,17 +103,17 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStmDecAsignment(FoolOOParser.StmDecAsignmentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FoolOOParser#fun}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFun(FoolOOParser.FunContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#funconstructor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunconstructor(FoolOOParser.FunconstructorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FoolOOParser#fun}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFun(FoolOOParser.FunContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code returnFunExp}
 	 * labeled alternative in {@link FoolOOParser#ret}.
@@ -94,20 +128,6 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReturnFunStms(FoolOOParser.ReturnFunStmsContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code varAssignment}
-	 * labeled alternative in {@link FoolOOParser#dec}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVarAssignment(FoolOOParser.VarAssignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code funDeclaration}
-	 * labeled alternative in {@link FoolOOParser#dec}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunDeclaration(FoolOOParser.FunDeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FoolOOParser#type}.
 	 * @param ctx the parse tree
