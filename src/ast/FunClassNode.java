@@ -1,10 +1,11 @@
 package ast;
 
 import lib.FOOLlib;
+import util.DispatcherTable;
 
 import java.util.ArrayList;
 
-public class FunNode  extends FunAbstractNode {
+public class FunClassNode  extends FunAbstractNode {
     /**
      * Constructor for FunctionNode.
      *
@@ -14,11 +15,10 @@ public class FunNode  extends FunAbstractNode {
      * @param progNode --> Function body program
      * @param retNode --> Function return node
      */
-    public FunNode (String id, Node type, ArrayList<Node> listVar, Node progNode, Node retNode) {
+    public FunClassNode (String id, Node type, ArrayList<Node> listVar, Node progNode, Node retNode) {
         super(id, type, listVar, progNode, retNode);
     }
 
-    @Override
     /**
      *
      * @return
@@ -35,15 +35,7 @@ public class FunNode  extends FunAbstractNode {
             popVar+="pop\n";
         }
         String funl=FOOLlib.freshFunLabel();
-        String end="";
-        if(id.equals("main")){
-            FOOLlib.putLabelMain(funl);
-            end="b "+FOOLlib.getLabelEnd()+"\n";
-        }else if (!(type instanceof VoidTypeNode)){
-            end= "sfp\n"+  // setto $fp a valore del CL
-                    "lrv\n"+ // risultato della funzione sullo stack
-                    "lra\n"+"js\n"; // salta a $ra
-        }
+
         String retCod="";
         if(retNode!=null){
             retCod=retNode.codeGeneration();
@@ -52,6 +44,22 @@ public class FunNode  extends FunAbstractNode {
         if (progNode!=null){
             progCod=progNode.codeGeneration();
         }
+
+
+
+//        int sizeVarHp=0;
+//        if(y==0){
+//            sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(className).get("numberVar"));
+//        }else{
+//            sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(listExtension.get(--y)).get("numberVar"));
+//        }
+//        String retHpVar="";
+//        for(int i = sizeVarHp; i>0; i--){
+//            retHpVar +=;//todo
+//        }
+
+
+
         FOOLlib.putCode(funl+":\n"+
                 "cfp\n"+ //setta $fp a $sp
                 "lra\n"+ //inserimento return address
@@ -62,7 +70,9 @@ public class FunNode  extends FunAbstractNode {
                 "sra\n"+ // pop del return address
                 "pop\n"+ // pop di AL
                 popVar+
-                end
+                "sfp\n"+  // setto $fp a valore del CL
+                "lrv\n"+ // risultato della funzione sullo stack
+                "lra\n"+"js\n" // salta a $ra
         );
 
         return "push "+ funl +"\n";

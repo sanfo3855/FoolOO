@@ -115,6 +115,12 @@ public interface FoolOOVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFun(FoolOOParser.FunContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link FoolOOParser#funClass}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunClass(FoolOOParser.FunClassContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code returnFunExp}
 	 * labeled alternative in {@link FoolOOParser#ret}.
 	 * @param ctx the parse tree

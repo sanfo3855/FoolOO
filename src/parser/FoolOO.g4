@@ -13,7 +13,7 @@ grammar FoolOO;
 start   : (decclass)* main
         ;
 
-decclass   : CLASS ID ( EXTENDS ID )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (fun | funconstructor)+ CRPAR
+decclass   : CLASS ID ( EXTENDS ID )? LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR (funClass | funconstructor)+ CRPAR
             ;
 
 main   : type MAIN LPAR RPAR CLPAR prog CRPAR
@@ -49,6 +49,9 @@ funconstructor  : ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR progFun CRPAR
 
 fun     : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR progFun (ret)? CRPAR
         ;
+
+funClass: type ID LPAR ( vardec ( COMMA vardec)* )? RPAR CLPAR progFun (ret)? CRPAR
+                ;
 
 ret     : RETURN exp SEMIC                                      #returnFunExp
         | RETURN stm                                           #returnFunStms

@@ -6,7 +6,7 @@ import util.SemanticError;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FunConstructorNode extends FunAbstractNode {
+public class FunConstructorNode extends FunClassNode {
     /**
      * Constructor fo Function Constructor Node.
      *
@@ -15,11 +15,7 @@ public class FunConstructorNode extends FunAbstractNode {
      * @param progNode --> Constructor body
      */
     public FunConstructorNode (String id, ArrayList<Node> listVar, Node progNode) {
-        this.id=id;
-        this.listVar=listVar;
-        this.progNode=progNode;
-        this.type=new IdTypeNode(id);
-        this.retNode=null;
+        super( id, new IdTypeNode(id), listVar, progNode, null);
     }
 
     /**
@@ -41,6 +37,7 @@ public class FunConstructorNode extends FunAbstractNode {
         return returnString;
     }
 
+    @Override
     /**
      * Check FunConstructorNode's semantic and call checkSemantic method on every childNode.
      *
@@ -89,6 +86,7 @@ public class FunConstructorNode extends FunAbstractNode {
         return semanticErrors;
     }
 
+    @Override
     /**
      *  Calls typeCheck() for ProgNode Child.
      *

@@ -129,7 +129,6 @@ public class CallMethodNode implements Node {
                 bLabel = DispatcherTable.getEntry(listExtension.get(y++)).get(key);
             }
         }
-
         int sizeVarHp=0;
         if(y==0){
             sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(className).get("numberVar"));
@@ -137,19 +136,12 @@ public class CallMethodNode implements Node {
             sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(listExtension.get(--y)).get("numberVar"));
         }
         for(int i = sizeVarHp; i>0; i--){
-            returnString += "push " +entry.getOffset()+"\n"+
-                    "lfp\n"+"add\n"+"lw\n"+"push "+(i-1)+"\nadd\n"+"lw\n"
-            ;
-        }
-        String retHpVar="";
-        for(int i = sizeVarHp; i>0; i--){
-//            retHpVar +=//todo
-//            ;
+            returnString += "push " +entry.getOffset()+"\n"+"lfp\n"+"add\n"+"lw\n"+"push "+(i-1)+"\nadd\n"+"lw\n";
         }
 
         for (int i = methodCall.getSizeListParam()-1; i>=0; i--){
             returnString += methodCall.getListParam().get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
         }
-        return returnString+"push "+bLabel+"js\n"+retHpVar;
+        return returnString+"push "+bLabel+"js\n";
     }
 }
