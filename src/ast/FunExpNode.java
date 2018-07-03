@@ -11,6 +11,7 @@ public class FunExpNode implements Node {
     private String id;//nome della funzione
     private String typeClassMethod;//nome della classe su cui viene ricercata la funzione
     private ArrayList<Node> listParam;//lista dei parametri della funzione
+
     private ArrayList<Node> typeParam=new ArrayList<Node>();
     private STentry entry;////entry table dell'id
     private int nestingLevel;//nestinglevel dell'entry
@@ -25,6 +26,10 @@ public class FunExpNode implements Node {
         this.id =id;
         this.listParam = listParam;
         this.typeClassMethod=null;
+    }
+
+    public ArrayList<Node> getTypeParam() {
+        return typeParam;
     }
 
     public ArrayList<Node> getListParam() {

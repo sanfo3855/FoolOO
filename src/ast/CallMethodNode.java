@@ -105,22 +105,27 @@ public class CallMethodNode implements Node {
      * @return
      */
     public String codeGeneration() {
-        String key = id + "#" + ((TypeNode)methodCall).getType();
-        for (Node param : ((FunExpNode)methodCall).getListParam()){
+        String key = methodCall.getId()+ "%" + ((TypeNode)methodCall.getEntry().getType()).getType();
+        for (Node param : ((FunExpNode)methodCall).getTypeParam()){
             key+= "%"+ ((TypeNode)param).getType();
         }
 
+
         String className = ((FunExpNode)methodCall).getTypeClassMethod();
-        String label;
-        if ((label = DispatcherTable.getEntry(className).get(key)) == null){
+        System.out.println(className + " " + key);
+        System.out.println(DispatcherTable.getEntry(className) + " KEY CLASS");
+        String bLabel;
+        if ((bLabel = DispatcherTable.getEntry(className).get(key)) == null){
             String stringExtension = DispatcherTable.getEntry(className).get("extends");
+            System.out.println(stringExtension + "STRING EXTENSION");
             String[] listExtension = stringExtension.split("%");
             int i=0;
-            while(label==null){
-                label = DispatcherTable.getEntry(listExtension[i++]).get(key);
+            while(bLabel==null){
+                bLabel = DispatcherTable.getEntry(listExtension[i++]).get(key);
             }
         }
+        System.out.println("LABEL " + bLabel);
 
-        return label;
+        return bLabel;
     }
 }
