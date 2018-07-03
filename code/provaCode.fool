@@ -1,4 +1,4 @@
-class classe2 extends classe3(int k){
+class classe2 (int k){
 
     int funClass7(int q){
         let
@@ -8,17 +8,6 @@ class classe2 extends classe3(int k){
             return f+q;
     }
 }
-class classe3 (int y){
-
-    int funClass3(int q){
-        let
-            int f=8;
-        in
-            print(f);
-            return f+q;
-    }
-}
-
 class classe1 extends classe2(int x){
  //    classe1(){
   //       x=7;
@@ -28,7 +17,7 @@ class classe1 extends classe2(int x){
              int f=3;
          in
              print(f);
-             return f+q;
+             return f;
      }
  }
 
@@ -45,6 +34,9 @@ void main(){
         int bbb=0;
         int ccc=777;
         classe1 varClass=new classe1();
+        classe2 varClass1=new classe2();
+        classe1 varClass2=new classe1();
+        int cccx=8888;
     in
        // print(b);
        // print(a);

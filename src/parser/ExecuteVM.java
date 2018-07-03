@@ -10,7 +10,8 @@ public class ExecuteVM {
     private int ip = 0;
     private int sp = MEMSIZE;
 
-    private static int hp = 0;
+    private static int hpCode = 0;
+    private int hp = 0;
     private int fp = MEMSIZE;
     private int ra;
     private int rv;
@@ -132,9 +133,15 @@ public class ExecuteVM {
         memory[--sp] = v;
     }
 
-    public static int getHp() {
-        return hp;
+    public static int getHpCode() {
+        return hpCode;
     }
 
+    public static void incHpCode() {
+        hpCode++;
+    }
 
+    public int[] getMemory() {
+        return memory;
+    }
 }

@@ -16,6 +16,7 @@ public class DecclassNode implements Node {
     private ArrayList<Node> listFun; //lista dei metodi di questo nodo classe
     private ArrayList<String> extClassId= new ArrayList<String>(); //lista completa delle superclassi di questo nodo classe
     private int offsetListVar=0;
+    private int numberVar=0;
 
     /**
      * Constructor for DecclassNode (with extends).
@@ -167,6 +168,8 @@ public class DecclassNode implements Node {
                             }
                             if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel(),nodeType,offsetListVar++)) != null  ){
                                 semanticErrors.add(new SemanticError("Field id "+fieldClass[1]+" already declared"));
+                            }else{
+                                numberVar++;
                             }
                         }
                     }
@@ -179,6 +182,8 @@ public class DecclassNode implements Node {
                 varTypes.add(arguments.getType());
                 if ( hashMapClass.put(arguments.getId(),new STentry(env.getNestingLevel(),arguments.getType(),offsetListVar++)) != null  ){
                     semanticErrors.add(new SemanticError("Parameter id "+arguments.getId()+" already declared"));
+                }else{
+                    numberVar++;
                 }
             }
 
@@ -242,6 +247,8 @@ public class DecclassNode implements Node {
             }
             methodList.put("extends", methodDT);
         }
+
+        methodList.put("numberVar", numberVar+"");
         DispatcherTable.putDispatchEntry(id, methodList);
         return returnString;
     }

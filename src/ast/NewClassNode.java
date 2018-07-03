@@ -106,10 +106,11 @@ public class NewClassNode implements Node{
     }
 
     public String codeGeneration() {
-        String code="push "+ExecuteVM.getHp()+"\n";
+        String code="push "+ExecuteVM.getHpCode()+"\n";
 
         for(int i=0; i<sizeListParm; i++){
-            code+="push 0\n" +
+            ExecuteVM.incHpCode();
+            code+="push 1\n" +
                      "pthp\n";
         }
 

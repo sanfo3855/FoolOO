@@ -108,12 +108,12 @@ public class CallMethodNode implements Node {
         //creo la chiave che verrà utilizzata per cercare la funzione nella dispatcher table
         String key = methodCall.getId()+ "%" + ((TypeNode)methodCall.getEntry().getType()).getType();
         //completo la chiave con i tipi dei parametri della funzione
-        for (Node param : ((FunExpNode)methodCall).getTypeParam()){
+        for (Node param : methodCall.getTypeParam()){
             key+= "%"+ ((TypeNode)param).getType();
         }
 
         //ottengo il nome della classe a cui apaprtiene il metodo
-        String className = ((FunExpNode)methodCall).getTypeClassMethod();
+        String className = methodCall.getTypeClassMethod();
         String bLabel;
         /* se il metodo non è in quella classe ma è a sua volta ereditato, ottengo il metodo
         dalla dispatcher table scorrendo le varie classi ereditate*/
