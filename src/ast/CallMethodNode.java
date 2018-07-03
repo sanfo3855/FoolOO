@@ -5,6 +5,7 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class CallMethodNode implements Node {
@@ -105,6 +106,7 @@ public class CallMethodNode implements Node {
      * @return bLabel --> String with the specific method function
      */
     public String codeGeneration() {
+        String returnString = "lfp\n"; //carico il frame pointer sullo stack
         //creo la chiave che verrà utilizzata per cercare la funzione nella dispatcher table
         String key = methodCall.getId()+ "%" + ((TypeNode)methodCall.getEntry().getType()).getType();
         //completo la chiave con i tipi dei parametri della funzione
@@ -115,16 +117,39 @@ public class CallMethodNode implements Node {
         //ottengo il nome della classe a cui apaprtiene il metodo
         String className = methodCall.getTypeClassMethod();
         String bLabel;
+        int y=0;
+        ArrayList<String> listExtension=new ArrayList<>();
         /* se il metodo non è in quella classe ma è a sua volta ereditato, ottengo il metodo
         dalla dispatcher table scorrendo le varie classi ereditate*/
         if ((bLabel = DispatcherTable.getEntry(className).get(key)) == null){
             String stringExtension = DispatcherTable.getEntry(className).get("extends");
-            String[] listExtension = stringExtension.split("%");
-            int i=0;
+            listExtension.addAll(Arrays.asList(stringExtension.split("%")));
+
             while(bLabel==null){
-                bLabel = DispatcherTable.getEntry(listExtension[i++]).get(key);
+                bLabel = DispatcherTable.getEntry(listExtension.get(y++)).get(key);
             }
         }
-        return bLabel;
+
+        int sizeVarHp=0;
+        if(y==0){
+            sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(className).get("numberVar"));
+        }else{
+            sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(listExtension.get(--y)).get("numberVar"));
+        }
+        for(int i = sizeVarHp; i>0; i--){
+            returnString += "push " +entry.getOffset()+"\n"+
+                    "lfp\n"+"add\n"+"lw\n"+"push "+(i-1)+"\nadd\n"+"lw\n"
+            ;
+        }
+        String retHpVar="";
+        for(int i = sizeVarHp; i>0; i--){
+//            retHpVar +=//todo
+//            ;
+        }
+
+        for (int i = methodCall.getSizeListParam()-1; i>=0; i--){
+            returnString += methodCall.getListParam().get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
+        }
+        return returnString+"push "+bLabel+"js\n"+retHpVar;
     }
 }

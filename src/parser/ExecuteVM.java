@@ -2,7 +2,7 @@ package parser;
 public class ExecuteVM {
 
     public static final int CODESIZE = 10000;
-    public static final int MEMSIZE = 10000;
+    public static final int MEMSIZE = 100;
 
     private int[] code;
     private int[] memory = new int[MEMSIZE];
@@ -114,7 +114,7 @@ public class ExecuteVM {
                     push(hp);
                     break;
                 case SVMParser.PRINT :
-                    System.out.println((sp<MEMSIZE)?memory[sp]:"Empty stack!");
+                    System.out.println((sp<MEMSIZE)?memory[sp++]:"Empty stack!");
                     break;
                 case SVMParser.PUSHTOHP:
                     memory[hp++] = pop();

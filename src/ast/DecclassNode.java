@@ -76,7 +76,7 @@ public class DecclassNode implements Node {
     }
 
     public int getOffsetListVarPlus() {
-        return offsetListVar++;
+        return offsetListVar;
     }
 
 
@@ -166,7 +166,7 @@ public class DecclassNode implements Node {
                                 default:
                                     nodeType= new IdTypeNode(fieldClass[2]);
                             }
-                            if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel(),nodeType,offsetListVar++)) != null  ){
+                            if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel()+1,nodeType,offsetListVar++)) != null  ){
                                 semanticErrors.add(new SemanticError("Field id "+fieldClass[1]+" already declared"));
                             }else{
                                 numberVar++;
@@ -180,7 +180,7 @@ public class DecclassNode implements Node {
             for(Node varNode : listVar){
                 VarDecNode arguments = (VarDecNode) varNode;
                 varTypes.add(arguments.getType());
-                if ( hashMapClass.put(arguments.getId(),new STentry(env.getNestingLevel(),arguments.getType(),offsetListVar++)) != null  ){
+                if ( hashMapClass.put(arguments.getId(),new STentry(env.getNestingLevel()+1,arguments.getType(),offsetListVar++)) != null  ){
                     semanticErrors.add(new SemanticError("Parameter id "+arguments.getId()+" already declared"));
                 }else{
                     numberVar++;
@@ -238,7 +238,7 @@ public class DecclassNode implements Node {
             }
             codFunAbs=funAbstractNode.codeGeneration();
             returnString+=codFunAbs;
-            methodList.put(methodDT, "b "+codFunAbs.split(" ")[1]);
+            methodList.put(methodDT, codFunAbs.split(" ")[1]);
         }
         if(idExt!=null){
             methodDT="";

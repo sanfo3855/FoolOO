@@ -68,10 +68,14 @@ public abstract class FunAbstractNode implements Node {
         if(retNode!=null){
             retCod=retNode.codeGeneration();
         }
+        String progCod="";
+        if (progNode!=null){
+            progCod=progNode.codeGeneration();
+        }
         FOOLlib.putCode(funl+":\n"+
                 "cfp\n"+ //setta $fp a $sp
                 "lra\n"+ //inserimento return address
-                progNode.codeGeneration()+
+                progCod+
                 retCod+
                 "srv\n"+ //pop del return value
                 popDec+

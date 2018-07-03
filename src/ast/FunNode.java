@@ -82,12 +82,12 @@ public class FunNode  extends FunAbstractNode {
         //Viene creata una nuova hashmap nell'ambiente
         env.addHashMapNL(entryHashMap);
         STentry entryListVar = null;
-        int offsetListVar=1;
+        int offsetListVar=0;
         for (Node node: listVar) {
             VarDecNode varDecNode = (VarDecNode) node;
             //Si ottiene il tipo di ciascun parametro
             parList.add(varDecNode.getType());
-            entryListVar=new STentry(env.getNestingLevel(),varDecNode.getType(),offsetListVar++);
+            entryListVar=new STentry(env.getNestingLevel(),varDecNode.getType(),offsetListVar--);
             if ( entryHashMap.put(varDecNode.getId(),entryListVar) != null  ){
                 semanticErrors.add(new SemanticError("Parameter id "+varDecNode.getId()+" already declared"));
             }
