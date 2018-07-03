@@ -224,13 +224,16 @@ public class DecclassNode implements Node {
         FunAbstractNode funAbstractNode;
         HashMap<String,String> methodList=new HashMap<String,String>();
         String methodDT;
+        String codFunAbs;
         for (Node fun: listFun) {
             funAbstractNode=(FunAbstractNode) fun;
             methodDT=funAbstractNode.getId()+"%"+((TypeNode)funAbstractNode.getType()).getType();
             for(Node typePar: funAbstractNode.getListVar()){
                 methodDT+="%"+((TypeNode)((VarDecNode)typePar).getType()).getType();
             }
-            methodList.put(methodDT, funAbstractNode.codeGeneration());
+            codFunAbs=funAbstractNode.codeGeneration();
+            returnString+=codFunAbs;
+            methodList.put(methodDT, "b "+codFunAbs.split(" ")[1]);
         }
         if(idExt!=null){
             methodDT="";
@@ -240,7 +243,7 @@ public class DecclassNode implements Node {
             methodList.put("extends", methodDT);
         }
         DispatcherTable.putDispatchEntry(id, methodList);
-        return "";
+        return returnString;
     }
 
 }
