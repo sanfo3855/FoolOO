@@ -101,31 +101,30 @@ public class CallMethodNode implements Node {
     }
 
     /**
-     *
-     * @return
+     * Generated code for the methodCall. It search the method inside the Dispatcher Table
+     * @return bLabel --> String with the specific method function
      */
     public String codeGeneration() {
+        //creo la chiave che verrà utilizzata per cercare la funzione nella dispatcher table
         String key = methodCall.getId()+ "%" + ((TypeNode)methodCall.getEntry().getType()).getType();
+        //completo la chiave con i tipi dei parametri della funzione
         for (Node param : ((FunExpNode)methodCall).getTypeParam()){
             key+= "%"+ ((TypeNode)param).getType();
         }
 
-
+        //ottengo il nome della classe a cui apaprtiene il metodo
         String className = ((FunExpNode)methodCall).getTypeClassMethod();
-        System.out.println(className + " " + key);
-        System.out.println(DispatcherTable.getEntry(className) + " KEY CLASS");
         String bLabel;
+        /* se il metodo non è in quella classe ma è a sua volta ereditato, ottengo il metodo
+        dalla dispatcher table scorrendo le varie classi ereditate*/
         if ((bLabel = DispatcherTable.getEntry(className).get(key)) == null){
             String stringExtension = DispatcherTable.getEntry(className).get("extends");
-            System.out.println(stringExtension + "STRING EXTENSION");
             String[] listExtension = stringExtension.split("%");
             int i=0;
             while(bLabel==null){
                 bLabel = DispatcherTable.getEntry(listExtension[i++]).get(key);
             }
         }
-        System.out.println("LABEL " + bLabel);
-
         return bLabel;
     }
 }
