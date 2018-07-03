@@ -111,6 +111,8 @@ public class FunExpNode implements Node {
         ArrayList<String> keyType= new ArrayList<String>();
         int keylength=0;
         Iterator iteratorHM;
+        Iterator iteratorExt;
+        String keyfun;
         Map.Entry<String,STentry> entryHM;
         /*
         Scorro tutti gli ambienti, pertendo dal più interno, per ricercare
@@ -156,14 +158,21 @@ public class FunExpNode implements Node {
                                 Se la classe di appartenenza del metodo è la stessa definita in typeClassMethod, ho trovato l'entry ricercata.
                                 Altrimenti cerco fra le sovraclassi della classe definita in typeClassMethod.
                                  */
+
                                 if (keyType.get(keylength - 1).equals(typeClassMethod)) {
                                     tmpEntry = entryHM.getValue();
                                 } else {
-                                    for (String keyfun : hmClassExt.keySet()) {
+                                    String extClassMethod=typeClassMethod;
+                                    iteratorExt=hmClassExt.entrySet().iterator();
+                                    while (iteratorExt.hasNext() && tmpEntry==null){
+                                        keyfun = ((Map.Entry<String, STentry>) iteratorExt.next()).getKey();
                                         String[] splitKey = keyfun.split("@");
-                                        if (splitKey.length > 1 && splitKey[0].split("%")[1].equals(typeClassMethod)) {
+                                        if (splitKey.length > 1 && splitKey[0].split("%")[1].equals(extClassMethod)) {
                                             if (keyType.get(keylength - 1).equals(splitKey[1])) {
                                                 tmpEntry = entryHM.getValue();
+                                            }else{
+                                                extClassMethod=splitKey[1];
+                                                iteratorExt=hmClassExt.entrySet().iterator();
                                             }
                                         }
                                     }
