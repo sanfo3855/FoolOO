@@ -1,7 +1,29 @@
-lhp     push(hp)
+class Numero (int val){
 
-push 0
+    void setValore(int v){
+        val = v;
+    }
 
-pthp    memory[hp++] = pop()
+    int getValore(){
+        return val;
+    }
+
+    int raddoppia(){
+        return val*2;
+    }
+}
 
 
+void main(){
+    let
+        void bbbb(int cc){
+            print(cc);
+        }
+        int a=2;
+        Numero num = new Numero();
+    in
+        bbbb(3);
+        num.setValore(a);
+        print(num.getValore());
+        print(num.raddoppia());
+}
