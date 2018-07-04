@@ -1,18 +1,18 @@
+class classe2 (int k){
+
+    int funClass7(int q){
+        let
+            int f=8;
+        in
+            print(f);
+            return f+q;
+    }
+}
+
 void main(){
     let
-        int y=5;
-        int x=4;
-        int a=oi(1);
-        int oi(int e){
-            let
-                int c = 2;
-                int returnString = 0;
-            in
-            returnString = c * e;
-            return returnString;
-        }
-
+        classe2 varClass1=new classe2();
     in
-        print(a);
+         print(varClass1.funClass7(2));
 
 }

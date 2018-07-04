@@ -73,6 +73,8 @@ assembly:
 
 	    | COPYFP                {code[i++] = COPYFP;}
 
+	    | COPYFPM                {code[i++] = COPYFPM;}
+
 	    | LOADHP                {code[i++] = LOADHP;}
 
 	    | STOREHP               {code[i++] = STOREHP;}
@@ -113,6 +115,7 @@ STORERV         : 'srv' ;	// store top into rv
 LOADFP	        : 'lfp' ;	// load frame pointer in the stack
 STOREFP	        : 'sfp' ;	// store top into frame pointer
 COPYFP          : 'cfp' ;   // copy stack pointer into frame pointer
+COPYFPM         : 'cfpm' ;   // copy stack pointer-1 into frame pointer
 LOADHP	        : 'lhp' ;	// load heap pointer in the stack
 STOREHP	        : 'shp' ;	// store top into heap pointer
 PRINT	        : 'print' ;	// print top of stack
