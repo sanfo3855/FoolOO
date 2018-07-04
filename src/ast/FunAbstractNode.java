@@ -11,7 +11,7 @@ import java.util.HashMap;
  * Interface that extends Node and define new methods
  * that have to be implemented in every node that implement FunAbstractNode
  */
-public class FunAbstractNode implements Node {
+public abstract class FunAbstractNode implements Node {
     protected String id;
     protected Node type;
     protected ArrayList<Node> listVar;
@@ -44,7 +44,7 @@ public class FunAbstractNode implements Node {
 
     /**
      *
-     * @return Node's ArrayList variables
+     * @return fNode's ArrayList variables
      */
     ArrayList<Node> getListVar(){
         return listVar;
@@ -138,10 +138,5 @@ public class FunAbstractNode implements Node {
             }
         }
         return new VoidTypeNode();
-    }
-
-    @Override
-    public String codeGeneration() {
-        return null;
     }
 }

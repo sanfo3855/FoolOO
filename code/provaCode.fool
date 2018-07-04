@@ -1,10 +1,12 @@
 
-class classe1 (int x, int y){
+class classe1 (int x, int y, int z){
 
      int funClass1(int q){
              print(x);
+             y=5;
+             z=99;
              print(y);
-             x=2;
+             x=4;
              print(x);
              print(q);
              return q;
@@ -19,5 +21,5 @@ void main(){
 
         print(8);
         print(varClass1.funClass1(7));
-        print(8);
+        //print(8);
 }

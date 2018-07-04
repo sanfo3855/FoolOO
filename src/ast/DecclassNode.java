@@ -15,7 +15,7 @@ public class DecclassNode implements Node {
     private ArrayList<Node> listVar; //lista dei campi di questo nodo classe
     private ArrayList<Node> listFun; //lista dei metodi di questo nodo classe
     private ArrayList<String> extClassId= new ArrayList<String>(); //lista completa delle superclassi di questo nodo classe
-    private int offsetListVar=0;
+    private int offsetListVar=2;
     private int numberVar=0;
 
     /**

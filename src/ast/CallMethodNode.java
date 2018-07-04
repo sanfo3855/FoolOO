@@ -106,7 +106,7 @@ public class CallMethodNode implements Node {
      * @return bLabel --> String with the specific method function
      */
     public String codeGeneration() {
-        String returnString = "lfp\n"; //carico il frame pointer sullo stack
+        String returnString = ""; //carico il frame pointer sullo stack
         //creo la chiave che verrà utilizzata per cercare la funzione nella dispatcher table
         String key = methodCall.getId()+ "%" + ((TypeNode)methodCall.getEntry().getType()).getType();
         //completo la chiave con i tipi dei parametri della funzione
@@ -138,10 +138,14 @@ public class CallMethodNode implements Node {
         for(int i = sizeVarHp; i>0; i--){
             returnString += "push " +entry.getOffset()+"\n"+"lfp\n"+"add\n"+"lw\n"+"push "+(i-1)+"\nadd\n"+"lw\n";
         }
-
+        returnString += "push 0\nlfp\n";
         for (int i = methodCall.getSizeListParam()-1; i>=0; i--){
             returnString += methodCall.getListParam().get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
         }
-        return returnString+"push "+bLabel+"js\n";
+        String retHpVar="cfpm\n";
+        for(int i = sizeVarHp; i>0; i--){
+            retHpVar +="push "+(i+1)+"\nlfp\nadd\nlw\npush "+((-entry.getOffset()+sizeVarHp))+"\nlfp\nadd\nlw\npush "+(i-1)+"\nadd\nsw\n";//todo
+        }
+        return returnString+"push "+bLabel+"js\n"+retHpVar;
     }
 }
