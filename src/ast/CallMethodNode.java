@@ -136,23 +136,53 @@ public class CallMethodNode implements Node {
             sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(listExtension.get(--y)).get("numberVar"));
         }
         for(int i = sizeVarHp; i>0; i--){
-            returnString += "push " +entry.getOffset()+"\n"+"lfp\n"+"add\n"+"lw\n"+"push "+(i-1)+"\nadd\n"+"lw\n";
+            returnString += "push " +entry.getOffset()+"\n"+
+                            "lfp\n"+
+                            "add\n"+
+                            "lw\n"+
+                            "push "+(i-1)+"\n" +
+                            "add\n"+
+                            "lw\n";
         }
         int sizeParamMethod=methodCall.getSizeListParam();
-        returnString += "push 0\nlfp\nsfpo\nlfp\n";
+        returnString += "push 0\n" +
+                        "lfp\n" +
+                        "sfpo\n" +
+                        "lfp\n";
         for (int i = sizeParamMethod-1; i>=0; i--){
             returnString += methodCall.getListParam().get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
         }
         String retHpVar="cfpm\n";
         for(int i = sizeVarHp; i>0; i--){
-            retHpVar +="push "+(i+1)+"\nlfp\nadd\nlw\npush "+entry.getOffset()+"\nlfpo\nadd\nlw\npush "+(i-1)+"\nadd\nsw\n";
+            retHpVar += "push "+(i+1)+"\n" +
+                        "lfp\n" +
+                        "add\n" +
+                        "lw\n" +
+                        "push "+entry.getOffset()+"\n" +
+                        "lfpo\n" +
+                        "add\n" +
+                        "lw\n" +
+                        "push "+(i-1)+"\n" +
+                        "add\n" +
+                        "sw\n";
         }
-        retHpVar+="push 1\nlfp\nadd\nlw\nlfp\npush "+(sizeVarHp+1)+"\nadd\nsw\n";
+        retHpVar += "push 1\n" +
+                    "lfp\n" +
+                    "add\n" +
+                    "lw\n" +
+                    "lfp\n" +
+                    "push "+(sizeVarHp+1)+"\n" +
+                    "add\n" +
+                    "sw\n";
 
         for(int i = sizeVarHp; i>0; i--){
             retHpVar +="pop\n";
         }
         retHpVar+="cfpo\n";
-        return returnString+"push "+sizeParamMethod+"\npush "+bLabel+"js\n"+retHpVar;
+        return returnString+
+                "push "+sizeParamMethod+"\n" +
+                "push "+bLabel+
+                "js\n"+
+                retHpVar;
     }
 }
