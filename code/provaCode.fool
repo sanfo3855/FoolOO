@@ -1,10 +1,13 @@
 
 class classe2 (int p){
 
+    void fun(){
+        p=33;
+    }
      int funClass1(int q){
-             p=88;
+             //p=88;
 
-             return q;
+             return p;
      }
      int funClass2(int q){
              p=234;
@@ -25,18 +28,19 @@ class classe1 extends classe2(int x, int y, int z){
 
 void main(){
     let
-        int q=51;
-        int x=q;
-        classe1 varClass=null;
-        classe1 varClass1=new classe1();
+        //int q=51;
+        //int x=q;
+        //classe1 varClass=null;
+        //classe1 varClass1=new classe1();
         classe2 varClass2=new classe2();
-        classe2 varClass3=new classe2();
+        //classe2 varClass3=new classe2();
     in
-        varClass=new classe1();
-        print(8);
-        print(varClass1.funClass1(7));
-        print(varClass1.funClass2(7));
-        print(8);
+        //varClass=new classe1();
+       // print(8);
+        //print(varClass1.funClass1(7));
+        //print(varClass1.funClass2(7));
+       // print(8);
+        varClass2.fun();
         print(varClass2.funClass1(7));
 }
 //todo varClass=null nello in

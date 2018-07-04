@@ -1,6 +1,5 @@
 package ast;
 
-import sun.rmi.server.Dispatcher;
 import util.DispatcherTable;
 import util.Environment;
 import util.SemanticError;
@@ -142,7 +141,7 @@ public class DecclassNode implements Node {
             //creo l'ambiente di livello 1 ovvero l'ambiente della classe caricando l'hashMapClass
             env.addHashMapNL(hashMapClass);
             ArrayList<Node> varTypes = new ArrayList<Node>();
-            hashMapClass.put(idClass,new STentry(env.getNestingLevel(),offsetListVar++));
+            hashMapClass.put(idClass,new STentry(env.getNestingLevel(),offsetListVar));
 
             /*
             se questo nodo classe estende un'altra classe carico nell'ambiente della classe

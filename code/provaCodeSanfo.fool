@@ -16,14 +16,16 @@ class Numero (int val){
 
 void main(){
     let
-        void bbbb(int cc){
-            print(cc);
-        }
-        int a=2;
+ //       int bbbb(int cc){
+ //           //cc=cc+44;
+ //           print(cc);
+ //           return 1;
+ //       }
+        //int a=2;
         Numero num = new Numero();
     in
-        bbbb(3);
-        num.setValore(a);
+        //bbbb(3);
+        //num.setValore(a);
         print(num.getValore());
         print(num.raddoppia());
 }

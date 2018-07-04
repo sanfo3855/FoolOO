@@ -39,26 +39,15 @@ public class FunClassNode  extends FunAbstractNode {
         String retCod="";
         if(retNode!=null){
             retCod=retNode.codeGeneration();
+        }else{
+            retCod="push 0\n";
         }
         String progCod="";
         if (progNode!=null){
             progCod=progNode.codeGeneration();
-        }
-
-
-
-//        int sizeVarHp=0;
-//        if(y==0){
-//            sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(className).get("numberVar"));
 //        }else{
-//            sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(listExtension.get(--y)).get("numberVar"));
-//        }
-//        String retHpVar="";
-//        for(int i = sizeVarHp; i>0; i--){
-//            retHpVar +=;//todo
-//        }
-
-
+//            progCod="push 0\n";
+        }
 
         FOOLlib.putCode(funl+":\n"+
                 "cfp\n"+ //setta $fp a $sp

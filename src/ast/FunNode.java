@@ -39,7 +39,7 @@ public class FunNode  extends FunAbstractNode {
         if(id.equals("main")){
             FOOLlib.putLabelMain(funl);
             end="b "+FOOLlib.getLabelEnd()+"\n";
-        }else if (!(type instanceof VoidTypeNode)){
+        }else {
             end= "sfp\n"+  // setto $fp a valore del CL
                     "lrv\n"+ // risultato della funzione sullo stack
                     "lra\n"+"js\n"; // salta a $ra
@@ -47,6 +47,8 @@ public class FunNode  extends FunAbstractNode {
         String retCod="";
         if(retNode!=null){
             retCod=retNode.codeGeneration();
+        }else{
+            retCod="push 0\n";
         }
         String progCod="";
         if (progNode!=null){
