@@ -83,7 +83,11 @@ assembly:
 
 	    | HALT                  {code[i++] = HALT;}
 
-	    | PUSHTOHP      {code[i++] = PUSHTOHP;}
+	    | PUSHTOHP              {code[i++] = PUSHTOHP;}
+
+        | LOADFPO               {code[i++] = LOADFPO;}
+
+        | STOREFPO              {code[i++] = STOREFPO;}
 
     )*  {
             for (Integer refAdd: labelRef.keySet() ) {
@@ -120,6 +124,8 @@ LOADHP	        : 'lhp' ;	// load heap pointer in the stack
 STOREHP	        : 'shp' ;	// store top into heap pointer
 PRINT	        : 'print' ;	// print top of stack
 PUSHTOHP        : 'pthp' ;  // pushes top of stack to heap
+STOREFPO        : 'sfpo' ;
+LOADFPO         : 'sfpo' ;
 HALT	        : 'halt' ;	// stop execution
 
 COL	        : ':' ;

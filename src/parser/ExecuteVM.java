@@ -15,6 +15,7 @@ public class ExecuteVM {
     private int fp = MEMSIZE;
     private int ra;
     private int rv;
+    private int fpo;
 
     public ExecuteVM(int[] code) {
         this.code = code;
@@ -121,6 +122,12 @@ public class ExecuteVM {
                     break;
                 case SVMParser.PUSHTOHP:
                     memory[hp++] = pop();
+                    break;
+                case SVMParser.STOREFPO : //
+                    fpo=pop();
+                    break;
+                case SVMParser.LOADFPO : //
+                    push(fpo);
                     break;
                 case SVMParser.HALT :
                     return;

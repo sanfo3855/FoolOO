@@ -2,14 +2,10 @@
 class classe1 (int x, int y, int z){
 
      int funClass1(int q){
-             print(x);
              y=5;
              z=99;
-             print(y);
              x=4;
-             print(x);
-             print(q);
-             return q;
+             return q*4;
      }
  }
 
@@ -20,6 +16,6 @@ void main(){
     in
 
         print(8);
-        print(varClass1.funClass1(7));
-        //print(8);
+        print(varClass1.funClass1(12));
+        print(varClass1.funClass1(8));
 }
