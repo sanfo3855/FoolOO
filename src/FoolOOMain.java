@@ -13,7 +13,8 @@ import java.util.ArrayList;
 
 public class FoolOOMain {
     public static void main(String[] args) throws Exception {
-          String fileName = "code/provaCodeSanfo.fool";
+        String fileName = "code/provaIf.fool";
+//        String fileName = "code/provaCode.fool";
         //String fileName = "code/provaFoolComplete.fool";
 
         FileInputStream is = new FileInputStream(fileName);

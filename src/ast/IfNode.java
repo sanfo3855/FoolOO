@@ -108,11 +108,15 @@ public class IfNode implements Node {
         }
 
         if (elseB != null) {
+            System.out.println(((IdTypeNode)thenB).getExtClassId());
+            System.out.println(((IdTypeNode)elseB).getExtClassId());
             //controllo che then ed else siano sottotipi tra loro, altrimenti restituisco errore
-            if (FOOLlib.isSubtype(thenB,elseB))
+            if (FOOLlib.isSubtype(thenB,elseB)){
                 node = elseB;
-            if (FOOLlib.isSubtype(elseB,thenB))
+            }
+            if (FOOLlib.isSubtype(elseB,thenB)){
                 node = thenB;
+            }
         }else{
             /*
             nel caso in cui l'else non esista viene ritornato void poichè

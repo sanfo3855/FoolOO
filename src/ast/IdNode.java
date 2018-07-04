@@ -82,7 +82,7 @@ public class IdNode implements Node {
                 break;
             default:
                 //identifico typeNode come un nodo IdTypeNode, e quindi un oggetto type
-                typeNode=new IdTypeNode(type);
+                typeNode=(TypeNode)entry.getType();
         }
         return typeNode;
     }

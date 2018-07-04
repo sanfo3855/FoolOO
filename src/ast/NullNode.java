@@ -51,7 +51,7 @@ public class NullNode implements Node {
      * @return Empty String
      */
     public String codeGeneration() {
-        return "";
+        return "push 0\n";
     }
 
 }
