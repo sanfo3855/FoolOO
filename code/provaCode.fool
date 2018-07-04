@@ -1,21 +1,37 @@
 
+class classe2 (int x){
+
+     int funClass2(int q){
+             x=88;
+
+             return q;
+     }
+ }
 class classe1 (int x, int y, int z){
 
      int funClass1(int q){
+             x=4;
              y=5;
              z=99;
-             x=4;
-             return q*4;
+             return q+x;
+     }
+     int funClass2(int q){
+             return x;
      }
  }
 
 void main(){
     let
-
+        int q=51;
+        int x=q;
         classe1 varClass1=new classe1();
+        classe2 varClass2=new classe2();
+        classe2 varClass3=new classe2();
     in
 
         print(8);
-        print(varClass1.funClass1(12));
-        print(varClass1.funClass1(8));
+        print(varClass1.funClass1(7));
+        print(varClass1.funClass2(7));
+        print(8);
+        print(varClass2.funClass2(7));
 }
