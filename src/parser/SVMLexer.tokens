@@ -56,5 +56,7 @@ ERR=33
 'shp'=23
 'print'=24
 'pthp'=25
+'sfpo'=26
+'lfpo'=27
 'halt'=28
 ':'=29

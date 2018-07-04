@@ -125,7 +125,7 @@ STOREHP	        : 'shp' ;	// store top into heap pointer
 PRINT	        : 'print' ;	// print top of stack
 PUSHTOHP        : 'pthp' ;  // pushes top of stack to heap
 STOREFPO        : 'sfpo' ;
-LOADFPO         : 'sfpo' ;
+LOADFPO         : 'lfpo' ;
 HALT	        : 'halt' ;	// stop execution
 
 COL	        : ':' ;

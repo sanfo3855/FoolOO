@@ -45,7 +45,7 @@ public class SVMLexer extends Lexer {
 		null, "'push'", "'pop'", "'add'", "'sub'", "'mult'", "'div'", "'sw'", 
 		"'lw'", "'b'", "'beq'", "'bleq'", "'bgeq'", "'js'", "'lra'", "'sra'", 
 		"'lrv'", "'srv'", "'lfp'", "'sfp'", "'cfp'", "'cfpm'", "'lhp'", "'shp'", 
-		"'print'", "'pthp'", null, null, "'halt'", "':'"
+		"'print'", "'pthp'", "'sfpo'", "'lfpo'", "'halt'", "':'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "PUSH", "POP", "ADD", "SUB", "MULT", "DIV", "STOREW", "LOADW", "BRANCH", 
@@ -182,7 +182,7 @@ public class SVMLexer extends Lexer {
 		"\u00a4\7k\2\2\u00a4\u00a5\7p\2\2\u00a5\u00a6\7v\2\2\u00a6\62\3\2\2\2\u00a7"+
 		"\u00a8\7r\2\2\u00a8\u00a9\7v\2\2\u00a9\u00aa\7j\2\2\u00aa\u00ab\7r\2\2"+
 		"\u00ab\64\3\2\2\2\u00ac\u00ad\7u\2\2\u00ad\u00ae\7h\2\2\u00ae\u00af\7"+
-		"r\2\2\u00af\u00b0\7q\2\2\u00b0\66\3\2\2\2\u00b1\u00b2\7u\2\2\u00b2\u00b3"+
+		"r\2\2\u00af\u00b0\7q\2\2\u00b0\66\3\2\2\2\u00b1\u00b2\7n\2\2\u00b2\u00b3"+
 		"\7h\2\2\u00b3\u00b4\7r\2\2\u00b4\u00b5\7q\2\2\u00b58\3\2\2\2\u00b6\u00b7"+
 		"\7j\2\2\u00b7\u00b8\7c\2\2\u00b8\u00b9\7n\2\2\u00b9\u00ba\7v\2\2\u00ba"+
 		":\3\2\2\2\u00bb\u00bc\7<\2\2\u00bc<\3\2\2\2\u00bd\u00c1\t\2\2\2\u00be"+
