@@ -50,7 +50,7 @@ public class FunClassNode  extends FunAbstractNode {
         }
 
         FOOLlib.putCode(funl+":\n"+
-                "cfp\n"+ //setta $fp a $sp
+                "cfpp\n"+ //setta $fp a $sp
                 "lra\n"+ //inserimento return address
                 progCod+
                 retCod+

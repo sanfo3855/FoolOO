@@ -153,6 +153,6 @@ public class CallMethodNode implements Node {
             retHpVar +="pop\n";
         }
         retHpVar+="cfpo\n";
-        return returnString+"push "+bLabel+"js\n"+retHpVar;
+        return returnString+"push "+sizeParamMethod+"\npush "+bLabel+"js\n"+retHpVar;
     }
 }

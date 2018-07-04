@@ -132,6 +132,9 @@ public class ExecuteVM {
                 case SVMParser.COPYFPO : //
                     fp=fpo;
                     break;
+                case SVMParser.COPYFPP : //
+                    fp=sp+pop();
+                    break;
                 case SVMParser.HALT :
                     return;
             }

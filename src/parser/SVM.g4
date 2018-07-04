@@ -91,6 +91,8 @@ assembly:
 
         | COPYFPO                {code[i++] = COPYFPO;}
 
+        | COPYFPP                {code[i++] = COPYFPP;}
+
     )*  {
             for (Integer refAdd: labelRef.keySet() ) {
                       code[refAdd]=labelAdd.get(labelRef.get(refAdd));
@@ -129,6 +131,7 @@ PUSHTOHP        : 'pthp' ;  // pushes top of stack to heap
 STOREFPO        : 'sfpo' ;
 LOADFPO         : 'lfpo' ;
 COPYFPO         : 'cfpo' ;   // copy stack pointer into frame pointer
+COPYFPP         : 'cfpp' ;
 HALT	        : 'halt' ;	// stop execution
 
 COL	        : ':' ;
