@@ -129,6 +129,9 @@ public class ExecuteVM {
                 case SVMParser.LOADFPO : //
                     push(fpo);
                     break;
+                case SVMParser.COPYFPO : //
+                    fp=fpo;
+                    break;
                 case SVMParser.HALT :
                     return;
             }
