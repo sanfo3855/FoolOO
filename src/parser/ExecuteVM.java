@@ -23,6 +23,10 @@ public class ExecuteVM {
 
     public void cpu() {
         while ( true ) {
+            if(sp<=hp){
+                System.out.println("Out of Memory");
+                return;
+            }
             int bytecode = code[ip++]; // fetch
             int v1,v2;
             int address;

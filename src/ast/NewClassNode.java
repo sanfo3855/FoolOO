@@ -132,8 +132,9 @@ public class NewClassNode implements Node{
                      "pthp\n";
         }
 
+
         if(methodCall.getMethodCall().getEntry()!=null){
-            code+=methodCall.codeGeneration();
+            code+=methodCall.codeGeneration()+"pop\n";
         }
         return code;
     }
