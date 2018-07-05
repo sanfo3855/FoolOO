@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class NewClassNode implements Node{
 
-    private FunExpNode funExpNode;
+    private CallMethodNode methodCall;
     private String id;
     private ArrayList<String> extClassId= new ArrayList<String>();
     private int sizeListParm= 0;
@@ -23,8 +23,8 @@ public class NewClassNode implements Node{
      */
     public NewClassNode (String id, ArrayList<Node> listPar) {
         this.id=id;
-        this.funExpNode = new FunExpNode(id, listPar);
-        this.funExpNode.setTypeClassMethod(id);
+        this.methodCall = new CallMethodNode(id, new FunExpNode(id, listPar));
+        this.methodCall.setMethodClass(id);
     }
 
     public String getId() {
@@ -43,7 +43,7 @@ public class NewClassNode implements Node{
      */
     public String toPrint(String s) {
         String returnString=s + "NewClassNode\n";
-        returnString+=funExpNode.toPrint(s+"   ");
+        returnString+=methodCall.toPrint(s+"   ");
         return returnString;
     }
 
@@ -98,10 +98,10 @@ public class NewClassNode implements Node{
         }
 
         //Chiama il checkSemantic di funExpNode
-        if(funExpNode.getSizeListParam()==0){
-            funExpNode.checkSemantics(env);
+        if(methodCall.getSizeListParam()==0){
+            methodCall.checkSemantics(env);
         }else{
-            semanticErrors.addAll(funExpNode.checkSemantics(env));
+            semanticErrors.addAll(methodCall.checkSemantics(env));
         }
 
 
@@ -114,8 +114,8 @@ public class NewClassNode implements Node{
     }
 
     public Node typeCheck() {
-        if(funExpNode.getSizeListParam()>0){
-            funExpNode.typeCheck();
+        if(methodCall.getSizeListParam()>0){
+            methodCall.typeCheck();
         }
         //Setta come tipo l'Id della classe
         Node idTypeNode=new IdTypeNode(id);
@@ -132,8 +132,8 @@ public class NewClassNode implements Node{
                      "pthp\n";
         }
 
-        if(funExpNode.getEntry()!=null){
-            code+=funExpNode.codeGeneration();
+        if(methodCall.getEntry()!=null){
+            code+=methodCall.codeGeneration();
         }
         return code;
     }
