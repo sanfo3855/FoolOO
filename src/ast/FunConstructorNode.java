@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -61,7 +62,7 @@ public class FunConstructorNode extends FunClassNode {
         //Viene creata una nuova hashmap nell'ambiente
         env.addHashMapNL(entryHashMap);
         STentry entryListVar = null;
-        int offsetListVar=1;
+        int offsetListVar=0;
         for (Node node: listVar) {
             VarDecNode varDecNode = (VarDecNode) node;
             //Si ottiene il tipo di ciascun parametro
@@ -100,4 +101,44 @@ public class FunConstructorNode extends FunClassNode {
     }
 
 
+    /**
+     *
+     * @return
+     */
+    public String codeGeneration() {
+        String popDec="";
+        if (progNode instanceof LetInExpNode){
+            for (int i=0; i<((LetInExpNode)progNode).getListDecSize();i++){
+                popDec+="pop\n";
+            }
+        }
+        String popVar="";
+        for (Node dec:listVar){
+            popVar+="pop\n";
+        }
+        String funl=FOOLlib.freshFunLabel();
+
+        String retCod="push 0\n";
+        String progCod="";
+        if (progNode!=null){
+            progCod=progNode.codeGeneration();
+        }
+
+        FOOLlib.putCode(funl+":\n"+
+                "cfpp\n"+ //setta $fp a $sp
+                "lra\n"+ //inserimento return address
+                progCod+
+                retCod+
+                "srv\n"+ //pop del return value
+                popDec+
+                "sra\n"+ // pop del return address
+                "pop\n"+ // pop di AL
+                popVar+
+                "sfp\n"+  // setto $fp a valore del CL
+                "lrv\n"+ // risultato della funzione sullo stack
+                "lra\n"+"js\n" // salta a $ra
+        );
+
+        return "push "+ funl +"\n";
+    }
 }

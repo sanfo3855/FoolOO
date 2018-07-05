@@ -1,7 +1,6 @@
 package ast;
 
 import lib.FOOLlib;
-import util.DispatcherTable;
 
 import java.util.ArrayList;
 
@@ -45,8 +44,6 @@ public class FunClassNode  extends FunAbstractNode {
         String progCod="";
         if (progNode!=null){
             progCod=progNode.codeGeneration();
-//        }else{
-//            progCod="push 0\n";
         }
 
         FOOLlib.putCode(funl+":\n"+

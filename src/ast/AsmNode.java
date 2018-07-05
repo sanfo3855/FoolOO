@@ -75,6 +75,7 @@ public class AsmNode implements Node {
                 ((IdTypeNode) type).setExtClassId(((NewClassNode) value).getExtClassId());
                 tmpEntry.addType(type);
                 env.getHashMapNL(j--).replace(id,tmpEntry);
+                ((NewClassNode) value).setIdCallMethod(id);
             }
         }
 

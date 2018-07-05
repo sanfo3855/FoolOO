@@ -13,7 +13,9 @@ public class NewClassNode implements Node{
     private CallMethodNode methodCall;
     private String id;
     private ArrayList<String> extClassId= new ArrayList<String>();
+    private ArrayList<Node> listPar= new ArrayList<Node>();
     private int sizeListParm= 0;
+    private String idCallMethod="";
 
     /**
      * Constructor for NewClassNode.
@@ -23,8 +25,7 @@ public class NewClassNode implements Node{
      */
     public NewClassNode (String id, ArrayList<Node> listPar) {
         this.id=id;
-        this.methodCall = new CallMethodNode(id, new FunExpNode(id, listPar));
-        this.methodCall.setMethodClass(id);
+        this.listPar=listPar;
     }
 
     public String getId() {
@@ -33,6 +34,12 @@ public class NewClassNode implements Node{
 
     public ArrayList<String> getExtClassId() {
         return extClassId;
+    }
+
+    public void setIdCallMethod(String idCallMethod) {
+        this.idCallMethod = idCallMethod;
+        this.methodCall = new CallMethodNode(idCallMethod, new FunExpNode(id, listPar));
+        this.methodCall.setMethodClass(id);
     }
 
     /**
@@ -103,13 +110,6 @@ public class NewClassNode implements Node{
         }else{
             semanticErrors.addAll(methodCall.checkSemantics(env));
         }
-
-
-
-
-
-
-
         return semanticErrors;
     }
 
@@ -132,7 +132,7 @@ public class NewClassNode implements Node{
                      "pthp\n";
         }
 
-        if(methodCall.getEntry()!=null){
+        if(methodCall.getMethodCall().getEntry()!=null){
             code+=methodCall.codeGeneration();
         }
         return code;
