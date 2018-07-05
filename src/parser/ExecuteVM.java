@@ -2,7 +2,7 @@ package parser;
 public class ExecuteVM {
 
     public static final int CODESIZE = 10000;
-    public static final int MEMSIZE = 100;
+    public static final int MEMSIZE = 50;
 
     private int[] code;
     private int[] memory = new int[MEMSIZE];
@@ -55,7 +55,7 @@ public class ExecuteVM {
                 case SVMParser.SUB :
                     v1=pop();
                     v2=pop();
-                    push(v2-v1);
+                    push(v2 - v1);
                     break;
                 case SVMParser.STOREW : //
                     address = pop();

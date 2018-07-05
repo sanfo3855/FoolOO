@@ -1,4 +1,9 @@
 class Numeri (int vala, int valb){
+    //Numeri(int a, int b){
+    //    vala=a;
+    //    valb=b;
+    //}
+
     int getA() {
         return vala;
     }
@@ -17,6 +22,11 @@ class Numeri (int vala, int valb){
 }
 
 class Plus extends Numeri (int result){
+    Plus(int a, int b){
+        vala=a;
+        valb=b;
+    }
+
     void calculate(){
         result=vala+valb;
     }
@@ -27,8 +37,14 @@ class Plus extends Numeri (int result){
 }
 
 class Minus extends Numeri (int result){
+    Minus(int a, int b){
+        vala=a;
+        valb=b;
+    }
+
     void calculate(){
-        result=vala-valb;
+        vala=9;
+        result= vala - valb;
     }
 
     int getResult(){
@@ -38,17 +54,15 @@ class Minus extends Numeri (int result){
 
 void main(){
     let
-        //Plus p = null;
-        //Minus m = null;
+        Plus p = null;
+        Minus m = null;
+        int x=8;
     in
-        p=new Plus();
-        //p.setA(2);
-        //p.setB(3);
+        p=new Plus(2,3);
         p.calculate();
         print(p.getResult());
-        m=new Minus();
-        //m.setA(2);
-        //m.setB(3);
+
+        m=new Minus(4,-6);
         m.calculate();
         print(m.getResult());
 }
