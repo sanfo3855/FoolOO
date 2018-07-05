@@ -5,6 +5,9 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+
 public class NewClassNode implements Node{
 
     private FunExpNode funExpNode;
@@ -22,6 +25,14 @@ public class NewClassNode implements Node{
         this.id=id;
         this.funExpNode = new FunExpNode(id, listPar);
         this.funExpNode.setTypeClassMethod(id);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public ArrayList<String> getExtClassId() {
+        return extClassId;
     }
 
     /**
@@ -92,6 +103,13 @@ public class NewClassNode implements Node{
         }else{
             semanticErrors.addAll(funExpNode.checkSemantics(env));
         }
+
+
+
+
+
+
+
         return semanticErrors;
     }
 

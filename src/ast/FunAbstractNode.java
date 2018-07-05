@@ -86,7 +86,7 @@ public abstract class FunAbstractNode implements Node {
         HashMap<String,STentry> entryHashMap = new HashMap<String,STentry> ();
         //Viene creata una nuova hashmap nell'ambiente
         env.addHashMapNL(entryHashMap);
-        STentry entryListVar = null;
+        STentry entryListVar;
         int offsetListVar=0;
         for (Node node: listVar) {
             VarDecNode varDecNode = (VarDecNode) node;

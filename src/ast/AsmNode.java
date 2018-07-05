@@ -70,6 +70,12 @@ public class AsmNode implements Node {
             /* Effettuo una ricerca nell'HashMap relativa al j-esimo nestingLevel
             della chiave "id". Se la trova salva l'entry relativa ed esce dal ciclo. */
             tmpEntry = env.getHashMapNL(j--).get(id);
+            if(value instanceof NewClassNode){
+                TypeNode type=new IdTypeNode(((NewClassNode) value).getId());
+                ((IdTypeNode) type).setExtClassId(((NewClassNode) value).getExtClassId());
+                tmpEntry.addType(type);
+                env.getHashMapNL(j--).replace(id,tmpEntry);
+            }
         }
 
 

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class FoolOOMain {
     public static void main(String[] args) throws Exception {
-        String fileName = "code/provaCodeSanfo1o.fool";
-//        String fileName = "code/provaCode.fool";
+//        String fileName = "code/provaCodeSanfo1o.fool";
+        String fileName = "code/provaCode.fool";
         //String fileName = "code/provaFoolComplete.fool";
 
         FileInputStream is = new FileInputStream(fileName);
@@ -33,10 +33,10 @@ public class FoolOOMain {
             Node ast = visitor.visit(parser.start()); //generazione AST
 
 
-            System.out.println("Visualizing AST...");
-            System.out.println(ast.toPrint(""));
-
-            System.out.println("END AST...");
+//            System.out.println("Visualizing AST...");
+//            System.out.println(ast.toPrint(""));
+//
+//            System.out.println("END AST...");
             Environment env = new Environment();
             ArrayList<SemanticError> err = ast.checkSemantics(env);
 
