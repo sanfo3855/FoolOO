@@ -55,7 +55,7 @@ public class ExecuteVM {
                 case SVMParser.SUB :
                     v1=pop();
                     v2=pop();
-                    push(v2 - v1);
+                    push(v2-v1);
                     break;
                 case SVMParser.STOREW : //
                     address = pop();
@@ -120,6 +120,9 @@ public class ExecuteVM {
                     break;
                 case SVMParser.LOADHP : //
                     push(hp);
+                    break;
+                case SVMParser.PUSHMINUS:
+                    push(-pop());
                     break;
                 case SVMParser.PRINT :
                     System.out.println((sp<MEMSIZE)?memory[sp++]:"Empty stack!");
