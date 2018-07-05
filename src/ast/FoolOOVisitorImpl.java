@@ -211,16 +211,28 @@ public class FoolOOVisitorImpl extends FoolOOBaseVisitor<Node> {
     @Override
     public Node visitExp(ExpContext ctx) {
         Node node;
+        String leftMinus=null;
         if (ctx.right==null) {
-            node=visit(ctx.left);
+            if(ctx.MINUS().size()==1){
+                node = new ExpNode(visit(ctx.left),null,null,"-");
+            } else {
+                node=visit(ctx.left);
+            }
+
         }else{
             String operator=null;
             if((ctx.PLUS()!=null)) {
+                if(ctx.MINUS().size()==1){
+                    leftMinus="-";
+                }
                 operator = "+";
             } else {
+                if(ctx.MINUS().size()==2){
+                    leftMinus="-";
+                }
                 operator = "-";
             }
-            node=new ExpNode(visit(ctx.left), visit(ctx.right),operator);
+            node=new ExpNode(visit(ctx.left), visit(ctx.right),operator,leftMinus);
         }
 
         return node;

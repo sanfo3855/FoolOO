@@ -11,6 +11,7 @@ public class ExpNode implements Node {
     private Node left;  //Nodo figlio sinistro
     private Node right; //Nodo figlio destro
     private String operator;    //operatore (+ o -) dell'ExpNode
+    private String leftMinus;
 
     /**
      * Constructor for ExpNode.
@@ -19,10 +20,11 @@ public class ExpNode implements Node {
      * @param right -> right child Node
      * @param operator -> Exp operator (+ or -)
      */
-    public ExpNode (Node left,Node right, String operator) {
+    public ExpNode (Node left,Node right, String operator, String leftMinus) {
         this.left=left;
         this.right=right;
         this.operator=operator;
+        this.leftMinus=leftMinus;
     }
 
     /**
@@ -34,13 +36,16 @@ public class ExpNode implements Node {
     public String toPrint(String s) {
 
         String retString="";
-
-        retString += s + "LeftExpNode\n" +
-                s + left.toPrint(s +"  ") + "\n"+
-                s + s + operator + "\n" +
-                s + s + "RightExpNode\n" +
-                s + right.toPrint(s + "  ") + "\n";
-
+        retString += s + "LeftExpNode\n";
+        if(leftMinus!=null) {
+            retString += s + leftMinus + "\n";
+        }
+        retString += s + left.toPrint(s +"  ") + "\n";
+        if(right!=null) {
+            retString += s + s + operator + "\n" +
+                    s + s + "RightExpNode\n" +
+                    s + right.toPrint(s + "  ") + "\n";
+        }
         return retString;
 
     }
@@ -56,8 +61,9 @@ public class ExpNode implements Node {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
         semanticErrors.addAll(left.checkSemantics(env));
-        semanticErrors.addAll(right.checkSemantics(env));
-
+        if(right!=null) {
+            semanticErrors.addAll(right.checkSemantics(env));
+        }
 
         return semanticErrors;
     }
@@ -85,14 +91,19 @@ public class ExpNode implements Node {
      * @return string of generated code
      */
     public String codeGeneration() {
+        String cgenString = left.codeGeneration();
+        if(leftMinus!=null){
+            cgenString += "pushminus\n";
+        }
+        if(right!=null) {
+            cgenString += right.codeGeneration();
 
-        String cgenString = left.codeGeneration() + right.codeGeneration();
-
-        /* check operator field */
-        if(operator.equals("+")){
-            cgenString += "add\n";
-        } else {
-            cgenString += "sub\n";
+            /* check operator field */
+            if (operator.equals("+")) {
+                cgenString += "add\n";
+            } else {
+                cgenString += "sub\n";
+            }
         }
 
         return cgenString;
