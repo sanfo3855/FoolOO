@@ -8,10 +8,10 @@ class classe2 (int p){
     //x=2;
         p=33+p;
     }
-     int funClass1(int q){
-             //p=88;
+     int funClass11(int q){
+             p=p+q;
 
-             return p+q;
+             return p;
      }
      int funClass2(int q){
              p=234;
@@ -38,24 +38,32 @@ void main(){
     let
         int q=51;
         int x=q;
-        classe2 varClass3=new classe2();
+        //classe2 varClass3=new classe2();
         classe2 varClass2=new classe2(1);
         classe1 varClass1=new classe1();
-        classe2 varClass=null;
+        classe1 varClass11=new classe1();
+        //classe2 varClass=null;
     in
+        varClass2=new classe2(1);
+        //varClass=new classe2();
+        //varClass.fun();
+        //varClass=null;
+        //varClass=new classe1();
+        //varClass.fun();
+        //varClass=new classe2();
+        //varClass.fun();
+        //print(8);
 
-        varClass=new classe2();
-        varClass.fun();
-        varClass=null;
-        varClass=new classe1();
-        varClass.fun();
-        varClass=new classe2();
-        varClass.fun();
-        print(8);
-        print(varClass1.funClass1(7));
+        varClass1=new classe1();
         print(varClass1.funClass2(7));
-        print(8);
+        print(varClass11.funClass2(7));
+        varClass1=varClass11;
+        print(varClass1.funClass1(7));
+        print(varClass1.funClass11(1));
+
+
+        //print(8);
         //varClass2.fun();
-        print(varClass2.funClass1(7));
+        //print(varClass2.funClass11(7));
 }
 //todo varClass=null nello in

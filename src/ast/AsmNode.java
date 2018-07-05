@@ -1,6 +1,7 @@
 package ast;
 
 import lib.FOOLlib;
+import parser.ExecuteVM;
 import util.Environment;
 import util.SemanticError;
 
@@ -131,6 +132,14 @@ public class AsmNode implements Node {
         returnString +=
                 "add\n"+ //Carico in cima allo stack il valore dell'inidirizzo in cui è salvata la variabile nello stack
                 "sw\n"; //Sovrascrivo sullo stack il valore da assegnare all'indirizzo ottenuto
+
+
+        if(value instanceof NewClassNode){
+            NewClassNode newClassNode=(NewClassNode) value;
+            if(newClassNode.isCodGenMethod()){
+                returnString+=newClassNode.getMethodCall().codeGeneration()+"pop\n";
+            }
+        }
 
         return returnString;
     }

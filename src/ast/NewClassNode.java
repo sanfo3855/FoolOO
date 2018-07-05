@@ -16,6 +16,7 @@ public class NewClassNode implements Node{
     private ArrayList<Node> listPar= new ArrayList<Node>();
     private int sizeListParm= 0;
     private String idCallMethod="";
+    private boolean isCodGenMethod=false;
 
     /**
      * Constructor for NewClassNode.
@@ -40,6 +41,14 @@ public class NewClassNode implements Node{
         this.idCallMethod = idCallMethod;
         this.methodCall = new CallMethodNode(idCallMethod, new FunExpNode(id, listPar));
         this.methodCall.setMethodClass(id);
+    }
+
+    public CallMethodNode getMethodCall() {
+        return methodCall;
+    }
+
+    public boolean isCodGenMethod() {
+        return isCodGenMethod;
     }
 
     /**
@@ -132,9 +141,8 @@ public class NewClassNode implements Node{
                      "pthp\n";
         }
 
-
         if(methodCall.getMethodCall().getEntry()!=null){
-            code+=methodCall.codeGeneration()+"pop\n";
+            isCodGenMethod=true;
         }
         return code;
     }

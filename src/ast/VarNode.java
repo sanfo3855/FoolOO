@@ -90,7 +90,17 @@ public class VarNode implements Node {
      * @return
      */
     public String codeGeneration() {
-        return value.codeGeneration();
+
+        String returnString=value.codeGeneration();
+
+        if(value instanceof NewClassNode){
+            NewClassNode newClassNode=(NewClassNode) value;
+            if(newClassNode.isCodGenMethod()){
+                returnString+=newClassNode.getMethodCall().codeGeneration()+"pop\n";
+            }
+        }
+
+        return returnString;
     }
 
 }

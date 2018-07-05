@@ -102,7 +102,6 @@ public class FoolNode implements Node {
                     for (Node fun : listFun) {
                         idKey = "fun#";
                         if (fun instanceof FunClassNode) {
-                            System.out.println(((FunClassNode) fun).getId());
                             funNode = (FunClassNode) fun;
                             /*
                             "fun#[idFun]%[tipoFun]%[tipoPar1]%.....%[tipoParN]%class%[idclasse]"
@@ -120,7 +119,6 @@ public class FoolNode implements Node {
                             if (hashMap.put(idKey, new STentry(env.getNestingLevel(),decclassNode.getOffsetListVarPlus())) != null) {
                                 semanticErrors.add(new SemanticError("Method " + idKey + " already declared !"));
                             }
-                            System.out.println(idKey);
                         }
                     }
                 }

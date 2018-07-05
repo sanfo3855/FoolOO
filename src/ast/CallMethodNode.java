@@ -108,7 +108,8 @@ public class CallMethodNode implements Node {
     public String codeGeneration() {
         String returnString = ""; //carico il frame pointer sullo stack
         //creo la chiave che verrà utilizzata per cercare la funzione nella dispatcher table
-        String key = methodCall.getId()+ "%" + ((TypeNode)methodCall.getEntry().getType()).getType();
+        String key = methodCall.getId()+ "%" +
+                ((TypeNode)methodCall.getEntry().getType()).getType();
         //completo la chiave con i tipi dei parametri della funzione
         for (Node param : methodCall.getTypeParam()){
             key+= "%"+ ((TypeNode)param).getType();
