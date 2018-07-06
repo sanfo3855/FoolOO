@@ -71,16 +71,26 @@ public class AsmNode implements Node {
             /* Effettuo una ricerca nell'HashMap relativa al j-esimo nestingLevel
             della chiave "id". Se la trova salva l'entry relativa ed esce dal ciclo. */
             tmpEntry = env.getHashMapNL(j--).get(id);
-            if(value instanceof NewClassNode){
-                TypeNode type=new IdTypeNode(((NewClassNode) value).getId());
-                ((IdTypeNode) type).setExtClassId(((NewClassNode) value).getExtClassId());
-                tmpEntry.addType(type);
-                env.getHashMapNL(j--).replace(id,tmpEntry);
-                ((NewClassNode) value).setIdCallMethod(id);
+            if(tmpEntry!=null){
+                if(value instanceof NewClassNode){
+                    TypeNode type=new IdTypeNode(((NewClassNode) value).getId());
+                    ((IdTypeNode) type).setExtClassId(((NewClassNode) value).getExtClassId());
+                    tmpEntry.addType(type);
+                    env.getHashMapNL(j).replace(id,tmpEntry);
+                    ((NewClassNode) value).setIdCallMethod(id);
+                }else if (value instanceof IfNode){
+                    Node thenB=((IfNode)value).getThenBranch();
+                    Node elseB=((IfNode)value).getElseBranch();
+                    if(thenB instanceof NewClassNode){
+                        ((NewClassNode) thenB).setIdCallMethod(id);
+                    }
+                    if(elseB instanceof NewClassNode){
+                        ((NewClassNode) elseB).setIdCallMethod(id);
+                    }
+
+                }
             }
         }
-
-
         /* Controlla se trova l'entry della dichiarazione */
         if(tmpEntry==null){
             /* Se non la trova
@@ -121,16 +131,15 @@ public class AsmNode implements Node {
 
         String returnString =
                 value.codeGeneration()+//Carico in cima allo stack il valore da assegnare
-                "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
-                "lfp\n"; //carico il fp sullo stack
+                        "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
+                        "lfp\n"; //carico il fp sullo stack
 
         //risalgo la catena statica
         for (int i=0; i<nestingLevel-entry.getNestinglevel(); i++)
             returnString+="lw\n";   //Faccio un loadword per ogni scope da risalire
-                                    //Ottengo l'indirizzo dello scope a cui ho la variabile
+        //Ottengo l'indirizzo dello scope a cui ho la variabile
 
-        returnString +=
-                "add\n"+ //Carico in cima allo stack il valore dell'inidirizzo in cui è salvata la variabile nello stack
+        returnString += "add\n"+ //Carico in cima allo stack il valore dell'inidirizzo in cui è salvata la variabile nello stack
                 "sw\n"; //Sovrascrivo sullo stack il valore da assegnare all'indirizzo ottenuto
 
 

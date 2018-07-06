@@ -40,10 +40,50 @@ void main(){
     let
         bool contr=true;
         A a = null;
+        B b=new B();
+        C c=new C();
     in
+
+        a=if(contr) then {
+            b
+        } else {
+            c
+        };
+
+        a.setB(8);
+        b.setA(45);
+        c.setB(77);
+
+
+
+
+        a=if(!contr) then {
+            new B()
+        } else {
+            new C()
+        };
+        a.setB(8);
+        print(b.raddoppiaB());
+/*
+
+        a=if(contr) then {
+            new B()
+        } else {
+            c
+        };
+
+
+        a=if(contr) then {
+            b
+        } else {
+            new C()
+        };
         a=if(contr) then {
             new B()
         } else {
             new C()
         };
+
+
+        */
 }

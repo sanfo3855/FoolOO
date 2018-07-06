@@ -75,9 +75,9 @@ public class FoolOOMain {
                         //                    System.out.println("Starting Virtual Machine...");
                         ExecuteVM vm = new ExecuteVM(parserASM.code);
                         vm.cpu();
-                        //                    System.out.println("\n\n");
-                        //                    for (int x : vm.getMemory())
-                        //                        System.out.println(x);
+                                            System.out.println("\n\n");
+                                            for (int x : vm.getMemory())
+                                                System.out.println(x);
                         FOOLlib.wipe();
                         vm.wipeMemory();
 

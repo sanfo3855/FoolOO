@@ -36,6 +36,14 @@ public class IfNode implements Node {
         this.thenBranch = thenBranch;
     }
 
+    public Node getThenBranch() {
+        return thenBranch;
+    }
+
+    public Node getElseBranch() {
+        return elseBranch;
+    }
+
     /**
      * Prints structure of IfNode.
      *
@@ -108,14 +116,16 @@ public class IfNode implements Node {
         }
 
         if (elseB != null) {
-            System.out.println(((IdTypeNode)thenB).getExtClassId());
-            System.out.println(((IdTypeNode)elseB).getExtClassId());
             //controllo che then ed else siano sottotipi tra loro, altrimenti restituisco errore
             if (FOOLlib.isSubtype(thenB,elseB)){
                 node = elseB;
             }
-            if (FOOLlib.isSubtype(elseB,thenB)){
-                node = thenB;
+            if (node==null){
+                if (FOOLlib.isSubtype(elseB,thenB)){
+                    node = thenB;
+                }else{
+                    node=FOOLlib.extendedFatherHimself(thenB,elseB);
+                }
             }
         }else{
             /*
@@ -143,16 +153,18 @@ public class IfNode implements Node {
         String code="";
         String l1 = FOOLlib.freshLabel();
         String l2 = FOOLlib.freshLabel();
+        String thenCode=thenBranch.codeGeneration();
+        String elseCode=elseBranch.codeGeneration();
 
         code+= cond.codeGeneration()+
                 "push 1\n"+
                 "beq "+ l1 +"\n";
         if(elseBranch!=null){
-            code+=elseBranch.codeGeneration();
+            code+=elseCode;
         }
         code+="b " + l2 + "\n" +
                 l1 + ":\n"+
-                thenBranch.codeGeneration()+
+                thenCode+
                 l2 + ":\n";
         return code;
     }

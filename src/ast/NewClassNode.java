@@ -106,7 +106,7 @@ public class NewClassNode implements Node{
             }
             for (String classex:env.getHashMapNL(0).keySet()) {
                 if(classex.contains("fieldClass")){
-                    if(classex.contains(idTemp)){
+                    if(classex.contains("#"+idTemp+"%")){
                         sizeListParm++;
                     }
                 }
@@ -133,11 +133,11 @@ public class NewClassNode implements Node{
     }
 
     public String codeGeneration() {
-        String code="push "+ExecuteVM.getHpCode()+"\n";
+        String code="lhp\n";//"push "+ExecuteVM.getHpCode()+"\n";
 
         for(int i=0; i<sizeListParm; i++){
-            ExecuteVM.incHpCode();
-            code+="push 11\n" +
+            //ExecuteVM.incHpCode();
+            code+="push 11\n" +//todo 11-->0
                      "pthp\n";
         }
 
