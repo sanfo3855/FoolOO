@@ -18,24 +18,25 @@ public class FoolOOMain {
     public static void main(String[] args) {
         try {
             TimeUnit.MILLISECONDS.sleep(300);
-            String fileName = "test/correct/ifBranchChildSameFather.fool";
+            String fileName = "test/correct/!recursive.fool";
             //        String fileName = "code/provaCode.fool";
             //String fileName = "code/provaFoolComplete.fool";
             boolean testPrintAST = false;
-            boolean testPrintCheckSemantic = false;
             boolean testPrintTypeCheck = false;
-            boolean testPrintCodeGen = false;
+            boolean testPrintCodeGen = true;
             if (args.length > 0) {
                 fileName = "test/" + args[0] + "/" + args[1];
             }
-            if(args[2]!=null){
-                testPrintAST=Boolean.parseBoolean(args[2]);
-            }
-            if(args[3]!=null){
-                testPrintTypeCheck=Boolean.parseBoolean(args[2]);
-            }
-            if(args[4]!=null){
-                testPrintCodeGen=Boolean.parseBoolean(args[2]);
+            if(args.length>2) {
+                if (args[2] != null) {
+                    testPrintAST = Boolean.parseBoolean(args[2]);
+                }
+                if (args[3] != null) {
+                    testPrintTypeCheck = Boolean.parseBoolean(args[2]);
+                }
+                if (args[4] != null) {
+                    testPrintCodeGen = Boolean.parseBoolean(args[2]);
+                }
             }
             System.out.println("----" + fileName + "----");
             FileInputStream is = new FileInputStream(fileName);

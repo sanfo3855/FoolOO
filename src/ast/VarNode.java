@@ -66,7 +66,7 @@ public class VarNode implements Node {
             }
         }
         //chiamo check semantics nel nodo value
-        semanticErrors.addAll(value.checkSemantics(env));
+        semanticErrors.addAll(value.checkSemantics(env));//todo ANDREA
 
         return semanticErrors;
     }
