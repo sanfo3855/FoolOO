@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AllMain {
     public static void main(String[]args) throws Exception{
-        String [] argss = {"",""};
+        String [] argss = {"","","false","false","false"};
 
         argss[0]="correct";
         File[] fileCorrect = new File("test/correct").listFiles();
