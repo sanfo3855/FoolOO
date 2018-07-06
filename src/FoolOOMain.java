@@ -1,5 +1,6 @@
 import ast.FoolOOVisitorImpl;
 import ast.Node;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lib.FOOLlib;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -20,9 +21,21 @@ public class FoolOOMain {
             String fileName = "test/correct/ifBranchChildSameFather.fool";
             //        String fileName = "code/provaCode.fool";
             //String fileName = "code/provaFoolComplete.fool";
-
+            boolean testPrintAST = false;
+            boolean testPrintCheckSemantic = false;
+            boolean testPrintTypeCheck = false;
+            boolean testPrintCodeGen = false;
             if (args.length > 0) {
                 fileName = "test/" + args[0] + "/" + args[1];
+            }
+            if(args[2]!=null){
+                testPrintAST=Boolean.parseBoolean(args[2]);
+            }
+            if(args[3]!=null){
+                testPrintTypeCheck=Boolean.parseBoolean(args[2]);
+            }
+            if(args[4]!=null){
+                testPrintCodeGen=Boolean.parseBoolean(args[2]);
             }
             System.out.println("----" + fileName + "----");
             FileInputStream is = new FileInputStream(fileName);
@@ -39,10 +52,11 @@ public class FoolOOMain {
                 Node ast = visitor.visit(parser.start());
 
                 if (parser.getNumberOfSyntaxErrors() == 0) {
-                    //            System.out.println("Visualizing AST...");
-                    //            System.out.println(ast.toPrint(""));
-                    //            System.out.println("END AST...");
-
+                    if(testPrintAST) {
+                        System.out.println("Visualizing AST...");
+                        System.out.println(ast.toPrint(""));
+                        System.out.println("END AST...");
+                    }
                     Environment env = new Environment();
                     ArrayList<SemanticError> err = ast.checkSemantics(env);
                     if (err.size() > 0) {
@@ -51,11 +65,14 @@ public class FoolOOMain {
                             System.out.println("\t" + e);
                     } else {
                         Node type = ast.typeCheck(); //type-checking bottom-up
-                        //System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
-
+                        if(testPrintTypeCheck) {
+                            System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
+                        }
                         // CODE GENERATION  prova.fool.asm
                         String code = ast.codeGeneration();
-                        //System.out.println(code);
+                        if(testPrintCodeGen) {
+                            System.out.println(code);
+                        }
                         BufferedWriter out = new BufferedWriter(new FileWriter(fileName + ".asm"));
                         out.write(code);
                         out.close();
@@ -75,9 +92,11 @@ public class FoolOOMain {
                         //                    System.out.println("Starting Virtual Machine...");
                         ExecuteVM vm = new ExecuteVM(parserASM.code);
                         vm.cpu();
-                        //                    System.out.println("\n\n");
-                        //                    for (int x : vm.getMemory())
-                        //                        System.out.println(x);
+                        if(testPrintCodeGen) {
+                            System.out.println("\n\n");
+                            for (int x : vm.getMemory())
+                                System.out.println(x);
+                        }
                         FOOLlib.wipe();
                         vm.wipeMemory();
 
