@@ -28,6 +28,7 @@ class Plus extends Numeri (int result){
     }
 
     void calculate(){
+
         result=vala+valb;
     }
 
@@ -43,7 +44,7 @@ class Minus extends Numeri (int result){
     }
 
     void calculate(){
-        vala=9;
+        //vala=9;
         result= vala - valb;
     }
 

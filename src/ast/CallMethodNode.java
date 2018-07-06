@@ -150,8 +150,9 @@ public class CallMethodNode implements Node {
                         "lfp\n" +
                         "sfpo\n" +
                         "lfp\n";
-        for (int i = sizeParamMethod-1; i>=0; i--){
-            returnString += methodCall.getListParam().get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
+        ArrayList<Node> methodCallListParam=methodCall.getListParam();
+        for (int i = 0; i<sizeParamMethod; i++){
+            returnString += methodCallListParam.get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
         }
         String retHpVar="cfpm\n";
         for(int i = sizeVarHp; i>0; i--){

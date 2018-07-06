@@ -78,13 +78,14 @@ public class FoolNode implements Node {
                     }
                 }
                 listVar=decclassNode.getListVar();
-                if(listVar.size()>0){//
-                    for (Node varNode:listVar) {
+                if(listVar.size()>0){
+                    for (int i=0; i<listVar.size(); i++){
+                        Node varNode=listVar.get(i);
                         /*
                         "fieldClass#[idclasse]%[nomeVar]%[tipoVar]"
                         Struttura dell'identificatore di una singola variabile di una classe
                          */
-                        idPutHM="fieldClass#"+decclassNode.getId();
+                        idPutHM="fieldClass"+i+"#"+decclassNode.getId();
                         idPutHM+="%"+((VarDecNode)varNode).getId();
                         idPutHM+="%"+((TypeNode)((VarDecNode)varNode).getType()).getType();
                         /*
@@ -95,6 +96,22 @@ public class FoolNode implements Node {
                             semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
                         }
                     }
+//                    for (Node varNode:listVar) {
+//                        /*
+//                        "fieldClass#[idclasse]%[nomeVar]%[tipoVar]"
+//                        Struttura dell'identificatore di una singola variabile di una classe
+//                         */
+//                        idPutHM="fieldClass#"+decclassNode.getId();
+//                        idPutHM+="%"+((VarDecNode)varNode).getId();
+//                        idPutHM+="%"+((TypeNode)((VarDecNode)varNode).getType()).getType();
+//                        /*
+//                        Salvo nell'ambiente l'identificatore delle variabili di una classe.
+//                        Tale id è necessario quando una classe viene estesa per poter ritrovare i campi ereditati
+//                        */
+//                        if ( hashMap.put(idPutHM,entryTable) != null ){
+//                            semanticErrors.add(new SemanticError("Class "+idPutHM+" already declared"));
+//                        }
+//                    }
                 }
                 listFun=decclassNode.getListFun();
                 if(listFun.size() > 0) {

@@ -105,7 +105,7 @@ public class NewClassNode implements Node{
                 idTemp=extClassId.get(i);
             }
             for (String classex:env.getHashMapNL(0).keySet()) {
-                if(classex.contains("fieldClass#")){
+                if(classex.contains("fieldClass")){
                     if(classex.contains(idTemp)){
                         sizeListParm++;
                     }

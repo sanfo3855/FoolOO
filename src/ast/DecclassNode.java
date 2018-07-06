@@ -6,6 +6,8 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class DecclassNode implements Node {
 
@@ -143,6 +145,10 @@ public class DecclassNode implements Node {
             ArrayList<Node> varTypes = new ArrayList<Node>();
             hashMapClass.put(idClass,new STentry(env.getNestingLevel(),offsetListVar));
 
+            HashMap<String,STentry> hmClassExt=env.getHashMapNL(0);
+            Iterator iteratorExt;
+            String keyVar;
+            int countVar=0;
             /*
             se questo nodo classe estende un'altra classe carico nell'ambiente della classe
             gli identificatori dei campi di tutte le sue superclassi, per poi potervi accedere
@@ -150,9 +156,14 @@ public class DecclassNode implements Node {
             if(idExt!=null){
                 for (String nameClassExt: extClassId) {
                     //gli identificatori dei campi delle sue superclassi si trovano nell'ambiente 0
-                    for (String classex:env.getHashMapNL(0).keySet()) {
-                        if(classex.contains("fieldClass#"+nameClassExt+"%")){
-                            String[] fieldClass=classex.split("%");
+
+                    iteratorExt=hmClassExt.entrySet().iterator();
+                    countVar=0;
+                    while (iteratorExt.hasNext()) {
+                        keyVar = ((Map.Entry<String, STentry>) iteratorExt.next()).getKey();
+                        if(keyVar.contains("fieldClass"+countVar+"#"+nameClassExt+"%")){
+                            countVar++;
+                            String[] fieldClass=keyVar.split("%");
                             Node nodeType;
                             //parso il tipo del campo per poter salvare il relativo nodo nell'entryTable
                             switch (fieldClass[2]){
@@ -168,10 +179,34 @@ public class DecclassNode implements Node {
                             if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel()+1,nodeType,offsetListVar++)) != null  ){
                                 semanticErrors.add(new SemanticError("Field id "+fieldClass[1]+" already declared"));
                             }else{
+                                iteratorExt=hmClassExt.entrySet().iterator();
                                 numberVar++;
                             }
                         }
                     }
+
+//                    for (String classex:env.getHashMapNL(0).keySet()) {
+//                        if(classex.contains("fieldClass#"+nameClassExt+"%")){
+//                            String[] fieldClass=classex.split("%");
+//                            Node nodeType;
+//                            //parso il tipo del campo per poter salvare il relativo nodo nell'entryTable
+//                            switch (fieldClass[2]){
+//                                case "int":
+//                                    nodeType= new IntTypeNode();
+//                                    break;
+//                                case "bool":
+//                                    nodeType= new BoolTypeNode();
+//                                    break;
+//                                default:
+//                                    nodeType= new IdTypeNode(fieldClass[2]);
+//                            }
+//                            if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel()+1,nodeType,offsetListVar++)) != null  ){
+//                                semanticErrors.add(new SemanticError("Field id "+fieldClass[1]+" already declared"));
+//                            }else{
+//                                numberVar++;
+//                            }
+//                        }
+//                    }
                 }
             }
 
