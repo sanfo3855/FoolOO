@@ -1,0 +1,18 @@
+class A (int a, int b){
+    A(int aa,int bb){
+        a=aa;
+        b=bb;
+    }
+
+    A(){
+        a=1;
+        b=0;
+    }
+}
+
+void main(){
+    let
+        B a = new A();
+    in
+        print(1);
+}

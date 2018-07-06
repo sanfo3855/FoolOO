@@ -96,5 +96,13 @@ public class FOOLlib {
     return labelEnd;
   }
 
+  public static void wipe(){
+    labCount=0;
+    funLabCount=0;
+    funCode="";
+    labelMain="";
+    labelEnd="";
+  }
 
+  //todo return dei branch di if-then-else possono essere sottotipi di uno stesso genitore
 }

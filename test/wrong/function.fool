@@ -1,0 +1,10 @@
+void main(){
+    let
+        void function(int aa, bool bb){
+            print(aa);
+            print(bb);
+        }
+    in
+        function(1,true);
+
+}

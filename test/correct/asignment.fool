@@ -1,0 +1,12 @@
+
+
+void main(){
+    let
+        int a=0;
+        bool b=true;
+    in
+        a=3;
+        b=false;
+        print(a);
+        print(b);
+}

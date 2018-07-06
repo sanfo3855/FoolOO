@@ -167,4 +167,16 @@ public class ExecuteVM {
     public int[] getMemory() {
         return memory;
     }
+
+    public void wipeMemory(){
+        memory = new int[MEMSIZE];
+        ip = 0;
+        sp = MEMSIZE;
+        hpCode = 0;
+        hp = 0;
+        fp = MEMSIZE;
+        ra=0;
+        rv=0;
+        fpo=0;
+    }
 }

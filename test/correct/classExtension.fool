@@ -1,0 +1,47 @@
+class A (int a, int b){
+    void setA(int aa){
+        a=aa;
+    }
+
+    void setB(int bb){
+        b=bb;
+    }
+
+    int getA(){
+        return a;
+    }
+
+    int getB(){
+        return b;
+    }
+}
+
+class B extends A(){
+    int raddoppiaA(){
+        return a*2;
+    }
+
+    int raddoppiaB(){
+        return b*2;
+    }
+}
+
+class C extends A(){
+    int quadruplicaA(){
+        return a*4;
+    }
+
+    int quadruplicaB(){
+        return b*4;
+    }
+}
+
+void main(){
+    let
+        A a
+    in
+        b.setA(2);
+        b.setB(4);
+        print(b.raddoppiaA());
+        print(b.raddoppiaB());
+}

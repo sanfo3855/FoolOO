@@ -28,7 +28,6 @@ class Plus extends Numeri (int result){
     }
 
     void calculate(){
-
         result=vala+valb;
     }
 
@@ -38,19 +37,20 @@ class Plus extends Numeri (int result){
 }
 
 class Minus extends Numeri (int result){
-    Minus(int a, int b){
-        vala=a;
-        valb=b;
-    }
+    //Minus(int a, int b){
+      //  vala=a;
+      //  valb=b;
+    //}
 
     void calculate(){
-        //vala=9;
         result= vala - valb;
     }
 
     int getResult(){
         return result;
     }
+
+
 }
 
 void main(){
@@ -63,7 +63,9 @@ void main(){
         p.calculate();
         print(p.getResult());
 
-        m=new Minus(4,-6);
+        m=new Minus();
+        m.setA(-4);
+        m.setB(6);
         m.calculate();
         print(m.getResult());
 }

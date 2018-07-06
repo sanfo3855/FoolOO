@@ -1,0 +1,6 @@
+void main(){
+    let
+        a=0;
+    in
+        int b=false;
+}

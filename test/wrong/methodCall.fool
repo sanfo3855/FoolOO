@@ -1,0 +1,18 @@
+class A (int a, int b){
+    void setA(int aa){
+        a=aa;
+    }
+
+    int getA(){
+        return a;
+    }
+
+}
+
+void main(){
+    let
+        A a = new A();
+    in
+        a.setA(2);
+        print(a.getA());
+}

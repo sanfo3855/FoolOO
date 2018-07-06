@@ -1,0 +1,13 @@
+class A (int a, int b){
+    A(int aa,int bb){
+        a=aa;
+        b=bb;
+    }
+}
+
+void main(){
+    let
+        A a = null;
+    in
+        print(1);
+}
