@@ -256,7 +256,8 @@ public class FunExpNode implements Node {
     public String codeGeneration() {
         String returnString = "lfp\n"; //carico il frame pointer sullo stack
         String AR = "";
-        for (int i = listParam.size()-1; i>=0; i--){
+        int listParamSize=listParam.size();
+        for (int i = 0; i<listParamSize; i++){
             returnString += listParam.get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
         }
 
@@ -265,6 +266,7 @@ public class FunExpNode implements Node {
         }
 
         returnString+= "lfp\n"+ AR + //carico frame pointer nello stack e risalgo catena statica
+                        "push "+(listParamSize+1)+"\n"+//todo
                         "push "+ entry.getOffset() +"\n" + //push dell'offset sullo stack
                         "lfp\n"+AR + //risale catena statica
                         "add\n"+

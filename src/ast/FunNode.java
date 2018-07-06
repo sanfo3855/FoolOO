@@ -31,18 +31,22 @@ public class FunNode  extends FunAbstractNode {
             }
         }
         String popVar="";
-        for (Node dec:listVar){
+        int sizeListVar=listVar.size();
+        for (int i=0; i<sizeListVar; i++){
             popVar+="pop\n";
         }
         String funl=FOOLlib.freshFunLabel();
         String end="";
+        String copyFP="";
         if(id.equals("main")){
             FOOLlib.putLabelMain(funl);
             end="b "+FOOLlib.getLabelEnd()+"\n";
+            copyFP="cfp\n"; //setta $fp a $sp
         }else {
             end= "sfp\n"+  // setto $fp a valore del CL
                     "lrv\n"+ // risultato della funzione sullo stack
                     "lra\n"+"js\n"; // salta a $ra
+            copyFP="cfpp\n"; //setta $fp a $sp
         }
         String retCod="";
         if(retNode!=null){
@@ -55,7 +59,7 @@ public class FunNode  extends FunAbstractNode {
             progCod=progNode.codeGeneration();
         }
         FOOLlib.putCode(funl+":\n"+
-                "cfp\n"+ //setta $fp a $sp
+                copyFP+
                 "lra\n"+ //inserimento return address
                 progCod+
                 retCod+

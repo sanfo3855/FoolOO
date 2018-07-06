@@ -13,8 +13,9 @@ import java.util.ArrayList;
 
 public class FoolOOMain {
     public static void main(String[] args) throws Exception {
-//        String fileName = "code/provaSuperConstructor.fool";
-        String fileName = "code/provaCode.fool";
+        String fileName = "code/provaSuperConstructor.fool";
+//        String fileName = "test/correct/function.fool";
+//        String fileName = "code/provaCode.fool";
         //String fileName = "code/provaFoolComplete.fool";
 
         FileInputStream is = new FileInputStream(fileName);
