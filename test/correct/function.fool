@@ -1,10 +1,11 @@
 void main(){
     let
-        void function(int aa, bool bb){
+        void function(int aa, bool bb, int cc){
             print(aa);
+            print(cc);
             print(bb);
         }
     in
-        function(1,true);
+        function(0, true, 9);
 
 }
