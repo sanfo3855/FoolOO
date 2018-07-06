@@ -266,7 +266,7 @@ public class FunExpNode implements Node {
         }
 
         returnString+= "lfp\n"+ AR + //carico frame pointer nello stack e risalgo catena statica
-                        "push "+(listParamSize+1)+"\n"+//todo
+                        "push "+(listParamSize+1)+"\n"+
                         "push "+ entry.getOffset() +"\n" + //push dell'offset sullo stack
                         "lfp\n"+AR + //risale catena statica
                         "add\n"+

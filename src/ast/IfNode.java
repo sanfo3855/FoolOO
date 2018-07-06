@@ -153,18 +153,16 @@ public class IfNode implements Node {
         String code="";
         String l1 = FOOLlib.freshLabel();
         String l2 = FOOLlib.freshLabel();
-        String thenCode=thenBranch.codeGeneration();
-        String elseCode=elseBranch.codeGeneration();
 
         code+= cond.codeGeneration()+
                 "push 1\n"+
                 "beq "+ l1 +"\n";
         if(elseBranch!=null){
-            code+=elseCode;
+            code+=elseBranch.codeGeneration();
         }
         code+="b " + l2 + "\n" +
                 l1 + ":\n"+
-                thenCode+
+                thenBranch.codeGeneration()+
                 l2 + ":\n";
         return code;
     }

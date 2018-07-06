@@ -12,6 +12,6 @@ void main(){
                 return bb;
         }
     in
-        a=f(5);
+        a=f(2);
         print(a);
 }
