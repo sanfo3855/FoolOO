@@ -1,0 +1,22 @@
+class A(int a, int b){
+    void setA(int aa){
+        a=aa;
+    }
+
+    void setB(int bb){
+        b=bb;
+    }
+}
+
+void main(){
+    let
+        A a = new A();
+        int c = if(false) then {
+                    1
+                } else {
+                    2
+                };
+    in
+        print(c);
+
+}

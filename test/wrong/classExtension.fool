@@ -16,7 +16,7 @@ class A (int a, int b){
     }
 }
 
-class B extends A(){
+class B extends A(int a, int b){
     int raddoppiaA(){
         return a*2;
     }

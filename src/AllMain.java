@@ -1,30 +1,29 @@
 import lib.FOOLlib;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AllMain {
     public static void main(String[]args) throws Exception{
         String [] argss = {"",""};
 
         argss[0]="correct";
-        File dir = new File("test/correct/");
-        argss[1]= "asignment";
-        FoolOOMain.main(argss);
-
-        argss[1] = "classDeclaration";
-        FoolOOMain.main(argss);
-
-        argss[1] = "methodCall";
-        FoolOOMain.main(argss);
-
-        argss[1] = "function";
-        FoolOOMain.main(argss);
+        File[] fileCorrect = new File("test/correct").listFiles();
+        for (File file : fileCorrect) {
+            if (file.isFile() && !file.getName().contains(".asm") && !file.getName().contains("!")) {
+                argss[1] = file.getName();
+                FoolOOMain.main(argss);
+            }
+        }
 
         argss[0]="wrong";
-        argss[1]= "asignment";
-        FoolOOMain.main(argss);
-
-        argss[1]= "classDeclaration";
-        FoolOOMain.main(argss);
+        File[] fileWrong = new File("test/wrong").listFiles();
+        for (File file : fileWrong) {
+            if (file.isFile() && !file.getName().contains(".asm")) {
+                argss[1] = file.getName();
+                FoolOOMain.main(argss);
+            }
+        }
     }
 }

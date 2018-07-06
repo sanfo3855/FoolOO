@@ -1,0 +1,30 @@
+class A(int a, int b){
+    void setA(int aa){
+        a=aa;
+    }
+}
+
+class B extends A(){
+    int getA(){
+        return a;
+    }
+}
+
+class C extends A(){
+    int getA(){
+        return a-1;
+    }
+}
+
+void main(){
+    let
+        A a = if(false) then {
+                  new B()
+              } else {
+                  new C()
+              };
+    in
+        a.setA(20);
+        print(a.getA());
+
+}
