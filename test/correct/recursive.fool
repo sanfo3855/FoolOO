@@ -1,21 +1,32 @@
+
 void main(){
     let
-        int a=500;
-        int f(int aa) {
-            let
-                int bb=aa;
-                int cc=aa;
-            in
+        int a=0;
+        int b=400;
+        /*int f(int aa) {
                 if(aa<=3) then {
-                    print(bb);
-                    f(aa+1);
+                    print(aa);
+                    b=f(aa+1);
                 }
                     print(aa);
-                return bb;
+                return aa;
+        }*/
+
+        int g() {
+            a=a+1;
+            if(a<=3) then {
+                print(a);
+                g();
+            }
+            return a;
         }
     in
-       f(2);
+        /*a=f(-5);
         print(a);
+        a=0;
+        print(1111111);*/
+        print(g());
+        /*print(7000000);*/
 }
 
 /*
@@ -41,22 +52,6 @@ void main(){
 }
 
 
-void main(){
-    let
-        int a=500;
-        int b=400;
-        int f(int aa) {
-                if(aa<=3) then {
-                    print(aa);
-                    b=f(aa+1);
-                }
-                    print(aa);
-                return aa;
-        }
-    in
-        a=f(0);
-        print(a);
-}
 
 
 void main(){

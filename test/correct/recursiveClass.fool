@@ -1,0 +1,18 @@
+class B(int mnbv){
+    int dec(int aa){
+            if(aa>=0) then {
+                print(aa);
+                aa = dec(aa-1);
+            }
+            return aa;
+    }
+}
+
+void main(){
+    let
+        B b = new B();
+        int aaaaa=0;
+    in
+        aaaaa = b.dec(5);
+}
+
