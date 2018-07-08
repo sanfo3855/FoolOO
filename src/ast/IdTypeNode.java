@@ -21,6 +21,10 @@ public class IdTypeNode implements TypeNode {
         this.id=id;
     }
 
+    public IdTypeNode(String id, ArrayList<String> extClassId) {
+        this.id=id;
+        this.extClassId=extClassId;
+    }
     /**
      *
      * @return ArrayList of extended class

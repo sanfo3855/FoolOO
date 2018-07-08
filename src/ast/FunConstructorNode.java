@@ -119,7 +119,6 @@ public class FunConstructorNode extends FunClassNode {
         for (Node dec:listVar){
             popVar+="pop\n";
         }
-        String funl=FOOLlib.freshFunLabel();
 
         String retCod="push 0\n";
         String progCod="";

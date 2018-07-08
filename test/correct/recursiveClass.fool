@@ -1,8 +1,9 @@
 class B(int mnbv){
     int dec(int aa){
+    //cc=0;
             if(aa>=0) then {
                 print(aa);
-                aa = dec(aa-1);
+                aa = this.dec(aa-1);
             }
             return aa;
     }
@@ -13,6 +14,7 @@ void main(){
         B b = new B();
         int aaaaa=0;
     in
-        aaaaa = b.dec(5);
+        aaaaa = b.dec(2);
+        print(aaaaa);
 }
 

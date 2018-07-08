@@ -66,6 +66,14 @@ public class CallMethodNode implements Node {
         int envNL=env.getNestingLevel();
         STentry entryTableTemp=null;
 
+//        if(id.equals("this")){
+//            for(String s: env.getHashMapNL(1).keySet()){
+//                if(s.contains("class%")){
+//                    id=s.split("%")[1];
+//                }
+//            }
+//        }
+
         /*
         Cerco l'STentry dell'oggetto chiamante il metodo.
         L'identificatore dell'oggetto viene ricercato in tutte le
@@ -106,7 +114,8 @@ public class CallMethodNode implements Node {
      * @return bLabel --> String with the specific method function
      */
     public String codeGeneration() {
-        String returnString = ""; //carico il frame pointer sullo stack
+        int sizeParamMethod=methodCall.getSizeListParam();
+        String returnString = "push "+(-sizeParamMethod)+"\nspn\n";
         //creo la chiave che verrà utilizzata per cercare la funzione nella dispatcher table
         String key = methodCall.getId()+ "%" +
                 ((TypeNode)methodCall.getEntry().getType()).getType();
@@ -145,7 +154,6 @@ public class CallMethodNode implements Node {
                             "add\n"+
                             "lw\n";
         }
-        int sizeParamMethod=methodCall.getSizeListParam();
         returnString += "push 0\n" +
                         "lfp\n" +
                         "sfpo\n" +
@@ -182,8 +190,8 @@ public class CallMethodNode implements Node {
         }
         retHpVar+="cfpo\n";
         return returnString+
-                "push "+sizeParamMethod+"\n" +
-                "push "+bLabel+
+                //"push "+sizeParamMethod+"\n" +
+                "push "+bLabel+"\n"+
                 "js\n"+
                 retHpVar;
     }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FunClassNode  extends FunAbstractNode {
+    protected String funl;
+
     /**
      * Constructor for FunctionNode.
      *
@@ -79,6 +81,11 @@ public class FunClassNode  extends FunAbstractNode {
     }
 
 
+    public String getFunl() {
+        funl=FOOLlib.freshFunLabel();
+        return funl;
+    }
+
     /**
      *
      * @return
@@ -94,11 +101,10 @@ public class FunClassNode  extends FunAbstractNode {
         for (Node dec:listVar){
             popVar+="pop\n";
         }
-        String funl=FOOLlib.freshFunLabel();
 
         String retCod;
         if(retNode!=null){
-            retCod=retNode.codeGeneration();
+            retCod="lfp\nlpn\nadd\nsfp\n"+retNode.codeGeneration();
         }else{
             retCod="push 0\n";
         }
@@ -108,7 +114,7 @@ public class FunClassNode  extends FunAbstractNode {
         }
 
         FOOLlib.putCode(funl+":\n"+
-                "lpn\npushminus\npush 1\nadd\ncfpp\n"+ //setta $fp a $sp
+                "lpn\npushminus\ncfpp\n"+ //setta $fp a $sp
                 "lra\n"+ //inserimento return address
                 progCod+
                 retCod+

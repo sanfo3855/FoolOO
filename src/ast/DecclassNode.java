@@ -144,6 +144,7 @@ public class DecclassNode implements Node {
             env.addHashMapNL(hashMapClass);
             ArrayList<Node> varTypes = new ArrayList<Node>();
             hashMapClass.put(idClass,new STentry(env.getNestingLevel(),offsetListVar));
+            hashMapClass.put("this",new STentry(env.getNestingLevel(), new IdTypeNode(id, extClassId),offsetListVar));
 
             HashMap<String,STentry> hmClassExt=env.getHashMapNL(0);
             Iterator iteratorExt;
@@ -184,29 +185,6 @@ public class DecclassNode implements Node {
                             }
                         }
                     }
-
-//                    for (String classex:env.getHashMapNL(0).keySet()) {
-//                        if(classex.contains("fieldClass#"+nameClassExt+"%")){
-//                            String[] fieldClass=classex.split("%");
-//                            Node nodeType;
-//                            //parso il tipo del campo per poter salvare il relativo nodo nell'entryTable
-//                            switch (fieldClass[2]){
-//                                case "int":
-//                                    nodeType= new IntTypeNode();
-//                                    break;
-//                                case "bool":
-//                                    nodeType= new BoolTypeNode();
-//                                    break;
-//                                default:
-//                                    nodeType= new IdTypeNode(fieldClass[2]);
-//                            }
-//                            if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel()+1,nodeType,offsetListVar++)) != null  ){
-//                                semanticErrors.add(new SemanticError("Field id "+fieldClass[1]+" already declared"));
-//                            }else{
-//                                numberVar++;
-//                            }
-//                        }
-//                    }
                 }
             }
 
@@ -260,19 +238,18 @@ public class DecclassNode implements Node {
      */
     public String codeGeneration() {
         String returnString = "";
-        FunAbstractNode funAbstractNode;
+        FunClassNode funClassNode;
         HashMap<String,String> methodList=new HashMap<String,String>();
         String methodDT;
         String codFunAbs;
         for (Node fun: listFun) {
-            funAbstractNode=(FunAbstractNode) fun;
-            methodDT=funAbstractNode.getId()+"%"+((TypeNode)funAbstractNode.getType()).getType();
-            for(Node typePar: funAbstractNode.getListVar()){
+            funClassNode=(FunClassNode) fun;
+            methodDT=funClassNode.getId()+"%"+((TypeNode)funClassNode.getType()).getType();
+            for(Node typePar: funClassNode.getListVar()){
                 methodDT+="%"+((TypeNode)((VarDecNode)typePar).getType()).getType();
             }
-            codFunAbs=funAbstractNode.codeGeneration();
-            returnString+=codFunAbs;
-            methodList.put(methodDT, codFunAbs.split(" ")[1]);
+            codFunAbs=funClassNode.getFunl();
+            methodList.put(methodDT, codFunAbs);
         }
         if(idExt!=null){
             methodDT="";
@@ -284,6 +261,10 @@ public class DecclassNode implements Node {
 
         methodList.put("numberVar", numberVar+"");
         DispatcherTable.putDispatchEntry(id, methodList);
+
+        for (Node fun: listFun) {
+            returnString+=fun.codeGeneration();
+        }
         return returnString;
     }
 
