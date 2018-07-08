@@ -18,7 +18,7 @@ public class FoolOOMain {
     public static void main(String[] args) {
         try {
             TimeUnit.MILLISECONDS.sleep(300);
-            String fileName = "test/correct/recursiveClass.fool";
+            String fileName = "test/correct/mutualRecursionClass.fool";
             //        String fileName = "code/provaCode.fool";
             //String fileName = "code/provaFoolComplete.fool";
             boolean testPrintAST = false;

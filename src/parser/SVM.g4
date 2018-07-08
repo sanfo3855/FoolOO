@@ -101,6 +101,8 @@ assembly:
 
         | LOADPN               {code[i++] = LOADPN;}
 
+        | COPYFPOF             {code[i++] = COPYFPOF;}
+
     )*  {
             for (Integer refAdd: labelRef.keySet() ) {
                       code[refAdd]=labelAdd.get(labelRef.get(refAdd));
@@ -144,6 +146,7 @@ PUSHMINUS       : 'pushminus' ;
 LOADFP1         : 'lfp1' ;
 LOADPN          : 'lpn' ;
 STOREPN         : 'spn' ;
+COPYFPOF        : 'cfpof' ;
 HALT	        : 'halt' ;	// stop execution
 
 COL	        : ':' ;

@@ -1,0 +1,37 @@
+class A(int a){
+    A(int aa){
+        a=aa;
+    }
+
+    int incA(int aa) {
+        let
+            int abc=aa;
+        in
+            if(aa<=6) then {
+                print(abc);
+                abc = this.incB(aa+1);
+
+            }
+            return abc;
+    }
+
+    int incB(int bb) {
+        let
+            int abc=bb;
+        in
+            if(bb<=6) then {
+                print(abc);
+                abc = this.incA(bb+1);
+            }
+            return abc;
+    }
+}
+
+void main(){
+    let
+        A a = new A();
+        int alba = 0;
+    in
+        alba = a.incA(0);
+        print(alba);
+}
