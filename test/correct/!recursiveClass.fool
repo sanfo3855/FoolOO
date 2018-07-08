@@ -1,19 +1,21 @@
-class B(int mnbv){
-    B(int a){
+class B(int mnbv, int cc){
+    B(int a,int b){
         mnbv=a;
+        cc=b;
         print(mnbv);
     }
     int dec(int aa){
     //cc=0;
-                //print(1111);
+                print(1111);
             if(aa>=0) then {
-              //  print(aa);
-              //  print(mnbv);
-                mnbv=aa;
+                print(mnbv);
+                print(aa);
+                //mnbv=aa;
                 aa = this.dec(aa-1);
             }
-               // print(1111);
-           // print(mnbv);
+                print(1888111);
+            print(mnbv);
+            print(aa);
             //mnbv=99;
             return aa;
     }
@@ -21,8 +23,8 @@ class B(int mnbv){
 
 void main(){
     let
-        B b = new B(3);
-        int aaaaa=0;
+        B b = new B(3, 4);
+        int aaaaa=7;
     in
         aaaaa = b.dec(2);
         print(aaaaa);

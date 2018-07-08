@@ -62,7 +62,7 @@ public class FunConstructorNode extends FunClassNode {
         //Viene creata una nuova hashmap nell'ambiente
         env.addHashMapNL(entryHashMap);
         STentry entryListVar = null;
-        int offsetListVar=0;
+        int offsetListVar=1;
         for (Node node: listVar) {
             VarDecNode varDecNode = (VarDecNode) node;
             //Si ottiene il tipo di ciascun parametro
@@ -126,15 +126,21 @@ public class FunConstructorNode extends FunClassNode {
             progCod=progNode.codeGeneration();
         }
 
+        String labelTrue=FOOLlib.freshFunLabel();
+        String copyFp="push 0\n" +
+                "beq " +labelTrue+"\n"+
+                "cfpof\n"+
+                labelTrue+":\n";
+
         FOOLlib.putCode(funl+":\n"+
-                "lpn\npushminus\ncfpp\n"+ //setta $fp a $sp
+                "lpn\npushminus\ncfpp\n"+copyFp+ //setta $fp a $sp
                 "lra\n"+ //inserimento return address
                 progCod+
                 retCod+
                 "srv\n"+ //pop del return value
                 popDec+
                 "sra\n"+ // pop del return address
-                "pop\n"+ // pop di AL
+                //"pop\n"+ // pop di AL
                 popVar+
                 "sfp\n"+  // setto $fp a valore del CL
                 "lrv\n"+ // risultato della funzione sullo stack

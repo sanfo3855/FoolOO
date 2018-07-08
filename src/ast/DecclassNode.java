@@ -177,7 +177,7 @@ public class DecclassNode implements Node {
                                 default:
                                     nodeType= new IdTypeNode(fieldClass[2]);
                             }
-                            if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel()+1,nodeType,offsetListVar++)) != null  ){
+                            if ( hashMapClass.put(fieldClass[1],new STentry(env.getNestingLevel()+1,nodeType,offsetListVar++,-1)) != null  ){
                                 semanticErrors.add(new SemanticError("Field id "+fieldClass[1]+" already declared"));
                             }else{
                                 iteratorExt=hmClassExt.entrySet().iterator();
@@ -192,7 +192,7 @@ public class DecclassNode implements Node {
             for(Node varNode : listVar){
                 VarDecNode arguments = (VarDecNode) varNode;
                 varTypes.add(arguments.getType());
-                if ( hashMapClass.put(arguments.getId(),new STentry(env.getNestingLevel()+1,arguments.getType(),offsetListVar++)) != null  ){
+                if ( hashMapClass.put(arguments.getId(),new STentry(env.getNestingLevel()+1,arguments.getType(),offsetListVar++,-1)) != null  ){
                     semanticErrors.add(new SemanticError("Parameter id "+arguments.getId()+" already declared"));
                 }else{
                     numberVar++;

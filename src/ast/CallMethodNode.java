@@ -145,26 +145,25 @@ public class CallMethodNode implements Node {
         }else{
             sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(listExtension.get(--y)).get("numberVar"));
         }
-        for(int i = sizeVarHp; i>0; i--){
-            returnString += "push " +entry.getOffset()+"\n"+
-                            "lfp\n"+
-                            "add\n"+
-                            "lw\n"+
-                            "push "+(i-1)+"\n" +
-                            "add\n"+
-                            "lw\n";
-        }
-        returnString += "push 0\n" +
-                        "lfp\n" +
-                        "sfpo\n" +
-                        "lfp\n";
-        ArrayList<Node> methodCallListParam=methodCall.getListParam();
-        for (int i = 0; i<sizeParamMethod; i++){
-            returnString += methodCallListParam.get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
-        }
-        String retHpVar="cfpm\n";
-        for(int i = sizeVarHp; i>0; i--){
-            retHpVar += "push "+(i+1)+"\n" +
+        String retHpVar="";
+        String copyFp="push 0\n";
+        if(!id.equals("this")){
+            for(int i = sizeVarHp; i>0; i--){
+                returnString += "push " +entry.getOffset()+"\n"+
+                        "lfp\n"+
+                        "add\n"+
+                        "lw\n"+
+                        "push "+(i-1)+"\n" +
+                        "add\n"+
+                        "lw\n";
+            }
+            returnString += //"push 0\n" +
+                    "lfp\n" +
+                    "sfpo\n" +
+                    "lfp\n";
+            retHpVar="cfpm\n";
+            for(int i = sizeVarHp; i>0; i--){
+                retHpVar += "push "+(i+1)+"\n" +
                         "lfp\n" +
                         "add\n" +
                         "lw\n" +
@@ -175,8 +174,8 @@ public class CallMethodNode implements Node {
                         "push "+(i-1)+"\n" +
                         "add\n" +
                         "sw\n";
-        }
-        retHpVar += "push 1\n" +
+            }
+            retHpVar += "push 1\n" +
                     "lfp\n" +
                     "add\n" +
                     "lw\n" +
@@ -185,12 +184,19 @@ public class CallMethodNode implements Node {
                     "add\n" +
                     "sw\n";
 
-        for(int i = sizeVarHp; i>0; i--){
-            retHpVar +="pop\n";
+            for(int i = sizeVarHp; i>0; i--){
+                retHpVar +="pop\n";
+            }
+            retHpVar+="cfpo\n";
+            copyFp="push 1\n";
         }
-        retHpVar+="cfpo\n";
-        return returnString+
-                //"push "+sizeParamMethod+"\n" +
+
+        ArrayList<Node> methodCallListParam=methodCall.getListParam();
+        for (int i = 0; i<sizeParamMethod; i++){
+            returnString += methodCallListParam.get(i).codeGeneration(); //eseguo il push dei parametri del chiamante
+        }
+
+        return returnString+copyFp+
                 "push "+bLabel+"\n"+
                 "js\n"+
                 retHpVar;

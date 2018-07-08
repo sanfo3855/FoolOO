@@ -88,11 +88,18 @@ public class IdNode implements Node {
     }
 
     public String codeGeneration() {
-        String returnString = "push "+entry.getOffset()+"\n"+ //push offset sullo stack
-                              "lfp\n"; //carica frame pointer sullo stack
+        String returnString = "push "+entry.getOffset()+"\n";//push offset sullo stack
 
-        for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++) {
-            returnString+="lpn\nadd\nlw\n"; //esegue loadword per ciascun livello da risalire
+
+        if(entry.getOffsetObj()==-1){
+            returnString += "lfpof\n";
+        }else{
+            returnString +="lfp\n"; //carico il fp sullo stack
+            //risalgo la catena statica
+            for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++){
+                returnString+="lpn\nadd\nlw\n";   //Faccio un loadword per ogni scope da risalire
+                //Ottengo l'indirizzo dello scope a cui ho la variabile
+            }
         }
 
         returnString+=  "add\n"+ //accede alla posizione della entry

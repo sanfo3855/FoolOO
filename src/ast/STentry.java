@@ -5,6 +5,7 @@ public class STentry {
     private int nestinglevel;
     private Node type;
     private int offset;
+    private int offsetObj;
 
     /**
      * Constructor for STentry without type.
@@ -28,6 +29,14 @@ public class STentry {
         this.nestinglevel = nestinglevel;
         this.type = type;
         this.offset = offset;
+        this.offsetObj = 0;
+    }
+
+    public STentry(int nestinglevel, Node type, int offset, int offsetObj) {
+        this.nestinglevel = nestinglevel;
+        this.type = type;
+        this.offset = offset;
+        this.offsetObj = offsetObj;
     }
 
     /**
@@ -61,6 +70,10 @@ public class STentry {
      */
     public int getNestinglevel() {
         return this.nestinglevel;
+    }
+
+    public int getOffsetObj() {
+        return offsetObj;
     }
 
     /**

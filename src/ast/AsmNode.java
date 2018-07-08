@@ -129,15 +129,19 @@ public class AsmNode implements Node {
      */
     public String codeGeneration() {
 
-        String returnString =
-                value.codeGeneration()+//Carico in cima allo stack il valore da assegnare
-                        "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
-                        "lfp\n"; //carico il fp sullo stack
+        String returnString =value.codeGeneration()+//Carico in cima allo stack il valore da assegnare
+                        "push "+entry.getOffset()+"\n"; //metto offset sullo stack
 
-        //risalgo la catena statica
-        for (int i=0; i<nestingLevel-entry.getNestinglevel(); i++){
-            returnString+="lpn\nadd\nlw\n";   //Faccio un loadword per ogni scope da risalire
-            //Ottengo l'indirizzo dello scope a cui ho la variabile
+
+        if(entry.getOffsetObj()==-1){
+            returnString += "lfpof\n";
+        }else{
+            returnString +="lfp\n"; //carico il fp sullo stack
+            //risalgo la catena statica
+            for (int i=0; i<nestingLevel-entry.getNestinglevel(); i++){
+                returnString+="lpn\nadd\nlw\n";   //Faccio un loadword per ogni scope da risalire
+                //Ottengo l'indirizzo dello scope a cui ho la variabile
+            }
         }
 
 
