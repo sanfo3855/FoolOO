@@ -10,6 +10,7 @@ public class LetInExpNode implements Node {
 
     private ArrayList<Node> listDec;
     private Node stms;
+    private int offset=-2;
 
     /**
      * Constructor for LetInExpNode.
@@ -24,6 +25,10 @@ public class LetInExpNode implements Node {
 
     public int getListDecSize() {
         return listDec.size();
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
     /**
@@ -70,7 +75,7 @@ public class LetInExpNode implements Node {
         //nome della chiave del nodo
         String idPutHM;
 
-        env.setOffset(-2);
+        env.setOffset(offset);
         for(Node node : listDec){
             //controllo nodo funzione
             if(node instanceof FunNode ){

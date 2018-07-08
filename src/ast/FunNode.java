@@ -45,10 +45,11 @@ public class FunNode  extends FunAbstractNode {
         }else {
             end= "sfp\n"+  // setto $fp a valore del CL
                     "lrv\n"+ // risultato della funzione sullo stack
-                    "lra\n"+"js\n"; // salta a $ra
-            copyFP="cfpp\n"; //setta $fp a $sp
+                    "lra\n"+
+                    "js\n"; // salta a $ra
+            copyFP="cfpp\n"; //setta $fp a $sp+pop
         }
-        String retCod="";
+        String retCod;
         if(retNode!=null){
             retCod=retNode.codeGeneration();
         }else{

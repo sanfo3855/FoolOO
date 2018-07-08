@@ -103,6 +103,9 @@ public abstract class FunAbstractNode implements Node {
 
         //Viene richiamato il checkSemantics nel corpo della funzione se != null
         if (progNode!=null) {
+            if (progNode instanceof LetInExpNode && (!id.equals("main"))){
+                ((LetInExpNode) progNode).setOffset(offsetListVar-2);
+            }
             semanticErrors.addAll(progNode.checkSemantics(env));
         }
 

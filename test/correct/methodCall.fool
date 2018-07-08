@@ -1,6 +1,10 @@
 class A (int a, int b){
-    void setA(int aa){
-        a=aa;
+    void setA( int e){
+    let
+        int i=90;
+        in
+        print(i);
+        a=4;
     }
 
     int getA(){
@@ -13,6 +17,6 @@ void main(){
     let
         A a = new A();
     in
-        a.setA(2);
+        a.setA(3);
         print(a.getA());
 }
