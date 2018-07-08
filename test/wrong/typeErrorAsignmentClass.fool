@@ -1,0 +1,33 @@
+class A(int a){
+    void setA(int aa){
+        a=aa;
+    }
+
+    int getA(){
+        return a;
+    }
+}
+
+class B(int b){
+    void setB(int bb){
+        b=bb;
+    }
+}
+
+class C extends A(int c){
+    void setC(int cc){
+        c=cc;
+    }
+
+    int getC(){
+        return c;
+    }
+}
+
+void main(){
+    let
+        A a = null;
+    in
+        a = new B();
+        a = new C();
+}

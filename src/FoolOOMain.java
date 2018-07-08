@@ -18,7 +18,7 @@ public class FoolOOMain {
     public static void main(String[] args) {
         try {
             TimeUnit.MILLISECONDS.sleep(300);
-            String fileName = "test/correct/!recursive.fool";
+            String fileName = "test/wrong/methodCall.fool";
             //        String fileName = "code/provaCode.fool";
             //String fileName = "code/provaFoolComplete.fool";
             boolean testPrintAST = false;
@@ -61,9 +61,10 @@ public class FoolOOMain {
                     Environment env = new Environment();
                     ArrayList<SemanticError> err = ast.checkSemantics(env);
                     if (err.size() > 0) {
-                        System.out.println("You had: " + err.size() + " errors:");
+                        System.out.println("\u001B[31m"+"You have: " + err.size() + " errors:");
                         for (SemanticError e : err)
                             System.out.println("\t" + e);
+                        System.out.println("\u001B[0m");
                     } else {
                         Node type = ast.typeCheck(); //type-checking bottom-up
                         if(testPrintTypeCheck) {

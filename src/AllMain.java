@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllMain {
-    public static void main(String[]args) throws Exception{
+    public static void main(String[]args) {
         String [] argss = {"","","false","false","false"};
 
         argss[0]="correct";

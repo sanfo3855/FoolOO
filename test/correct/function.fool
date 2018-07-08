@@ -1,13 +1,14 @@
 void main(){
     let
-        void function(int bb){
-        let
-            int a=3;
-         in
-            print(a);
-            print(bb);
+        void function(int aa, bool bb, int cc){
+            let
+                int a=3;
+            in
+                print(aa+a);
+                print(cc+a);
+                print(bb+a);
         }
     in
-        function(0);
+        function(0, true, 9);
 
 }

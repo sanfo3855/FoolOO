@@ -95,6 +95,8 @@ assembly:
 
         | PUSHMINUS             {code[i++] = PUSHMINUS;}
 
+        | LOADFP1               {code[i++] = LOADFP1;}
+
     )*  {
             for (Integer refAdd: labelRef.keySet() ) {
                       code[refAdd]=labelAdd.get(labelRef.get(refAdd));
@@ -135,6 +137,7 @@ LOADFPO         : 'lfpo' ;
 COPYFPO         : 'cfpo' ;   // copy stack pointer into frame pointer
 COPYFPP         : 'cfpp' ;
 PUSHMINUS       : 'pushminus' ;
+LOADFP1         : 'lfp1' ;
 HALT	        : 'halt' ;	// stop execution
 
 COL	        : ':' ;
