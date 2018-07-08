@@ -92,7 +92,7 @@ public class IdNode implements Node {
                               "lfp\n"; //carica frame pointer sullo stack
 
         for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++) {
-            returnString+= "lw\n"; //esegue loadword per ciascun livello da risalire
+            returnString+="lpn\nadd\nlw\n"; //esegue loadword per ciascun livello da risalire
         }
 
         returnString+=  "add\n"+ //accede alla posizione della entry

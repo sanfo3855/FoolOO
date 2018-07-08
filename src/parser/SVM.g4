@@ -97,9 +97,9 @@ assembly:
 
         | LOADFP1               {code[i++] = LOADFP1;}
 
-        | STOREFPF              {code[i++] = STOREFPF;}
+        | STOREPN              {code[i++] = STOREPN;}
 
-        | LOADFPF               {code[i++] = LOADFPF;}
+        | LOADPN               {code[i++] = LOADPN;}
 
     )*  {
             for (Integer refAdd: labelRef.keySet() ) {
@@ -142,8 +142,8 @@ COPYFPO         : 'cfpo' ;   // copy stack pointer into frame pointer
 COPYFPP         : 'cfpp' ;
 PUSHMINUS       : 'pushminus' ;
 LOADFP1         : 'lfp1' ;
-LOADFPF         : 'lfpf' ;
-STOREFPF        : 'sfpf' ;
+LOADPN          : 'lpn' ;
+STOREPN         : 'spn' ;
 HALT	        : 'halt' ;	// stop execution
 
 COL	        : ':' ;

@@ -1,4 +1,4 @@
-// Generated from /home/matteo/Developments/git/FoolOO/src/parser/SVM.g4 by ANTLR 4.7
+// Generated from /home/andrea/IdeaProjects/compilatori/FoolOO/src/parser/SVM.g4 by ANTLR 4.7
 package parser;
 
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class SVMParser extends Parser {
 		BRANCHEQ=10, BRANCHLESSEQ=11, BRANCHGREATEREQ=12, JS=13, LOADRA=14, STORERA=15, 
 		LOADRV=16, STORERV=17, LOADFP=18, STOREFP=19, COPYFP=20, COPYFPM=21, LOADHP=22, 
 		STOREHP=23, PRINT=24, PUSHTOHP=25, STOREFPO=26, LOADFPO=27, COPYFPO=28, 
-		COPYFPP=29, PUSHMINUS=30, LOADFP1=31, LOADFPF=32, STOREFPF=33, HALT=34, 
+		COPYFPP=29, PUSHMINUS=30, LOADFP1=31, LOADPN=32, STOREPN=33, HALT=34, 
 		COL=35, LABEL=36, NUMBER=37, WHITESP=38, ERR=39;
 	public static final int
 		RULE_assembly = 0;
@@ -37,15 +37,15 @@ public class SVMParser extends Parser {
 		"'lw'", "'b'", "'beq'", "'bleq'", "'bgeq'", "'js'", "'lra'", "'sra'", 
 		"'lrv'", "'srv'", "'lfp'", "'sfp'", "'cfp'", "'cfpm'", "'lhp'", "'shp'", 
 		"'print'", "'pthp'", "'sfpo'", "'lfpo'", "'cfpo'", "'cfpp'", "'pushminus'", 
-		"'lfp1'", "'lfpp'", "'sfpp'", "'halt'", "':'"
+		"'lfp1'", "'lpn'", "'spn'", "'halt'", "':'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "PUSH", "POP", "ADD", "SUB", "MULT", "DIV", "STOREW", "LOADW", "BRANCH", 
 		"BRANCHEQ", "BRANCHLESSEQ", "BRANCHGREATEREQ", "JS", "LOADRA", "STORERA", 
 		"LOADRV", "STORERV", "LOADFP", "STOREFP", "COPYFP", "COPYFPM", "LOADHP", 
 		"STOREHP", "PRINT", "PUSHTOHP", "STOREFPO", "LOADFPO", "COPYFPO", "COPYFPP", 
-		"PUSHMINUS", "LOADFP1", "LOADFPF", "STOREFPF", "HALT", "COL", "LABEL", 
-		"NUMBER", "WHITESP", "ERR"
+		"PUSHMINUS", "LOADFP1", "LOADPN", "STOREPN", "HALT", "COL", "LABEL", "NUMBER", 
+		"WHITESP", "ERR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -239,13 +239,13 @@ public class SVMParser extends Parser {
 		public TerminalNode LOADFP1(int i) {
 			return getToken(SVMParser.LOADFP1, i);
 		}
-		public List<TerminalNode> STOREFPF() { return getTokens(SVMParser.STOREFPF); }
-		public TerminalNode STOREFPF(int i) {
-			return getToken(SVMParser.STOREFPF, i);
+		public List<TerminalNode> STOREPN() { return getTokens(SVMParser.STOREPN); }
+		public TerminalNode STOREPN(int i) {
+			return getToken(SVMParser.STOREPN, i);
 		}
-		public List<TerminalNode> LOADFPF() { return getTokens(SVMParser.LOADFPF); }
-		public TerminalNode LOADFPF(int i) {
-			return getToken(SVMParser.LOADFPF, i);
+		public List<TerminalNode> LOADPN() { return getTokens(SVMParser.LOADPN); }
+		public TerminalNode LOADPN(int i) {
+			return getToken(SVMParser.LOADPN, i);
 		}
 		public List<TerminalNode> NUMBER() { return getTokens(SVMParser.NUMBER); }
 		public TerminalNode NUMBER(int i) {
@@ -276,7 +276,7 @@ public class SVMParser extends Parser {
 			setState(83);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PUSH) | (1L << POP) | (1L << ADD) | (1L << SUB) | (1L << MULT) | (1L << DIV) | (1L << STOREW) | (1L << LOADW) | (1L << BRANCH) | (1L << BRANCHEQ) | (1L << BRANCHLESSEQ) | (1L << BRANCHGREATEREQ) | (1L << JS) | (1L << LOADRA) | (1L << STORERA) | (1L << LOADRV) | (1L << STORERV) | (1L << LOADFP) | (1L << STOREFP) | (1L << COPYFP) | (1L << COPYFPM) | (1L << LOADHP) | (1L << STOREHP) | (1L << PRINT) | (1L << PUSHTOHP) | (1L << STOREFPO) | (1L << LOADFPO) | (1L << COPYFPO) | (1L << COPYFPP) | (1L << PUSHMINUS) | (1L << LOADFP1) | (1L << LOADFPF) | (1L << STOREFPF) | (1L << HALT) | (1L << LABEL))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PUSH) | (1L << POP) | (1L << ADD) | (1L << SUB) | (1L << MULT) | (1L << DIV) | (1L << STOREW) | (1L << LOADW) | (1L << BRANCH) | (1L << BRANCHEQ) | (1L << BRANCHLESSEQ) | (1L << BRANCHGREATEREQ) | (1L << JS) | (1L << LOADRA) | (1L << STORERA) | (1L << LOADRV) | (1L << STORERV) | (1L << LOADFP) | (1L << STOREFP) | (1L << COPYFP) | (1L << COPYFPM) | (1L << LOADHP) | (1L << STOREHP) | (1L << PRINT) | (1L << PUSHTOHP) | (1L << STOREFPO) | (1L << LOADFPO) | (1L << COPYFPO) | (1L << COPYFPP) | (1L << PUSHMINUS) | (1L << LOADFP1) | (1L << LOADPN) | (1L << STOREPN) | (1L << HALT) | (1L << LABEL))) != 0)) {
 				{
 				setState(81);
 				_errHandler.sync(this);
@@ -542,15 +542,15 @@ public class SVMParser extends Parser {
 				case 35:
 					{
 					setState(77);
-					match(STOREFPF);
-					code[i++] = STOREFPF;
+					match(STOREPN);
+					code[i++] = STOREPN;
 					}
 					break;
 				case 36:
 					{
 					setState(79);
-					match(LOADFPF);
-					code[i++] = LOADFPF;
+					match(LOADPN);
+					code[i++] = LOADPN;
 					}
 					break;
 				}

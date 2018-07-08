@@ -1,0 +1,62 @@
+
+void main(){
+    let
+        int a=500;
+        int b=400;
+        int f(int aa) {
+                if(aa<=3) then {
+                    print(aa);
+                    b=f(aa+1);
+                }
+                    print(aa);
+                return aa;
+        }
+    in
+        a=f(-5);
+        print(a);
+}
+
+/*
+
+void main(){
+    let
+        int a=500;
+        int f(int aa) {
+            let
+                int bb=aa;
+                int cc=aa;
+            in
+                if(aa<=3) then {
+                    print(bb);
+                    bb=f(aa+1);
+                }
+                    print(aa);
+                return bb;
+        }
+    in
+        a=f(-5);
+        print(a);
+}
+
+
+
+
+void main(){
+    let
+        int a=0;
+        int g=500;
+        int f() {
+                    a=a+1;
+                if(a<=3) then {
+                    print(a);
+                    f();
+                }
+                   // print(aa);
+                return a;
+        }
+    in
+        g=f();
+        print(g);
+}
+
+*/

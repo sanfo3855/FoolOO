@@ -135,9 +135,11 @@ public class AsmNode implements Node {
                         "lfp\n"; //carico il fp sullo stack
 
         //risalgo la catena statica
-        for (int i=0; i<nestingLevel-entry.getNestinglevel(); i++)
-            returnString+="lw\n";   //Faccio un loadword per ogni scope da risalire
-        //Ottengo l'indirizzo dello scope a cui ho la variabile
+        for (int i=0; i<nestingLevel-entry.getNestinglevel(); i++){
+            returnString+="lpn\nadd\nlw\n";   //Faccio un loadword per ogni scope da risalire
+            //Ottengo l'indirizzo dello scope a cui ho la variabile
+        }
+
 
         returnString += "add\n"+ //Carico in cima allo stack il valore dell'inidirizzo in cui è salvata la variabile nello stack
                 "sw\n"; //Sovrascrivo sullo stack il valore da assegnare all'indirizzo ottenuto

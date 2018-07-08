@@ -15,7 +15,7 @@ public class ExecuteVM {
     private int ra;
     private int rv;
     private int fpo;
-    private int fpf;
+    private int pn=0;
 
     public ExecuteVM(int[] code) {
         this.code = code;
@@ -143,13 +143,13 @@ public class ExecuteVM {
                     fp=sp+pop();
                     break;
                 case SVMParser.LOADFP1 : //
-                    push(fp);
+                    push(fp+1);
                     break;
-                case SVMParser.STOREFPF : //
-                    fpf=pop();
+                case SVMParser.STOREPN : //
+                    pn=pop();
                     break;
-                case SVMParser.LOADFPF : //
-                    push(fpf);
+                case SVMParser.LOADPN : //
+                    push(pn);
                     break;
                 case SVMParser.HALT :
                     return;
