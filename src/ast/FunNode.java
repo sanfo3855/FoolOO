@@ -64,8 +64,8 @@ public class FunNode  extends FunAbstractNode {
                 "lra\n"+ //inserimento return address
                 progCod+
                 retCod+
-                popDec+
                 "srv\n"+ //pop del return value
+                popDec+
                 "sra\n"+ // pop del return address
                 "pop\n"+ // pop di AL
                 popVar+

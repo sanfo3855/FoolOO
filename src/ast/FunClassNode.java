@@ -96,7 +96,7 @@ public class FunClassNode  extends FunAbstractNode {
         }
         String funl=FOOLlib.freshFunLabel();
 
-        String retCod="";
+        String retCod;
         if(retNode!=null){
             retCod=retNode.codeGeneration();
         }else{

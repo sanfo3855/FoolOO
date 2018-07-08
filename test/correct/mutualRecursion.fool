@@ -2,26 +2,26 @@ void main(){
     let
         int f(int a){
             let
-                int bb=0;
+                int bb=5;
             in
                 if(a>=0) then {
+                    print(a);
                     bb=g(a-1);
-                    print(bb);
                 }
-                return bb;
+                return a;
         }
 
         int g(int b){
             let
-                int aa=0;
+                int aa=33;
             in
                 if(b>=0) then {
+                    print(b);
                     aa=f(b-1);
-                    print(aa);
                 }
-                return aa;
+                return b;
         }
-        int cc = 0;
+        int cc = 789;
     in
         cc=f(10);
         print(cc);
