@@ -1,17 +1,24 @@
 class B(int mnbv){
+    B(int a){
+        mnbv=a;
+        print(mnbv);
+    }
     int dec(int aa){
     //cc=0;
             if(aa>=0) then {
                 print(aa);
+                mnbv=aa;
+                print(mnbv);
                 aa = this.dec(aa-1);
             }
+            print(mnbv);
             return aa;
     }
 }
 
 void main(){
     let
-        B b = new B();
+        B b = new B(3);
         int aaaaa=0;
     in
         aaaaa = b.dec(2);

@@ -106,7 +106,7 @@ public class FunClassNode  extends FunAbstractNode {
         if(retNode!=null){
             retCod="lfp\nlpn\nadd\nsfp\n"+retNode.codeGeneration();
         }else{
-            retCod="push 0\n";
+            retCod="lfp\nlpn\nadd\nsfp\npush 0\n";
         }
         String progCod="";
         if (progNode!=null){

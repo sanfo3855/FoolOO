@@ -120,14 +120,14 @@ public class FunConstructorNode extends FunClassNode {
             popVar+="pop\n";
         }
 
-        String retCod="push 0\n";
+        String retCod="lfp\nlpn\nadd\nsfp\npush 0\n";
         String progCod="";
         if (progNode!=null){
             progCod=progNode.codeGeneration();
         }
 
         FOOLlib.putCode(funl+":\n"+
-                "lpn\npushminus\npush 1\nadd\ncfpp\n"+ //setta $fp a $sp
+                "lpn\npushminus\ncfpp\n"+ //setta $fp a $sp
                 "lra\n"+ //inserimento return address
                 progCod+
                 retCod+
