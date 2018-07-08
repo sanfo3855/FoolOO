@@ -1,0 +1,38 @@
+class A(int a, int b, int c){
+
+    A(int aa){
+        a = aa;
+        b = aa*2;
+        c = aa*3;
+    }
+
+    void set(int aa){
+        a = aa;
+        b = aa*2;
+        c = aa*3;
+    }
+
+    int getA(){
+        return a;
+    }
+
+    int getB(){
+        return b;
+    }
+
+    int getC(){
+        return c;
+    }
+}
+
+
+void main(){
+    let
+        A a = new A(22);
+    in
+        //a.set(22);
+        print(a.getA());
+        print(a.getB());
+        print(a.getC());
+        print(22*2);
+}

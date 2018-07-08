@@ -16,6 +16,7 @@ public class ExecuteVM {
     private int rv;
     private int fpo;
     private int pn=0;
+    private int fpof=0;
 
     public ExecuteVM(int[] code) {
         this.code = code;
@@ -150,6 +151,9 @@ public class ExecuteVM {
                     break;
                 case SVMParser.LOADPN : //
                     push(pn);
+                    break;
+                case SVMParser.COPYFPOF : //
+                    fpof=fp;
                     break;
                 case SVMParser.HALT :
                     return;
