@@ -142,8 +142,8 @@ COPYFPO         : 'cfpo' ;   // copy stack pointer into frame pointer
 COPYFPP         : 'cfpp' ;
 PUSHMINUS       : 'pushminus' ;
 LOADFP1         : 'lfp1' ;
-LOADFPF         : 'lfpp' ;
-STOREFPF        : 'sfpp' ;
+LOADFPF         : 'lfpf' ;
+STOREFPF        : 'sfpf' ;
 HALT	        : 'halt' ;	// stop execution
 
 COL	        : ':' ;
