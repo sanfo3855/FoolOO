@@ -152,6 +152,8 @@ public class ExecuteVM {
                 case SVMParser.LOADPN : //
                     push(pn);
                     break;
+                case SVMParser.LOADFPOF:
+                    push(fpof);
                 case SVMParser.COPYFPOF : //
                     fpof=fp;
                     break;
