@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FoolOO">
+    <output-path>$PROJECT_DIR$/out/artifacts/FoolOO</output-path>
+    <root id="archive" name="FoolOO.jar" />
+  </artifact>
+</component>

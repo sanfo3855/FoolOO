@@ -78,6 +78,9 @@ public class FunConstructorNode extends FunClassNode {
 
         //Viene richiamato il checkSemantics nel corpo del costruttore se != null
         if (progNode!=null) {
+            if (progNode instanceof LetInExpNode){
+                ((LetInExpNode) progNode).setOffset(offsetListVar-1);
+            }
             semanticErrors.addAll(progNode.checkSemantics(env));
         }
 

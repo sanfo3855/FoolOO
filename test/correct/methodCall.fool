@@ -1,6 +1,10 @@
 class A (int a, int b){
     void setA(int aa){
-        a=aa;
+        let
+            int c=3;
+        in
+            a=aa;
+            print(c);
     }
 
     int getA(){

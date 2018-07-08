@@ -3,7 +3,7 @@ void main(){
         int a=500;
         int f(int aa) {
             let
-                int bb=0;
+                int bb=77;
             in
                 if(aa<=3) then {
                     bb=f(aa+1);
@@ -12,6 +12,6 @@ void main(){
                 return bb;
         }
     in
-        a=f(2);
+        a=f(4);
         print(a);
 }
