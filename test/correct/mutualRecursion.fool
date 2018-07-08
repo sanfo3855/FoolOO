@@ -1,0 +1,28 @@
+void main(){
+    let
+        int f(int a){
+            let
+                int bb=0;
+            in
+                if(a>=0) then {
+                    bb=g(a-1);
+                    print(bb);
+                }
+                return bb;
+        }
+
+        int g(int b){
+            let
+                int aa=0;
+            in
+                if(b>=0) then {
+                    aa=f(b-1);
+                    print(aa);
+                }
+                return aa;
+        }
+        int cc = 0;
+    in
+        cc=f(10);
+        print(cc);
+}

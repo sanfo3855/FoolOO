@@ -15,9 +15,11 @@ import java.util.ArrayList;
 
 public class FoolOOLanguageMain {
     public static void main(String[] args) {
+        String err = "\u001B[31m";
+        String stopErr = "\u001B[0m";
         try {
             String fileName = null;
-            if(args.length==1){
+            if(args.length==1 && args[0].endsWith(".fool")){
                 fileName = args[0];
                 FileInputStream is = new FileInputStream(fileName);
                 ANTLRInputStream input = new ANTLRInputStream(is);
@@ -32,12 +34,12 @@ public class FoolOOLanguageMain {
                     Node ast = visitor.visit(parser.start());
                     if (parser.getNumberOfSyntaxErrors() == 0) {
                         Environment env = new Environment();
-                        ArrayList<SemanticError> err = ast.checkSemantics(env);
-                        if (err.size() > 0) {
-                            System.out.println("\u001B[31m"+"You have: " + err.size() + " errors:");
-                            for (SemanticError e : err)
+                        ArrayList<SemanticError> error = ast.checkSemantics(env);
+                        if (error.size() > 0) {
+                            System.out.println(err+"You have: " + error.size() + " errors:");
+                            for (SemanticError e : error)
                                 System.out.println("\t" + e);
-                            System.out.println("\u001B[0m");
+                            System.out.println(stopErr);
                         } else {
                             Node type = ast.typeCheck(); //type-checking bottom-up
                             // CODE GENERATION  prova.fool.asm
@@ -61,15 +63,24 @@ public class FoolOOLanguageMain {
                         }
                     }
                 }
+            } else {
+                System.out.println(err);
+                if(args.length==1){
+                    System.out.println("Fool language <file>.fool needed. \n\tFound " + args[0]);
+                } else {
+                    System.out.println("Fool language <file>.fool needed.");
+                }
+
+                System.out.println(stopErr);
             }
         } catch (Exception ex) {
-            String err = "\u001B[31m"+ ex.toString();
             System.out.println(err);
-            StackTraceElement [] stack = ex.getStackTrace();
-            for(StackTraceElement st: stack) {
-                System.out.println(st);
-            }
-            System.out.println("\u001B[0m");
+            System.out.println( ex.toString() );
+//            StackTraceElement [] stack = ex.getStackTrace();
+//            for(StackTraceElement st: stack) {
+//                System.out.println(st);
+//            }
+            System.out.println(stopErr);
         }
     }
 }

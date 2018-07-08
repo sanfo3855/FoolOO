@@ -1,0 +1,30 @@
+class A (int a){
+    void setA(int aa){
+        a=aa;
+    }
+
+    int getA(){
+        return a;
+    }
+}
+
+class B(){
+    A instanceA(){
+        let
+            A obj = new A();
+        in
+            return obj;
+            //todo return new A();
+    }
+}
+
+void main(){
+    let
+         A aaaaaa = null;
+         B b = new B();
+    in
+        aaaaaa = b.instanceA();
+        aaaaaa.setA(4);
+        print(aaaaaa.getA());
+
+}

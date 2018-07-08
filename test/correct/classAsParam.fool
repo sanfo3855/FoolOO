@@ -1,0 +1,31 @@
+class A(int a){
+    void setA(int aa){
+        a=aa;
+    }
+
+    int getA(){
+        return a;
+    }
+}
+
+class B(A objA){
+    void setObjA(A obj){
+        objA=obj;
+    }
+
+    A getObjA(){
+        return objA;
+    }
+}
+
+void main(){
+    let
+        A a = new A();
+        A aa = null;
+        B b = new B();
+    in
+        a.setA(24);
+        b.setObjA(a);
+        aa = b.getObjA();
+        print(aa.getA());
+}
