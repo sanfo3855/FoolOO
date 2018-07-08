@@ -83,6 +83,9 @@ public class StmsNode implements Node {
         String code= "";
         for(Node nodo : listNode){
             code += nodo.codeGeneration();
+            if(nodo instanceof FunExpNode){
+                code+="pop\n";
+            }
         }
         return code;
     }
