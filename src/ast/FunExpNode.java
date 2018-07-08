@@ -268,7 +268,7 @@ public class FunExpNode implements Node {
 
         returnString+= "push "+(-listParamSize)+"\nspn\n"+
                 AR + //carico frame pointer nello stack e risalgo catena statica
-                        "push "+(listParamSize+1)+"\n"+
+                        //"push "+(listParamSize+1)+"\n"+
                         "push "+ entry.getOffset() +"\n" + //push dell'offset sullo stack
                         AR + //risale catena statica
                         "add\n"+

@@ -47,7 +47,7 @@ public class FunNode  extends FunAbstractNode {
                     "lrv\n"+ // risultato della funzione sullo stack
                     "lra\n"+
                     "js\n"; // salta a $ra
-            copyFP="cfpp\n"; //setta $fp a $sp+pop
+            copyFP="lpn\npushminus\npush 1\nadd\ncfpp\n"; //setta $fp a $sp+pop
         }
         String retCod;
         if(retNode!=null){

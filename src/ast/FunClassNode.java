@@ -108,7 +108,7 @@ public class FunClassNode  extends FunAbstractNode {
         }
 
         FOOLlib.putCode(funl+":\n"+
-                "cfpp\n"+ //setta $fp a $sp
+                "lpn\npushminus\npush 1\nadd\ncfpp\n"+ //setta $fp a $sp
                 "lra\n"+ //inserimento return address
                 progCod+
                 retCod+
