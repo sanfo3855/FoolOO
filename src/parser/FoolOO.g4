@@ -1,9 +1,6 @@
 grammar FoolOO;
 
 @lexer::members {
-   //there is a much better way to do this, check the ANTLR guide
-   //I will leave it like this for now just becasue it is quick
-   //but it doesn't work well
    public int lexicalErrors=0;
 }
 

@@ -54,9 +54,6 @@ public class FunClassNode  extends FunAbstractNode {
             }
         }
 
-        //Aggiunto il tipo nella entry corrente
-//        entry.addType(new FunTypeNode(parList, type));
-
         //Viene richiamato il checkSemantics nel corpo della funzione se != null
         if (progNode!=null) {
             if (progNode instanceof LetInExpNode && (!id.equals("main"))){

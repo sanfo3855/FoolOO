@@ -136,7 +136,7 @@ public class NewClassNode implements Node{
      * @return string of generated code
      */
     public String codeGeneration() {
-        String code="lhp\n";//"push "+ExecuteVM.getHpCode()+"\n";
+        String code="lhp\n";
 
         for(int i=0; i<sizeListParm; i++){
             //ExecuteVM.incHpCode();

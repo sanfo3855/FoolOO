@@ -69,9 +69,6 @@ public class LetInExpNode implements Node {
         //Si ottiene l'hashmap dello scope corrente
         HashMap<String,STentry> hashMap = env.getHashMapNL(env.getNestingLevel());
 
-        //creazione nuova entry
-//        STentry entryTable = ;
-
         //nome della chiave del nodo
         String idPutHM;
 
