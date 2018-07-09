@@ -14,7 +14,6 @@ class B(){
             A obj = new A();
         in
             return obj;
-            //todo return new A();
     }
 }
 
