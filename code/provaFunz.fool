@@ -1,7 +1,0 @@
-
-    class funzA(int a){
-        int fun(int s){
-            a=a+1;
-        }
-    }
-

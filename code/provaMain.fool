@@ -1,6 +1,0 @@
-int main(){
-    let
-        int x=null;
-    in
-        x=0;
-}
