@@ -141,7 +141,6 @@ public class FunConstructorNode extends FunClassNode {
                 "srv\n"+ //pop del return value
                 popDec+
                 "sra\n"+ // pop del return address
-                //"pop\n"+ // pop di AL
                 popVar+
                 "cfp\n"+  // setto $fp a valore del CL
                 "lrv\n"+ // risultato della funzione sullo stack
