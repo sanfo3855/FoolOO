@@ -83,7 +83,7 @@ public class CallMethodNode implements Node {
             entryTableTemp=env.getHashMapNL(envNL--).get(id);
         }
         if (entryTableTemp==null){
-            semanticErrors.add(new SemanticError("Id "+id+" not declared"));
+            semanticErrors.add(new SemanticError("Method "+id+" is not declared"));
         }else{
             //carico in idType il nome della classe dell'oggetto id
             String idType=((TypeNode)entryTableTemp.getType()).getType();

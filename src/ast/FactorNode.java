@@ -104,7 +104,7 @@ public class FactorNode implements Node {
 
             if (!(FOOLlib.isSubtype(leftNode, rightNode) && FOOLlib.isSubtype(rightNode, leftNode))) {
                 /* Stampa un errore di tipo e blocca l'esecuzione */
-                System.out.println("Incompatible types in Factor");
+                System.out.println("Incompatible types in the use of logical operators");
                 System.exit(0);
             }
         }

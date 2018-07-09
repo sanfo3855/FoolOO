@@ -142,7 +142,7 @@ public class FoolNode implements Node {
                 }
                 //Salvo nell'ambiente l'identificatore della funzione
                 if ( hashMap.put(idPutHM,entryTable) != null ){
-                    semanticErrors.add(new SemanticError("Fun "+idPutHM+" already declared"));
+                    semanticErrors.add(new SemanticError("Function "+idPutHM+" already declared"));
                 }
 //                //controllo che esista una sola funzione main
 //                if ( hashMap.put("fun%main",entryTable) != null ){

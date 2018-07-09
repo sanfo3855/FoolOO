@@ -103,7 +103,7 @@ public class LetInExpNode implements Node {
                  */
                 if ( hashMap.put(idPutHM,new STentry(env.getNestingLevel(),env.getOffsetDec())) != null ){
                     //funzione già dichiarata nell'ambiente corrente
-                    semanticErrors.add(new SemanticError("Fun "+idPutHM+" already declared"));
+                    semanticErrors.add(new SemanticError("Function "+idPutHM+" already declared"));
                 }
             }
         }

@@ -68,7 +68,7 @@ public class VarDecNode implements Node {
         //si controlla che l'inserimento di tale entry non sia già esistente
         if( hm.put(id,entry) != null ){
             //viene generato un errore semantico nel caso in cui sia già stata inizializzata
-            semanticErrors.add(new SemanticError("Multiple declaration of " + id + " at " + env.getNestingLevel()));
+            semanticErrors.add(new SemanticError("Multiple declaration of variable " + id + " at " + env.getNestingLevel()));
         }
         //si richiama il check semantics nel type
         semanticErrors.addAll(type.checkSemantics(env));

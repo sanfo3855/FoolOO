@@ -1,4 +1,20 @@
-class classe2 (int k){
+class classe1 (int w){
+        int funClass1(int o){
+            let
+                int s = 1;
+            in
+               if (!(o>=s)) then{
+                    s = o;
+               }else{
+                    s= o+s;
+               }
+
+               print(s);
+               return s-o;
+        }
+}
+
+class classe2 extends classe1 (int k) {
 
     int funClass7(int q){
         let
@@ -12,7 +28,15 @@ class classe2 (int k){
 void main(){
     let
         classe2 varClass1=new classe2();
+        classe1 varClass2=new classe1();
+        classe1 varClass3=new classe1();
+        bool ifCond = true;
     in
-         print(varClass1.funClass7(2));
+        varClass3 = if (ifCond) then{
+            varClass2
+        }else{
+            varClass1
+        };
+         print(varClass3);
 
 }

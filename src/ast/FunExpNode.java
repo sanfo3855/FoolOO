@@ -184,7 +184,7 @@ public class FunExpNode implements Node {
             }
         }
         if(tmpEntry==null){
-            semanticErrors.add(new SemanticError("Funz id " + id + " is not declared"));
+            semanticErrors.add(new SemanticError("Function " + id + " is not declared"));
         } else {
             /*
             Se l'entry è stata trovata vuol dire che esiste una funzione che corrisponde a quella ricercata,
@@ -242,7 +242,7 @@ public class FunExpNode implements Node {
     public Node typeCheck() {
         for(int i=0; i<listParam.size(); i++){
             if(!FOOLlib.isSubtype(listParam.get(i).typeCheck(),typeParam.get(i))){
-                System.out.println("Wrong type " + typeParam.get(i).toPrint("") + " for param " + i + " in " +id );
+                System.out.println("Wrong type " + typeParam.get(i).toPrint("") + " for parameter " + i + " in " +id );
                 System.exit(0);
             }
         }
