@@ -146,8 +146,10 @@ public class CallMethodNode implements Node {
             sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(listExtension.get(--y)).get("numberVar"));
         }
         String retHpVar="";
-        String copyFp="push 0\n";
-        if(!id.equals("this")){
+        String copyFp;
+        if(id.equals("this")) {
+            copyFp="push 0\n";
+        }else{
             for(int i = sizeVarHp; i>0; i--){
                 returnString += "push " +entry.getOffset()+"\n"+
                         "lfp\n"+
@@ -159,11 +161,11 @@ public class CallMethodNode implements Node {
             }
             returnString += //"push 0\n" +
                     "lfp\n" +
-                    "sfpo\n" +
-                    "lfp\n";
+                            "sfpo\n" +
+                            "lfp\n";
             retHpVar="cfpm\n";
             for(int i = sizeVarHp; i>0; i--){
-                retHpVar += "push "+(i+1)+"\n" +
+                retHpVar += "push "+(i+2)+"\n" +
                         "lfp\n" +
                         "add\n" +
                         "lw\n" +
@@ -190,6 +192,7 @@ public class CallMethodNode implements Node {
             retHpVar+="cfpo\n";
             copyFp="push 1\n";
         }
+
 
         ArrayList<Node> methodCallListParam=methodCall.getListParam();
         for (int i = 0; i<sizeParamMethod; i++){

@@ -3,18 +3,33 @@ class B(int mnbv, int cc){
         mnbv=a;
         cc=b;
         print(mnbv);
+        print(cc);
     }
     int dec(int aa){
     //cc=0;
-                print(1111);
+                print(1111111);
             if(aa>=0) then {
                 print(mnbv);
+                print(cc);
                 print(aa);
-                //mnbv=aa;
+
+            if(aa==2) then{
+                mnbv=44;
+                cc=765;
+                print(mnbv);
+                print(cc);
+            }
+            if(aa==1) then{
+                mnbv=77;
+            }
+            if(aa==0) then{
+                mnbv=789;
+            }
                 aa = this.dec(aa-1);
             }
                 print(1888111);
             print(mnbv);
+                print(cc);
             print(aa);
             //mnbv=99;
             return aa;

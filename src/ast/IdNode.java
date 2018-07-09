@@ -96,12 +96,12 @@ public class IdNode implements Node {
         }else{
             returnString +="lfp\n"; //carico il fp sullo stack
             //risalgo la catena statica
-            for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++){
-                returnString+="lpn\nadd\nlw\n";   //Faccio un loadword per ogni scope da risalire
-                //Ottengo l'indirizzo dello scope a cui ho la variabile
-            }
         }
 
+        for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++){
+            returnString+="lpn\nadd\nlw\n";   //Faccio un loadword per ogni scope da risalire
+            //Ottengo l'indirizzo dello scope a cui ho la variabile
+        }
         returnString+=  "add\n"+ //accede alla posizione della entry
                         "lw\n"; //carica sullo stack il valore all'indirizzo ottenuto
 

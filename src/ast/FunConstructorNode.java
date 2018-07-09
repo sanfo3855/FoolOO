@@ -126,7 +126,7 @@ public class FunConstructorNode extends FunClassNode {
             progCod=progNode.codeGeneration();
         }
 
-        String labelTrue=FOOLlib.freshFunLabel();
+        String labelTrue=FOOLlib.freshLabel();
         String copyFp="push 0\n" +
                 "beq " +labelTrue+"\n"+
                 "cfpof\n"+
@@ -142,7 +142,7 @@ public class FunConstructorNode extends FunClassNode {
                 "sra\n"+ // pop del return address
                 //"pop\n"+ // pop di AL
                 popVar+
-                "sfp\n"+  // setto $fp a valore del CL
+         /*cfp*/       "sfp\n"+  // setto $fp a valore del CL
                 "lrv\n"+ // risultato della funzione sullo stack
                 "lra\n"+"js\n" // salta a $ra
         );
