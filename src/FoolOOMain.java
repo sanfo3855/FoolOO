@@ -18,7 +18,7 @@ public class FoolOOMain {
     public static void main(String[] args) {
         try {
             TimeUnit.MILLISECONDS.sleep(300);
-            String fileName = "test/correct/classFieldModify.fool";
+            String fileName = "test/correct/recursiveClass.fool";
             boolean testPrintAST = false;
             boolean testPrintTypeCheck = false;
             boolean testPrintCodeGen = true;

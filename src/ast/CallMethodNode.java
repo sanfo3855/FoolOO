@@ -83,14 +83,6 @@ public class CallMethodNode implements Node {
         int envNL=env.getNestingLevel();
         STentry entryTableTemp=null;
 
-//        if(id.equals("this")){
-//            for(String s: env.getHashMapNL(1).keySet()){
-//                if(s.contains("class%")){
-//                    id=s.split("%")[1];
-//                }
-//            }
-//        }
-
         /*
         Cerco l'STentry dell'oggetto chiamante il metodo.
         L'identificatore dell'oggetto viene ricercato in tutte le
@@ -162,10 +154,18 @@ public class CallMethodNode implements Node {
         }else{
             sizeVarHp=Integer.parseInt(DispatcherTable.getEntry(listExtension.get(--y)).get("numberVar"));
         }
-        String retHpVar="";
+        String retHpVar;
         String copyFp;
         if(id.equals("this")) {
             copyFp="push 0\n";
+            retHpVar="push 1\n" +
+                    "lfp\n" +
+                    "add\n" +
+                    "lw\n" +
+                    "lfp\n" +
+                    "push "+sizeParamMethod+"\n" +
+                    "add\n" +
+                    "sw\n"+"cfpo\n";
         }else{
             for(int i = sizeVarHp; i>0; i--){
                 returnString += "push " +entry.getOffset()+"\n"+
@@ -176,8 +176,7 @@ public class CallMethodNode implements Node {
                         "add\n"+
                         "lw\n";
             }
-            returnString += //"push 0\n" +
-                    "lfp\n" +
+            returnString += "lfp\n" +
                             "sfpo\n" +
                             "lfp\n";
             retHpVar="cfpm\n";
@@ -199,14 +198,14 @@ public class CallMethodNode implements Node {
                     "add\n" +
                     "lw\n" +
                     "lfp\n" +
-                    "push "+(sizeVarHp+1)+"\n" +//todo modificato
+                    "push "+(sizeVarHp+1)+"\n" +
                     "add\n" +
                     "sw\n";
 
             for(int i = sizeVarHp; i>0; i--){
                 retHpVar +="pop\n";
             }
-            retHpVar+="cfpo\n";//todo modificato
+            retHpVar+="cfpo\n";
             copyFp="push 1\n";
         }
 

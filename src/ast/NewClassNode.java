@@ -137,7 +137,7 @@ public class NewClassNode implements Node{
 
         for(int i=0; i<sizeListParm; i++){
             //ExecuteVM.incHpCode();
-            code+="push 11\n" +//todo 11-->0
+            code+="push 0\n" +
                      "pthp\n";
         }
 

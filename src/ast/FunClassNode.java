@@ -130,7 +130,7 @@ public class FunClassNode  extends FunAbstractNode {
                 "sra\n"+ // pop del return address
                 //"pop\n"+ // pop di AL
                 popVar+
-                "cfp\n"+  // setto $fp a valore del CL
+                "cfp\n"+
                 "lrv\n"+ // risultato della funzione sullo stack
                 "lra\n"+
                 "js\n" // salta a $ra

@@ -3,25 +3,26 @@ class A(int a){
         a=aa;
     }
 
-    int incA(int aa) {
+    int incA(int aa, int c) {
         let
             int abc=aa;
         in
             if(aa<=6) then {
                 print(abc);
-                abc = this.incB(aa+1);
+                abc = this.incB(aa+1, 9 ,9);
+                print(abc);
 
             }
             return abc;
     }
 
-    int incB(int bb) {
+    int incB(int bb, int r, int e) {
         let
             int abc=bb;
         in
             if(bb<=6) then {
                 print(abc);
-                abc = this.incA(bb+1);
+                abc = this.incA(bb+1, 9);
             }
             return abc;
     }
@@ -32,6 +33,6 @@ void main(){
         A a = new A();
         int alba = 0;
     in
-        alba = a.incA(0);
+        alba = a.incA(0, 9);
         print(alba);
 }
