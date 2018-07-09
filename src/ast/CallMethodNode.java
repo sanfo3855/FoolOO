@@ -27,19 +27,36 @@ public class CallMethodNode implements Node {
         this.methodCall = methodCall;
     }
 
+    /**
+     *
+     * @return FunExpNode methodCall
+     */
     public FunExpNode getMethodCall() {
         return methodCall;
     }
 
+    /**
+     * Calls setTypeClass Method on methodCall node
+     *
+     * @param typeClassMethod
+     */
     public void setMethodClass(String typeClassMethod) {
         this.methodCall.setTypeClassMethod(typeClassMethod);
     }
 
-
+    /**
+     *
+     * @return number of param in child node methodCall
+     */
     public int getSizeListParam() {
         return methodCall.getSizeListParam();
     }
 
+    /**
+     *
+     *
+     * @return Node SymbolTableEntry
+     */
     public STentry getEntry() {
         return entry;
     }
@@ -110,8 +127,8 @@ public class CallMethodNode implements Node {
     }
 
     /**
-     * Generated code for the methodCall. It search the method inside the Dispatcher Table
-     * @return bLabel --> String with the specific method function
+     * Generated code for the methodCall.
+     * @return updated codeGeneration string
      */
     public String codeGeneration() {
         int sizeParamMethod=methodCall.getSizeListParam();

@@ -233,8 +233,8 @@ public class DecclassNode implements Node {
     }
 
     /**
-     *
-     * @return
+     * Generated code for the DecclassNode.
+     * @return updated codeGeneration string
      */
     public String codeGeneration() {
         String returnString = "";

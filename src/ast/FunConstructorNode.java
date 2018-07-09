@@ -105,8 +105,9 @@ public class FunConstructorNode extends FunClassNode {
 
 
     /**
+     * Generated code for the AsmNode.
      *
-     * @return
+     * @return updated codeGeneration string
      */
     public String codeGeneration() {
         String popDec="";

@@ -13,6 +13,7 @@ public class AsmNode implements Node {
     private Node value; //Value assigned to id
     private STentry entry; //field that holds AsmNode SymbolTable entry
     private int nestingLevel;
+
     /**
      * Constructor for AsmNode.
      *
@@ -124,8 +125,8 @@ public class AsmNode implements Node {
     }
 
     /**
-     *
-     * @return
+     * Generated code for the AsmNode.
+     * @return updated codeGeneration string
      */
     public String codeGeneration() {
 

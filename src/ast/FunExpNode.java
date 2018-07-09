@@ -28,22 +28,42 @@ public class FunExpNode implements Node {
         this.typeClassMethod=null;
     }
 
+    /**
+     *
+     * @return ArrayList of Node (typeParam)
+     */
     public ArrayList<Node> getTypeParam() {
         return typeParam;
     }
 
+    /**
+     *
+     * @return ArrayList of Node (listParam)
+     */
     public ArrayList<Node> getListParam() {
         return listParam;
     }
 
+    /**
+     *
+     * @return size of listParam
+     */
     public int getSizeListParam() {
         return listParam.size();
     }
 
+    /**
+     *
+     * @return function id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @return Node's SymbolTableEntry
+     */
     public STentry getEntry() {
         return entry;
     }
@@ -57,6 +77,10 @@ public class FunExpNode implements Node {
         this.typeClassMethod = typeClassMethod;
     }
 
+    /**
+     *
+     * @return typeClassMethod
+     */
     public String getTypeClassMethod() {
         return typeClassMethod;
     }

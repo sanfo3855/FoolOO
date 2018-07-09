@@ -1,38 +1,35 @@
-class B(int mnbv, int cc){
-    B(int a,int b){
-        mnbv=a;
-        cc=b;
-        print(mnbv);
-        print(cc);
+class B(int a, int b){
+    B(int aa,int bb){
+        a=aa;
+        b=bb;
+        print(a);
+        print(b);
     }
-    int dec(int aa){
-    //cc=0;
-                print(1111111);
-            if(aa>=0) then {
-                print(mnbv);
-                print(cc);
-                print(aa);
 
+    int dec(int aa){
+        if(aa>=0) then {
             if(aa==2) then{
-                mnbv=44;
-                cc=765;
-                print(mnbv);
-                print(cc);
+                a=1;
+                b=-1;
+                print(a);
+                print(b);
             }
-            if(aa==1) then{
-                mnbv=77;
+            if(aa==1) then {
+                a=2;
+                b=-2;
+                print(a);
+                print(b);
             }
-            if(aa==0) then{
-                mnbv=789;
+            if(aa==0) then {
+                a=3;
+                b=-3;
+                print(a);
+                print(b);
             }
-                aa = this.dec(aa-1);
-            }
-                print(1888111);
-            print(mnbv);
-                print(cc);
+            aa = this.dec(aa-1);
             print(aa);
-            //mnbv=99;
-            return aa;
+        }
+        return aa;
     }
 }
 

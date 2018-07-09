@@ -5,6 +5,7 @@ import lib.FOOLlib;
 import java.util.ArrayList;
 
 public class FunNode  extends FunAbstractNode {
+
     /**
      * Constructor for FunctionNode.
      *
@@ -21,7 +22,7 @@ public class FunNode  extends FunAbstractNode {
     @Override
     /**
      *
-     * @return
+     * @return string of generated code
      */
     public String codeGeneration() {
         String popDec="";

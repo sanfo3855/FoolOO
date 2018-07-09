@@ -31,6 +31,12 @@ public class FactorNode implements Node {
         this.notRight = notRight;
     }
 
+    /**
+     * Constructor for ExpNode.
+     *
+     * @param left -> left child node
+     * @param notLeft -> not (!) operator before left node
+     */
     public FactorNode (Node left, boolean notLeft){
         this.left=left;
         this.right=null;

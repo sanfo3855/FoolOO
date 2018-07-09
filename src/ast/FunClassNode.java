@@ -87,8 +87,8 @@ public class FunClassNode  extends FunAbstractNode {
     }
 
     /**
-     *
-     * @return
+     * Generated code for the AsmNode.
+     * @return updated codeGeneration string
      */
     public String codeGeneration() {
         String popDec="";
