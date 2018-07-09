@@ -69,7 +69,6 @@ public class NewClassNode implements Node{
      * @param env -> Environment that holds previously parsed information
      * @return updated ArrayList of semantic errors
      */
-
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> semanticErrors = new ArrayList<SemanticError>();
 
@@ -132,6 +131,10 @@ public class NewClassNode implements Node{
         return idTypeNode;
     }
 
+    /**
+     *
+     * @return string of generated code
+     */
     public String codeGeneration() {
         String code="lhp\n";//"push "+ExecuteVM.getHpCode()+"\n";
 

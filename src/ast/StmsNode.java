@@ -77,7 +77,7 @@ public class StmsNode implements Node {
 
     /**
      *
-     * @return
+     * @return string of generated code
      */
     public String codeGeneration() {
         String code= "";

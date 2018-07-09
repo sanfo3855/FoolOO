@@ -144,10 +144,7 @@ public class FoolNode implements Node {
                 if ( hashMap.put(idPutHM,entryTable) != null ){
                     semanticErrors.add(new SemanticError("Function "+idPutHM+" already declared"));
                 }
-//                //controllo che esista una sola funzione main
-//                if ( hashMap.put("fun%main",entryTable) != null ){
-//                    semanticErrors.add(new SemanticError("Main already declared"));
-//                }
+
             }
         }
         // richiamo il checkSemantics su tutti i nodi figli di FoolNode

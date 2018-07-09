@@ -87,6 +87,10 @@ public class IdNode implements Node {
         return typeNode;
     }
 
+    /**
+     *
+     * @return string of generated code
+     */
     public String codeGeneration() {
         String returnString = "push "+entry.getOffset()+"\n";//push offset sullo stack
 

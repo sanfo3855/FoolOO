@@ -99,7 +99,7 @@ public class VarNode implements Node {
 
     /**
      *
-     * @return
+     * @return string of generated code
      */
     public String codeGeneration() {
 

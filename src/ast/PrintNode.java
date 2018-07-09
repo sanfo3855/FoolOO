@@ -18,15 +18,28 @@ public class PrintNode implements Node{
         return s + exp.toPrint(s + "   ");
     }
 
+    /**
+     * Calls checkSemantic on child node.
+     * @param env -> Environment that holds previously parsed information
+     * @return
+     */
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         return exp.checkSemantics(env);
     }
 
+    /**
+     * Calls typeCheck on child node
+     * @return VoidTypeNode()
+     */
     public Node typeCheck() {
         exp.typeCheck();
         return new VoidTypeNode();
     }
 
+    /**
+     *
+     * @return string of generated code
+     */
     public String codeGeneration() {
         return exp.codeGeneration()+"print\n";
     }

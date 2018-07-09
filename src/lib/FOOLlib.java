@@ -65,37 +65,80 @@ public class FOOLlib {
         return res;
     }
 
+    /**
+     *
+     * @return fresh label in code generation
+     */
     public static String freshLabel() {
         return "label"+(labCount++);
     }
 
+    /**
+     *
+     * @return fresh label for function in code generation
+     */
     public static String freshFunLabel() {
         return "function"+(funLabCount++);
     }
 
+    /**
+     * Put code "c" in funCode
+     *
+     * @param c -> code to put
+     */
     public static void putCode(String c) {
         funCode+="\n"+c; //aggiunge una linea vuota di separazione prima di funzione
     }
 
+    /**
+     *
+     * @return funCode
+     */
     public static String getCode() {
         return funCode;
     }
 
+    /**
+     * Put main label in labelMain
+     *
+     * @param label -> main label
+     */
     public static void putLabelMain(String label) {
         labelMain=label;
     }
 
+    /**
+     *
+     * @return main label
+     */
     public static String getLabelMain() {
         return labelMain;
     }
+
+    /**
+     * Put label end of function
+     *
+     * @param label -> ending label
+     */
     public static void putLabelEnd(String label) {
         labelEnd=label;
     }
 
+    /**
+     *
+     * @return label end of function
+     */
     public static String getLabelEnd() {
         return labelEnd;
     }
 
+    /**
+     * Check if Node a and Node b have same father
+     *
+     * @param a -> Node
+     * @param b -> Node
+     * @return true or false
+     */
     public static IdTypeNode extendedFatherHimself(Node a, Node b) {
         IdTypeNode node=null;
         if(a instanceof IdTypeNode && b  instanceof IdTypeNode){
@@ -123,6 +166,9 @@ public class FOOLlib {
         return node;
     }
 
+    /**
+     * Wipe FOOLlib field
+     */
     public static void wipe(){
         labCount=0;
         funLabCount=0;

@@ -72,6 +72,10 @@ public class STentry {
         return this.nestinglevel;
     }
 
+    /**
+     *
+     * @return offset object
+     */
     public int getOffsetObj() {
         return offsetObj;
     }
