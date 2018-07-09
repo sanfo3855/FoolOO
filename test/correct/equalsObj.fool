@@ -1,0 +1,25 @@
+class A(int a){
+    void setA(int aa){
+        a=aa;
+    }
+
+}
+
+void main(){
+    let
+        A a = new A();
+        A b = new A();
+        A c = a;
+    in
+       if(a==b) then {
+           print(1);
+       } else {
+           print(2);
+       }
+
+       if(a==c) then {
+           print(1);
+       } else {
+           print(2);
+       }
+}

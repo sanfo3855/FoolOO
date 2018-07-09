@@ -2,7 +2,7 @@ package parser;
 public class ExecuteVM {
 
     public static final int CODESIZE = 10000;
-    public static final int MEMSIZE = 100;
+    public static final int MEMSIZE = 1000;
 
     private int[] code;
     private int[] memory = new int[MEMSIZE];
@@ -185,5 +185,6 @@ public class ExecuteVM {
         ra=0;
         rv=0;
         fpo=0;
+        fpof=0;
     }
 }

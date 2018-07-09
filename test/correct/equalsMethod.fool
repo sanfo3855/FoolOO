@@ -1,0 +1,32 @@
+class A(int a){
+    int f(){
+    a=7;
+        return 1;
+    }
+    int g(){
+        return 2;
+    }
+    int p(){
+    a=8;
+        return 1;
+    }
+
+}
+
+void main(){
+    let
+        A a = new A();
+    in
+       if(a.f()==a.p()) then {
+           print(1);
+       } else {
+           print(2);
+       }
+
+       if(a.f()==a.g()) then {
+           print(1);
+       } else {
+           print(2);
+       }
+
+}

@@ -199,14 +199,14 @@ public class CallMethodNode implements Node {
                     "add\n" +
                     "lw\n" +
                     "lfp\n" +
-                    "push "+(sizeVarHp+1)+"\n" +
+                    "push "+(sizeVarHp+1)+"\n" +//todo modificato
                     "add\n" +
                     "sw\n";
 
             for(int i = sizeVarHp; i>0; i--){
                 retHpVar +="pop\n";
             }
-            retHpVar+="cfpo\n";
+            retHpVar+="cfpo\n";//todo modificato
             copyFp="push 1\n";
         }
 
